@@ -1,0 +1,174 @@
+---
+import ServiceLayout from '../../layouts/ServiceLayout.astro';
+import PageHero from '../../components/ui/PageHero.astro';
+import Breadcrumb from '../../components/ui/Breadcrumb.astro';
+import FAQSection from '../../components/ui/FAQSection.astro';
+import KeyTakeaway from '../../components/ui/KeyTakeaway.astro';
+import AuthorByline from '../../components/ui/AuthorByline.astro';
+import ServiceSchema from '../../components/schema/ServiceSchema.astro';
+import FAQSchema from '../../components/schema/FAQSchema.astro';
+import { buildTitle, buildCanonical, buildDescription } from '../../lib/seo';
+
+const title = buildTitle("Tree Removal — Sullivan, Orange & Ulster Counties NY | EFP");
+const description = buildDescription(
+  "Safe tree removal for hazard trees, storm damage, diseased trees, and site clearing in Sullivan, Orange, and Ulster counties, NY. " +
+  "Any quantity, size, or species — residential and commercial. Call (845) 754-8242."
+);
+const canonicalUrl = buildCanonical("/services/tree-removal");
+
+const crumbs = [
+  { label: "Home",         href: "/"         },
+  { label: "Services",     href: "/services" },
+  { label: "Tree Removal", href: "/services/tree-removal" },
+];
+
+const faqs = [
+  {
+    question: "What types of tree removal do you handle?",
+    answer: "Hazard and dying trees, storm-damaged trees, diseased or insect-infested trees, trees interfering with structures or utilities, and strategic removal as part of woodland improvement or site preparation. Projects range from single residential trees to large-quantity commercial and rural clearing operations.",
+  },
+  {
+    question: "Can you remove trees of any size?",
+    answer: "Yes. Environmental Forest Products handles trees of any size or species — including large-diameter hardwoods that require specialized equipment and rigging. Henry Kowalec has 30+ years of experience with large-scale forestry operations across the Hudson Valley and Catskills region.",
+  },
+  {
+    question: "Is there any value in the trees being removed?",
+    answer: "Frequently yes. Before any removal is scheduled, a forester can assess whether trees have merchantable timber value. A single large red oak, black cherry, or white oak log removed from a residential property may have meaningful stumpage value — enough to offset a portion of the removal cost. This step is worth doing before the saw starts.",
+  },
+  {
+    question: "Do you handle tree removal after a storm?",
+    answer: "Yes. Post-storm tree work — removing failed trees, clearing downed material, and addressing structural hazards from split or hanging limbs — is part of EFP's service offering. For larger-scale storm events affecting a woodlot, a salvage timber assessment can identify whether storm-damaged trees have remaining market value before they begin to degrade.",
+  },
+  {
+    question: "Can you also grind the stump after removal?",
+    answer: "Yes. Stump grinding is available as a follow-on to tree removal. Coordinating both services in a single visit is more efficient than scheduling separately.",
+  },
+  {
+    question: "What areas do you serve for tree removal?",
+    answer: "Sullivan, Orange, and Ulster counties in New York, plus Pike and Wayne counties in Pennsylvania and Sussex County in New Jersey.",
+  },
+];
+---
+
+<ServiceLayout title={title} description={description} canonicalUrl={canonicalUrl}>
+  <ServiceSchema
+    pageType="service"
+    serviceName="Tree Removal"
+    description={description}
+    url={canonicalUrl}
+    areaServed={["Sullivan County, NY", "Orange County, NY", "Ulster County, NY", "Pike County, PA", "Wayne County, PA", "Sussex County, NJ"]}
+    crumbs={crumbs}
+  />
+  <FAQSchema items={faqs} />
+
+  <Breadcrumb crumbs={crumbs} />
+
+  <PageHero
+    title="Tree Removal"
+    subtitle="Any size, any species — residential, commercial, and rural properties in Sullivan, Orange, and Ulster counties"
+  />
+
+  <article class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <KeyTakeaway text="Before any tree removal is scheduled, it is worth having a forester assess whether the trees have merchantable timber value — particularly large-diameter hardwoods on rural and semi-rural properties. Recovering that value changes the economics of the removal significantly." />
+
+    <AuthorByline />
+
+    <img
+      src="/images/uploads/hand-felling-trees-nyc-dep-carmel-ny.jpg"
+      alt="Professional tree felling during NYC DEP project in Carmel, NY — Environmental Forest Products crew work"
+      class="w-full rounded-xl shadow-md my-8"
+      loading="lazy"
+    />
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Tree Removal Services</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Environmental Forest Products provides professional tree removal for residential properties, commercial
+      sites, and rural woodland across Sullivan, Orange, and Ulster counties in New York. Henry Kowalec
+      and his crew are experienced with trees of any size or species — from single hazard trees near
+      structures to large-scale removals involving dozens of trees across a wooded property.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      The approach to each removal project depends on the tree's size, condition, proximity to structures
+      and utilities, and what the landowner needs the site to look like when the work is done. Every
+      project starts with an on-site assessment — not a phone estimate.
+    </p>
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">When Tree Removal Makes Sense</h2>
+    <ul class="space-y-3 mb-8">
+      {[
+        ["Hazard trees", "Dead, dying, or structurally compromised trees near structures, driveways, utility lines, or high-traffic areas. A forestry assessment identifies which trees present genuine risk versus which are simply aging — avoiding unnecessary removal while addressing real hazards."],
+        ["Storm damage", "Uprooted, split, or hanging trees after wind events, ice storms, or heavy snow. Post-storm work often needs to move quickly to address immediate hazards and prevent further damage."],
+        ["Disease and insect infestation", "Emerald ash borer, beech leaf disease, oak wilt, and other pathogens are active in this region. Removing heavily affected trees promptly can slow spread and, in some cases, salvage merchantable timber value before the wood degrades."],
+        ["Woodland improvement", "Strategic removal of wolf trees, invasive species, and suppressed or damaged individuals to improve the health and timber value of the remaining stand. This is the same work done in a timber harvest — scaled to a single property goal."],
+        ["Site preparation", "Tree removal as part of a construction, agricultural, or landscaping project. For larger sites, see our land clearing services."],
+      ].map(([heading, body]) => (
+        <li class="flex gap-3">
+          <svg class="w-5 h-5 text-[#2d5a2d] flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+          <div>
+            <span class="font-semibold text-gray-900">{heading}.</span>
+            <span class="text-gray-600"> {body}</span>
+          </div>
+        </li>
+      ))}
+    </ul>
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Assessing Timber Value Before Removal</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Residential and rural property owners often don't know whether the trees being removed have
+      marketable timber value. The answer depends on species, diameter, log quality, and current
+      stumpage prices — but large-diameter red oak, black cherry, white oak, and hard maple on
+      properties in this region frequently have genuine value.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      A single butt log from a high-quality red oak or black cherry tree can represent meaningful
+      stumpage value. That value only exists if the tree is identified and handled correctly before
+      removal — separating the log from slash and routing it to a buyer rather than the chipper. This
+      is a step a general tree service is unlikely to take and a consulting forester will always consider.
+    </p>
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Stump Removal</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Tree removal typically leaves stumps behind. If the site needs to be clean — for mowing, lawn use,
+      construction, or grading — <a href="/services/stump-grinding" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">stump grinding</a>
+      is available as a follow-on service. Scheduling both in a single visit is more efficient than
+      returning separately.
+    </p>
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Tree Removal and Woodland Management</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      For landowners removing trees as part of a broader woodland improvement effort — rather than
+      responding to a single hazard tree — a
+      <a href="/services/woodlot-management" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">woodlot management plan</a>
+      provides the framework for making those decisions systematically rather than on a tree-by-tree basis.
+      Properties with 50 or more contiguous wooded acres may also qualify for the
+      <a href="/services/480a-forest-tax-law" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">480-a Forest Tax Law program</a>,
+      which can significantly reduce property and school taxes on enrolled woodland.
+    </p>
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Service Area</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Tree removal is available in
+      <a href="/locations/sullivan-county-ny" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">Sullivan County</a>,
+      <a href="/locations/orange-county-ny" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">Orange County</a>, and
+      <a href="/locations/ulster-county-ny" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">Ulster County</a>
+      in New York, as well as Pike and Wayne counties in Pennsylvania and Sussex County in New Jersey.
+    </p>
+
+    <div class="bg-green-50 border border-green-200 rounded-lg p-6 my-10">
+      <h3 class="font-bold text-[#1a3c1a] text-lg mb-2">Schedule a Tree Assessment</h3>
+      <p class="text-gray-700 text-sm mb-4">
+        Call to discuss your tree removal project. Henry will walk the site, assess any timber value,
+        and give you a straight answer about what the work involves.
+      </p>
+      <a href="tel:+18457548242" class="inline-flex items-center gap-2 bg-[#1a3c1a] text-white font-semibold px-5 py-3 rounded hover:bg-[#2d5a2d] transition-colors text-sm">
+        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/></svg>
+        Call (845) 754-8242
+      </a>
+    </div>
+
+    <FAQSection items={faqs} />
+    <EstimateForm variant="b2c" />
+
+  </article>
+</ServiceLayout>

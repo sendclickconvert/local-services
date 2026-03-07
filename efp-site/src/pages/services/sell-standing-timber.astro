@@ -1,0 +1,161 @@
+---
+// pages/services/sell-standing-timber.astro
+// High commercial intent page — "sell standing timber" is a strong transactional query.
+// Landowners searching this term are ready to act. Copy should reflect that intent.
+import ServiceLayout from '../../layouts/ServiceLayout.astro';
+import PageHero from '../../components/ui/PageHero.astro';
+import Breadcrumb from '../../components/ui/Breadcrumb.astro';
+import FAQSection from '../../components/ui/FAQSection.astro';
+import EstimateForm from '../../components/forms/EstimateForm.astro';
+import ServiceSchema from '../../components/schema/ServiceSchema.astro';
+import FAQSchema from '../../components/schema/FAQSchema.astro';
+import AuthorByline from '../../components/ui/AuthorByline.astro';
+import { buildTitle, buildCanonical, buildDescription } from '../../lib/seo';
+
+const title = buildTitle("Sell Standing Timber — Timber Appraisal & Marketing NY");
+const description = buildDescription(
+  "Ready to sell timber from your woodland in New York? A consulting forester appraises your standing timber, markets it to qualified buyers, and manages the sale so you get fair value — not the first offer."
+);
+const canonicalUrl = buildCanonical("/services/sell-standing-timber");
+
+const crumbs = [
+  { label: "Home",     href: "/"         },
+  { label: "Services", href: "/services" },
+  { label: "Sell Standing Timber", href: "/services/sell-standing-timber" },
+];
+
+// ⚠️ FAQs — factually grounded, confirm specifics with Henry before launch
+const faqs = [
+  {
+    question: "How do I know what my standing timber is worth?",
+    answer: "The value of standing timber depends on species, log quality, volume, and current market conditions for each species. A timber appraisal — also called a timber cruise — involves systematically sampling the stand to estimate volume and grade by species, then applying current stumpage prices to arrive at an estimated value. Without this step, a landowner has no basis for evaluating any offer they receive."
+  },
+  {
+    question: "Should I accept a logger's direct offer for my timber?",
+    answer: "A logger's direct offer is made in the buyer's interest, not yours. Loggers price timber based on what they need to pay to remain profitable — not based on what the timber is actually worth on the open market. A consulting forester works on your behalf: appraising the timber, marketing it to multiple qualified buyers, and negotiating terms so you can compare competing bids rather than accepting a single take-it-or-leave-it offer."
+  },
+  {
+    question: "What is a timber sale contract and do I need one?",
+    answer: "A timber sale contract defines the terms under which a logger is permitted to harvest your property: what trees are marked for cutting, the sale price, the harvest deadline, logging road requirements, damage provisions, and any special conditions for sensitive areas. Without a written contract, you have no legal recourse if the logger cuts unmarked trees, damages the property, or fails to complete the cleanup. A consulting forester prepares and administers this contract as part of the timber marketing process."
+  },
+  {
+    question: "What species have the most timber value in Sullivan and Orange counties?",
+    answer: "In the Hudson Valley and Catskills region, red oak, white oak, and black cherry typically command the strongest stumpage prices when log quality is high. Hard maple, white ash, and eastern white pine also have markets. The actual value on any given property depends on species mix, tree size, log quality, and current mill demand — which shifts with broader lumber market conditions. [⚠️ Confirm current market specifics with Henry]"
+  },
+  {
+    question: "Can I sell timber and still qualify for 480-a?",
+    answer: "In most cases, yes — a properly planned timber harvest is consistent with 480-a enrollment. In fact, timber harvesting is often a required component of a 480-a management plan. The key is that the harvest must align with the approved management plan on file with the state. If you are enrolled in 480-a or considering enrollment, any timber sale should be planned in coordination with your management plan. See our 480-a consulting services for more detail."
+  },
+];
+---
+
+<ServiceLayout title={title} description={description} canonicalUrl={canonicalUrl}>
+  <ServiceSchema
+    pageType="service"
+    serviceName="Timber Appraisal and Marketing"
+    description={description}
+    url={canonicalUrl}
+    areaServed={["Sullivan County, NY", "Orange County, NY", "Ulster County, NY", "Pike County, PA", "Wayne County, PA", "Sussex County, NJ"]}
+    crumbs={crumbs}
+  />
+  <FAQSchema items={faqs} />
+
+  <Breadcrumb crumbs={crumbs} />
+
+  <PageHero
+    title="Sell Standing Timber in New York — Get Fair Value"
+    subtitle="Timber appraisal, competitive bidding, and sale management by a certified consulting forester"
+  />
+
+  <article class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <AuthorByline />
+
+        <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">The Problem With Selling Timber Without Representation</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Most landowners who sell timber do it the wrong way: a logger shows up, makes an offer, and the landowner accepts it because they have no basis for comparison. The logger knows what the timber is worth. The landowner does not.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      The result is almost always the same — the landowner receives a fraction of what a competitive bidding process would have produced. In some cases, they also end up with a damaged property: logging roads that weren't restored, trees that weren't supposed to be cut, and a site that will take years to recover.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      A certified consulting forester changes that equation. Their role is to represent the landowner — not the buyer — through every step of the timber sale process.
+    </p>
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">How a Timber Sale Works When Managed by a Forester</h2>
+    <img src="/images/uploads/log-truck-hardwood-timber-sparta-nj.jpg" alt="EFP log truck hauling premium hardwood timber from Sparta, NJ — standing timber marketing and sale" class="w-full rounded-xl shadow-md" loading="lazy" />
+    <p class="text-gray-700 leading-relaxed mb-4">
+      The full process of a <a href="/services/timber-harvesting" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">timber harvest</a> — from stand assessment through logging completion — is described in detail on our timber harvesting page. Here is what the sale management component looks like specifically:
+    </p>
+    <ul class="space-y-4 mb-8">
+      {[
+        ["Timber cruise and appraisal", "A systematic inventory of the stand estimates volume and grade by species, then applies current stumpage prices to establish what the timber is actually worth. This is the foundation of every well-managed timber sale."],
+        ["Marking the harvest", "Trees selected for cutting are marked with paint. The marking prescription defines what comes out and what stays — protecting the long-term health and value of the remaining stand."],
+        ["Competitive bidding", "The sale is offered to multiple qualified loggers operating in the region. Competing bids give the landowner real market information and significantly improve final sale price compared to single-offer deals."],
+        ["Timber sale contract", "A legally binding contract defines the terms of the harvest: what was sold, the price, the harvest period, road restoration requirements, and protections for unmarked trees and sensitive areas."],
+        ["Harvest oversight", "The operation is monitored during logging to ensure compliance with the contract. This step catches problems before they become permanent damage."],
+      ].map(([heading, body]) => (
+        <li class="flex gap-3">
+          <svg class="w-5 h-5 text-[#2d5a2d] flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+          <div>
+            <span class="font-semibold text-gray-900">{heading}.</span>
+            <span class="text-gray-600"> {body}</span>
+          </div>
+        </li>
+      ))}
+    </ul>
+
+    <div class="bg-gray-50 border border-gray-200 rounded-lg p-6 mb-10">
+      <h3 class="font-bold text-[#1a3c1a] mb-3 text-base">How the Bidding Process Works</h3>
+      <p class="text-gray-700 text-sm leading-relaxed mb-3">
+        After the timber cruise and marking are complete, a bid packet is prepared and sent to qualified loggers
+        and timber buyers operating in the region. Prospective buyers are invited to walk the property and
+        inspect the marked trees before submitting their bids — sealed, to a set bid-reading date.
+      </p>
+      <p class="text-gray-700 text-sm leading-relaxed mb-3">
+        Bids are reviewed with the landowner and compared against the appraised stumpage value. The landowner
+        decides whether to accept the high bid or continue the process. Once a bid is accepted, a contract
+        is executed. The buyer typically has up to one year to harvest the marked timber, and all trees must
+        be paid for before cutting begins.
+      </p>
+      <p class="text-gray-700 text-sm leading-relaxed">
+        Environmental Forest Products is present throughout — visiting the property as the sale progresses,
+        confirming access routes and loading sites are used as agreed, and ensuring the contract terms are
+        followed from start to finish.
+      </p>
+    </div>
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Timber Value in the Hudson Valley and Catskills</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      The Hudson Valley and Catskill region produces commercially valuable hardwoods including red oak, white oak, black cherry, hard maple, white ash, and tulip poplar, as well as softwoods like eastern white pine. The actual value of timber on a given property depends on species composition, individual tree quality, total volume, and current stumpage market conditions.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Stumpage prices fluctuate with lumber markets, seasonal logging conditions, and regional mill demand. A current appraisal by a forester with regional experience reflects what your timber is actually worth today — not what it was worth two years ago or what a logger decides to offer.
+    </p>
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Timber Sales and the 480-a Program</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      If your woodland is enrolled in New York's 480-a Forest Tax Law program, any timber harvest must comply with your approved management plan. A properly planned harvest is not only permitted under 480-a — it is often a required element of the management prescription. If you are considering a timber sale and are currently enrolled, or thinking about enrolling, see our <a href="/services/480a-forest-tax-law" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">480-a consulting services</a> to understand how the two intersect.
+    </p>
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Service Area</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Timber appraisal and marketing services are available in <a href="/locations/sullivan-county-ny" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">Sullivan County</a>, <a href="/locations/orange-county-ny" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">Orange County</a>, and <a href="/locations/ulster-county-ny" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">Ulster County</a> in New York, as well as Pike and Wayne counties in Pennsylvania and Sussex County in New Jersey.
+    </p>
+
+    <div class="bg-green-50 border border-green-200 rounded-lg p-6 my-10">
+      <h3 class="font-bold text-[#1a3c1a] text-lg mb-2">Have Timber? Find Out What It's Worth.</h3>
+      <p class="text-gray-700 text-sm mb-4">
+        The first step is a timber stand evaluation. Call to schedule a site visit — we will give you a straight assessment of your timber, what the market looks like right now, and what a well-managed sale process would look like for your property.
+      </p>
+      <a href="tel:+18457548242" class="inline-flex items-center gap-2 bg-[#1a3c1a] text-white font-semibold px-5 py-3 rounded hover:bg-[#2d5a2d] transition-colors text-sm">
+        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/></svg>
+        Call (845) 754-8242
+      </a>
+    </div>
+
+    <FAQSection items={faqs} />
+    <EstimateForm variant="b2c" />
+
+  </article>
+</ServiceLayout>

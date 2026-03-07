@@ -1,0 +1,165 @@
+---
+import ServiceLayout from '../../layouts/ServiceLayout.astro';
+import PageHero from '../../components/ui/PageHero.astro';
+import Breadcrumb from '../../components/ui/Breadcrumb.astro';
+import FAQSection from '../../components/ui/FAQSection.astro';
+import KeyTakeaway from '../../components/ui/KeyTakeaway.astro';
+import AuthorByline from '../../components/ui/AuthorByline.astro';
+import ServiceSchema from '../../components/schema/ServiceSchema.astro';
+import FAQSchema from '../../components/schema/FAQSchema.astro';
+import { buildTitle, buildCanonical, buildDescription } from '../../lib/seo';
+
+const title = buildTitle("Tree Planting & Reforestation — Hudson Valley NY | EFP");
+const description = buildDescription(
+  "Tree planting and reforestation services for private landowners in Sullivan, Orange, and Ulster counties, NY. " +
+  "Species selection, site preparation, and maintenance guidance from a certified consulting forester."
+);
+const canonicalUrl = buildCanonical("/services/tree-planting");
+
+const crumbs = [
+  { label: "Home",          href: "/"         },
+  { label: "Services",      href: "/services" },
+  { label: "Tree Planting", href: "/services/tree-planting" },
+];
+
+const faqs = [
+  {
+    question: "What tree species are best for reforestation in Sullivan and Orange counties?",
+    answer: "Species selection depends on the site — soil type, drainage, elevation, existing vegetation, and the landowner's goals all factor in. For timber production, red oak, black cherry, white ash, and tulip poplar are productive choices on suitable sites in the Hudson Valley and Catskill foothills. For wildlife habitat, mast-producing species like oaks and beech are high value. For stream or wetland buffers, native willows, alders, and red maple are often appropriate. A site assessment before planting is the right starting point.",
+  },
+  {
+    question: "Can tree planting count as part of a 480-a management plan?",
+    answer: "Yes. Reforestation and site planting activities can be incorporated into a 480-a Forest Tax Law management plan as part of the work schedule. Fields reverting to forest through both natural regeneration and active planting can eventually qualify for 480-a enrollment once the stand meets stocking requirements. Tree planting on qualifying sites can accelerate eligibility timelines.",
+  },
+  {
+    question: "What site preparation is needed before planting?",
+    answer: "Site prep depends on what is currently growing on the land. Competing vegetation — grasses, shrubs, invasives — typically needs to be controlled before or after planting to give seedlings adequate light and reduce root competition in the early years. Henry can assess a planting site and recommend the appropriate preparation approach before seedlings are sourced.",
+  },
+  {
+    question: "Do you source the planting stock?",
+    answer: "Environmental Forest Products can advise on species selection and appropriate nursery sources for the region. New York State DEC regional nurseries produce bare-root native species stock at low cost for qualifying reforestation projects. Henry can help identify whether your project qualifies for state nursery stock and what the ordering and delivery timeline looks like.",
+  },
+];
+---
+
+<ServiceLayout title={title} description={description} canonicalUrl={canonicalUrl}>
+  <ServiceSchema
+    pageType="service"
+    serviceName="Tree Planting & Reforestation"
+    description={description}
+    url={canonicalUrl}
+    areaServed={["Sullivan County, NY", "Orange County, NY", "Ulster County, NY"]}
+    crumbs={crumbs}
+  />
+  <FAQSchema items={faqs} />
+
+  <Breadcrumb crumbs={crumbs} />
+
+  <PageHero
+    title="Tree Planting & Reforestation"
+    subtitle="Species selection, site prep, and reforestation guidance — Sullivan, Orange, and Ulster counties"
+  />
+
+  <article class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <KeyTakeaway text="Tree planting and reforestation on private land in New York requires careful species selection based on site conditions — soil drainage, light availability, elevation, and management goals. A site assessment by a certified forester prevents costly species mismatches and sets reforestation projects up for long-term success." />
+
+    <AuthorByline />
+
+    <img
+      src="/images/uploads/spruce-timber-harvest-millbrook-ny.jpg"
+      alt="Managed forest stand in Millbrook, NY — the result of long-term woodland management including selective harvest and species improvement"
+      class="w-full rounded-xl shadow-md my-8"
+      loading="lazy"
+    />
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Reforestation as Part of a Management Strategy</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Tree planting on private land in the Hudson Valley and Catskills region is most effective when it is
+      part of a broader management strategy rather than a standalone activity. The right species for a
+      given site depends on soil type, drainage, existing canopy, and what the landowner wants the forest
+      to provide — whether that is future timber value, wildlife habitat, carbon sequestration, visual
+      screening, or a combination of objectives.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Environmental Forest Products provides tree planting consultation as part of its broader woodland
+      management services. Henry Kowalec can assess a planting site, recommend appropriate native species
+      for the conditions and goals, advise on site preparation requirements, and connect landowners with
+      appropriate nursery stock sources — including NY State DEC nurseries that supply native bare-root
+      stock for qualifying reforestation projects.
+    </p>
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Tree Planting and 480-a Enrollment</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Fields actively reverting to forest — through either natural regeneration or active planting — can
+      eventually become eligible for New York's <a href="/services/480a-forest-tax-law" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">480-a Forest Tax Law program</a> once the stand meets the
+      program's stocking requirements. Active planting can accelerate that timeline compared to natural
+      regeneration alone.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-6">
+      If your goal is eventually enrolling planted land in 480-a, the species and planting approach should
+      align with what the DEC will want to see in a management plan. A forester should be involved in the
+      planning process from the beginning to avoid having to undo early decisions later.
+    </p>
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Native Species for Reforestation in the Hudson Valley</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Species selection is the most consequential decision in any reforestation project. Planting the
+      wrong species for a site's soil drainage, light availability, and elevation produces poor survival
+      rates and poor long-term results — outcomes that can take years to become visible and are expensive
+      to correct. The right species for a Sullivan County ridgetop is different from the right species
+      for a low, moist area near the Neversink or Delaware River corridors.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Species commonly recommended for reforestation on private land in the Hudson Valley and Catskills
+      region, depending on site conditions:
+    </p>
+    <ul class="list-disc pl-6 text-gray-700 mb-6 space-y-2 text-sm leading-relaxed">
+      <li><strong>Red oak</strong> — excellent growth rate on well-drained upland sites; strong timber value; important mast producer for wildlife</li>
+      <li><strong>White oak</strong> — slower-growing but premium lumber and higher mast value than red oak; tolerates a wider range of soil conditions</li>
+      <li><strong>Black cherry</strong> — fast-growing on disturbed and recently cleared sites; consistently strong stumpage market in this region</li>
+      <li><strong>Sugar maple</strong> — ideal for higher elevations and north-facing slopes; long rotation but high timber value and significant wildlife value</li>
+      <li><strong>Yellow birch</strong> — well-suited to moist, cool sites in the Catskill foothills; good commercial value</li>
+      <li><strong>Tulip poplar (yellow poplar)</strong> — fast-growing on better soils in Orange and Ulster counties; strong sawtimber market</li>
+      <li><strong>Eastern white pine</strong> — productive softwood option for open fields and old agricultural land reverting to forest; consistent lumber market</li>
+      <li><strong>Shrub species for wildlife</strong> — highbush blueberry, native viburnums, elderberry, and silky dogwood for understory planting in habitat-focused projects</li>
+    </ul>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Non-native invasive species — including Norway spruce, which is commonly available from commercial
+      nurseries but does not regenerate naturally or support native food webs — are generally not recommended
+      for reforestation projects on private land, except in specific windbreak or visual screening applications.
+    </p>
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">NY State DEC Nursery Program</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      The New York State DEC operates regional nurseries that produce native bare-root seedlings for
+      qualifying reforestation projects on private land. Seedling prices are substantially below commercial
+      nursery rates, and the available species list covers most of the hardwoods and conifers appropriate
+      for reforestation in the Hudson Valley and Catskills region.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Eligibility for state nursery stock, minimum order sizes, delivery timing, and available species
+      change annually. Henry can advise on whether your project qualifies for state nursery stock and
+      what the ordering timeline looks like for your planting window.
+    </p>
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Deer Protection and Early Maintenance</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Deer browse pressure is the most common cause of reforestation failure on private land in this
+      region. White-tailed deer populations in Sullivan, Orange, and Ulster counties are high enough
+      that unprotected seedlings of most palatable species have low survival rates in the first two to
+      three growing seasons — before the seedlings are tall enough to grow out of reach of browse.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-6">
+      Protection options include individual tree tubes (plastic mesh tubes that protect individual
+      seedlings and create a greenhouse microclimate that accelerates early growth), fencing of planting
+      blocks, and species selection that favors less palatable species on high-deer-pressure sites.
+      The appropriate approach depends on planting density, species mix, site topography, and budget.
+      Deer protection should be planned and budgeted before seedlings are ordered, not addressed
+      after the first growing season reveals the problem.
+    </p>
+
+    <FAQSection items={faqs} />
+
+  </article>
+</ServiceLayout>

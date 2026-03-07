@@ -1,0 +1,65 @@
+---
+// ServiceSchema.astro
+// Injects Service + LocalBusiness JSON-LD for service pages AND county location pages.
+// Uses pageType prop to distinguish — no separate LocationSchema component exists or is needed.
+//
+// ─── DOCTRINE ─────────────────────────────────────────────────────────────────
+// The architecture blueprint listed "LocationSchema.astro" as a separate component.
+// That was consolidated during scaffold: ServiceSchema handles both page types via
+// the pageType prop. This is intentional — the schema structure is identical enough
+// that a separate component adds complexity without benefit.
+//
+// pageType: 'service'   → /services/ pages and /lp/ landing pages
+// pageType: 'location'  → /locations/ county pages (adds county-specific areaServed)
+//
+// ⚠️ Agent may generate this schema for NET-NEW pages only.
+//    Any page already indexed and ranking = manual edit only.
+// ─────────────────────────────────────────────────────────────────────────────
+
+import { business, author } from '../../data/client.config';
+import { buildBreadcrumbs } from '../../data/schema/breadcrumbs';
+import type { Crumb } from '../../data/schema/breadcrumbs';
+
+interface Props {
+  pageType: 'service' | 'location';
+  serviceName: string;            // e.g. "480-a Forest Tax Law Consulting"
+  description: string;
+  url: string;
+  areaServed?: string[];          // County names, e.g. ["Sullivan County, NY"]
+  crumbs: Crumb[];                // Same array passed to Breadcrumb.astro
+}
+
+const { pageType, serviceName, description, url, areaServed = [], crumbs } = Astro.props;
+
+const baseOrg = {
+  "@type": ["LocalBusiness", "ProfessionalService"],
+  "@id": `${business.domain}/#organization`,
+  "name": business.name,
+  "url": business.domain,
+  "telephone": business.phone,
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": business.address.city,
+    "addressRegion": business.address.stateAbbr,
+    "addressCountry": business.address.country,
+  },
+};
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": serviceName,
+  "description": description,
+  "url": url,
+  "provider": baseOrg,
+  ...(areaServed.length > 0 && {
+    "areaServed": areaServed.map(area => ({
+      "@type": "AdministrativeArea",
+      "name": area,
+    })),
+  }),
+  "breadcrumb": buildBreadcrumbs(crumbs),
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />

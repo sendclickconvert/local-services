@@ -1,0 +1,152 @@
+---
+// Header.astro
+// Sticky nav: logo left, primary links center, click-to-call + Facebook right.
+// Mobile: hamburger toggle via inline script only.
+
+import { business } from '../../data/client.config';
+
+interface Props {
+  currentPath: string;
+}
+const { currentPath } = Astro.props;
+
+const navLinks = [
+  { label: 'Services',  href: '/services'  },
+  { label: 'Guides',    href: '/guides'    },
+  { label: 'Locations', href: '/locations' },
+  { label: 'About',     href: '/about'     },
+  { label: 'Contact',   href: '/contact'   },
+];
+
+function isActive(href: string) {
+  if (href === '/') return currentPath === '/';
+  return currentPath.startsWith(href);
+}
+---
+
+<header class="sticky top-0 z-50 bg-[#1a3c1a] shadow-lg">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+
+      <!-- Logo — real image with text fallback -->
+      <a href="/" class="flex items-center flex-shrink-0 group" aria-label="Environmental Forest Products — Home">
+        <img
+          src="/images/logos/efp-logo.webp"
+          alt="Environmental Forest Products"
+          width="220"
+          height="40"
+          class="h-9 w-auto object-contain brightness-0 invert opacity-90 group-hover:opacity-100 transition-opacity"
+          loading="eager"
+          fetchpriority="high"
+        />
+      </a>
+
+      <!-- Desktop nav -->
+      <nav class="hidden md:flex items-center gap-1" aria-label="Main navigation">
+        {navLinks.map(link => (
+          <a
+            href={link.href}
+            class={`px-3 py-2 rounded text-sm font-medium transition-colors ${
+              isActive(link.href)
+                ? 'bg-[#2d5a2d] text-white'
+                : 'text-green-200 hover:text-white hover:bg-[#2d5a2d]'
+            }`}
+            aria-current={isActive(link.href) ? 'page' : undefined}
+          >
+            {link.label}
+          </a>
+        ))}
+      </nav>
+
+      <!-- Right side: Facebook + Call + Mobile toggle -->
+      <div class="flex items-center gap-2">
+
+        <!-- Facebook icon -->
+        <a
+          href="https://www.facebook.com/EForestProducts/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-green-300 hover:text-white transition-colors p-1.5 rounded hidden sm:flex items-center"
+          aria-label="Environmental Forest Products on Facebook"
+        >
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+          </svg>
+        </a>
+
+        <!-- Click-to-call -->
+        <a
+          href={`tel:${business.phoneRaw}`}
+          class="flex items-center gap-2 bg-[#2d5a2d] hover:bg-green-600 text-white text-sm font-semibold px-4 py-2 rounded transition-colors"
+          aria-label={`Call ${business.phone}`}
+        >
+          <svg class="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+            <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
+          </svg>
+          <span class="hidden sm:inline">{business.phone}</span>
+          <span class="sm:hidden">Call</span>
+        </a>
+
+        <!-- Mobile hamburger -->
+        <button
+          id="mobile-menu-toggle"
+          class="md:hidden text-green-200 hover:text-white p-2 rounded transition-colors"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+          aria-label="Toggle navigation menu"
+        >
+          <svg id="icon-open" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+          <svg id="icon-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <div id="mobile-menu" class="hidden md:hidden bg-[#143014] border-t border-green-900">
+    <nav class="max-w-7xl mx-auto px-4 py-3 flex flex-col gap-1" aria-label="Mobile navigation">
+      {navLinks.map(link => (
+        <a
+          href={link.href}
+          class={`px-3 py-3 rounded text-sm font-medium transition-colors ${
+            isActive(link.href)
+              ? 'bg-[#2d5a2d] text-white'
+              : 'text-green-200 hover:text-white hover:bg-[#2d5a2d]'
+          }`}
+        >
+          {link.label}
+        </a>
+      ))}
+      <!-- Facebook in mobile menu too -->
+      <a
+        href="https://www.facebook.com/EForestProducts/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="px-3 py-3 rounded text-sm font-medium text-green-200 hover:text-white hover:bg-[#2d5a2d] transition-colors flex items-center gap-2"
+      >
+        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+        </svg>
+        Facebook
+      </a>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const toggle = document.getElementById('mobile-menu-toggle');
+  const menu   = document.getElementById('mobile-menu');
+  const iconOpen  = document.getElementById('icon-open');
+  const iconClose = document.getElementById('icon-close');
+  toggle?.addEventListener('click', () => {
+    const isOpen = menu?.classList.toggle('hidden') === false;
+    toggle.setAttribute('aria-expanded', String(isOpen));
+    iconOpen?.classList.toggle('hidden', isOpen);
+    iconClose?.classList.toggle('hidden', !isOpen);
+  });
+</script>

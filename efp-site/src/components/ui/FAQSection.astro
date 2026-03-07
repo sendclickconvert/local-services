@@ -1,0 +1,51 @@
+---
+// FAQSection.astro
+// ⚠️ CRITICAL DOCTRINE — READ BEFORE EDITING:
+// Renders FAQ items as FULLY VISIBLE HTML.
+// NO accordion. NO collapse. NO <details>/<summary>. NO JS toggle.
+//
+// This is intentional and non-negotiable. Hidden content is not indexed by
+// AI crawlers (GPTBot, PerplexityBot) or reliably by Googlebot.
+// AI search citation is a PRIMARY SEO goal for this build.
+// Visible HTML is required. This is doctrine, not a styling preference.
+//
+// Companion: FAQSchema.astro injects FAQPage JSON-LD from the same items array.
+// One source. Two outputs. Never maintain separately.
+
+interface FaqItem {
+  question: string;
+  answer: string;
+}
+
+interface Props {
+  items: FaqItem[];
+  heading?: string;
+}
+
+const { items, heading = 'Frequently Asked Questions' } = Astro.props;
+---
+
+{items.length > 0 && (
+  <section class="py-12 border-t border-gray-100">
+    <div class="max-w-3xl mx-auto">
+
+      <h2 class="text-2xl sm:text-3xl font-bold text-[#1a3c1a] mb-10">
+        {heading}
+      </h2>
+
+      <div class="space-y-8">
+        {items.map((item, i) => (
+          <div class="pb-8 border-b border-gray-100 last:border-b-0 last:pb-0">
+            <h3 class="text-lg font-semibold text-gray-900 mb-3 leading-snug">
+              {item.question}
+            </h3>
+            <p class="text-gray-700 leading-relaxed">
+              {item.answer}
+            </p>
+          </div>
+        ))}
+      </div>
+
+    </div>
+  </section>
+)}

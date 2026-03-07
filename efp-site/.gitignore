@@ -1,0 +1,39 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Build output — never commit
+dist/
+.output/
+
+# Environment — NEVER commit secrets
+.env
+.env.local
+.env.*.local
+.env.production
+
+# Astro cache
+.astro/
+
+# Replit
+.replit
+replit.nix
+.breakpoints
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*.suo
+.history/
+
+# Logs
+*.log
+npm-debug.log*

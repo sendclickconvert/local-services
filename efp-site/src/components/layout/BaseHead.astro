@@ -1,0 +1,65 @@
+---
+// BaseHead.astro
+// Renders everything inside <head>: title, meta, canonical, OG tags, GA4 init.
+// ⚠️ Analytics event wiring is manual-only — do not agent-edit GA4 logic here.
+
+import { integrations, business, seo } from '../../data/client.config';
+import { buildDescription } from '../../lib/seo';
+
+interface Props {
+  title: string;              // Full composed title (use buildTitle() before passing)
+  description?: string;       // Page-level override; falls back to default
+  canonicalUrl: string;       // Always use buildCanonical() — never inline
+  ogImage?: string;           // Absolute URL to OG image
+  robotsContent?: string;     // Pass noindex() result; undefined = no tag rendered
+}
+
+const {
+  title,
+  description,
+  canonicalUrl,
+  ogImage = `${business.domain}${seo.ogImageDefault}`,
+  robotsContent,
+} = Astro.props;
+
+const metaDescription = buildDescription(description);
+---
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>{title}</title>
+<meta name="description" content={metaDescription} />
+<link rel="canonical" href={canonicalUrl} />
+
+{robotsContent && <meta name="robots" content={robotsContent} />}
+
+<!-- Open Graph -->
+<meta property="og:title" content={title} />
+<meta property="og:description" content={metaDescription} />
+<meta property="og:url" content={canonicalUrl} />
+<meta property="og:image" content={ogImage} />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content={business.name} />
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={metaDescription} />
+<meta name="twitter:image" content={ogImage} />
+
+<!-- Favicon -->
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+<!-- ⚠️ MANUAL-ONLY: GA4 init and call tracking DNI script wired below -->
+<!-- Do not agent-edit analytics event wiring -->
+{integrations.ga4MeasurementId && (
+  <>
+    <script async src={`https://www.googletagmanager.com/gtag/js?id=${integrations.ga4MeasurementId}`}></script>
+    <script define:vars={{ GA4_ID: integrations.ga4MeasurementId }}>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', GA4_ID);
+    </script>
+  </>
+)}

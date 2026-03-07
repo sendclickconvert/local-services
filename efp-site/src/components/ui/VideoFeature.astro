@@ -1,0 +1,173 @@
+---
+// VideoFeature.astro
+// Performance-first Vimeo embed — matches CRST.net mobile pattern.
+//
+// MOBILE:
+//   - Poster image only on initial load (no iframe, no player JS)
+//   - Vimeo player is NOT in the DOM until user taps play
+//   - 16:9 responsive container, full-width, no overflow
+//   - Large accessible tap target
+//   - Never autoplays
+//
+// DESKTOP:
+//   - Same poster-first approach — Vimeo loads only on click
+//   - Visually prominent section, strong play button
+//   - No autoplay, no background-video behavior
+//
+// Usage:
+//   <VideoFeature
+//     vimeoId="123456789"
+//     posterSrc="/images/video-poster.jpg"
+//     heading="See EFP at Work"
+//     caption="Henry Kowalec — 30+ years of certified forestry consulting"
+//   />
+
+interface Props {
+  vimeoId: string;         // Vimeo video ID only — e.g. "123456789"
+  posterSrc: string;       // Poster image path — required, shown until play
+  heading?: string;        // Optional section heading above panel
+  caption?: string;        // Optional caption below panel
+}
+
+const { vimeoId, posterSrc, heading, caption } = Astro.props;
+
+// Vimeo embed URL — no autoplay on initial load, autoplay only triggered by play button
+// background=0 keeps controls visible after load
+const vimeoParams = new URLSearchParams({
+  autoplay: '1',        // Autoplay only because we inject the iframe on tap
+  autopause: '0',
+  byline: '0',
+  portrait: '0',
+  title: '0',
+  color: '2d5a2d',      // EFP green accent on Vimeo controls
+  dnt: '1',             // Do not track
+}).toString();
+
+const vimeoEmbedUrl = `https://player.vimeo.com/video/${vimeoId}?${vimeoParams}`;
+---
+
+<section class="py-14 sm:py-20 bg-gray-950">
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    {heading && (
+      <h2 class="text-white text-2xl sm:text-3xl font-bold text-center mb-8 leading-tight">
+        {heading}
+      </h2>
+    )}
+
+    <!--
+      Outer container — 16:9 via padding-bottom trick.
+      aspect-ratio CSS works in all modern browsers but padding-bottom
+      is the most reliable cross-device 16:9 method.
+    -->
+    <div
+      class="video-feature-wrap relative w-full rounded-xl overflow-hidden shadow-2xl bg-black"
+      style="padding-bottom: 56.25%; height: 0;"
+      data-vimeo-url={vimeoEmbedUrl}
+    >
+
+      <!-- Poster image — lightweight, lazy loaded, covers the container -->
+      <img
+        class="video-poster absolute inset-0 w-full h-full object-cover"
+        src={posterSrc}
+        alt={heading ?? "EFP forestry operations — watch Henry Kowalec at work"}
+        loading="lazy"
+        decoding="async"
+      />
+
+      <!-- Semi-transparent overlay for play button legibility -->
+      <div class="video-overlay absolute inset-0 bg-black/40 transition-opacity duration-200">
+
+        <!-- Play button — large tap target, accessible -->
+        <button
+          class="video-play-btn absolute inset-0 w-full h-full flex items-center justify-center focus:outline-none focus-visible:ring-4 focus-visible:ring-white/60 group"
+          type="button"
+          aria-label="Play video"
+        >
+          <!-- Circle + triangle — minimum 80px on mobile for fat-finger tap -->
+          <span
+            class="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-white/90 group-hover:bg-white flex items-center justify-center shadow-2xl transition-transform duration-150 group-hover:scale-105 group-active:scale-95"
+            aria-hidden="true"
+          >
+            <svg
+              class="w-8 h-8 sm:w-10 sm:h-10 text-[#1a3c1a] ml-1"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path d="M8 5v14l11-7z"/>
+            </svg>
+          </span>
+        </button>
+
+      </div>
+
+      <!--
+        Vimeo iframe placeholder — NOT present in DOM on page load.
+        Injected by JS below only after user taps play.
+        This keeps Vimeo's player.js out of the page entirely until needed.
+      -->
+
+    </div>
+
+    {caption && (
+      <p class="text-center text-gray-400 text-sm mt-4 leading-relaxed max-w-xl mx-auto">
+        {caption}
+      </p>
+    )}
+
+  </div>
+</section>
+
+<!--
+  Minimal inline script — no framework dependency.
+  Injects Vimeo iframe into DOM only after explicit user tap/click.
+  Keeps initial page weight as low as possible on mobile.
+-->
+<script>
+  document.querySelectorAll<HTMLElement>('.video-feature-wrap').forEach(wrap => {
+    const btn     = wrap.querySelector<HTMLButtonElement>('.video-play-btn');
+    const overlay = wrap.querySelector<HTMLElement>('.video-overlay');
+    const poster  = wrap.querySelector<HTMLImageElement>('.video-poster');
+    const url     = wrap.dataset.vimeoUrl;
+
+    if (!btn || !url) return;
+
+    function activatePlayer() {
+      // Fade out UI elements
+      if (overlay) {
+        overlay.style.opacity = '0';
+        overlay.style.pointerEvents = 'none';
+      }
+      if (poster) {
+        poster.style.opacity = '0';
+      }
+
+      // Inject iframe into DOM — Vimeo player JS loads here for the first time
+      const iframe = document.createElement('iframe');
+      iframe.src = url!;
+      iframe.setAttribute('frameborder', '0');
+      iframe.setAttribute('allow', 'autoplay; fullscreen; picture-in-picture');
+      iframe.setAttribute('allowfullscreen', '');
+      iframe.setAttribute('title', 'EFP forestry operations video');
+      iframe.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;border:0;';
+
+      wrap.appendChild(iframe);
+
+      // Clean up event listeners
+      btn?.removeEventListener('click', activatePlayer);
+      btn?.removeEventListener('keydown', handleKeydown);
+    }
+
+    function handleKeydown(e: KeyboardEvent) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        activatePlayer();
+      }
+    }
+
+    btn.addEventListener('click', activatePlayer);
+    btn.addEventListener('keydown', handleKeydown);
+  });
+</script>

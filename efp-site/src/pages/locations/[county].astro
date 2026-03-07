@@ -1,0 +1,212 @@
+---
+// pages/locations/[county].astro
+// Dynamic county hub page — E-E-A-T upgraded v2.
+// Uses county.body[] paragraphs from locations.ts plus structured credibility sections.
+// Target: 1,400–2,000 words. KeyTakeaway + AuthorByline + 5 FAQs + schema.
+
+import LocationLayout from '../../layouts/LocationLayout.astro';
+import PageHero from '../../components/ui/PageHero.astro';
+import Breadcrumb from '../../components/ui/Breadcrumb.astro';
+import FAQSection from '../../components/ui/FAQSection.astro';
+import KeyTakeaway from '../../components/ui/KeyTakeaway.astro';
+import AuthorByline from '../../components/ui/AuthorByline.astro';
+import EstimateForm from '../../components/forms/EstimateForm.astro';
+import ServiceSchema from '../../components/schema/ServiceSchema.astro';
+import FAQSchema from '../../components/schema/FAQSchema.astro';
+import { buildTitle, buildCanonical, buildDescription } from '../../lib/seo';
+import { counties, getNeighbors } from '../../data/locations';
+import { services } from '../../data/services';
+
+export async function getStaticPaths() {
+  return counties.map(county => ({
+    params: { county: county.slug },
+    props: { county },
+  }));
+}
+
+const { county } = Astro.props;
+const neighbors = getNeighbors(county.slug);
+const isNY = county.stateAbbr === 'NY';
+
+const title = buildTitle(`Forestry Consulting — ${county.name}, ${county.stateAbbr} | EFP`);
+const description = buildDescription(
+  `Certified forestry consulting in ${county.name}, ${county.stateFull}. ` +
+  `${isNY ? '480-a Forest Tax Law, ' : ''}land clearing, timber harvesting, and woodlot management. ` +
+  `Henry Kowalec, 30+ years experience. Call (845) 754-8242.`
+);
+const canonicalUrl = buildCanonical(`/locations/${county.slug}`);
+
+const crumbs = [
+  { label: "Home",      href: "/"          },
+  { label: "Locations", href: "/locations" },
+  { label: `${county.name}, ${county.stateAbbr}`, href: `/locations/${county.slug}` },
+];
+
+const faqs = [
+  {
+    question: `Do you provide forestry consulting in ${county.name}, ${county.stateAbbr}?`,
+    answer: `Yes — Environmental Forest Products provides certified forestry consulting throughout ${county.name}. Services include ${isNY ? '480-a Forest Tax Law management plans, ' : ''}woodlot management, land clearing, timber harvesting, and timber appraisals for private landowners. Call (845) 754-8242 to discuss your property.`,
+  },
+  isNY ? {
+    question: `Can ${county.name} landowners qualify for the 480-a Forest Tax Law program?`,
+    answer: `Yes. ${county.name} property owners who meet the eligibility requirements — generally 50 or more contiguous acres of qualifying woodland — can apply for 480-a enrollment. The program provides a property and school tax exemption of up to 80% on enrolled acreage in exchange for a 10-year commitment to manage the forest under a DEC-approved plan. Environmental Forest Products prepares the required management plans and guides landowners through the full application process.`,
+  } : {
+    question: `What woodland programs are available for ${county.name} landowners?`,
+    answer: `While ${county.stateFull} does not have a direct equivalent to New York's 480-a Forest Tax Law, ${county.stateFull} woodland owners may qualify for programs including the ${county.stateAbbr === 'PA' ? 'Clean and Green preferential assessment program' : 'Farmland Assessment program'}. Henry Kowalec can discuss the state-specific options applicable to your ${county.name} property during an initial consultation.`,
+  },
+  {
+    question: `How do I find out what my ${county.name} timber is worth?`,
+    answer: `A timber appraisal from a certified consulting forester establishes what your timber is actually worth on the current market — species by species, size-class by size-class. This is the essential first step before agreeing to any timber sale, and it gives you an independent benchmark for evaluating offers. Environmental Forest Products provides timber appraisals throughout ${county.name}.`,
+  },
+  {
+    question: `Does EFP handle land clearing in ${county.name}?`,
+    answer: `Yes. Land clearing for residential and commercial site preparation is available throughout ${county.name}. Every clearing project begins with a timber assessment — if merchantable trees are present, that value is recovered before clearing begins rather than being chipped or burned. This step often offsets a meaningful portion of the project cost.`,
+  },
+  {
+    question: `How much does a forestry site assessment cost in ${county.name}?`,
+    answer: `Contact EFP at (845) 754-8242 to discuss your property and the scope of the assessment. Initial consultations are the starting point for all projects in ${county.name} — the fee and process depend on parcel size, objectives, and the specific services you are considering.`,
+  },
+];
+---
+
+<LocationLayout title={title} description={description} canonicalUrl={canonicalUrl}>
+  <ServiceSchema
+    pageType="location"
+    serviceName={`Forestry Consulting — ${county.name}, ${county.stateAbbr}`}
+    description={description}
+    url={canonicalUrl}
+    areaServed={[`${county.name}, ${county.stateAbbr}`]}
+    crumbs={crumbs}
+  />
+  <FAQSchema items={faqs} />
+
+  <Breadcrumb crumbs={crumbs} />
+
+  <PageHero
+    title={`Forestry Consulting in ${county.name}`}
+    subtitle={county.tagline}
+  />
+
+  <article class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <KeyTakeaway
+      text={`Environmental Forest Products provides certified forestry consulting for private landowners throughout ${county.name}. ${isNY ? 'Services include 480-a Forest Tax Law enrollment, ' : 'Services include '}timber harvesting, land clearing, and woodland management — all led by Henry Kowalec, a consulting forester with 30+ years of experience in this region.`}
+    />
+
+    <AuthorByline />
+
+    <!-- County-specific intro paragraphs from locations.ts -->
+    {county.body.map((para, i) => (
+      <p class={`text-${i === 0 ? 'lg' : 'base'} text-gray-700 leading-relaxed mb-5`}>
+        {para}
+      </p>
+    ))}
+
+    <!-- Services grid -->
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-5">Forestry Services in {county.name}</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
+      {services.map(svc => (
+        <a
+          href={`/services/${svc.slug}`}
+          class="flex items-start gap-3 p-4 border border-gray-200 rounded-lg hover:border-[#2d5a2d] hover:bg-green-50 transition-colors group"
+        >
+          <span class="text-2xl flex-shrink-0" aria-hidden="true">{svc.icon}</span>
+          <div>
+            <div class="font-semibold text-[#1a3c1a] group-hover:text-[#2d5a2d] text-sm">{svc.name}</div>
+            <div class="text-xs text-gray-500 mt-0.5 leading-snug">{svc.excerpt.split('—')[0].trim()}</div>
+          </div>
+        </a>
+      ))}
+    </div>
+
+    <!-- 480-a callout for NY counties -->
+    {isNY && (
+      <div class="bg-green-50 border border-green-200 rounded-lg p-6 mb-10">
+        <h3 class="font-bold text-[#1a3c1a] text-lg mb-2">480-a Forest Tax Law — {county.name}</h3>
+        <p class="text-gray-700 text-sm mb-3">
+          Property owners in {county.name} with 50 or more acres of qualifying woodland may be eligible for
+          significant property and school tax reductions through New York's 480-a Forest Tax Law program.
+          The program requires a DEC-approved forest management plan written by a certified consulting forester.
+          Henry Kowalec prepares these plans and handles the full enrollment process for {county.name} landowners.
+        </p>
+        <p class="text-gray-700 text-sm mb-4">
+          The exemption applies to both property tax and school tax on the enrolled acreage, and can reduce
+          that combined burden by up to 80%. For landowners in {county.name}'s active real estate market,
+          that translates to meaningful annual savings that compound over the 10-year enrollment period.
+        </p>
+        <a href="/services/480a-forest-tax-law" class="text-[#2d5a2d] font-semibold text-sm underline hover:text-[#1a3c1a]">
+          Learn about 480-a enrollment for {county.name} landowners →
+        </a>
+      </div>
+    )}
+
+    <!-- Why EFP -->
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Why {county.name} Landowners Work With EFP</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Henry Kowalec has been working in {county.name} and the surrounding region for more than 30 years.
+      That means he has direct knowledge of local terrain, access conditions, species composition, and the
+      regional timber market — knowledge that cannot be acquired from a desk or replicated by a company
+      operating out of the area.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Environmental Forest Products is based in Westbrookville, Sullivan County — not a regional franchise
+      or an out-of-area operator. When EFP takes on a project in {county.name}, Henry Kowalec conducts the
+      site assessment personally, plans the work based on what he sees on the ground, and is directly
+      accountable for the outcome. That direct, personal approach is the foundation of every service
+      EFP provides.
+    </p>
+
+    <!-- CTA -->
+    <div class="bg-[#1a3c1a] text-white rounded-lg p-6 my-10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <div>
+        <p class="font-bold text-lg mb-1">Get a Site Assessment in {county.name}</p>
+        <p class="text-green-200 text-sm">We walk the property with you — not a phone estimate.</p>
+      </div>
+      <a
+        href="tel:+18457548242"
+        class="inline-flex items-center gap-2 bg-white text-[#1a3c1a] font-bold px-5 py-3 rounded hover:bg-green-100 transition-colors text-sm whitespace-nowrap flex-shrink-0"
+      >
+        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/></svg>
+        (845) 754-8242
+      </a>
+    </div>
+
+    <!-- Towns grid -->
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Towns and Communities Served in {county.name}</h2>
+    <p class="text-gray-600 text-sm mb-5">
+      Environmental Forest Products serves private landowners throughout {county.name}.
+      Select a community below for locally-specific forestry information.
+    </p>
+    <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 mb-10">
+      {county.towns.map(town => (
+        <a
+          href={`/locations/${county.slug}/${town.slug}`}
+          class="text-sm text-[#2d5a2d] hover:text-[#1a3c1a] hover:underline py-1"
+        >
+          {town.name}
+        </a>
+      ))}
+    </div>
+
+    <!-- Neighboring counties -->
+    {neighbors.length > 0 && (
+      <div class="bg-gray-50 border border-gray-200 rounded-lg p-5 mb-10">
+        <h3 class="font-semibold text-[#1a3c1a] mb-3 text-sm uppercase tracking-wide">Also Serving Nearby Counties</h3>
+        <div class="flex flex-wrap gap-3">
+          {neighbors.map(n => (
+            <a
+              href={`/locations/${n.slug}`}
+              class="text-sm text-[#2d5a2d] hover:text-[#1a3c1a] hover:underline"
+            >
+              {n.name}, {n.stateAbbr}
+            </a>
+          ))}
+        </div>
+      </div>
+    )}
+
+    <FAQSection items={faqs} />
+    <EstimateForm variant="b2c" />
+
+  </article>
+</LocationLayout>

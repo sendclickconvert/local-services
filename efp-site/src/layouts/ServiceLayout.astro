@@ -1,0 +1,24 @@
+---
+// ServiceLayout.astro
+// Used by all /services/ pages.
+// Extends BaseLayout. CTASection is always rendered at the bottom — no exceptions.
+
+import BaseLayout from './BaseLayout.astro';
+import CTASection from '../components/ui/CTASection.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  canonicalUrl: string;
+  ogImage?: string;
+  robotsContent?: string;
+  ctaVariant?: 'b2c' | 'b2b';
+}
+
+const { ctaVariant = 'b2c', ...rest } = Astro.props;
+---
+
+<BaseLayout {...rest}>
+  <slot />
+  <CTASection variant={ctaVariant} />
+</BaseLayout>

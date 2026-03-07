@@ -1,0 +1,23 @@
+---
+// LocationLayout.astro
+// Used by all /locations/ county pages.
+// Extends BaseLayout. CTASection always rendered at bottom.
+
+import BaseLayout from './BaseLayout.astro';
+import CTASection from '../components/ui/CTASection.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  canonicalUrl: string;
+  ogImage?: string;
+  robotsContent?: string;
+}
+
+const { ...rest } = Astro.props;
+---
+
+<BaseLayout {...rest}>
+  <slot />
+  <CTASection variant="b2c" />
+</BaseLayout>

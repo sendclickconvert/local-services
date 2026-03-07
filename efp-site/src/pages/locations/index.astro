@@ -1,0 +1,79 @@
+---
+// pages/locations/index.astro
+// Service areas hub — lists all counties + town counts.
+// Powered entirely by locations.ts — no hardcoded geography here.
+
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/ui/PageHero.astro';
+import CTASection from '../../components/ui/CTASection.astro';
+import Breadcrumb from '../../components/ui/Breadcrumb.astro';
+import { buildTitle, buildCanonical, buildDescription } from '../../lib/seo';
+import { primaryCounties, secondaryCounties } from '../../data/locations';
+
+const title = buildTitle("Forestry Consulting Service Areas — NY, PA & NJ");
+const description = buildDescription(
+  "Environmental Forest Products serves private woodland owners across Sullivan, Orange, and Ulster " +
+  "counties in New York, plus Pike and Wayne counties in Pennsylvania and Sussex County in New Jersey."
+);
+const canonicalUrl = buildCanonical("/locations");
+
+const crumbs = [
+  { label: "Home",      href: "/"          },
+  { label: "Locations", href: "/locations" },
+];
+---
+
+<BaseLayout title={title} description={description} canonicalUrl={canonicalUrl}>
+  <Breadcrumb crumbs={crumbs} />
+
+  <PageHero
+    title="Forestry Consulting Service Areas"
+    subtitle="Serving private landowners across New York, Pennsylvania, and New Jersey"
+  />
+
+  <section class="py-16 sm:py-20 bg-white">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <!-- Primary Counties — NY -->
+      <h2 class="text-2xl font-bold text-[#1a3c1a] mb-2">Primary Service Area — New York</h2>
+      <p class="text-gray-600 mb-8 text-sm">
+        Sullivan, Orange, and Ulster counties are our core service area. All services available throughout these counties.
+      </p>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-16">
+        {primaryCounties.map(county => (
+          <a
+            href={`/locations/${county.slug}`}
+            class="block p-6 border-2 border-gray-200 rounded-xl hover:border-[#2d5a2d] hover:shadow-md transition-all group"
+          >
+            <h3 class="font-bold text-[#1a3c1a] text-lg group-hover:text-[#2d5a2d] mb-1">{county.name}</h3>
+            <p class="text-xs text-gray-500 mb-3">{county.stateFull}</p>
+            <p class="text-sm text-gray-600 mb-4 leading-snug">{county.tagline}</p>
+            <p class="text-xs text-[#2d5a2d] font-semibold">{county.towns.length} towns served →</p>
+          </a>
+        ))}
+      </div>
+
+      <!-- Secondary Counties — PA + NJ -->
+      <h2 class="text-2xl font-bold text-[#1a3c1a] mb-2">Also Serving Pennsylvania &amp; New Jersey</h2>
+      <p class="text-gray-600 mb-8 text-sm">
+        We extend services into Pike and Wayne counties in Pennsylvania and Sussex County in New Jersey.
+      </p>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-16">
+        {secondaryCounties.map(county => (
+          <a
+            href={`/locations/${county.slug}`}
+            class="block p-6 border border-gray-200 rounded-xl hover:border-[#2d5a2d] hover:shadow-md transition-all group"
+          >
+            <h3 class="font-bold text-[#1a3c1a] text-lg group-hover:text-[#2d5a2d] mb-1">{county.name}</h3>
+            <p class="text-xs text-gray-500 mb-3">{county.stateFull}</p>
+            <p class="text-sm text-gray-600 mb-4 leading-snug">{county.tagline}</p>
+            <p class="text-xs text-[#2d5a2d] font-semibold">{county.towns.length} towns served →</p>
+          </a>
+        ))}
+      </div>
+
+    </div>
+  </section>
+
+  <CTASection variant="b2c" />
+</BaseLayout>

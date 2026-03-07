@@ -1,0 +1,161 @@
+---
+// pages/services/timber-harvesting.astro
+import ServiceLayout from '../../layouts/ServiceLayout.astro';
+import PageHero from '../../components/ui/PageHero.astro';
+import Breadcrumb from '../../components/ui/Breadcrumb.astro';
+import FAQSection from '../../components/ui/FAQSection.astro';
+import EstimateForm from '../../components/forms/EstimateForm.astro';
+import ServiceSchema from '../../components/schema/ServiceSchema.astro';
+import FAQSchema from '../../components/schema/FAQSchema.astro';
+import AuthorByline from '../../components/ui/AuthorByline.astro';
+import { buildTitle, buildCanonical, buildDescription } from '../../lib/seo';
+
+const title = buildTitle("Timber Harvesting Services — Hudson Valley & Catskills NY");
+const description = buildDescription(
+  "Selective, sustainable timber harvesting in Sullivan, Orange, and Ulster counties, NY. A certified consulting forester plans every harvest to protect long-term woodland health and maximize timber value."
+);
+const canonicalUrl = buildCanonical("/services/timber-harvesting");
+
+const crumbs = [
+  { label: "Home",     href: "/"         },
+  { label: "Services", href: "/services" },
+  { label: "Timber Harvesting", href: "/services/timber-harvesting" },
+];
+
+// ⚠️ FAQs — factually safe, should be reviewed and expanded by Henry
+const faqs = [
+  {
+    question: "What is selective timber harvesting?",
+    answer: "Selective harvesting means removing specific trees — typically mature, damaged, or overcrowded ones — while leaving the surrounding stand intact. This approach maintains forest canopy, protects wildlife habitat, reduces erosion risk, and ensures the woodland continues to grow and produce value after the harvest is complete. It contrasts with clear-cutting, which removes all or most trees from an area."
+  },
+  {
+    question: "How does a consulting forester add value to a timber harvest?",
+    answer: "A certified consulting forester marks the trees to be harvested, prepares the timber sale contract, solicits bids from licensed loggers, and oversees the operation to ensure it is carried out according to plan. This process typically results in higher returns for landowners than dealing directly with a logger, because the forester's role is to represent the landowner's interests — not the buyer's."
+  },
+  {
+    question: "Do I need a timber harvest to qualify for 480-a?",
+    answer: "Not necessarily. The 480-a Forest Tax Law program in New York requires a certified management plan, but harvesting is only one component of forest management. Some management activities focus on species composition, invasive removal, or habitat improvement rather than timber removal. [⚠️ Confirm specifics with Henry]"
+  },
+  {
+    question: "How long does a timber harvest take?",
+    answer: "The timeline for a timber harvest depends on the acreage involved, the volume and species of timber, access conditions, and seasonal factors. A small residential woodlot harvest may take a few days; a larger commercial harvest can span several weeks. The planning and bidding process that precedes the harvest typically adds several months to the overall timeline. [⚠️ Confirm typical timelines with Henry]"
+  },
+  {
+    question: "What areas do you serve for timber harvesting?",
+    answer: "Timber harvesting consulting is available in Sullivan, Orange, and Ulster counties in New York, as well as Pike and Wayne counties in Pennsylvania and Sussex County in New Jersey."
+  },
+];
+---
+
+<ServiceLayout title={title} description={description} canonicalUrl={canonicalUrl}>
+  <ServiceSchema
+    pageType="service"
+    serviceName="Timber Harvesting Services"
+    description={description}
+    url={canonicalUrl}
+    areaServed={["Sullivan County, NY", "Orange County, NY", "Ulster County, NY", "Pike County, PA", "Wayne County, PA", "Sussex County, NJ"]}
+    crumbs={crumbs}
+  />
+  <FAQSchema items={faqs} />
+
+  <Breadcrumb crumbs={crumbs} />
+
+  <PageHero
+    title="Timber Harvesting in the Hudson Valley & Catskills"
+    subtitle="Selective, sustainable logging guided by a certified consulting forester — protecting your woodland while recovering its value"
+  />
+
+  <article class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <AuthorByline />
+
+        <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Timber Harvesting That Protects the Forest</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      A timber harvest done correctly improves a woodland. Done incorrectly, it can damage it for decades. The difference comes down to planning — specifically, whether the harvest was designed by someone whose job is to protect the long-term health and value of the forest, or by someone whose interest is maximizing what comes out of it in a single cut.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Environmental Forest Products provides timber harvesting consulting for private landowners across the Hudson Valley and Catskills region. Every harvest is planned using selective methods that preserve stand structure, protect regeneration, and leave the woodland in better condition than before the loggers arrived.
+    </p>
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">How a Timber Harvest Is Managed</h2>
+    <img src="/images/uploads/komatsu-feller-buncher-timber-harvest-1-ny.jpg" alt="Komatsu XT445L tracked feller buncher during a timber harvest in New York — Environmental Forest Products" class="w-full rounded-xl shadow-md" loading="lazy" />
+    <p class="text-gray-700 leading-relaxed mb-4">
+      The process begins with a timber cruise — a systematic assessment of the stand to inventory species, volume, and quality. Based on that data, a harvest prescription is developed that identifies which trees to remove and which to leave. The prescription balances the landowner's goals (income, habitat, long-term timber value, 480-a compliance) against the biological needs of the forest.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Once the prescription is set, the timber is bid to licensed loggers operating in the region. A consulting forester represents the landowner in that process, reviews the bids, and helps select the right operator. During the harvest, the operation is monitored to ensure it follows the plan.
+    </p>
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Species and Markets in This Region</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      The Hudson Valley and Catskill region supports a range of commercially valuable species, including red oak, white oak, black cherry, hard maple, white ash, and eastern white pine, among others. Markets and pricing vary by species, log quality, and current demand. A consulting forester with regional experience understands how to time and structure a sale to achieve reasonable returns for the landowner.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      If you are considering selling timber from your property, see our <a href="/services/sell-standing-timber" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">timber appraisal and marketing services</a> for a detailed explanation of how a properly managed timber sale works and what landowners typically recover through competitive bidding versus a direct logger offer.
+    </p>
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Timber Harvesting and the 480-a Program</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      For landowners enrolled in New York's 480-a Forest Tax Law program, timber harvesting must comply with the approved management plan on file with the state. If a harvest is planned for a property currently in 480-a, or if a landowner is considering enrollment, it is important to coordinate the harvest with the management plan requirements before any trees are marked. See our <a href="/services/480a-forest-tax-law" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">480-a consulting services</a> and <a href="/services/woodlot-management" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">woodlot management plans</a> for more information.
+    </p>
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">What to Expect During a Timber Harvest</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      A well-managed timber harvest on a private woodlot in this region typically unfolds over several weeks
+      to a few months, depending on volume, terrain, and weather. Here is what the operation generally looks like:
+    </p>
+    <ul class="space-y-3 mb-8">
+      {[
+        ["Equipment mobilization", "Logging equipment — typically a feller-buncher, forwarder, or skidder depending on terrain and prescription — is brought to the site. Access roads and landing areas are established or improved per the contract specifications."],
+        ["Marked-tree-only cutting", "Only trees marked with paint in the pre-harvest prescription are cut. Unmarked trees are protected. This is enforced by the forester during monitoring visits throughout the operation."],
+        ["Log sorting and hauling", "Logs are sorted by species and grade at the landing and hauled to the mill. High-value logs are separated from lower-value pulpwood or firewood-grade material to maximize total recovery."],
+        ["Slash management", "The tops and branches left after felling — called slash — are typically lopped and scattered or piled, per the contract and any applicable plan requirements. Excessive slash concentrations near roads or watercourses are addressed as part of the operation."],
+        ["Road and landing restoration", "When the harvest is complete, the contract specifies what restoration is required — water bars on skid trails, removal of temporary bridges, grading of landings. These terms are negotiated before the contract is signed."],
+      ].map(([heading, body]) => (
+        <li class="flex gap-3">
+          <svg class="w-5 h-5 text-[#2d5a2d] flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+          <div>
+            <span class="font-semibold text-gray-900">{heading}.</span>
+            <span class="text-gray-600"> {body}</span>
+          </div>
+        </li>
+      ))}
+    </ul>
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Other Reasons Landowners Harvest Timber</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Timber harvesting is not always driven by a standard management plan cycle. Other common scenarios include:
+    </p>
+    <ul class="list-disc pl-6 text-gray-700 mb-6 space-y-2 text-sm leading-relaxed">
+      <li><strong>Wildlife habitat and food plots.</strong> Selective clearing opens the canopy, encourages browse, and creates edge habitat. For hunting camps and recreational properties, a targeted harvest can transform a dense closed-canopy stand into productive wildlife habitat within a few growing seasons.</li>
+      <li><strong>Improved property access.</strong> Timber harvesting can fund the development of roads and trails through a property, effectively paying for access improvements out of the sale proceeds.</li>
+      <li><strong>Salvage after natural events.</strong> Wind events, ice storms, heavy insect infestations, and tree diseases — including canker, mold, and fire blight — can make a salvage harvest economically sensible. Affected trees may still have marketable value if harvested before quality declines further.</li>
+      <li><strong>Planned harvest cycles.</strong> Properties under active management are typically harvested on 5, 10, or 15-year cycles depending on stand conditions, species growth rates, and market timing. A phased approach spreads income over time while maintaining continuous forest cover.</li>
+    </ul>
+    <p class="text-gray-700 leading-relaxed mb-6">
+      Regardless of the reason, the process starts the same way: an on-site assessment of the proposed
+      woodlot along with a review of local property records. Planning and preparation are what separate
+      a harvest that benefits both landowner and forest from one that creates long-term damage.
+    </p>
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Service Area</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Timber harvesting consulting is available in <a href="/locations/sullivan-county-ny" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">Sullivan County</a>, <a href="/locations/orange-county-ny" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">Orange County</a>, and <a href="/locations/ulster-county-ny" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">Ulster County</a> in New York, as well as Pike and Wayne counties in Pennsylvania and Sussex County in New Jersey.
+    </p>
+
+    <div class="bg-green-50 border border-green-200 rounded-lg p-6 my-10">
+      <h3 class="font-bold text-[#1a3c1a] text-lg mb-2">Thinking About a Timber Harvest?</h3>
+      <p class="text-gray-700 text-sm mb-4">
+        Start with a timber stand evaluation. We'll assess your woodland and give you a straight picture of what you have, what it's worth, and what the right next step is — whether that's harvesting now, waiting, or focusing on a different management objective first.
+      </p>
+      <a href="tel:+18457548242" class="inline-flex items-center gap-2 bg-[#1a3c1a] text-white font-semibold px-5 py-3 rounded hover:bg-[#2d5a2d] transition-colors text-sm">
+        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/></svg>
+        Call (845) 754-8242
+      </a>
+    </div>
+
+    <FAQSection items={faqs} />
+    <EstimateForm variant="b2c" />
+
+  </article>
+</ServiceLayout>

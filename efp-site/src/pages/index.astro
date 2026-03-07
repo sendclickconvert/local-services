@@ -1,0 +1,232 @@
+---
+// pages/index.astro — Homepage
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/ui/PageHero.astro';
+import ServiceCard from '../components/ui/ServiceCard.astro';
+import VideoFeature from '../components/ui/VideoFeature.astro';
+import CTASection from '../components/ui/CTASection.astro';
+import { buildTitle, buildCanonical, buildDescription } from '../lib/seo';
+import { websiteSchema } from '../data/schema/website';
+
+const title = buildTitle("Certified Forestry Consulting — Hudson Valley & Catskills");
+const description = buildDescription();
+const canonicalUrl = buildCanonical("/");
+
+// ─── TRUST DATA ───────────────────────────────────────────────────────────────
+// From live EFP site — confirmed visible. Logo files needed from Henry.
+// ⚠️ = flag for Henry review before launch (verify current membership status)
+
+const equipmentBrands = [
+  // ⚠️ These 4 logo files still needed from Henry — /images/logos/[name]
+  { name: "Husqvarna",               logo: null,  darkBg: false },
+  { name: "Timberjack / John Deere", logo: null,  darkBg: false },
+  { name: "Snap-on",                 logo: null,  darkBg: false },
+  { name: "Columbia Forest Products",logo: null,  darkBg: false },
+];
+
+const associations = [
+  // ✅ Confirmed logos provided by Henry
+  { name: "NY Forest Owners Association",        logo: "/images/logos/ny-forest-owners-association.jpg", darkBg: false },
+  { name: "Sullivan County Chamber of Commerce", logo: "/images/logos/sullivan-county-chamber.jpg",      darkBg: false },
+  { name: "Orange County Chamber of Commerce",   logo: "/images/logos/orange-county-chamber.jpg",        darkBg: false },
+  { name: "Delaware State Chamber of Commerce",  logo: "/images/logos/delaware-state-chamber.webp",      darkBg: false },
+  { name: "Better Business Bureau",              logo: "/images/logos/bbb.png",                          darkBg: true  },
+  // ⚠️ Still needed from Henry — verify membership status + get logo files
+  { name: "Society of American Foresters",       logo: null, darkBg: false },
+  { name: "NJ Forestry Association",             logo: null, darkBg: false },
+  { name: "NY Logger Training (NYLT)",           logo: null, darkBg: false },
+  { name: "Northeastern Loggers Association",    logo: null, darkBg: false },
+  { name: "Empire State Forest Products Assoc.",logo: null, darkBg: false },
+  { name: "Delaware County Business Alliance",   logo: null, darkBg: false },
+];
+
+// ─── TESTIMONIALS ─────────────────────────────────────────────────────────────
+// Source: live eforestproducts.com — confirmed real.
+// Add second testimonial once Henry provides source material.
+
+const testimonials = [
+  {
+    quote: "Just a note to show our appreciation for all your excellent work on the logging of our property in the Town of Kent. You proved in the end to have been the right choice at the beginning to guide us through the process, and verify what is important to us, that you care for the land as well as the harvesting of the lumber. Our hearty recommendation to anyone searching for the right logger.",
+    name: "Mary Ting & Todd Springer",
+    detail: "springerandting.com · Town of Kent, NY",
+    avatar: null,
+  },
+  {
+    quote: "I originally approached Henry at Environmental Forest Products LLC to oversee a timber harvest of my 72 acre property, and based on how he conducted his business and responsibility of forest management I asked him to partner on future projects.",
+    name: "Dom Carbone",
+    detail: "domcarbone.com",
+    avatar: null,
+  },
+];
+---
+
+<BaseLayout title={title} description={description} canonicalUrl={canonicalUrl}>
+  <!-- ⚠️ MANUAL-ONLY: WebSite schema — do not agent-edit -->
+  <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
+
+  <!-- ─── 1. HERO ─────────────────────────────────────────────────────────── -->
+  <PageHero
+    title="Certified Forestry Consulting for the Hudson Valley & Catskills"
+    subtitle="480-a Forest Tax Law · Land Clearing · Timber Harvesting · Woodlot Management"
+  />
+
+  <!-- ─── TRUST BAR ──────────────────────────────────────────────────────── -->
+  <div class="bg-[#1a3c1a] py-5">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
+        {[
+          { stat: "Since 1991", label: "Serving the Tri-State area" },
+          { stat: "~100 yrs",   label: "Combined team experience" },
+          { stat: "6 counties", label: "NY · PA · NJ service area" },
+          { stat: "480-a",      label: "DEC-certified management plans" },
+        ].map(s => (
+          <div class="py-2">
+            <div class="text-white font-bold text-lg sm:text-xl leading-tight">{s.stat}</div>
+            <div class="text-green-300 text-xs mt-0.5 leading-snug">{s.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── 2. SERVICES ──────────────────────────────────────────────────────── -->
+  <section class="py-16 sm:py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-2xl sm:text-3xl font-bold text-[#1a3c1a] mb-3">Forestry Services for Private Landowners</h2>
+        <p class="text-gray-600 max-w-xl mx-auto text-base">
+          Certified consulting expertise across Sullivan, Orange, and Ulster counties — and beyond.
+        </p>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <ServiceCard title="480-a Forest Tax Law" slug="480a-forest-tax-law" excerpt="Reduce your property taxes with NY's 480-a program. Henry is one of a small number of certified foresters in the region qualified to write the required management plans." icon="🌲" />
+        <ServiceCard title="Land Clearing"        slug="land-clearing"        excerpt="Residential and commercial site preparation across Sullivan, Orange, and Ulster counties — clearing expertise grounded in forestry, not just excavation." icon="🚜" />
+        <ServiceCard title="Timber Harvesting"    slug="timber-harvesting"    excerpt="Selective, sustainable logging services. A consulting forester plans and oversees every harvest to protect your woodland and maximize what the timber is worth." icon="🪵" />
+        <ServiceCard title="Woodlot Management"   slug="woodlot-management"   excerpt="Forest management plans for private landowners — required for 480-a enrollment and the foundation of any long-term woodland stewardship program." icon="🗺️" />
+      </div>
+      <div class="text-center mt-8">
+        <a href="/services" class="inline-flex items-center gap-2 text-[#2d5a2d] font-semibold hover:text-[#1a3c1a] transition-colors">
+          View all services
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── 3. VIDEO FEATURE ─────────────────────────────────────────────────── -->
+  <VideoFeature
+    vimeoId="1171347773"
+    posterSrc="/images/uploads/spruce-timber-harvest-millbrook-ny.jpg"
+    heading="See Our Work in Action"
+    caption="Forestry equipment and field work from Environmental Forest Products — serving the Hudson Valley and Catskills since 1991."
+  />
+
+  <!-- ─── 4. EQUIPMENT & ASSOCIATIONS ─────────────────────────────────────── -->
+  <!--
+    From the live EFP site — confirmed real logos and affiliations.
+    Currently rendering as text fallbacks until logo files are provided.
+    All logos: drop files into /public/images/logos/ and swap null → path below.
+  -->
+  <section class="py-16 sm:py-20 bg-white border-t border-gray-100">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <h2 class="text-center text-2xl font-bold text-[#1a3c1a] mb-2">Equipment &amp; Associations</h2>
+      <p class="text-center text-gray-500 text-sm mb-12">
+        The equipment we run. The organizations we belong to.
+      </p>
+
+      <!-- Equipment brands -->
+      <div class="mb-10">
+        <p class="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-5 text-center">Equipment &amp; Vendors</p>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-6">
+          {equipmentBrands.map(brand => (
+            <div class="flex items-center justify-center h-16 px-4 border border-gray-200 rounded-lg bg-gray-50">
+              {brand.logo
+                ? <img src={brand.logo} alt={brand.name} class="max-h-10 max-w-full object-contain" loading="lazy" />
+                : <span class="text-sm font-semibold text-gray-500 text-center leading-tight">{brand.name}</span>
+              }
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Divider -->
+      <div class="border-t border-gray-100 mb-10" />
+
+      <!-- Industry associations and chambers -->
+      <div>
+        <p class="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-5 text-center">Associations &amp; Organizations</p>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-6">
+          {associations.map(org => (
+            <div class={`flex items-center justify-center h-16 px-3 border rounded-lg ${org.darkBg ? 'bg-[#0a3d5e] border-[#0a3d5e]' : 'bg-gray-50 border-gray-200'}`}>
+              {org.logo
+                ? <img src={org.logo} alt={org.name} class="max-h-10 max-w-full object-contain" loading="lazy" />
+                : <span class="text-xs font-semibold text-gray-500 text-center leading-tight">{org.name}</span>
+              }
+            </div>
+          ))}
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ─── 5. TESTIMONIALS ───────────────────────────────────────────────────── -->
+  <section class="py-16 sm:py-20 bg-gray-50 border-t border-gray-100">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <h2 class="text-center text-2xl font-bold text-[#1a3c1a] mb-2">What Our Clients Say</h2>
+      <p class="text-center text-gray-500 text-sm mb-12">
+        Private landowners across the Hudson Valley and Catskills.
+      </p>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        {testimonials.map(t => (
+          <div class="bg-white rounded-xl border border-gray-200 p-6 shadow-sm flex flex-col">
+
+            <!-- Quote mark -->
+            <svg class="w-8 h-8 text-[#2d5a2d] opacity-30 mb-3 flex-shrink-0" fill="currentColor" viewBox="0 0 32 32" aria-hidden="true">
+              <path d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z"/>
+            </svg>
+
+            <!-- Quote text -->
+            <p class="text-gray-700 text-sm leading-relaxed flex-1 mb-5 italic">
+              "{t.quote}"
+            </p>
+
+            <!-- Attribution -->
+            <div class="flex items-center gap-3 mt-auto pt-4 border-t border-gray-100">
+              {t.avatar
+                ? <img src={t.avatar} alt={t.name} class="w-10 h-10 rounded-full object-cover flex-shrink-0" loading="lazy" />
+                : (
+                  <div class="w-10 h-10 rounded-full bg-[#1a3c1a] flex items-center justify-center flex-shrink-0" aria-hidden="true">
+                    <span class="text-white text-sm font-bold">{t.name.charAt(0)}</span>
+                  </div>
+                )
+              }
+              <div>
+                <div class="font-semibold text-[#1a3c1a] text-sm">{t.name}</div>
+                {t.detail && <div class="text-xs text-gray-400">{t.detail}</div>}
+              </div>
+            </div>
+
+          </div>
+        ))}
+      </div>
+
+      <!-- Google review nudge — once Henry has reviews -->
+      <p class="text-center text-xs text-gray-400 mt-8">
+        Working with Henry?
+        <a href="https://g.page/r/[STUB-GBP-REVIEW-LINK]/review" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]" target="_blank" rel="noopener">
+          Leave a Google review
+        </a>
+        — it helps other landowners find this site.
+      </p>
+
+    </div>
+  </section>
+
+  <!-- ─── 6. FINAL CTA ──────────────────────────────────────────────────────── -->
+  <CTASection variant="b2c" />
+
+</BaseLayout>

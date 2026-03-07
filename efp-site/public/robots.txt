@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://eforestproducts.com/sitemap-index.xml
+
+# Crawl blocks must be explicitly instructed — none set by default
+# Do NOT add GPTBot or PerplexityBot blocks — AI citation indexing is a ranking goal
+# noindex directives belong in meta tags only, never in robots.txt

@@ -1,0 +1,58 @@
+---
+// GuideLayout.astro
+// Used by guides/[...slug].astro for all content collection articles.
+// Includes: AuthorByline, KeyTakeaway slot, RelatedLinks, CTASection.
+
+import BaseLayout from './BaseLayout.astro';
+import AuthorByline from '../components/ui/AuthorByline.astro';
+import KeyTakeaway from '../components/ui/KeyTakeaway.astro';
+import RelatedLinks from '../components/ui/RelatedLinks.astro';
+import CTASection from '../components/ui/CTASection.astro';
+
+interface LinkItem {
+  label: string;
+  href: string;
+}
+
+interface Props {
+  title: string;
+  description?: string;
+  canonicalUrl: string;
+  ogImage?: string;
+  robotsContent?: string;
+  keyTakeaway?: string;
+  upLinks?: LinkItem[];
+  downLinks?: LinkItem[];
+  serviceLinks?: LinkItem[];
+  locationLinks?: LinkItem[];
+}
+
+const {
+  keyTakeaway,
+  upLinks,
+  downLinks,
+  serviceLinks,
+  locationLinks,
+  ...rest
+} = Astro.props;
+---
+
+<BaseLayout {...rest}>
+  <article class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+
+    {keyTakeaway && <KeyTakeaway text={keyTakeaway} />}
+
+    <AuthorByline />
+
+    <slot />
+
+    <RelatedLinks
+      upLinks={upLinks}
+      downLinks={downLinks}
+      serviceLinks={serviceLinks}
+      locationLinks={locationLinks}
+    />
+
+  </article>
+  <CTASection variant="b2c" />
+</BaseLayout>

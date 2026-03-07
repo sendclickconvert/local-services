@@ -1,0 +1,24 @@
+---
+// KeyTakeaway.astro
+// Styled callout box — primary AI Overview and AI search citation target.
+// Left border accent, "Key Takeaway" label, factual tone.
+// Content rule: text must answer the page's primary question in 1-2 sentences.
+// Factual, not promotional. Promotional language reduces AI citation rate.
+
+interface Props {
+  text: string;
+}
+const { text } = Astro.props;
+---
+
+<aside
+  class="bg-green-50 border-l-4 border-[#2d5a2d] rounded-r-lg px-6 py-5 my-8"
+  aria-label="Key Takeaway"
+>
+  <p class="text-xs font-bold uppercase tracking-widest text-[#2d5a2d] mb-2">
+    Key Takeaway
+  </p>
+  <p class="text-gray-800 text-base sm:text-lg leading-relaxed font-medium">
+    {text}
+  </p>
+</aside>

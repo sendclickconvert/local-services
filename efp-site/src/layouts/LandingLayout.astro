@@ -1,0 +1,68 @@
+---
+// LandingLayout.astro
+// Used by all /lp/ B2B landing pages.
+// Minimal layout: no main nav, no footer nav links, CTA only.
+// Purpose: eliminate exit paths on conversion-focused landing pages.
+//
+// INDEXING DECISION: /lp/ pages are INDEXED — they are SEO assets, not paid campaigns.
+// To noindex a future /lp/ page, pass robotsContent={noindex(true)} explicitly.
+
+import BaseHead from '../components/layout/BaseHead.astro';
+import CTASection from '../components/ui/CTASection.astro';
+import { business } from '../data/client.config';
+import { organizationSchema } from '../data/schema/organization';
+
+interface Props {
+  title: string;
+  description?: string;
+  canonicalUrl: string;
+  ogImage?: string;
+  robotsContent?: string;
+}
+
+const { title, description, canonicalUrl, ogImage, robotsContent } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <BaseHead
+    title={title}
+    description={description}
+    canonicalUrl={canonicalUrl}
+    ogImage={ogImage}
+    robotsContent={robotsContent}
+  />
+  <script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
+</head>
+<body class="bg-white">
+
+  <!-- Minimal header: logo + phone only, no nav links -->
+  <header class="bg-[#1a3c1a] px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+    <a href="/" class="text-white font-bold text-lg hover:text-green-300 transition-colors">
+      {business.name}
+    </a>
+    <a
+      href={`tel:${business.phoneRaw}`}
+      class="flex items-center gap-2 bg-[#2d5a2d] hover:bg-green-600 text-white text-sm font-semibold px-4 py-2 rounded transition-colors"
+    >
+      <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+        <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
+      </svg>
+      {business.phone}
+    </a>
+  </header>
+
+  <main>
+    <slot />
+  </main>
+
+  <CTASection variant="b2b" />
+
+  <!-- Minimal footer: NAP only, no nav links -->
+  <footer class="bg-[#0d1a0d] text-gray-600 text-xs text-center py-5 px-4">
+    {business.name} · {business.address.city}, {business.address.stateAbbr} · {business.phone}
+  </footer>
+
+</body>
+</html>

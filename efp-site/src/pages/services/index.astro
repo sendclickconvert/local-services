@@ -1,0 +1,31 @@
+---
+// pages/services/index.astro — Services hub
+import ServiceLayout from '../../layouts/ServiceLayout.astro';
+import PageHero from '../../components/ui/PageHero.astro';
+import ServiceCard from '../../components/ui/ServiceCard.astro';
+import { buildTitle, buildCanonical, buildDescription } from '../../lib/seo';
+
+const title = buildTitle("Forestry Services — Sullivan, Orange & Ulster Counties");
+const description = buildDescription("Certified forestry consulting services in the Hudson Valley and Catskills. 480-a Forest Tax Law, land clearing, timber harvesting, woodlot management, and more.");
+const canonicalUrl = buildCanonical("/services");
+---
+
+<ServiceLayout title={title} description={description} canonicalUrl={canonicalUrl}>
+  <PageHero
+    title="Forestry Consulting Services"
+    subtitle="480-a Forest Tax Law · Land Clearing · Timber Harvesting · Woodlot Management — serving Sullivan, Orange, and Ulster counties"
+  />
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <ServiceCard title="480-a Forest Tax Law" slug="480a-forest-tax-law" excerpt="Reduce your property taxes with NY's 480-a Forest Tax Law program. Henry is one of a small number of certified foresters in the region qualified to write the required management plans." icon="🌲" />
+      <ServiceCard title="Land Clearing" slug="land-clearing" excerpt="Residential and commercial site preparation across Sullivan, Orange, and Ulster counties — clearing expertise grounded in forestry, not just excavation." icon="🚜" />
+      <ServiceCard title="Timber Harvesting" slug="timber-harvesting" excerpt="Selective, sustainable logging services. A consulting forester plans and oversees every harvest to protect your woodland and maximize what the timber is worth." icon="🪵" />
+      <ServiceCard title="Sell Standing Timber" slug="sell-standing-timber" excerpt="Timber appraisal, competitive bidding, and sale management. Find out what your timber is actually worth before you accept any offer." icon="💰" />
+      <ServiceCard title="Woodlot Management" slug="woodlot-management" excerpt="Forest management plans for private landowners — required for 480-a enrollment and the foundation of any long-term woodland stewardship program." icon="🗺️" />
+      <ServiceCard title="Wildlife Habitat" slug="wildlife-habitat-management" excerpt="Targeted forestry practices that improve habitat for deer, turkey, grouse, and native wildlife — fully compatible with 480-a and timber objectives." icon="🦌" />
+      <ServiceCard title="Stump Grinding" slug="stump-grinding" excerpt="Complete stump removal after tree work, land clearing, or timber harvesting — leaving the site clean and ready for its next use." icon="⚙️" />
+      <ServiceCard title="Tree Planting" slug="tree-planting" excerpt="Native species selection, site preparation, and reforestation guidance for New York woodland." icon="🌱" />
+      <ServiceCard title="Tree Removal" slug="tree-removal" excerpt="Safe removal of hazard trees, storm-damaged trees, and diseased timber — any size or species." icon="🪚" />
+    </div>
+  </section>
+</ServiceLayout>

@@ -1,0 +1,167 @@
+---
+// pages/services/woodlot-management.astro
+//
+// NOTE: This page was previously shipping with title tag "Land Clearing Services"
+// on the WordPress site — a known keyword cannibalization bug (fixed in WP SEO plugin).
+// The Astro build has the correct title from day one.
+
+import ServiceLayout from '../../layouts/ServiceLayout.astro';
+import PageHero from '../../components/ui/PageHero.astro';
+import Breadcrumb from '../../components/ui/Breadcrumb.astro';
+import FAQSection from '../../components/ui/FAQSection.astro';
+import EstimateForm from '../../components/forms/EstimateForm.astro';
+import ServiceSchema from '../../components/schema/ServiceSchema.astro';
+import FAQSchema from '../../components/schema/FAQSchema.astro';
+import AuthorByline from '../../components/ui/AuthorByline.astro';
+import { buildTitle, buildCanonical, buildDescription } from '../../lib/seo';
+
+const title = buildTitle("Woodlot Management & Forest Management Plans — NY");
+const description = buildDescription(
+  "Professional woodlot management and forest management plans for private landowners in Sullivan, Orange, and Ulster counties, NY. Required for 480-a enrollment — written by a certified consulting forester."
+);
+const canonicalUrl = buildCanonical("/services/woodlot-management");
+
+const crumbs = [
+  { label: "Home",     href: "/"         },
+  { label: "Services", href: "/services" },
+  { label: "Woodlot Management", href: "/services/woodlot-management" },
+];
+
+// ⚠️ FAQs — factually grounded, confirm specifics and expand with Henry before launch
+const faqs = [
+  {
+    question: "What is a forest management plan and do I need one?",
+    answer: "A forest management plan is a written document that describes the current condition of your woodland and prescribes the management activities — harvesting, invasive control, species improvement, habitat work — that will be carried out over a defined period, typically 10 years. In New York, a certified management plan is a legal requirement for enrollment in the 480-a Forest Tax Law program. Even outside of 480-a, a management plan is the foundation of any deliberate woodland stewardship program."
+  },
+  {
+    question: "Who is qualified to write a forest management plan in New York?",
+    answer: "New York's 480-a program requires that management plans be written by a licensed professional forester or someone operating under their supervision. Not all foresters working in the state are qualified to write 480-a plans — the state has specific requirements for the forester's credentials and the plan's content. Environmental Forest Products works with landowners to prepare plans that meet all state requirements. [⚠️ Confirm exact NY DEC credentialing requirements with Henry]"
+  },
+  {
+    question: "What does a forest management plan typically include?",
+    answer: "A forest management plan generally includes a description of the property and stand conditions, a timber inventory or assessment of the woodland's current state, management objectives agreed to with the landowner, prescribed activities and a schedule for implementing them, and maps of the management units. For 480-a purposes, the plan must also address compliance with state forestry guidelines and be approved by the NY Department of Environmental Conservation."
+  },
+  {
+    question: "How often does a forest management plan need to be updated?",
+    answer: "Most forest management plans in New York are written for a 10-year management period. At the end of that period the plan must be renewed and updated to reflect what was accomplished and what the next management cycle should include. Annual compliance reports may also be required for properties enrolled in 480-a. [⚠️ Confirm 480-a renewal and reporting requirements with Henry]"
+  },
+  {
+    question: "Can woodlot management improve habitat for wildlife at the same time?",
+    answer: "Yes — and this is one of the most common dual objectives for private landowners in this region. The management activities prescribed in a woodlot management plan — stand thinning, species improvement, invasive removal, opening creation — are the same practices that improve habitat for deer, turkey, grouse, and other native wildlife. A well-designed plan can address timber production, tax savings through 480-a, and wildlife habitat as integrated goals rather than competing ones."
+  },
+];
+---
+
+<ServiceLayout title={title} description={description} canonicalUrl={canonicalUrl}>
+  <ServiceSchema
+    pageType="service"
+    serviceName="Woodlot Management and Forest Management Plans"
+    description={description}
+    url={canonicalUrl}
+    areaServed={["Sullivan County, NY", "Orange County, NY", "Ulster County, NY", "Pike County, PA", "Wayne County, PA", "Sussex County, NJ"]}
+    crumbs={crumbs}
+  />
+  <FAQSchema items={faqs} />
+
+  <Breadcrumb crumbs={crumbs} />
+
+  <PageHero
+    title="Woodlot Management & Forest Management Plans"
+    subtitle="Professional management plans and ongoing woodland stewardship for private landowners in the Hudson Valley and Catskills"
+  />
+
+  <article class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <AuthorByline />
+
+        <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">What Woodlot Management Actually Means</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Most private woodland in New York is not actively managed. It grows, it changes, invasive species move in, stand density increases, and valuable species get crowded out — all without any deliberate intervention. Over time, the timber value declines, the wildlife habitat degrades, and the property becomes harder to manage with each passing year.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Woodlot management is the practice of changing that trajectory. It means having a current understanding of what is on your property, what it is worth, and what it could become — and then taking the specific actions that move it in the right direction. A certified consulting forester provides the professional assessment and written plan that makes that possible.
+    </p>
+
+    <img src="/images/uploads/hand-felling-trees-nyc-dep-carmel-ny.jpg" alt="Forester hand-felling trees on an NYC DEP project in Carmel, NY — skilled woodland management in action" class="w-full rounded-xl shadow-md" loading="lazy" />
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Forest Management Plans</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      A forest management plan is the core document that guides all woodlot management activity. It describes the current state of the woodland, establishes the landowner's objectives, and prescribes the specific management activities — and a schedule for carrying them out — over the plan period.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      In New York, a written forest management plan prepared by a qualified forester is a legal requirement for enrollment in the <a href="/services/480a-forest-tax-law" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">480-a Forest Tax Law program</a>, which can significantly reduce property taxes on qualifying woodland. This makes the management plan both a practical stewardship tool and a financial asset.
+    </p>
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">What a Management Plan Covers</h2>
+    <ul class="space-y-4 mb-8">
+      {[
+        ["Stand inventory and condition assessment", "A systematic evaluation of what is currently on the property — species composition, tree sizes, stand density, timber quality, and any problem areas including invasive species pressure, storm damage, or disease."],
+        ["Management objectives", "The plan reflects the landowner's goals: timber production, 480-a compliance, wildlife habitat improvement, recreational use, or some combination. These objectives drive every prescription in the plan."],
+        ["Prescribed management activities", "Specific actions recommended for each management unit on the property — harvesting, thinning, invasive control, tree planting, or habitat improvement — with a schedule and priority order."],
+        ["Compliance documentation", "For 480-a-enrolled properties, the plan includes the documentation required by the NY Department of Environmental Conservation and addresses compliance with state forestry guidelines."],
+        ["Maps and stand descriptions", "Detailed maps identifying management units, access points, boundary lines, and any sensitive areas that require special consideration during management activities."],
+      ].map(([heading, body]) => (
+        <li class="flex gap-3">
+          <svg class="w-5 h-5 text-[#2d5a2d] flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+          </svg>
+          <div>
+            <span class="font-semibold text-gray-900">{heading}.</span>
+            <span class="text-gray-600"> {body}</span>
+          </div>
+        </li>
+      ))}
+    </ul>
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Woodlot Management and Timber Harvesting</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      For many landowners, the first significant management activity after a plan is written is a <a href="/services/timber-harvesting" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">timber harvest</a>. A harvest is not just a revenue event — it is a forest management tool. Removing the right trees at the right time improves species composition, reduces competition for the remaining stand, and accelerates the development of the woodland toward the landowner's long-term objectives.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      When a harvest is part of the management plan, it is designed to serve the plan's goals — not just to extract whatever timber is most convenient. This is one of the clearest differences between a forester-managed harvest and an unplanned logger-direct timber sale.
+    </p>
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Woodlot Management and Wildlife Habitat</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      A well-managed woodlot and productive wildlife habitat are not competing goals. The stand structure improvements that benefit timber value — reduced density, improved species composition, controlled invasives, maintained forest edges — are the same conditions that improve habitat for deer, turkey, grouse, and native woodland wildlife. See our <a href="/services/wildlife-habitat-management" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">wildlife habitat management services</a> for more on how these objectives are integrated.
+    </p>
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Plans as Documentation — Including Against Timber Theft</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      A written forest management plan serves a documentation function that is easy to overlook until it is
+      needed. The plan establishes in writing what trees were present, what their condition and approximate
+      value was, and what management activities were authorized or scheduled. That documentation matters in
+      a range of situations: insurance claims after storm damage, legal disputes over property boundaries,
+      permit applications, and — in rural areas where it happens more than most people expect — timber theft.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-6">
+      Unauthorized timber cutting on private land represents a real financial loss, and without documentation
+      of what was on the property before the cut, establishing that loss is difficult. A management plan
+      with stand records gives landowners a baseline they can point to. Good plans also anticipate
+      contingency scenarios — natural disasters, pest or disease events, unusual circumstances — and give
+      landowners a written framework for responding to them rather than making reactive decisions under pressure.
+    </p>
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Service Area</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Woodlot management and forest management plan services are available throughout <a href="/locations/sullivan-county-ny" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">Sullivan County</a>, <a href="/locations/orange-county-ny" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">Orange County</a>, and <a href="/locations/ulster-county-ny" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">Ulster County</a> in New York, as well as Pike and Wayne counties in Pennsylvania and Sussex County in New Jersey.
+    </p>
+
+    <div class="bg-green-50 border border-green-200 rounded-lg p-6 my-10">
+      <h3 class="font-bold text-[#1a3c1a] text-lg mb-2">Start With a Woodland Assessment</h3>
+      <p class="text-gray-700 text-sm mb-4">
+        Whether you are pursuing 480-a enrollment, planning a harvest, or simply want to understand what you have and what it is worth, the right starting point is an on-site assessment. Call to schedule a visit — we will walk the property with you and give you a clear picture of your woodland's current condition and what a management plan would involve.
+      </p>
+      <a href="tel:+18457548242" class="inline-flex items-center gap-2 bg-[#1a3c1a] text-white font-semibold px-5 py-3 rounded hover:bg-[#2d5a2d] transition-colors text-sm">
+        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+          <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
+        </svg>
+        Call (845) 754-8242
+      </a>
+    </div>
+
+    <FAQSection items={faqs} />
+    <EstimateForm variant="b2c" />
+
+  </article>
+</ServiceLayout>

@@ -1,0 +1,51 @@
+---
+// ArticleSchema.astro
+// Injects BlogPosting JSON-LD for all /guides/ articles.
+//
+// ⚠️ image array MUST include all three aspect ratios before publish:
+//    16:9, 4:3, 1:1 — required for Google rich results eligibility.
+//    Use buildSchemaImages(slug) from src/lib/seo.ts to generate.
+//
+// dateModified MUST be updated on every content edit — freshness signal.
+
+import { author, business } from '../../data/client.config';
+import { buildBreadcrumbs } from '../../data/schema/breadcrumbs';
+import type { Crumb } from '../../data/schema/breadcrumbs';
+
+interface Props {
+  title: string;
+  description: string;
+  url: string;
+  datePublished: string;
+  dateModified: string;
+  images: string[];     // Use buildSchemaImages(slug) — must be 3 items
+  crumbs: Crumb[];      // Same array passed to Breadcrumb.astro
+}
+
+const { title, description, url, datePublished, dateModified, images, crumbs } = Astro.props;
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": title,
+  "description": description,
+  "url": url,
+  "datePublished": datePublished,
+  "dateModified": dateModified,
+  "image": images,
+  "author": {
+    "@type": "Person",
+    "name": author.name,
+    "jobTitle": author.title,
+    "sameAs": [...author.sameAs],
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": business.name,
+    "url": business.domain,
+  },
+  "breadcrumb": buildBreadcrumbs(crumbs),
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />

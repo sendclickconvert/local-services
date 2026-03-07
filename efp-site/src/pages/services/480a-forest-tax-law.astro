@@ -1,0 +1,233 @@
+---
+// pages/services/480a-forest-tax-law.astro
+// ⚠️ NOTE: TRANSACTIONAL conversion page. Distinct from /guides/480a-forest-tax-law-new-york (informational pillar).
+// Do NOT collapse these two pages.
+// Sources: NY Real Property Tax Law § 480-a (Justia 2024), NY DEC 480-a program page,
+//          NY State Tax Dept Exemption Manual §4.08, 6 NYCRR Part 199 (effective March 1, 2026)
+// All figures are from public primary sources. Flag: [⚠️ Henry confirm] = awaiting Henry's
+// specific experience/numbers before this page goes live.
+
+import ServiceLayout from '../../layouts/ServiceLayout.astro';
+import PageHero from '../../components/ui/PageHero.astro';
+import Breadcrumb from '../../components/ui/Breadcrumb.astro';
+import FAQSection from '../../components/ui/FAQSection.astro';
+import EligibilityPrecheck from '../../components/ui/EligibilityPrecheck.astro';
+import KeyTakeaway from '../../components/ui/KeyTakeaway.astro';
+import AuthorByline from '../../components/ui/AuthorByline.astro';
+import ServiceSchema from '../../components/schema/ServiceSchema.astro';
+import FAQSchema from '../../components/schema/FAQSchema.astro';
+import { buildTitle, buildCanonical, buildDescription } from '../../lib/seo';
+
+const title = buildTitle("480-a Forest Tax Law Consulting — NY | EFP");
+const description = buildDescription(
+  "New York's 480-a Forest Tax Law program can reduce property taxes on qualifying woodland by up to 80%. " +
+  "Environmental Forest Products prepares the certified management plans required for enrollment — " +
+  "serving Sullivan, Orange, and Ulster counties."
+);
+const canonicalUrl = buildCanonical("/services/480a-forest-tax-law");
+
+const crumbs = [
+  { label: "Home",     href: "/"          },
+  { label: "Services", href: "/services"  },
+  { label: "480-a Forest Tax Law", href: "/services/480a-forest-tax-law" },
+];
+
+const faqs = [
+  {
+    question: "How much can I save with the 480-a program?",
+    answer: "New York's 480-a program exempts qualifying woodland from property taxes up to 80% of the assessed value of the enrolled acreage, per the NY State Tax Department Exemption Manual (§4.08). Tax savings vary by property, assessed value, and local equalization rate — every property calculation is different. One published example for a property with $3,500 in annual land and school taxes projects savings of $25,000 to $30,000 over 15 years after factoring in plan costs and the 6% stumpage yield tax. [⚠️ Henry: add a Sullivan County or Orange County example from your own clients if available]",
+  },
+  {
+    question: "What is the minimum acreage to qualify for 480-a?",
+    answer: "The program requires at least 50 contiguous acres of privately owned forest land. Under NY Real Property Tax Law § 480-a, lands divided by roads, easements, or rights-of-way are still considered contiguous for eligibility purposes unless those features physically prevent vehicular access for forest management. Fields that are reverting to forestland can qualify after 3 years.",
+  },
+  {
+    question: "Who is allowed to write a 480-a management plan?",
+    answer: "Under § 480-a, the management plan must be prepared by or under the direct supervision of a qualified forester — specifically, a cooperating consultant forester who has entered into an agreement with the NY DEC under the cooperating consultant foresters program (ECL § 9-0713). Not all foresters practicing in New York hold this qualification. Environmental Forest Products is qualified to prepare 480-a management plans for properties in Sullivan, Orange, and Ulster counties. [⚠️ Henry: confirm exact DEC cooperating consultant forester status and any certifications to list here]",
+  },
+  {
+    question: "What does the management plan commitment require?",
+    answer: "Once enrolled, landowners file an annual commitment form with both the town assessor and the DEC Regional Forester, committing the property to continued forest crop production for the next 10 years under the approved plan. The plan itself now operates on a 20-year schedule broken into two 10-year flexible work periods under the 2026 DEC regulatory amendments (6 NYCRR Part 199, effective March 1, 2026). Prior to any commercial harvest cutting, landowners must give the DEC Regional Forester at least 30 days notice and pay a 6% yield tax on the stumpage value to the county treasurer within 30 days of receiving DEC's certification of value.",
+  },
+  {
+    question: "What are the rollback penalties if I leave the program?",
+    answer: "If a landowner voluntarily converts enrolled land to a use that precludes forest management — or fails to follow the plan's work schedule — the property is subject to rollback penalties. Published sources cite penalties of up to 2.5 times the tax savings received. Landowners who simply stop filing the annual commitment (without a conversion violation) must continue to follow the management plan for the remainder of the commitment period to avoid penalties. [⚠️ Henry: confirm the exact penalty structure as you explain it to clients]",
+  },
+  {
+    question: "Does the 480-a exemption apply to school taxes?",
+    answer: "Yes. The exemption applies to both property taxes and school taxes on the enrolled acreage, up to the 80% cap. This is a significant portion of most rural landowners' tax bills in Sullivan, Orange, and Ulster counties, where school taxes typically represent the largest share of the total.",
+  },
+  {
+    question: "Can I still harvest timber if my land is enrolled in 480-a?",
+    answer: "Yes — harvesting is often a required component of the management plan, not prohibited by it. The 480-a program is designed around sustainable timber production. Prescribed cuts, thinnings, and commercial harvests are part of the work schedule. Each harvest requires 30 days advance notice to the DEC Regional Forester and payment of the 6% stumpage yield tax. The DEC certifies the stumpage value independently.",
+  },
+  {
+    question: "What happens to the 480-a enrollment if I sell the property?",
+    answer: "Under NY Real Property Tax Law § 480-a, the obligation to follow the management plan stays with the property — not the individual owner — for the remainder of the commitment period. A buyer purchasing enrolled land takes on the same commitment. Subdivisions of less than 50 acres created within the commitment period are subject to rollback taxes.",
+  },
+];
+---
+
+<ServiceLayout title={title} description={description} canonicalUrl={canonicalUrl}>
+  <ServiceSchema
+    pageType="service"
+    serviceName="480-a Forest Tax Law Consulting"
+    description={description}
+    url={canonicalUrl}
+    areaServed={["Sullivan County, NY", "Orange County, NY", "Ulster County, NY"]}
+    crumbs={crumbs}
+  />
+  <FAQSchema items={faqs} />
+
+  <Breadcrumb crumbs={crumbs} />
+
+  <PageHero
+    title="480-a Forest Tax Law Consulting"
+    subtitle="Reduce property taxes on qualifying woodland by up to 80% — Sullivan, Orange, and Ulster counties"
+  />
+
+  <article class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <KeyTakeaway>
+      New York's 480-a Forest Tax Law program allows qualifying woodland owners with 50 or more contiguous
+      acres to reduce property and school taxes by up to 80% of the assessed value of enrolled acreage —
+      in exchange for a 10-year commitment to follow a DEC-approved forest management plan written by a
+      certified forester.
+    </KeyTakeaway>
+
+    <AuthorByline />
+
+    <img
+      src="/images/uploads/hand-felling-trees-nyc-dep-carmel-ny.jpg"
+      alt="Certified forester overseeing timber work on an NYC DEP project in Carmel, NY — the kind of active management required under a 480-a plan"
+      class="w-full rounded-xl shadow-md my-8"
+      loading="lazy"
+    />
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">What Is New York's 480-a Forest Tax Program?</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Section 480-a of New York's Real Property Tax Law was enacted in 1974 and took effect in 1976.
+      It was designed to encourage long-term sustainable management of privately-owned forest land by
+      giving landowners a meaningful tax incentive in exchange for a commitment to manage their woodland
+      under an approved plan.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      The program is voluntary. Enrollment is not permanent — it requires an annual filing that recommits
+      the property to the program for the next 10 years. Landowners who enroll receive an exemption of up
+      to 80% of the assessed value of the enrolled acreage from both property taxes and school taxes.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-6">
+      As of the DEC's 2026 regulatory update (6 NYCRR Part 199, effective March 1, 2026), management plans
+      now operate on a 20-year schedule broken into two flexible 10-year work periods — a change designed
+      to reduce the administrative burden on participating landowners.
+    </p>
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Who Qualifies for 480-a?</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      To be eligible, a property must meet all of the following:
+    </p>
+    <ul class="list-disc pl-6 text-gray-700 mb-6 space-y-2">
+      <li><strong>Minimum 50 contiguous acres</strong> of privately owned forest land devoted to forest crop production.</li>
+      <li><strong>Stocked with a stand of forest trees</strong> sufficient to produce a merchantable forest crop within 30 years of original certification.</li>
+      <li><strong>Not recently clear-cut</strong> — land from which merchantable timber was removed in the 3 years prior to application is ineligible, unless the cutting was done under a qualifying forest management program.</li>
+      <li><strong>Privately owned</strong> by an individual or private organization (not public land).</li>
+      <li><strong>Willing to commit</strong> to the annual filing and management plan requirements.</li>
+    </ul>
+    <p class="text-gray-700 leading-relaxed mb-6">
+      Properties divided by roads, easements, rights-of-way, or utility corridors are still considered
+      contiguous for eligibility purposes under § 480-a — as long as those features don't physically
+      prevent vehicle access for forest management activities.
+    </p>
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">How Much Can You Save?</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      The exemption is calculated as the lesser of: (1) 80% of the assessed value of the enrolled acreage,
+      or (2) the amount by which the assessed value exceeds $40 multiplied by the state equalization rate
+      times the number of eligible acres. For most rural properties in Sullivan, Orange, and Ulster counties,
+      the 80% cap is the operative figure.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-6">
+      Published estimates for properties with approximately $3,500 in annual land and school taxes project
+      net savings of $25,000 to $30,000 over a 15-year period after accounting for management plan costs,
+      five-year plan updates, and the 6% stumpage yield tax paid at the time of any commercial harvest.
+      Actual savings vary by property and must be calculated individually based on current assessed value,
+      local equalization rates, and school tax rates.
+    </p>
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">The Management Plan Requirement</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      A DEC-approved forest management plan is required for enrollment. Under § 480-a, the plan must be
+      prepared by or under the direct supervision of a qualified cooperating consultant forester — a forester
+      who has entered into a formal agreement with the NY DEC under the cooperating consultant foresters
+      program (ECL § 9-0713). This is a specific credential, not simply a forestry degree or general
+      consulting practice.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      The approved plan must address: stocking levels, prescribed cutting schedule, forest management access,
+      boundary marking, provisions for threatened and endangered species, and a work schedule tied to the
+      management objectives. Plans now cover a 20-year period under the 2026 regulatory update.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-6">
+      Environmental Forest Products prepares 480-a management plans for qualifying properties in Sullivan,
+      Orange, and Ulster counties, and extends service into Pike County (PA) and Sussex County (NJ) for
+      broader land management consulting. The process begins with a site visit to assess eligibility before
+      any plan writing begins.
+    </p>
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">How to Apply — Step by Step</h2>
+    <ol class="list-decimal pl-6 text-gray-700 mb-6 space-y-3">
+      <li><strong>Site assessment:</strong> A certified forester walks the property and confirms eligibility — acreage, stocking, access, and boundary conditions.</li>
+      <li><strong>Management plan preparation:</strong> The forester prepares the DEC-required plan including stand descriptions, forest type maps, and a work schedule.</li>
+      <li><strong>DEC application submission:</strong> The completed application is submitted to the DEC with two copies of the management plan and three forest-type maps.</li>
+      <li><strong>DEC review and certification:</strong> The DEC has 60 days from receipt of a complete application to issue a certificate of eligibility.</li>
+      <li><strong>County clerk filing:</strong> The certificate of approval is filed with the county clerk, where it is recorded and indexed against the property deed.</li>
+      <li><strong>Town assessor filing:</strong> The landowner files the Application for Real Property Tax Exemption with the town assessor.</li>
+      <li><strong>Annual renewal:</strong> Each subsequent year, a certified commitment form is filed with both the town assessor and the DEC Regional Forester to maintain eligibility.</li>
+    </ol>
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Rollback Penalties for Non-Compliance</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Landowners who fail to follow the plan's work schedule, voluntarily convert the land to a non-forest
+      use, fail to give required notice before commercial cutting, or fail to pay the stumpage yield tax on
+      time are subject to penalty taxes. Published guidance cites penalties of up to 2.5 times the tax
+      savings received.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-6">
+      Landowners who simply stop filing the annual commitment — without a conversion or compliance violation —
+      can exit the program by ceasing to renew. However, they must continue to follow the management plan for
+      the remainder of the commitment period (up to 9 additional years after the last exemption year) to avoid
+      rollback taxes. The DEC may waive penalties in cases where non-compliance was beyond the owner's control
+      and can be corrected without significant harm to the plan's objectives.
+    </p>
+
+    <!-- 480-a Eligibility Pre-Check tool -->
+    <div class="border-t border-gray-200 pt-10">
+      <h2 class="text-2xl font-bold text-[#1a3c1a] mb-2">Is Your Property a Candidate?</h2>
+      <p class="text-gray-600 text-sm mb-2 leading-relaxed">
+        Use the screening tool below to get a quick read on whether your land may be worth discussing
+        with Henry. It takes about 60 seconds.
+      </p>
+      <EligibilityPrecheck />
+    </div>
+
+    <FAQSection items={faqs} />
+
+    <!-- Source citations -->
+    <div class="mt-12 pt-8 border-t border-gray-200">
+      <h3 class="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-3">Sources</h3>
+      <ul class="text-xs text-gray-400 space-y-1">
+        <li>New York Real Property Tax Law § 480-a (as amended through 2024) — Justia / NY Senate</li>
+        <li>NY State Department of Environmental Conservation — 480-a Forest Tax Law program page</li>
+        <li>NY State Tax Department — Exemption Administration Manual, Part 2 §4.08 (RPTL § 480-a)</li>
+        <li>6 NYCRR Part 199 Regulatory Impact Statement (DEC, November 2024) — effective March 1, 2026</li>
+        <li>NY State Department of Taxation and Finance — Joint Report on Forest Tax Laws</li>
+      </ul>
+      <p class="text-xs text-gray-400 mt-3">
+        This page summarizes publicly available program information for general guidance only.
+        Tax savings, eligibility, and plan requirements vary by property. Consult a certified forester
+        and your county assessor for calculations specific to your land.
+      </p>
+    </div>
+
+  </article>
+</ServiceLayout>

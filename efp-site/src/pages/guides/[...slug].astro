@@ -1,0 +1,97 @@
+---
+// pages/guides/[...slug].astro
+// Dynamic route — renders all src/content/guides/ markdown files.
+// Slug is derived from filename only. No frontmatter slug override.
+
+import { getCollection } from 'astro:content';
+import GuideLayout from '../../layouts/GuideLayout.astro';
+import Breadcrumb from '../../components/ui/Breadcrumb.astro';
+import FAQSection from '../../components/ui/FAQSection.astro';
+import ArticleSchema from '../../components/schema/ArticleSchema.astro';
+import FAQSchema from '../../components/schema/FAQSchema.astro';
+import { buildTitle, buildCanonical, buildDescription, buildOgImage, buildSchemaImages, noindex } from '../../lib/seo';
+
+export async function getStaticPaths() {
+  const guides = await getCollection('guides');
+  return guides.map(entry => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+
+const {
+  title,
+  description,
+  datePublished,
+  dateModified,
+  isPillar,
+  hubSlug,
+  relatedServices,
+  relatedLocations,
+  faqs,
+  keyTakeaway,
+  ogImageSlug,
+  noindex: shouldNoindex,
+} = entry.data;
+
+const canonicalUrl = buildCanonical(`/guides/${entry.slug}`);
+const ogImage = buildOgImage(ogImageSlug ?? entry.slug);
+const robotsContent = noindex(shouldNoindex);
+
+const crumbs = [
+  { label: "Home", href: "/" },
+  { label: "Guides", href: "/guides" },
+  { label: title, href: `/guides/${entry.slug}` },
+];
+
+// Build RelatedLinks props
+const upLinks = !isPillar && hubSlug
+  ? [{ label: "Complete 480-a Forest Tax Law Guide", href: `/guides/${hubSlug}` }]
+  : undefined;
+
+const serviceLinks = relatedServices.map(slug => ({
+  label: slug.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase()),
+  href: `/services/${slug}`,
+}));
+
+const locationLinks = relatedLocations.map(slug => ({
+  label: slug.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase()),
+  href: `/locations/${slug}`,
+}));
+---
+
+<GuideLayout
+  title={buildTitle(title)}
+  description={buildDescription(description)}
+  canonicalUrl={canonicalUrl}
+  ogImage={ogImage}
+  robotsContent={robotsContent}
+  keyTakeaway={keyTakeaway}
+  upLinks={upLinks}
+  serviceLinks={serviceLinks}
+  locationLinks={locationLinks}
+>
+  <!-- ⚠️ BlogPosting schema requires 3 OG image files before publish: 16:9, 4:3, 1:1 -->
+  <ArticleSchema
+    title={title}
+    description={description}
+    url={canonicalUrl}
+    datePublished={datePublished}
+    dateModified={dateModified}
+    images={buildSchemaImages(ogImageSlug ?? entry.slug)}
+    crumbs={crumbs}
+  />
+  {faqs.length > 0 && <FAQSchema items={faqs} />}
+
+  <Breadcrumb crumbs={crumbs} />
+
+  <h1 class="text-3xl sm:text-4xl font-bold text-[#1a3c1a] mt-6 mb-3 leading-tight">{title}</h1>
+  <p class="text-sm text-gray-400 mb-8">Last updated: {dateModified}</p>
+
+  <Content />
+
+  {faqs.length > 0 && <FAQSection items={faqs} />}
+</GuideLayout>

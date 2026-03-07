@@ -1,0 +1,166 @@
+---
+// pages/services/wildlife-habitat-management.astro
+import ServiceLayout from '../../layouts/ServiceLayout.astro';
+import PageHero from '../../components/ui/PageHero.astro';
+import Breadcrumb from '../../components/ui/Breadcrumb.astro';
+import FAQSection from '../../components/ui/FAQSection.astro';
+import EstimateForm from '../../components/forms/EstimateForm.astro';
+import ServiceSchema from '../../components/schema/ServiceSchema.astro';
+import FAQSchema from '../../components/schema/FAQSchema.astro';
+import AuthorByline from '../../components/ui/AuthorByline.astro';
+import { buildTitle, buildCanonical, buildDescription } from '../../lib/seo';
+
+const title = buildTitle("Wildlife Habitat Management — Hudson Valley & Catskills NY");
+const description = buildDescription(
+  "Wildlife habitat management for private landowners in Sullivan, Orange, and Ulster counties, NY. Forest management practices that improve habitat for deer, turkey, grouse, and other native species."
+);
+const canonicalUrl = buildCanonical("/services/wildlife-habitat-management");
+
+const crumbs = [
+  { label: "Home",     href: "/"         },
+  { label: "Services", href: "/services" },
+  { label: "Wildlife Habitat Management", href: "/services/wildlife-habitat-management" },
+];
+
+// ⚠️ FAQs — confirm specifics with Henry before launch, especially regarding species and specific techniques
+const faqs = [
+  {
+    question: "What does wildlife habitat management involve?",
+    answer: "Wildlife habitat management involves modifying forest structure and composition to improve conditions for target species. In a woodland setting, this typically includes creating or maintaining openings, managing forest edges, controlling invasive species, encouraging mast-producing trees like oaks, and in some cases managing water features. The specific approach depends on the property and which species the landowner wants to support."
+  },
+  {
+    question: "Can habitat management work be integrated with a timber harvest?",
+    answer: "Yes — and in many cases a timber harvest is the primary tool used to achieve habitat goals. Selective harvesting can create the canopy openings that improve browse and ground cover for deer and turkey, while leaving the denser areas that provide thermal cover and escape routes. A consulting forester can design a harvest that serves both timber value and habitat objectives simultaneously."
+  },
+  {
+    question: "Does habitat management qualify under the 480-a program?",
+    answer: "Wildlife habitat improvement can be a component of a 480-a forest management plan, but the primary purpose of 480-a is forest management for timber production and ecological stewardship rather than recreational hunting or wildlife management specifically. Whether specific habitat practices qualify depends on how the management plan is structured. [⚠️ Confirm this with Henry — he will know the correct answer for NY DEC requirements]"
+  },
+  {
+    question: "What species can habitat management benefit in Sullivan County?",
+    answer: "The Hudson Valley and Catskill region supports whitetail deer, wild turkey, ruffed grouse, woodcock, black bear, and a range of forest songbirds and native wildlife. The habitat features that benefit these species — forest openings, edge habitat, mast trees, early successional cover — overlap considerably, so management for one species often benefits others. [⚠️ Confirm target species focus with Henry]"
+  },
+  {
+    question: "Is an existing woodlot a good candidate for habitat management?",
+    answer: "Most private woodland in this region benefits from some level of active management. Closed-canopy second-growth forest with dense shade suppresses the understory browse and early successional cover that most game species depend on. Even modest interventions — creating small openings, improving forest edges, managing invasive species — can meaningfully improve habitat conditions. A site assessment is the right starting point."
+  },
+];
+---
+
+<ServiceLayout title={title} description={description} canonicalUrl={canonicalUrl}>
+  <ServiceSchema
+    pageType="service"
+    serviceName="Wildlife Habitat Management"
+    description={description}
+    url={canonicalUrl}
+    areaServed={["Sullivan County, NY", "Orange County, NY", "Ulster County, NY", "Pike County, PA", "Wayne County, PA", "Sussex County, NJ"]}
+    crumbs={crumbs}
+  />
+  <FAQSchema items={faqs} />
+
+  <Breadcrumb crumbs={crumbs} />
+
+  <PageHero
+    title="Wildlife Habitat Management for Private Landowners"
+    subtitle="Forest management practices that improve habitat for deer, turkey, grouse, and native wildlife in the Hudson Valley and Catskills"
+  />
+
+  <article class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <AuthorByline />
+
+        <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Better Habitat Starts With Better Forest Management</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Private woodland in the Hudson Valley and Catskills region is some of the most productive wildlife habitat in the Northeast — when it is actively managed. Dense, closed-canopy second-growth forest may look healthy, but it often lacks the structural diversity that game species and native wildlife actually need: open understories with browse, forest edges with transition habitat, mast-producing trees with room to grow, and early successional areas with ground cover.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Wildlife habitat management is the practice of deliberately improving these conditions through targeted forestry work. It is not a separate discipline from timber and woodland management — it is the same set of tools applied with wildlife objectives as a primary or secondary goal.
+    </p>
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Management Practices That Improve Habitat</h2>
+    <img src="/images/uploads/spruce-timber-harvest-millbrook-ny.jpg" alt="Selective timber harvest in Millbrook, NY — careful logging that improves wildlife habitat and forest health" class="w-full rounded-xl shadow-md" loading="lazy" />
+    <ul class="space-y-4 mb-8">
+      {[
+        ["Canopy openings", "Creating small to mid-sized openings in a closed-canopy stand lets sunlight reach the forest floor, stimulating regeneration of browse species and ground cover that deer, turkey, and grouse depend on for food and nesting."],
+        ["Edge management", "The transition zone between forest and field or open areas is among the most productive wildlife habitat on most properties. Managing this edge — controlling invasive shrubs, favoring native species, and maintaining a layered structure — concentrates wildlife activity."],
+        ["Mast tree improvement", "Oak, beech, and other hard mast species are critical food sources for many species in this region. Releasing individual mast trees from competition improves their crown development and long-term production."],
+        ["Invasive species control", "Invasive shrubs like autumn olive, multiflora rose, Japanese barberry, and honeysuckle have colonized large areas of private woodland in the region. While some invasives provide short-term browse, they eventually displace the native understory that supports diverse wildlife communities."],
+        ["Timber harvest for habitat", "A carefully designed selective harvest is often the most effective single action available for habitat improvement. It creates structural diversity, promotes regeneration, and can be timed and located to benefit specific target species. See our <a href='/services/timber-harvesting' class='text-[#2d5a2d] underline hover:text-[#1a3c1a]'>timber harvesting services</a> for more on how harvests are planned and managed."],
+      ].map(([heading, body]) => (
+        <li class="flex gap-3">
+          <svg class="w-5 h-5 text-[#2d5a2d] flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+          <div>
+            <span class="font-semibold text-gray-900">{heading}.</span>
+            <span class="text-gray-600"> {body}</span>
+          </div>
+        </li>
+      ))}
+    </ul>
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Habitat Management for Deer, Turkey, Grouse, and Small Game</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      The Hudson Valley and Catskills region supports strong populations of white-tailed deer, wild turkey,
+      ruffed grouse, woodcock, and small game species — but the quality of that habitat on any given property
+      depends almost entirely on how the woodland is managed. Hunting camps and recreational properties with
+      50 or more acres of forest are some of the most underutilized habitat improvement candidates in the
+      region.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Deer require a mix of travel corridors, bedding cover, and food sources. A dense, closed-canopy
+      second-growth hardwood stand provides corridor and bedding structure but limited food. Creating
+      canopy openings — through selective harvesting or targeted thinning — stimulates the regeneration
+      of browse species that deer depend on from May through November. Well-placed openings also create
+      edge habitat that concentrates deer movement and benefits turkey nesting and brood-rearing.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Wild turkey and ruffed grouse are particularly sensitive to forest structure. Turkey require open
+      understories for poult mobility, mast-producing trees with accessible ground litter, and nesting
+      cover at forest edges. Grouse are closely associated with early successional habitat — young aspen,
+      alder runs, and dense brushy cover adjacent to mature forest. Both species respond strongly to
+      managed forest disturbance when the disturbance is designed with their requirements in mind.
+    </p>
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Food Plots and Forest Edge Integration</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Food plots on forested properties are most productive when they are integrated with the surrounding
+      forest edge management rather than simply cleared openings. The transition zone between the food
+      plot and the forest cover — maintained with native shrubs, regenerating browse species, and layered
+      structure rather than mowed to the treeline — concentrates deer and turkey use and extends the
+      time wildlife spends in and around the plot.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      A timber harvest can fund the development of food plot clearings while simultaneously improving
+      the surrounding forest structure. The income from merchantable timber removed to create the opening
+      often more than covers the cost of site prep and seeding — making the habitat improvement
+      essentially self-funded.
+    </p>
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Combining Habitat Goals With Timber Value and 480-a</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Many landowners come to habitat management through one of two entry points: they want to improve hunting on their property, or they are already enrolled in — or considering — the <a href="/services/480a-forest-tax-law" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">480-a Forest Tax Law program</a> and want to make sure their management activities serve multiple objectives at once.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      In most cases, these goals align well. The forest management practices required for 480-a compliance — improving species composition, managing stand density, controlling invasives — are the same practices that improve habitat. A <a href="/services/woodlot-management" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">woodlot management plan</a> can address timber production, tax savings, and wildlife habitat as a single integrated program rather than three separate efforts.
+    </p>
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Service Area</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Wildlife habitat management services are available in <a href="/locations/sullivan-county-ny" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">Sullivan County</a>, <a href="/locations/orange-county-ny" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">Orange County</a>, and <a href="/locations/ulster-county-ny" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">Ulster County</a> in New York, as well as Pike and Wayne counties in Pennsylvania and Sussex County in New Jersey.
+    </p>
+
+    <div class="bg-green-50 border border-green-200 rounded-lg p-6 my-10">
+      <h3 class="font-bold text-[#1a3c1a] text-lg mb-2">Start With a Property Walk</h3>
+      <p class="text-gray-700 text-sm mb-4">
+        Every habitat management plan begins with an on-site assessment of what you have and what your goals are. Call to schedule a property walk — we will identify what is limiting wildlife use on your land and what the right management approach looks like for your situation.
+      </p>
+      <a href="tel:+18457548242" class="inline-flex items-center gap-2 bg-[#1a3c1a] text-white font-semibold px-5 py-3 rounded hover:bg-[#2d5a2d] transition-colors text-sm">
+        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/></svg>
+        Call (845) 754-8242
+      </a>
+    </div>
+
+    <FAQSection items={faqs} />
+    <EstimateForm variant="b2c" />
+
+  </article>
+</ServiceLayout>

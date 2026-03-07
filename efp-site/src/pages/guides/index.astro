@@ -1,0 +1,88 @@
+---
+// pages/guides/index.astro
+// 480-a content hub index — lists pillar first, then supporting articles.
+// Exists so /guides breadcrumb links don't 404.
+
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/ui/PageHero.astro';
+import CTASection from '../../components/ui/CTASection.astro';
+import { getCollection } from 'astro:content';
+import { buildTitle, buildCanonical, buildDescription } from '../../lib/seo';
+
+const title = buildTitle("480-a Forest Tax Law Guides — NY Woodland Owner Resources");
+const description = buildDescription(
+  "Free guides for New York woodland owners. 480-a Forest Tax Law eligibility, " +
+  "management plan requirements, application timelines, and property tax reduction strategies."
+);
+const canonicalUrl = buildCanonical("/guides");
+
+const allGuides = await getCollection('guides');
+const pillar = allGuides.find(g => g.data.isPillar);
+const spokes = allGuides.filter(g => !g.data.isPillar).sort((a, b) =>
+  a.data.title.localeCompare(b.data.title)
+);
+---
+
+<BaseLayout title={title} description={description} canonicalUrl={canonicalUrl}>
+  <PageHero
+    title="480-a Forest Tax Law — Complete Resource Library"
+    subtitle="Guides for NY landowners looking to reduce property taxes through the 480-a program"
+  />
+
+  <section class="py-16 sm:py-20 bg-white">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      {pillar && (
+        <div class="bg-green-50 border-2 border-[#2d5a2d] rounded-xl p-6 mb-10">
+          <p class="text-xs font-bold uppercase tracking-wider text-[#2d5a2d] mb-2">Complete Guide</p>
+          <h2 class="text-2xl font-bold text-[#1a3c1a] mb-2">
+            <a href={`/guides/${pillar.slug}`} class="hover:text-[#2d5a2d] transition-colors">
+              {pillar.data.title}
+            </a>
+          </h2>
+          <p class="text-gray-600 mb-4 leading-relaxed">{pillar.data.description}</p>
+          <a href={`/guides/${pillar.slug}`} class="inline-flex items-center gap-1 font-semibold text-[#2d5a2d] hover:text-[#1a3c1a] transition-colors">
+            Read the complete guide
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      )}
+
+      {spokes.length > 0 && (
+        <div>
+          <h2 class="text-xl font-bold text-[#1a3c1a] mb-6">In This Series</h2>
+          <ul class="divide-y divide-gray-100">
+            {spokes.map(guide => (
+              <li class="py-5">
+                <a href={`/guides/${guide.slug}`} class="block font-semibold text-[#1a3c1a] hover:text-[#2d5a2d] transition-colors mb-1">
+                  {guide.data.title}
+                </a>
+                <p class="text-sm text-gray-500 leading-relaxed">{guide.data.description}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      {allGuides.length === 0 && (
+        <div class="space-y-4">
+          <a href="/guides/480a-forest-tax-law-new-york" class="block p-5 border border-gray-200 rounded-lg hover:border-[#2d5a2d] hover:bg-green-50 transition-colors group">
+            <div class="font-semibold text-[#1a3c1a] group-hover:text-[#2d5a2d]">New York's 480-a Forest Tax Law: Complete Guide</div>
+            <div class="text-sm text-gray-500 mt-1">Eligibility, tax savings, management plan requirements, and the application process — explained for landowners.</div>
+          </a>
+          <a href="/guides/should-i-sell-my-timber" class="block p-5 border border-gray-200 rounded-lg hover:border-[#2d5a2d] hover:bg-green-50 transition-colors group">
+            <div class="font-semibold text-[#1a3c1a] group-hover:text-[#2d5a2d]">Should I Sell My Timber? What NY Landowners Need to Know</div>
+            <div class="text-sm text-gray-500 mt-1">Before you negotiate with a logger, read this. Timber appraisal, competitive bidding, and why independent assessment matters.</div>
+          </a>
+          <a href="/guides/what-is-a-forest-management-plan" class="block p-5 border border-gray-200 rounded-lg hover:border-[#2d5a2d] hover:bg-green-50 transition-colors group">
+            <div class="font-semibold text-[#1a3c1a] group-hover:text-[#2d5a2d]">What Is a Forest Management Plan?</div>
+            <div class="text-sm text-gray-500 mt-1">What a plan includes, who can write one for 480-a enrollment, and why private woodland owners need one.</div>
+          </a>
+        </div>
+      )}
+
+    </div>
+  </section>
+
+  <CTASection variant="b2c" />
+</BaseLayout>

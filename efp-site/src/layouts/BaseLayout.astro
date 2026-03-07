@@ -1,0 +1,52 @@
+---
+// BaseLayout.astro
+// Master layout: <head> + Header + main slot + Footer.
+// All other layouts extend this one.
+//
+// NOTE: WebSite schema is injected directly on index.astro (homepage only).
+// BaseLayout does not handle this — keeping sitewide and page-specific schema
+// concerns separate is intentional.
+
+import BaseHead from '../components/layout/BaseHead.astro';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+import { organizationSchema } from '../data/schema/organization';
+
+interface Props {
+  title: string;
+  description?: string;
+  canonicalUrl: string;   // Always from buildCanonical() in src/lib/seo.ts
+  ogImage?: string;       // Always from buildOgImage() — absolute URL
+  robotsContent?: string; // From noindex() — undefined means no robots tag rendered
+}
+
+const {
+  title,
+  description,
+  canonicalUrl,
+  ogImage,
+  robotsContent,
+} = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <BaseHead
+    title={title}
+    description={description}
+    canonicalUrl={canonicalUrl}
+    ogImage={ogImage}
+    robotsContent={robotsContent}
+  />
+  <!-- ⚠️ MANUAL-ONLY: Organization schema — do not agent-edit -->
+  <script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
+</head>
+<body>
+  <Header currentPath={Astro.url.pathname} />
+  <main>
+    <slot />
+  </main>
+  <Footer />
+</body>
+</html>

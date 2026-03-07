@@ -1,0 +1,129 @@
+---
+// pages/services/stump-grinding.astro
+import ServiceLayout from '../../layouts/ServiceLayout.astro';
+import PageHero from '../../components/ui/PageHero.astro';
+import Breadcrumb from '../../components/ui/Breadcrumb.astro';
+import FAQSection from '../../components/ui/FAQSection.astro';
+import EstimateForm from '../../components/forms/EstimateForm.astro';
+import ServiceSchema from '../../components/schema/ServiceSchema.astro';
+import FAQSchema from '../../components/schema/FAQSchema.astro';
+import AuthorByline from '../../components/ui/AuthorByline.astro';
+import { buildTitle, buildCanonical, buildDescription } from '../../lib/seo';
+
+const title = buildTitle("Stump Grinding Services — Sullivan, Orange & Ulster Counties NY");
+const description = buildDescription(
+  "Professional stump grinding in Sullivan, Orange, and Ulster counties, NY. Complete stump removal after tree work, land clearing, or timber harvesting — leaving the site clean and ready for its next use."
+);
+const canonicalUrl = buildCanonical("/services/stump-grinding");
+
+const crumbs = [
+  { label: "Home",     href: "/"         },
+  { label: "Services", href: "/services" },
+  { label: "Stump Grinding", href: "/services/stump-grinding" },
+];
+
+// ⚠️ FAQs — review and confirm with Henry before launch
+const faqs = [
+  {
+    question: "What is stump grinding and how does it work?",
+    answer: "Stump grinding uses a rotating cutting wheel to chip the stump and surface roots down below grade — typically 6 to 12 inches below ground level. The result is a pile of wood chips and a cleared area where the stump used to be. The chips can be used as mulch, backfilled into the hole, or hauled away depending on the project."
+  },
+  {
+    question: "Does stump grinding remove the entire root system?",
+    answer: "Stump grinding removes the stump and the main surface root flare, but not the full root system extending into the surrounding soil. For most purposes — lawn restoration, replanting, and site cleanup — this is sufficient. The remaining roots decompose over time. If complete root removal is required for excavation or foundation work, that typically requires different equipment and methods."
+  },
+  {
+    question: "Can you grind stumps after a land clearing project?",
+    answer: "Yes. Stump grinding is commonly scheduled as a follow-on to land clearing when a completely level, usable site is needed. If you are planning a clearing project that will require stump removal afterward, it is worth coordinating both services at the outset. Contact us to discuss the full scope of your project."
+  },
+  {
+    question: "How long does stump grinding take?",
+    answer: "A single residential stump typically takes less than an hour to grind, depending on size and root structure. Multiple stumps or large-diameter stumps from mature trees take longer. Site access for the grinding equipment is a factor — ask about access requirements when you call. [⚠️ Confirm typical job timelines with Henry]"
+  },
+  {
+    question: "Do you serve Orange and Ulster counties for stump grinding?",
+    answer: "Yes. Stump grinding is available throughout Sullivan, Orange, and Ulster counties in New York. Service is also available in Pike and Wayne counties in Pennsylvania and Sussex County in New Jersey. Contact us to confirm availability for your property."
+  },
+];
+---
+
+<ServiceLayout title={title} description={description} canonicalUrl={canonicalUrl}>
+  <ServiceSchema
+    pageType="service"
+    serviceName="Stump Grinding Services"
+    description={description}
+    url={canonicalUrl}
+    areaServed={["Sullivan County, NY", "Orange County, NY", "Ulster County, NY", "Pike County, PA", "Wayne County, PA", "Sussex County, NJ"]}
+    crumbs={crumbs}
+  />
+  <FAQSchema items={faqs} />
+
+  <Breadcrumb crumbs={crumbs} />
+
+  <PageHero
+    title="Stump Grinding in Sullivan, Orange & Ulster Counties"
+    subtitle="Clean stump removal after tree work, land clearing, or timber harvesting — site-ready results"
+  />
+
+  <article class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <AuthorByline />
+
+        <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Complete Stump Removal for Any Site Condition</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      After a tree is removed — whether from storm damage, a clearing project, or timber harvesting operations — the stump that remains is more than an eyesore. It is a tripping hazard, an obstacle for mowing and grading, a source of continued root activity, and a host for wood-decay fungi and certain insects. Stump grinding removes it cleanly and leaves the site ready for whatever comes next.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Environmental Forest Products provides stump grinding as a standalone service and as part of larger land clearing and timber projects across the Hudson Valley and Catskills region.
+    </p>
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">When Stump Grinding Makes Sense</h2>
+    <img src="/images/uploads/land-clearing-forestburgh-ny-komatsu.jpg" alt="Site clearing and stump removal in Forestburgh, NY — Environmental Forest Products Sullivan County" class="w-full rounded-xl shadow-md" loading="lazy" />
+    <ul class="space-y-3 mb-6">
+      {[
+        ["After tree removal", "A removed tree almost always leaves a stump. Grinding it eliminates the root collar and allows the area to be graded, seeded, or used for construction."],
+        ["Following land clearing", "Stumps left after a clearing operation prevent proper grading and make the land difficult to use. Grinding them down brings the site to a consistent, workable level."],
+        ["Lawn and landscaping restoration", "Stumps in lawn areas prevent clean mowing and become worse obstacles as surrounding grass grows back. Grinding resolves the problem permanently."],
+        ["Site preparation for construction", "When a cleared area will be used for a driveway, foundation, outbuilding, or other structure, stumps need to be removed to below the depth of excavation or grading."],
+      ].map(([heading, body]) => (
+        <li class="flex gap-3">
+          <svg class="w-5 h-5 text-[#2d5a2d] flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+          <div>
+            <span class="font-semibold text-gray-900">{heading}.</span>
+            <span class="text-gray-600"> {body}</span>
+          </div>
+        </li>
+      ))}
+    </ul>
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">What to Expect After Grinding</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Grinding produces a mound of wood chips at the stump location. These chips can be raked back into the hole as fill, spread as mulch around the surrounding area, or hauled away if you prefer a completely cleared site. The ground will be below grade initially and will settle as the remaining root material decomposes. For lawn areas, the hole is typically backfilled and seeded.
+    </p>
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Coordinating With Other Services</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Stump grinding is most efficiently coordinated as part of a larger scope of work. If you are planning a <a href="/services/land-clearing" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">land clearing project</a> or have recently had timber harvested from a woodlot, discuss stump removal at the same time so equipment and scheduling can be coordinated in a single visit.
+    </p>
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Service Area</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Stump grinding is available in <a href="/locations/sullivan-county-ny" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">Sullivan County</a>, <a href="/locations/orange-county-ny" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">Orange County</a>, and <a href="/locations/ulster-county-ny" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">Ulster County</a> in New York, plus Pike and Wayne counties in Pennsylvania and Sussex County in New Jersey.
+    </p>
+
+    <div class="bg-green-50 border border-green-200 rounded-lg p-6 my-10">
+      <h3 class="font-bold text-[#1a3c1a] text-lg mb-2">Ready to Get the Stump Out?</h3>
+      <p class="text-gray-700 text-sm mb-4">
+        Call to discuss your site. We will confirm what equipment access looks like, how the chips will be handled, and what it takes to get from stump to clean ground.
+      </p>
+      <a href="tel:+18457548242" class="inline-flex items-center gap-2 bg-[#1a3c1a] text-white font-semibold px-5 py-3 rounded hover:bg-[#2d5a2d] transition-colors text-sm">
+        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/></svg>
+        Call (845) 754-8242
+      </a>
+    </div>
+
+    <FAQSection items={faqs} />
+    <EstimateForm variant="b2c" />
+
+  </article>
+</ServiceLayout>

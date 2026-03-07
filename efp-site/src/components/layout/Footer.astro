@@ -1,0 +1,135 @@
+---
+// Footer.astro
+// 3-column grid: NAP / Services / County pages. Disclaimer row below.
+// All content pulled from config — no hardcoded EFP strings.
+// ⚠️ NAP block must match GBP character-for-character before launch.
+
+import { business, serviceArea } from '../../data/client.config';
+
+const services = [
+  { label: '480-a Forest Tax Law', href: '/services/480a-forest-tax-law' },
+  { label: 'Land Clearing',        href: '/services/land-clearing'        },
+  { label: 'Timber Harvesting',    href: '/services/timber-harvesting'    },
+  { label: 'Sell Standing Timber', href: '/services/sell-standing-timber' },
+  { label: 'Woodlot Management',   href: '/services/woodlot-management'   },
+  { label: 'Wildlife Habitat',     href: '/services/wildlife-habitat-management' },
+  { label: 'Stump Grinding',       href: '/services/stump-grinding'       },
+  { label: 'Tree Planting',        href: '/services/tree-planting'        },
+  { label: 'Tree Removal',         href: '/services/tree-removal'         },
+];
+---
+
+<footer class="bg-[#0d1a0d] text-gray-300">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-16">
+
+      <!-- Column 1: NAP block -->
+      <div>
+        <a href="/" class="inline-block mb-5" aria-label="Environmental Forest Products — Home">
+          <img
+            src="/images/logos/efp-logo.webp"
+            alt="Environmental Forest Products"
+            width="200"
+            height="36"
+            class="h-8 w-auto object-contain brightness-0 invert opacity-80 hover:opacity-100 transition-opacity"
+            loading="lazy"
+          />
+        </a>
+        <address class="not-italic text-sm leading-relaxed text-gray-400 space-y-1">
+          <div>{business.address.city}, {business.address.stateAbbr} {business.address.zip}</div>
+          <div>
+            <a
+              href={`tel:${business.phoneRaw}`}
+              class="text-green-400 hover:text-green-300 font-semibold transition-colors text-base"
+            >
+              {business.phone}
+            </a>
+          </div>
+          {business.email && business.email !== '[TBD — confirm with Henry]' && (
+            <div>
+              <a href={`mailto:${business.email}`} class="text-green-400 hover:text-green-300 transition-colors">
+                {business.email}
+              </a>
+            </div>
+          )}
+        </address>
+        <p class="mt-4 text-xs text-gray-500 leading-relaxed">
+          {business.owner} — {business.ownerTitle}<br />
+          {business.ownerExperience} serving the Hudson Valley &amp; Catskills
+        </p>
+        <!-- Social -->
+        <div class="mt-4 flex items-center gap-3">
+          <a
+            href="https://www.facebook.com/EForestProducts/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex items-center gap-2 text-xs text-gray-500 hover:text-green-300 transition-colors"
+            aria-label="Environmental Forest Products on Facebook"
+          >
+            <svg class="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+            </svg>
+            Follow on Facebook
+          </a>
+        </div>
+      </div>
+
+      <!-- Column 2: Services -->
+      <div>
+        <h3 class="text-white font-semibold text-sm uppercase tracking-wider mb-4">Services</h3>
+        <ul class="space-y-2">
+          {services.map(s => (
+            <li>
+              <a href={s.href} class="text-sm text-gray-400 hover:text-green-300 transition-colors">
+                {s.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Column 3: Service Area -->
+      <div>
+        <h3 class="text-white font-semibold text-sm uppercase tracking-wider mb-4">Service Area</h3>
+        <div class="mb-3">
+          <p class="text-xs text-gray-500 uppercase tracking-wide mb-2">Primary</p>
+          <ul class="space-y-2">
+            {serviceArea.primary.map(county => (
+              <li>
+                <a href={`/locations/${county.slug}`} class="text-sm text-gray-400 hover:text-green-300 transition-colors">
+                  {county.name}, {county.stateAbbr}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <p class="text-xs text-gray-500 uppercase tracking-wide mb-2">Also Serving</p>
+          <ul class="space-y-2">
+            {serviceArea.secondary.map(county => (
+              <li>
+                <a href={`/locations/${county.slug}`} class="text-sm text-gray-400 hover:text-green-300 transition-colors">
+                  {county.name}, {county.stateAbbr}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Divider + disclaimer -->
+    <div class="mt-12 pt-6 border-t border-green-950">
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 text-xs text-gray-600">
+        <p>© {new Date().getFullYear()} {business.name}. All rights reserved.</p>
+        <p class="text-right">
+          Certified forestry consulting — Hudson Valley, Catskills &amp; Poconos.<br class="sm:hidden" />
+          Licensed in NY, PA, NJ.
+        </p>
+      </div>
+    </div>
+
+  </div>
+</footer>

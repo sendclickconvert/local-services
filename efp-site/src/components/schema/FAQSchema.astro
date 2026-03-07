@@ -1,0 +1,36 @@
+---
+// FAQSchema.astro
+// Injects FAQPage JSON-LD schema — separate from FAQSection.astro visual component.
+//
+// USAGE PATTERN: Both components receive the SAME items array.
+// <FAQSection items={faqs} />      ← visible HTML (indexed by all crawlers)
+// <FAQSchema items={faqs} />       ← JSON-LD (structured data for rich results)
+//
+// One source. Two outputs. Never maintain FAQ content separately.
+
+interface FaqItem {
+  question: string;
+  answer: string;
+}
+
+interface Props {
+  items: FaqItem[];
+}
+
+const { items } = Astro.props;
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": items.map(item => ({
+    "@type": "Question",
+    "name": item.question,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": item.answer,
+    },
+  })),
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />

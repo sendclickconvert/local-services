@@ -1,0 +1,130 @@
+---
+// Landowner decision guide — high intent, zero competition, AI citation target
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/ui/PageHero.astro';
+import Breadcrumb from '../../components/ui/Breadcrumb.astro';
+import FAQSection from '../../components/ui/FAQSection.astro';
+import KeyTakeaway from '../../components/ui/KeyTakeaway.astro';
+import AuthorByline from '../../components/ui/AuthorByline.astro';
+import CTASection from '../../components/ui/CTASection.astro';
+import { buildTitle, buildCanonical, buildDescription } from '../../lib/seo';
+
+const title = buildTitle("Should I Sell My Timber? What NY Landowners Need to Know");
+const description = buildDescription(
+  "Before you sell standing timber on your New York woodland property, there are key questions to answer — " +
+  "about timber value, the right process, and how to avoid leaving money on the table. A certified forester explains."
+);
+const canonicalUrl = buildCanonical("/guides/should-i-sell-my-timber");
+
+const crumbs = [
+  { label: "Home",   href: "/"        },
+  { label: "Guides", href: "/guides"  },
+  { label: "Should I Sell My Timber?", href: "/guides/should-i-sell-my-timber" },
+];
+
+const faqs = [
+  {
+    question: "How do I know if my timber is valuable enough to sell?",
+    answer: "Species, size, log quality, and current mill demand all determine stumpage value. Red oak, white oak, and black cherry typically command the strongest prices in the Hudson Valley region when log quality is high. A timber cruise — a systematic inventory of your woodland — gives you the volume, species, and quality data needed to assess marketable value before you approach a buyer.",
+  },
+  {
+    question: "What is a timber appraisal and do I need one?",
+    answer: "A timber appraisal is a professional assessment of the volume and value of standing timber on a property. For a sale of any significant size, a forester-conducted appraisal is the only reliable way to know what your timber is worth before you negotiate with a logger or timber buyer. Without an appraisal, you are negotiating blind.",
+  },
+  {
+    question: "Can I just call a logging company directly and get a fair price?",
+    answer: "A logging company's offer is based on what they believe the timber is worth to them — not an independent assessment of market value. Without an independent timber appraisal and competitive bidding from multiple buyers, most landowners have no way of knowing whether an offer is fair. The difference between a negotiated single-buyer offer and a competitively bid sale can be substantial on a meaningful timber sale.",
+  },
+  {
+    question: "What is the difference between clear-cutting and selective harvesting?",
+    answer: "Clear-cutting removes all or nearly all merchantable timber from a site in a single operation. Selective harvesting removes specific trees — typically those that are mature, damaged, or crowding better-quality trees — while leaving the remaining stand intact. Selective harvesting generally produces less short-term volume per acre but maintains the long-term productivity, aesthetic quality, and ecological function of the woodland. Most forest management plans call for selective approaches.",
+  },
+  {
+    question: "Will a timber sale affect my 480-a enrollment?",
+    answer: "A properly planned harvest is typically a required component of a 480-a management plan — not a threat to enrollment. The key requirements are giving the DEC Regional Forester 30 days advance notice before cutting begins and paying the 6% stumpage yield tax within 30 days of receiving the DEC's certification of stumpage value. Harvesting without following these procedures is a compliance violation.",
+  },
+];
+---
+
+<BaseLayout title={title} description={description} canonicalUrl={canonicalUrl}>
+  <Breadcrumb crumbs={crumbs} />
+
+  <PageHero
+    title="Should I Sell My Timber?"
+    subtitle="What New York woodland owners need to know before making a decision"
+  />
+
+  <article class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <KeyTakeaway text="Before selling standing timber on your New York property, get an independent timber appraisal from a certified forester — not an estimate from the buyer. The only way to know if an offer is fair is to know what your timber is actually worth, based on species, volume, log quality, and current market conditions." />
+
+    <AuthorByline />
+
+    <img
+      src="/images/uploads/komatsu-feller-buncher-timber-harvest-1-ny.jpg"
+      alt="Komatsu XT445L feller buncher during a selective timber harvest in New York — professional forestry equipment operated by EFP"
+      class="w-full rounded-xl shadow-md my-8"
+      loading="lazy"
+    />
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">The Questions to Ask Before You Sell</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Landowners considering a timber sale in New York typically face the same set of questions: Is the
+      timber worth selling? How much is it worth? Who should buy it? And what happens to the land after
+      the harvest is done?
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      The answers depend on species composition, tree size and quality, site access, current mill demand,
+      and whether the property is enrolled in — or eligible for — New York's 480-a Forest Tax Law program.
+      A certified forester can assess all of these factors before any buyer is contacted.
+    </p>
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Why Independent Appraisal Matters</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      The most common mistake private landowners make in a timber sale is negotiating directly with a
+      single logging company or timber buyer without an independent assessment of what the timber is worth.
+      A buyer's offer is based on the buyer's interest — not the market value of your timber. Without a
+      forester-conducted timber cruise and appraisal, a landowner cannot evaluate whether any given offer
+      is reasonable.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Competitive bidding — getting sealed bids from multiple qualified buyers after a professional timber
+      inventory — consistently produces higher stumpage prices than direct negotiation with a single buyer.
+      The difference on a meaningful timber sale is often more than the cost of the forester's fee many
+      times over.
+    </p>
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">What Species Are Most Valuable in the Hudson Valley?</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      In the Hudson Valley and Catskill region, red oak, white oak, and black cherry typically command
+      the strongest stumpage prices when log quality is high. Hard maple, white ash, and yellow birch
+      also have markets, though species demand shifts with broader lumber market conditions and individual
+      mill requirements. Eastern white pine has a consistent market for clear-grade lumber and dimension
+      stock.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-6">
+      Not all timber on a given property has equal value. A professional timber cruise identifies the
+      volume and grade of each merchantable species on the property — giving the landowner a realistic
+      picture of what the market is likely to pay before any bids are solicited.
+    </p>
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Timber Sales and 480-a</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      If your property is enrolled in New York's 480-a Forest Tax Law program, a commercial harvest is
+      not prohibited — in many cases it is a required component of the management plan. The requirements
+      are: give the DEC Regional Forester written notice at least 30 days before cutting begins, and pay
+      a 6% yield tax on the stumpage value within 30 days of receiving the DEC's certification. The DEC
+      certifies the stumpage value independently — not the logger or the landowner.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-6">
+      If your property is not yet enrolled in 480-a but may qualify, a pending timber sale is an
+      opportunity to get the enrollment process started before the harvest occurs rather than after.
+      Coordinating the two activities is more efficient than addressing them separately.
+    </p>
+
+    <FAQSection items={faqs} />
+
+  </article>
+
+  <CTASection variant="b2c" heading="Get a timber appraisal before you sell." />
+</BaseLayout>

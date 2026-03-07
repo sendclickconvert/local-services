@@ -1,0 +1,233 @@
+---
+import ServiceLayout from '../../layouts/ServiceLayout.astro';
+import PageHero from '../../components/ui/PageHero.astro';
+import Breadcrumb from '../../components/ui/Breadcrumb.astro';
+import FAQSection from '../../components/ui/FAQSection.astro';
+import KeyTakeaway from '../../components/ui/KeyTakeaway.astro';
+import AuthorByline from '../../components/ui/AuthorByline.astro';
+import ServiceSchema from '../../components/schema/ServiceSchema.astro';
+import FAQSchema from '../../components/schema/FAQSchema.astro';
+import { buildTitle, buildCanonical, buildDescription } from '../../lib/seo';
+
+const title = buildTitle("Land Clearing — Sullivan, Orange & Ulster Counties NY | EFP");
+const description = buildDescription(
+  "Land clearing services for residential and commercial properties in Sullivan, Orange, and Ulster counties, NY. " +
+  "Certified forestry oversight — recover timber value before equipment arrives. Call (845) 754-8242."
+);
+const canonicalUrl = buildCanonical("/services/land-clearing");
+
+const crumbs = [
+  { label: "Home",          href: "/"         },
+  { label: "Services",      href: "/services" },
+  { label: "Land Clearing", href: "/services/land-clearing" },
+];
+
+const faqs = [
+  {
+    question: "What types of land clearing do you handle?",
+    answer: "Residential lot clearing, commercial site preparation, agricultural field reclamation, right-of-way and utility corridor clearing, brush and overgrowth removal, and selective clearing that preserves specific trees while removing others. Projects range from single-lot residential work to multi-acre commercial site prep.",
+  },
+  {
+    question: "Do I need a permit to clear land in New York?",
+    answer: "It depends on the project location and scope. NY State does not require a general permit for clearing on private upland property, but local municipalities may have their own requirements, and work near wetlands or watercourses requires DEC review under Article 24 (Freshwater Wetlands) or 401/404 permits if federal jurisdictional wetlands are involved. Clearing within 100 feet of a regulated wetland typically requires a DEC permit. Henry can identify whether your project area involves regulated features during the initial site assessment.",
+  },
+  {
+    question: "What happens to the trees and brush after clearing?",
+    answer: "Merchantable timber identified before clearing is separated and sold — that value offsets the cost of clearing in many cases. Non-merchantable wood material is typically chipped on site, hauled away, or piled for burning depending on project specifications and site access. The approach is determined during the site assessment based on volume, species, and what the landowner needs the site to look like afterward.",
+  },
+  {
+    question: "Can I recover timber value from trees being cleared?",
+    answer: "Often yes. Before clearing equipment is scheduled, a forester walks the site and identifies any trees with marketable stumpage value — hardwoods like red oak, black cherry, and hard maple are common on second-growth sites in this region. Recovering that value requires separating and marketing those logs before the bulldozer arrives, not after. This is one of the primary advantages of working with a forestry firm rather than a general clearing contractor.",
+  },
+  {
+    question: "How long does land clearing take?",
+    answer: "Project duration varies with acreage, terrain, vegetation density, and site access. A typical residential lot clearing in the 1–3 acre range takes 1–3 days with appropriate equipment. Larger commercial or agricultural clearing projects are scoped individually. Henry will give you a realistic timeline estimate after the initial site walk.",
+  },
+  {
+    question: "Do you provide land clearing in Orange and Ulster counties?",
+    answer: "Yes. Land clearing services are available throughout Sullivan, Orange, and Ulster counties in New York, as well as Pike and Wayne counties in Pennsylvania and Sussex County in New Jersey.",
+  },
+];
+---
+
+<ServiceLayout title={title} description={description} canonicalUrl={canonicalUrl}>
+  <ServiceSchema
+    pageType="service"
+    serviceName="Land Clearing"
+    description={description}
+    url={canonicalUrl}
+    areaServed={["Sullivan County, NY", "Orange County, NY", "Ulster County, NY", "Pike County, PA", "Wayne County, PA", "Sussex County, NJ"]}
+    crumbs={crumbs}
+  />
+  <FAQSchema items={faqs} />
+
+  <Breadcrumb crumbs={crumbs} />
+
+  <PageHero
+    title="Land Clearing"
+    subtitle="Residential, commercial, and agricultural clearing — with certified forestry oversight"
+  />
+
+  <article class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+    <KeyTakeaway text="Before clearing equipment arrives on your property, a certified forester should walk the site — identifying timber with marketable value that can be separated and sold rather than chipped or burned. That step often offsets a significant portion of the clearing cost and changes the economics of the project entirely." />
+
+    <AuthorByline />
+
+    <img
+      src="/images/uploads/land-clearing-forestburgh-ny-komatsu.jpg"
+      alt="Land clearing project in Forestburgh, NY — Komatsu excavators clearing second-growth forest for site preparation"
+      class="w-full rounded-xl shadow-md my-8"
+      loading="lazy"
+    />
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Land Clearing in the Hudson Valley and Catskills</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      The terrain across Sullivan, Orange, and Ulster counties presents clearing challenges that differ from
+      flatter regions — rocky slopes, dense second-growth forest, variable soil conditions, and proximity
+      to regulated wetlands and watercourses on many parcels. Effective land clearing here requires a
+      methodical approach that accounts for drainage, site access, and how the land will perform long after
+      the equipment leaves.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Environmental Forest Products provides land clearing for residential, commercial, and agricultural
+      projects throughout the region. Every project starts with an on-site assessment — not a phone estimate
+      — because the variables that determine what clearing actually involves cannot be evaluated from a
+      property description alone.
+    </p>
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Types of Clearing Work</h2>
+    <ul class="space-y-3 mb-8">
+      {[
+        ["Residential lot clearing", "Preparing building envelopes, driveway corridors, lawn areas, and yard perimeters for new construction or major renovation. Includes selective clearing to preserve specific trees the landowner wants to keep."],
+        ["Commercial site preparation", "Large-scale clearing for commercial development, warehouse pads, parking areas, and access roads — coordinated to work efficiently with subsequent grading and construction phases."],
+        ["Agricultural land reclamation", "Returning overgrown former farmland or pasture to agricultural use. This often involves clearing decades of invasive shrubs, sapling growth, and brushy fencerows that have reclaimed open land."],
+        ["Right-of-way and corridor clearing", "Utility corridors, road shoulder maintenance, driveway clearing, and easement maintenance."],
+        ["Brush and overgrowth removal", "Reclaiming property boundaries, fence lines, and viewsheds that have become impenetrable over years of neglect."],
+        ["Selective clearing", "Removing specific species — invasives, dying trees, storm-damaged material — while protecting desirable trees. This is where forestry training matters most: knowing which trees are worth preserving and which are not."],
+      ].map(([heading, body]) => (
+        <li class="flex gap-3">
+          <svg class="w-5 h-5 text-[#2d5a2d] flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+          <div>
+            <span class="font-semibold text-gray-900">{heading}.</span>
+            <span class="text-gray-600"> {body}</span>
+          </div>
+        </li>
+      ))}
+    </ul>
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Recovering Timber Value Before Clearing Begins</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Most general clearing contractors clear everything that is in the way — merchantable hardwoods and
+      brush go through the same chipper. A consulting forester's first step on a clearing site is a
+      pre-clearing timber walk: identifying any trees with marketable stumpage value that can be harvested
+      and sold before the clearing equipment is scheduled.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      In the Hudson Valley and Catskills region, second-growth forest frequently contains red oak, black
+      cherry, white oak, and hard maple with genuine commercial value — even on sites being cleared for
+      development. Separating and marketing those logs before they become chips or burn piles can offset
+      a significant portion of the total clearing cost. On larger parcels, the timber sale sometimes
+      exceeds it.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-6">
+      This step requires a forester, not a clearing crew. If timber value is present, it needs to be
+      identified and documented before clearing equipment mobilizes — not discovered afterward when it
+      is too late to recover.
+    </p>
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">What Happens to the Cleared Material</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      After merchantable timber is separated and removed, the remaining cleared material — non-merchantable
+      wood, brush, and slash — is handled based on project specifications and site conditions:
+    </p>
+    <ul class="list-disc pl-6 text-gray-700 mb-6 space-y-2 text-sm leading-relaxed">
+      <li><strong>Chipping on site.</strong> Most brush and small-diameter material is chipped and left as
+      mulch or spread across the cleared area. This is the standard approach for residential and most
+      commercial projects.</li>
+      <li><strong>Haul-away.</strong> If the site needs to be completely cleared of all material — for
+      grading, seeding, or project requirements — material is hauled off-site. This adds cost relative to
+      chipping in place.</li>
+      <li><strong>Burning.</strong> On larger rural sites with adequate separation from structures and in
+      compliance with local burn regulations, piling and burning is an option for heavy brush volumes.</li>
+    </ul>
+    <p class="text-gray-700 leading-relaxed mb-6">
+      The disposal approach is determined during the site assessment based on the volume of material,
+      what the landowner needs the finished site to look like, and any site-specific constraints.
+    </p>
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Permits and Regulatory Considerations</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      New York State does not require a general permit for clearing upland private property, but several
+      regulatory triggers apply depending on project location:
+    </p>
+    <ul class="list-disc pl-6 text-gray-700 mb-6 space-y-2 text-sm leading-relaxed">
+      <li><strong>DEC Article 24 (Freshwater Wetlands).</strong> Work within or adjacent to regulated wetlands —
+      typically within 100 feet of a DEC-mapped freshwater wetland — requires a permit from the DEC. Many rural
+      parcels in Sullivan, Orange, and Ulster counties contain mapped wetlands or wetland buffers. Identifying
+      these features before clearing begins is part of the initial site assessment.</li>
+      <li><strong>Army Corps of Engineers (Section 404).</strong> Federally jurisdictional wetlands (not all of
+      which are on DEC maps) may require a federal 404 permit for fill or clearing activity.</li>
+      <li><strong>Local municipal requirements.</strong> Many municipalities in the region have their own tree
+      preservation ordinances, clearing permit requirements, or site plan review processes for projects above
+      a certain acreage threshold. Requirements vary by town.</li>
+      <li><strong>NYSDOT / county road access.</strong> Projects involving access from state or county roads
+      require highway work permits for driveway or access road construction.</li>
+    </ul>
+    <p class="text-gray-700 leading-relaxed mb-6">
+      Henry can identify potential regulatory issues during the initial property walk and advise on what
+      reviews are required before clearing begins. Discovering a wetland buffer conflict after a clearing
+      contract is signed is a significantly more expensive problem than identifying it beforehand.
+    </p>
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Stump Removal After Clearing</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Most clearing projects leave stumps behind. If the site needs to be fully graded, seeded, or
+      built upon, <a href="/services/stump-grinding" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">stump grinding</a>
+      is typically the next step. Coordinating stump removal with the clearing project at the outset
+      is more efficient than returning to the site with separate equipment and scheduling.
+    </p>
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Land Clearing and Long-Term Site Management</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      For landowners who are clearing woodland but retaining the adjacent forest, a
+      <a href="/services/woodlot-management" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">woodlot management plan</a>
+      for the remaining forest can be developed at the same time as the clearing work is scoped.
+      Clearing can create edge conditions that benefit wildlife habitat on the adjoining forest — but
+      only if the transition is managed deliberately rather than left to chance.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      For properties with 50 or more acres of forested land, a clearing project combined with
+      <a href="/services/480a-forest-tax-law" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">480-a Forest Tax Law enrollment</a>
+      on the remaining woodland is worth discussing before the clearing scope is finalized. The
+      cleared area may or may not remain eligible for 480-a depending on acreage and configuration,
+      and it is better to know that before the project is designed.
+    </p>
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Service Area</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Land clearing services are available throughout
+      <a href="/locations/sullivan-county-ny" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">Sullivan County</a>,
+      <a href="/locations/orange-county-ny" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">Orange County</a>, and
+      <a href="/locations/ulster-county-ny" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">Ulster County</a>
+      in New York, as well as Pike and Wayne counties in Pennsylvania and Sussex County in New Jersey.
+    </p>
+
+    <div class="bg-green-50 border border-green-200 rounded-lg p-6 my-10">
+      <h3 class="font-bold text-[#1a3c1a] text-lg mb-2">Get a Site Assessment</h3>
+      <p class="text-gray-700 text-sm mb-4">
+        Every land clearing project starts with an on-site walk. Call to schedule — no obligation,
+        just a direct conversation about what the work involves, what timber value may be recoverable,
+        and what it will realistically take.
+      </p>
+      <a href="tel:+18457548242" class="inline-flex items-center gap-2 bg-[#1a3c1a] text-white font-semibold px-5 py-3 rounded hover:bg-[#2d5a2d] transition-colors text-sm">
+        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/></svg>
+        Call (845) 754-8242
+      </a>
+    </div>
+
+    <FAQSection items={faqs} />
+    <EstimateForm variant="b2c" />
+
+  </article>
+</ServiceLayout>

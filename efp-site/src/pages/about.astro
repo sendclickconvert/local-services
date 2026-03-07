@@ -1,0 +1,223 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/ui/PageHero.astro';
+import Breadcrumb from '../components/ui/Breadcrumb.astro';
+import CTASection from '../components/ui/CTASection.astro';
+import { buildTitle, buildCanonical, buildDescription } from '../lib/seo';
+import { business } from '../data/client.config';
+
+const title = buildTitle("About Environmental Forest Products — Since 1991");
+const description = buildDescription(
+  "Environmental Forest Products has provided certified forestry consulting in the Tri-State area since 1991. " +
+  "Henry Kowalec and his team bring nearly 100 years of combined forestry experience to timber harvesting, " +
+  "480-a management plans, land clearing, and woodland management across Sullivan, Orange, and Ulster counties."
+);
+const canonicalUrl = buildCanonical("/about");
+
+const crumbs = [
+  { label: "Home",  href: "/" },
+  { label: "About", href: "/about" },
+];
+
+const testimonials = [
+  {
+    quote: "Just a note to show our appreciation for all your excellent work on the logging of our property in the Town of Kent. You proved in the end to have been the right choice at the beginning to guide us through the process, and verify what is important to us, that you care for the land as well as the harvesting of the lumber. Our hearty recommendation to anyone searching for the right logger.",
+    name: "Mary Ting & Todd Springer",
+    detail: "springerandting.com · Town of Kent, NY",
+  },
+  {
+    quote: "I originally approached Henry at Environmental Forest Products LLC to oversee a timber harvest of my 72 acre property, and based on how he conducted his business and responsibility of forest management I asked him to partner on future projects.",
+    name: "Dom Carbone",
+    detail: "domcarbone.com",
+  },
+];
+
+const clientTypes = [
+  { icon: "🏡", label: "Private landowners" },
+  { icon: "🏢", label: "Businesses" },
+  { icon: "💧", label: "Watershed authorities" },
+  { icon: "🏛️", label: "Local governments" },
+];
+---
+
+<BaseLayout title={title} description={description} canonicalUrl={canonicalUrl}>
+  <Breadcrumb crumbs={crumbs} />
+
+  <PageHero
+    title="About Environmental Forest Products"
+    subtitle="Certified forestry consulting in the Tri-State area since 1991"
+  />
+
+  <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+
+    <!-- Henry photo + bio -->
+    <div class="flex flex-col sm:flex-row gap-8 sm:gap-12 items-start mb-14">
+
+      <div class="flex-shrink-0 w-full sm:w-64">
+        <img
+          src="/images/henry-kowalec-consulting-forester-efp.webp"
+          alt="Henry Kowalec, Consulting Forester — Environmental Forest Products, Westbrookville NY"
+          class="w-full sm:w-64 rounded-xl shadow-lg object-cover"
+          width="750"
+          height="730"
+          loading="eager"
+        />
+        <div class="mt-4 bg-green-50 border border-green-200 rounded-lg p-4 text-sm">
+          <p class="font-semibold text-[#1a3c1a]">Henry Kowalec</p>
+          <p class="text-gray-600 text-xs mt-0.5">Consulting Forester</p>
+          <p class="text-gray-600 text-xs">Environmental Forest Products</p>
+          <p class="text-gray-600 text-xs mt-1">Serving the Tri-State area since 1991</p>
+          <a href="tel:+18457548242" class="block mt-2 text-[#2d5a2d] font-semibold text-xs hover:underline">
+            (845) 754-8242
+          </a>
+          <a href="mailto:henry@eforestproducts.com" class="block mt-1 text-[#2d5a2d] text-xs hover:underline">
+            henry@eforestproducts.com
+          </a>
+        </div>
+      </div>
+
+      <div class="flex-1">
+        <h2 class="text-2xl font-bold text-[#1a3c1a] mb-4">
+          One of the Most Experienced Forestry Consulting Firms in the Tri-State Area
+        </h2>
+
+        <p class="text-gray-700 leading-relaxed mb-4">
+          Environmental Forest Products has been providing certified forestry consulting services since 1991.
+          Henry Kowalec founded the company on a straightforward premise: woodland owners in the Hudson Valley
+          and Catskills region needed an independent forester on their side — someone whose obligation was to
+          the landowner and the long-term health of the woodland, not to a timber buyer or logging company.
+        </p>
+
+        <p class="text-gray-700 leading-relaxed mb-4">
+          The EFP team brings nearly 100 years of combined forestry experience to every project. That depth
+          of experience spans timber cruising and appraisal, 480-a Forest Tax Law management plan preparation,
+          sustainable selective harvesting, commercial land clearing, wildlife habitat management, and
+          standing timber marketing. Projects have ranged from single-parcel consultations of a few acres
+          to multi-hundred-acre commercial timber operations for government and watershed clients.
+        </p>
+
+        <p class="text-gray-700 leading-relaxed mb-4">
+          EFP operates its own equipment fleet — including tracked feller bunchers, forwarders, and log trucks —
+          which means Henry can manage the full cycle of a timber project from initial assessment and plan
+          preparation through harvest execution and final haul. That end-to-end capability, combined with
+          independent consulting forester status, gives landowners a single accountable point of contact for
+          projects that would otherwise require coordinating between separate consultants, contractors, and
+          logging crews.
+        </p>
+
+        <p class="text-gray-700 leading-relaxed">
+          Low-impact harvesting techniques are standard practice at EFP — not an option. Minimizing site
+          disturbance, protecting residual trees, and leaving the property in condition for the next generation
+          of forest growth is how Henry has maintained a 30-year client relationship record in a region where
+          word-of-mouth is the primary referral channel.
+        </p>
+      </div>
+    </div>
+
+    <!-- Stats bar -->
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-14">
+      {[
+        { stat: "1991",   desc: "Year founded" },
+        { stat: "~100",   desc: "Years combined forestry experience" },
+        { stat: "6",      desc: "Counties served across NY, PA, NJ" },
+        { stat: "480-a",  desc: "Certified DEC management plan forester" },
+      ].map(s => (
+        <div class="bg-green-50 border border-green-200 rounded-lg p-4 text-center">
+          <div class="text-2xl font-bold text-[#1a3c1a] mb-1">{s.stat}</div>
+          <div class="text-xs text-gray-600 leading-snug">{s.desc}</div>
+        </div>
+      ))}
+    </div>
+
+    <!-- What EFP does -->
+    <div class="border-t border-gray-200 pt-12 mb-14">
+      <h2 class="text-2xl font-bold text-[#1a3c1a] mb-4">What Environmental Forest Products Does</h2>
+
+      <p class="text-gray-700 leading-relaxed mb-4">
+        Periodic selective timber harvest is a critical component of healthy woodlot management — not
+        just a commercial transaction. When done correctly, it improves species composition, releases
+        the best-quality trees, improves forest structure, and sets the stage for stronger future growth.
+        EFP approaches every harvest project with this long-term management objective as the guiding
+        framework, not simply the volume of timber that can be extracted.
+      </p>
+
+      <p class="text-gray-700 leading-relaxed mb-4">
+        The company assists landowners with standing timber marketing across regional and global markets,
+        working to recover full stumpage value for each species and grade of timber on a property.
+        Independent competitive bidding — rather than single-buyer negotiation — is the standard approach
+        for timber sales of significant value.
+      </p>
+
+      <p class="text-gray-700 leading-relaxed mb-6">
+        Beyond timber, EFP provides wildlife habitat improvement planning, land clearing for site development,
+        and 480-a Forest Tax Law management plan preparation for qualifying New York properties. The company
+        has worked with private individuals, agricultural businesses, watershed management authorities, and
+        local governments — on projects ranging from one-hour site consultations to long-term management
+        plans with 10 to 15-year review periods.
+      </p>
+
+      <!-- Client type grid -->
+      <h3 class="text-sm font-semibold uppercase tracking-widest text-gray-500 mb-4">Clients Served</h3>
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8">
+        {clientTypes.map(ct => (
+          <div class="flex items-center gap-2 bg-white border border-gray-200 rounded-lg px-4 py-3 text-sm text-gray-700">
+            <span aria-hidden="true">{ct.icon}</span>
+            {ct.label}
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Service range -->
+    <div class="border-t border-gray-200 pt-12 mb-14">
+      <h2 class="text-2xl font-bold text-[#1a3c1a] mb-4">Flexible for Any Size Project</h2>
+      <p class="text-gray-700 leading-relaxed mb-4">
+        As a private, independent forestry consulting firm, Environmental Forest Products has the flexibility
+        to serve landowners across a wide range of project types and sizes. Timber sales have been conducted
+        on properties as small as a few acres and as large as several hundred acres. Consulting engagements
+        range from a single-visit property assessment to multi-year management relationships with formal
+        review cycles.
+      </p>
+      <p class="text-gray-700 leading-relaxed">
+        That flexibility — and the independence that comes with not being affiliated with any timber buyer,
+        mill, or logging contractor — is what allows EFP to act exclusively in the landowner's interest on
+        every project.
+      </p>
+    </div>
+
+    <!-- Service area -->
+    <div class="border-t border-gray-200 pt-12 mb-14">
+      <h2 class="text-2xl font-bold text-[#1a3c1a] mb-4">Service Area</h2>
+      <p class="text-gray-700 leading-relaxed mb-4">
+        Environmental Forest Products serves private woodland owners primarily in Sullivan, Orange, and Ulster
+        counties in New York — the core Catskills and Hudson Valley service area. Service extends into Pike
+        and Wayne counties in Pennsylvania and Sussex County in New Jersey for timber and land management projects.
+      </p>
+      <a href="/locations" class="text-[#2d5a2d] font-semibold hover:underline text-sm">
+        View all service areas →
+      </a>
+    </div>
+
+    <!-- Testimonials -->
+    <div class="border-t border-gray-200 pt-12">
+      <h2 class="text-2xl font-bold text-[#1a3c1a] mb-8">What Clients Say</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        {testimonials.map(t => (
+          <div class="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
+            <svg class="w-7 h-7 text-[#2d5a2d] opacity-30 mb-3" fill="currentColor" viewBox="0 0 32 32" aria-hidden="true">
+              <path d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z"/>
+            </svg>
+            <p class="text-gray-700 text-sm leading-relaxed italic mb-5">"{t.quote}"</p>
+            <div class="pt-4 border-t border-gray-100">
+              <div class="font-semibold text-[#1a3c1a] text-sm">{t.name}</div>
+              <div class="text-xs text-gray-400 mt-0.5">{t.detail}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+  </article>
+
+  <CTASection variant="b2c" />
+</BaseLayout>
