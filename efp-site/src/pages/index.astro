@@ -1,43 +1,40 @@
 ---
 // pages/index.astro — Homepage
 import BaseLayout from '../layouts/BaseLayout.astro';
-import PageHero from '../components/ui/PageHero.astro';
+import EligibilityQuiz from '../components/ui/EligibilityQuiz.astro';
 import ServiceCard from '../components/ui/ServiceCard.astro';
 import VideoFeature from '../components/ui/VideoFeature.astro';
 import CTASection from '../components/ui/CTASection.astro';
 import { buildTitle, buildCanonical, buildDescription } from '../lib/seo';
+import { business, phone } from '../data/client.config';
 import { websiteSchema } from '../data/schema/website';
+import { organizationSchema } from '../data/schema/organization';
 
-const title = buildTitle("Certified Forestry Consulting — Hudson Valley & Catskills");
-const description = buildDescription();
+const title = "Environmental Forest Products | Forestry Consulting in Hudson Valley NY";
+const description = buildDescription(
+  "Environmental Forest Products provides timber harvesting, land clearing, woodlot management, and 480-a tax consulting across NY, NJ, and PA. Call (845) 754-8242."
+);
 const canonicalUrl = buildCanonical("/");
 
 // ─── TRUST DATA ───────────────────────────────────────────────────────────────
 // From live EFP site — confirmed visible. Logo files needed from Henry.
 // ⚠️ = flag for Henry review before launch (verify current membership status)
 
-const equipmentBrands = [
-  // ⚠️ These 4 logo files still needed from Henry — /images/logos/[name]
-  { name: "Husqvarna",               logo: null,  darkBg: false },
-  { name: "Timberjack / John Deere", logo: null,  darkBg: false },
-  { name: "Snap-on",                 logo: null,  darkBg: false },
-  { name: "Columbia Forest Products",logo: null,  darkBg: false },
-];
-
-const associations = [
-  // ✅ Confirmed logos provided by Henry
-  { name: "NY Forest Owners Association",        logo: "/images/logos/ny-forest-owners-association.jpg", darkBg: false },
-  { name: "Sullivan County Chamber of Commerce", logo: "/images/logos/sullivan-county-chamber.jpg",      darkBg: false },
-  { name: "Orange County Chamber of Commerce",   logo: "/images/logos/orange-county-chamber.jpg",        darkBg: false },
-  { name: "Delaware State Chamber of Commerce",  logo: "/images/logos/delaware-state-chamber.webp",      darkBg: false },
-  { name: "Better Business Bureau",              logo: "/images/logos/bbb.png",                          darkBg: true  },
-  // ⚠️ Still needed from Henry — verify membership status + get logo files
-  { name: "Society of American Foresters",       logo: null, darkBg: false },
-  { name: "NJ Forestry Association",             logo: null, darkBg: false },
-  { name: "NY Logger Training (NYLT)",           logo: null, darkBg: false },
-  { name: "Northeastern Loggers Association",    logo: null, darkBg: false },
-  { name: "Empire State Forest Products Assoc.",logo: null, darkBg: false },
-  { name: "Delaware County Business Alliance",   logo: null, darkBg: false },
+const allLogos = [
+  { name: "Better Business Bureau",              logo: "/images/logos/bbb.png" },
+  { name: "NY Forest Owners Association",        logo: "/images/logos/ny-forest-owners-association.jpg" },
+  { name: "Sullivan County Chamber of Commerce", logo: "/images/logos/sullivan-county-chamber.jpg" },
+  { name: "Orange County Chamber of Commerce",   logo: "/images/logos/orange-county-chamber.jpg" },
+  { name: "Delaware State Chamber of Commerce",  logo: "/images/logos/delaware-state-chamber.webp" },
+  { name: "Delaware County Business Alliance",   logo: "/images/logos/delaware-business-alliance.webp" },
+  { name: "Husqvarna",                          logo: "/images/logos/husqvarna.webp" },
+  { name: "Timberjack / John Deere",            logo: "/images/logos/timberjack.webp" },
+  { name: "Snap-on",                            logo: "/images/logos/snapon.webp" },
+  { name: "Columbia Forest Products",            logo: "/images/logos/columbia-forest-products.webp" },
+  { name: "Empire State Forest Products Assoc.", logo: "/images/logos/empire-state-forest.webp" },
+  { name: "Society of American Foresters",       logo: "/images/logos/society-american-foresters.webp" },
+  { name: "NJ Forestry Association",             logo: "/images/logos/nj-forestry-association.webp" },
+  { name: "NY Logger Training (NYLT)",           logo: "/images/logos/nylt-logo.webp" },
 ];
 
 // ─── TESTIMONIALS ─────────────────────────────────────────────────────────────
@@ -63,12 +60,66 @@ const testimonials = [
 <BaseLayout title={title} description={description} canonicalUrl={canonicalUrl}>
   <!-- ⚠️ MANUAL-ONLY: WebSite schema — do not agent-edit -->
   <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
+  <!-- LocalBusiness schema — homepage ONLY per blueprint doctrine -->
+  <script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
 
   <!-- ─── 1. HERO ─────────────────────────────────────────────────────────── -->
-  <PageHero
-    title="Certified Forestry Consulting for the Hudson Valley & Catskills"
-    subtitle="480-a Forest Tax Law · Land Clearing · Timber Harvesting · Woodlot Management"
-  />
+  <section class="relative overflow-hidden" style="background:#0d1a0d;">
+    <!-- Background image -->
+    <picture>
+      <source srcset="/images/uploads/optimized/land-clearing-forestburgh-ny-komatsu-1200.webp" type="image/webp" />
+      <img
+        src="/images/uploads/land-clearing-forestburgh-ny-komatsu.jpg"
+        alt="Sustainable timber harvesting in Sullivan County, New York"
+        fetchpriority="high"
+        decoding="sync"
+        class="absolute inset-0 w-full h-full object-cover object-center"
+        width="1200" height="675"
+      />
+    </picture>
+    <div class="absolute inset-0" style="background:rgba(13,26,13,0.72);" aria-hidden="true"></div>
+
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24">
+      <div class="flex flex-col lg:flex-row lg:items-center gap-10 lg:gap-14">
+
+        <!-- LEFT: existing hero content (55–60%) -->
+        <div class="lg:w-[57%] flex-shrink-0">
+          <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight mb-5">
+            Environmental Forest Products: Certified Forestry Consulting in the Hudson Valley &amp; Catskills
+          </h1>
+          <p class="text-lg sm:text-xl text-green-200 mb-8 leading-relaxed">
+            480-a Forest Tax Law · Land Clearing · Timber Harvesting · Woodlot Management
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4">
+            <a
+              href={`tel:${phone.trackingTel}`}
+              class="inline-flex items-center justify-center gap-2 bg-white text-[#1a3c1a] hover:bg-green-50 font-bold text-base sm:text-lg px-8 py-4 rounded shadow-lg transition-colors"
+            >
+              <svg class="w-5 h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
+              </svg>
+              Call for a Free Consultation
+            </a>
+            <a
+              href="/contact"
+              class="inline-flex items-center justify-center gap-2 border-2 border-white text-white hover:bg-white/10 font-bold text-base sm:text-lg px-8 py-4 rounded shadow-lg transition-colors"
+            >
+              Request a Free Estimate
+              <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- RIGHT: 480-a quiz widget (40–45%) -->
+        <div class="lg:w-[43%] w-full">
+          <EligibilityQuiz />
+        </div>
+
+      </div>
+    </div>
+  </section>
 
   <!-- ─── TRUST BAR ──────────────────────────────────────────────────────── -->
   <div class="bg-[#1a3c1a] py-5">
@@ -89,8 +140,32 @@ const testimonials = [
     </div>
   </div>
 
-  <!-- ─── 2. SERVICES ──────────────────────────────────────────────────────── -->
+  <!-- ─── INTRO BODY ──────────────────────────────────────────────────────── -->
   <section class="py-16 sm:py-20 bg-white">
+    <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 prose prose-lg prose-green">
+      <p>
+        Environmental Forest Products has served landowners across Sullivan, Orange,
+        and Ulster counties in New York — and into Pike and Wayne counties in
+        Pennsylvania and Sussex County in New Jersey — for over 30 years.
+        Henry Kowalec, a certified consulting forester, leads every project
+        personally.
+      </p>
+      <p>
+        Whether you're looking to harvest standing timber, clear land for development,
+        enroll wooded acreage in the New York 480-a Forest Tax Law program, or develop
+        a long-term woodlot management plan, EFP provides low-impact solutions
+        tailored to your land and your goals.
+      </p>
+      <p>
+        We buy standing timber directly, handle all aspects of sustainable logging,
+        and work with landowners who want to improve their forest without
+        sacrificing its long-term health.
+      </p>
+    </div>
+  </section>
+
+  <!-- ─── 2. SERVICES ──────────────────────────────────────────────────────── -->
+  <section class="py-16 sm:py-20 bg-gray-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
         <h2 class="text-2xl sm:text-3xl font-bold text-[#1a3c1a] mb-3">Forestry Services for Private Landowners</h2>
@@ -99,17 +174,29 @@ const testimonials = [
         </p>
       </div>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        <ServiceCard title="480-a Forest Tax Law" slug="480a-forest-tax-law" excerpt="Reduce your property taxes with NY's 480-a program. Henry is one of a small number of certified foresters in the region qualified to write the required management plans." icon="🌲" />
-        <ServiceCard title="Land Clearing"        slug="land-clearing"        excerpt="Residential and commercial site preparation across Sullivan, Orange, and Ulster counties — clearing expertise grounded in forestry, not just excavation." icon="🚜" />
-        <ServiceCard title="Timber Harvesting"    slug="timber-harvesting"    excerpt="Selective, sustainable logging services. A consulting forester plans and oversees every harvest to protect your woodland and maximize what the timber is worth." icon="🪵" />
-        <ServiceCard title="Woodlot Management"   slug="woodlot-management"   excerpt="Forest management plans for private landowners — required for 480-a enrollment and the foundation of any long-term woodland stewardship program." icon="🗺️" />
+        <ServiceCard title="480-a Forest Tax Law" slug="480a-forest-tax-law" excerpt="Reduce your property taxes with NY's 480-a program. Henry is one of a small number of certified foresters in the region qualified to write the required management plans." iconImage="/images/icons/480a-tax-law.png" />
+        <ServiceCard title="Land Clearing"        slug="land-clearing"        excerpt="Residential and commercial site preparation across Sullivan, Orange, and Ulster counties — clearing expertise grounded in forestry, not just excavation." iconImage="/images/icons/land-clearing.png" />
+        <ServiceCard title="Timber Harvesting"    slug="timber-harvesting"    excerpt="Selective, sustainable logging services. A consulting forester plans and oversees every harvest to protect your woodland and maximize what the timber is worth." iconImage="/images/icons/timber-harvesting.png" />
+        <ServiceCard title="Woodlot Management"   slug="woodlot-management"   excerpt="Forest management plans for private landowners — required for 480-a enrollment and the foundation of any long-term woodland stewardship program." iconImage="/images/icons/woodlot-management.png" />
       </div>
       <div class="text-center mt-8">
         <a href="/services" class="inline-flex items-center gap-2 text-[#2d5a2d] font-semibold hover:text-[#1a3c1a] transition-colors">
           View all services
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          <svg class="w-4 h-4" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
         </a>
       </div>
+    </div>
+  </section>
+
+  <!-- ─── SERVICE AREA CALLOUT ─────────────────────────────────────────────── -->
+  <section class="py-16 sm:py-20 bg-white">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-2xl sm:text-3xl font-bold text-[#1a3c1a] mb-4">Serving New York, New Jersey &amp; Pennsylvania</h2>
+      <p class="text-gray-700 text-base leading-relaxed">
+        Primary service area includes Sullivan County, Orange County, and Ulster
+        County (NY), with extended coverage into Pike County and Wayne County (PA)
+        and Sussex County (NJ).
+      </p>
     </div>
   </section>
 
@@ -117,6 +204,7 @@ const testimonials = [
   <VideoFeature
     vimeoId="1171347773"
     posterSrc="/images/uploads/spruce-timber-harvest-millbrook-ny.jpg"
+    posterAlt="Environmental Forest Products logging equipment, Westbrookville NY"
     heading="See Our Work in Action"
     caption="Forestry equipment and field work from Environmental Forest Products — serving the Hudson Valley and Catskills since 1991."
   />
@@ -127,45 +215,17 @@ const testimonials = [
     Currently rendering as text fallbacks until logo files are provided.
     All logos: drop files into /public/images/logos/ and swap null → path below.
   -->
-  <section class="py-16 sm:py-20 bg-white border-t border-gray-100">
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+  <section class="py-16 sm:py-20 bg-gray-50 border-t-4 border-[#1a3c1a]">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
 
-      <h2 class="text-center text-2xl font-bold text-[#1a3c1a] mb-2">Equipment &amp; Associations</h2>
-      <p class="text-center text-gray-500 text-sm mb-12">
-        The equipment we run. The organizations we belong to.
-      </p>
+      <h2 class="text-center text-2xl font-bold text-[#1a3c1a] mb-10">Equipment &amp; Associations</h2>
 
-      <!-- Equipment brands -->
-      <div class="mb-10">
-        <p class="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-5 text-center">Equipment &amp; Vendors</p>
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-6">
-          {equipmentBrands.map(brand => (
-            <div class="flex items-center justify-center h-16 px-4 border border-gray-200 rounded-lg bg-gray-50">
-              {brand.logo
-                ? <img src={brand.logo} alt={brand.name} class="max-h-10 max-w-full object-contain" loading="lazy" />
-                : <span class="text-sm font-semibold text-gray-500 text-center leading-tight">{brand.name}</span>
-              }
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <!-- Divider -->
-      <div class="border-t border-gray-100 mb-10" />
-
-      <!-- Industry associations and chambers -->
-      <div>
-        <p class="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-5 text-center">Associations &amp; Organizations</p>
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-6">
-          {associations.map(org => (
-            <div class={`flex items-center justify-center h-16 px-3 border rounded-lg ${org.darkBg ? 'bg-[#0a3d5e] border-[#0a3d5e]' : 'bg-gray-50 border-gray-200'}`}>
-              {org.logo
-                ? <img src={org.logo} alt={org.name} class="max-h-10 max-w-full object-contain" loading="lazy" />
-                : <span class="text-xs font-semibold text-gray-500 text-center leading-tight">{org.name}</span>
-              }
-            </div>
-          ))}
-        </div>
+      <div class="flex flex-wrap items-center justify-center gap-8 sm:gap-10">
+        {allLogos.map(item => (
+          <div class="flex items-center justify-center h-14 px-2">
+            <img src={item.logo} alt={item.name} class="max-h-12 max-w-[140px] object-contain" loading="lazy" />
+          </div>
+        ))}
       </div>
 
     </div>
@@ -214,15 +274,120 @@ const testimonials = [
         ))}
       </div>
 
-      <!-- Google review nudge — once Henry has reviews -->
+      <!-- Google review nudge — update href once GBP is live -->
       <p class="text-center text-xs text-gray-400 mt-8">
         Working with Henry?
-        <a href="https://g.page/r/[STUB-GBP-REVIEW-LINK]/review" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]" target="_blank" rel="noopener">
-          Leave a Google review
+        <a href="https://eforestproducts.com/contact" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">
+          Get in touch
         </a>
-        — it helps other landowners find this site.
+        — we'd love to hear from you.
       </p>
 
+    </div>
+  </section>
+
+  <!-- ─── FAQ BLOCK ────────────────────────────────────────────────────────── -->
+  <section class="py-16 sm:py-20 bg-white">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-2xl sm:text-3xl font-bold text-[#1a3c1a] mb-10 text-center">Common Questions About Forestry Services in New York</h2>
+
+      <div class="space-y-8">
+        <div>
+          <h3 class="text-lg font-semibold text-[#1a3c1a] mb-2">How much do loggers pay landowners per acre in New York?</h3>
+          <p class="text-gray-700 leading-relaxed">
+            Timber payments vary based on species, volume, and market conditions.
+            In New York, landowners typically receive between $500 and $2,000+ per
+            acre for timber harvests, depending on the quality and density of
+            merchantable trees. An on-site timber appraisal gives you the most
+            accurate number for your specific acreage. Call Henry at <a href="tel:+18454980208" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">(845) 754-8242</a>
+            for a free consultation.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-semibold text-[#1a3c1a] mb-2">What trees are worth money for logging in New York?</h3>
+          <p class="text-gray-700 leading-relaxed">
+            High-value species in the Hudson Valley and Catskill region include
+            black cherry, red oak, sugar maple, white ash, and black walnut.
+            Softwoods like white pine also have commercial value depending on
+            current mill demand. A consulting forester can identify which trees
+            on your lot are harvest-ready and marketable.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-semibold text-[#1a3c1a] mb-2">What is the 480-a Forest Tax Law in New York?</h3>
+          <p class="text-gray-700 leading-relaxed">
+            New York's 480-a program reduces property taxes on qualifying wooded
+            land in exchange for a certified forest management plan. Landowners
+            with 50+ acres of forest can qualify. Environmental Forest Products
+            prepares the required management plans and guides landowners through
+            the application process in Sullivan, Orange, and Ulster counties.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-semibold text-[#1a3c1a] mb-2">Do you buy standing timber directly from landowners?</h3>
+          <p class="text-gray-700 leading-relaxed">
+            Yes. EFP purchases standing timber outright, handles all harvesting
+            operations, and manages timber marketing for landowners who prefer a
+            hands-off approach. We also provide timber appraisals if you want an
+            independent valuation before selling.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── FAQPage SCHEMA ──────────────────────────────────────────────────── -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How much do loggers pay landowners per acre in New York?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Timber payments vary based on species, volume, and market conditions. In New York, landowners typically receive between $500 and $2,000+ per acre for timber harvests, depending on the quality and density of merchantable trees. Call Henry at (845) 754-8242 for a free consultation."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What trees are worth money for logging in New York?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "High-value species in the Hudson Valley and Catskill region include black cherry, red oak, sugar maple, white ash, and black walnut. Softwoods like white pine also have commercial value depending on current mill demand."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the 480-a Forest Tax Law in New York?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "New York's 480-a program reduces property taxes on qualifying wooded land in exchange for a certified forest management plan. Landowners with 50+ acres of forest can qualify. Environmental Forest Products prepares the required management plans in Sullivan, Orange, and Ulster counties."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do you buy standing timber directly from landowners?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. EFP purchases standing timber outright, handles all harvesting operations, and manages timber marketing for landowners who prefer a hands-off approach. Timber appraisals are also available."
+        }
+      }
+    ]
+  })} />
+
+  <!-- ─── BOTTOM CTA ─────────────────────────────────────────────────────── -->
+  <section class="py-16 sm:py-20 bg-gray-50">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-2xl sm:text-3xl font-bold text-[#1a3c1a] mb-4">Ready to Talk About Your Land?</h2>
+      <p class="text-gray-700 text-base leading-relaxed">
+        Call Henry directly at <a href="tel:+18454980208" class="text-[#2d5a2d] font-semibold underline hover:text-[#1a3c1a]">(845) 754-8242</a> or
+        use the <a href="/contact" class="text-[#2d5a2d] font-semibold underline hover:text-[#1a3c1a]">contact form</a>. No obligation — just a conversation about
+        what your property can do for you.
+      </p>
     </div>
   </section>
 

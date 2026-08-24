@@ -1,13 +1,17 @@
 ---
 // GuideLayout.astro
 // Used by guides/[...slug].astro for all content collection articles.
-// Includes: AuthorByline, KeyTakeaway slot, RelatedLinks, CTASection.
+// Desktop: two-column layout — article left (2/3), sticky sidebar right (1/3).
+// Mobile: single column; TOC dropdown at top, inline CTA after intro, related guides at bottom.
 
 import BaseLayout from './BaseLayout.astro';
 import AuthorByline from '../components/ui/AuthorByline.astro';
 import KeyTakeaway from '../components/ui/KeyTakeaway.astro';
 import RelatedLinks from '../components/ui/RelatedLinks.astro';
 import CTASection from '../components/ui/CTASection.astro';
+import GuideTOC from '../components/ui/GuideTOC.astro';
+import GuideCTA from '../components/ui/GuideCTA.astro';
+import GuideRelated from '../components/ui/GuideRelated.astro';
 
 interface LinkItem {
   label: string;
@@ -25,6 +29,11 @@ interface Props {
   downLinks?: LinkItem[];
   serviceLinks?: LinkItem[];
   locationLinks?: LinkItem[];
+  // Sidebar props
+  guideSlug: string;
+  hubSlug?: string;
+  isPillar?: boolean;
+  relatedGuides?: LinkItem[];
 }
 
 const {
@@ -33,26 +42,68 @@ const {
   downLinks,
   serviceLinks,
   locationLinks,
+  guideSlug,
+  hubSlug,
+  isPillar,
+  relatedGuides = [],
   ...rest
 } = Astro.props;
 ---
 
-<BaseLayout {...rest}>
-  <article class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+<BaseLayout {...rest} ogType="article">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-8 sm:my-10">
+    <div class="flex gap-10 items-start">
 
-    {keyTakeaway && <KeyTakeaway text={keyTakeaway} />}
+      <!-- ── MAIN ARTICLE COLUMN ─────────────────────────────────── -->
+      <article class="w-full lg:w-[65%] min-w-0 bg-white rounded-2xl shadow-md ring-1 ring-gray-200 px-8 sm:px-12 py-10">
 
-    <AuthorByline />
+        {keyTakeaway && <KeyTakeaway text={keyTakeaway} />}
+        <AuthorByline />
 
-    <slot />
+        <!-- Mobile TOC dropdown (inside card, above content) -->
+        <div class="lg:hidden mb-2">
+          <GuideTOC />
+        </div>
 
-    <RelatedLinks
-      upLinks={upLinks}
-      downLinks={downLinks}
-      serviceLinks={serviceLinks}
-      locationLinks={locationLinks}
-    />
+        <!-- Mobile inline CTA (appears after intro, before body) -->
+        <div class="lg:hidden mb-6">
+          <GuideCTA slug={guideSlug} hubSlug={hubSlug} isPillar={isPillar} />
+        </div>
 
-  </article>
+        <div id="guide-article-body">
+          <slot />
+        </div>
+
+        <!-- Mobile related guides (bottom of article) -->
+        <div class="lg:hidden">
+          <GuideRelated links={relatedGuides} />
+        </div>
+
+        <RelatedLinks
+          upLinks={upLinks}
+          downLinks={downLinks}
+          serviceLinks={serviceLinks}
+          locationLinks={locationLinks}
+        />
+
+      </article>
+
+      <!-- ── SIDEBAR ─────────────────────────────────────────────── -->
+      <aside class="hidden lg:flex flex-col gap-6 w-[35%] flex-shrink-0" style="position: sticky; top: 1.5rem; max-height: calc(100vh - 3rem); overflow-y: auto;">
+
+        <!-- 1. Table of Contents -->
+        <GuideTOC />
+
+        <!-- 2. Pillar-aware CTA card -->
+        <GuideCTA slug={guideSlug} hubSlug={hubSlug} isPillar={isPillar} />
+
+        <!-- 3. Related guides -->
+        <GuideRelated links={relatedGuides} />
+
+      </aside>
+
+    </div>
+  </div>
+
   <CTASection variant="b2c" />
 </BaseLayout>

@@ -1,0 +1,131 @@
+---
+// Boiceville, Ulster County — individual static location page
+import LocationLayout from '../../../layouts/LocationLayout.astro';
+import PageHero from '../../../components/ui/PageHero.astro';
+import Breadcrumb from '../../../components/ui/Breadcrumb.astro';
+import FAQSection from '../../../components/ui/FAQSection.astro';
+import KeyTakeaway from '../../../components/ui/KeyTakeaway.astro';
+import AuthorByline from '../../../components/ui/AuthorByline.astro';
+import EstimateForm from '../../../components/forms/EstimateForm.astro';
+import ServiceSchema from '../../../components/schema/ServiceSchema.astro';
+import FAQSchema from '../../../components/schema/FAQSchema.astro';
+import { services } from '../../../data/services';
+
+const title       = "Forestry Consulting — Boiceville, NY | EFP";
+const description = "Certified forestry consulting in Boiceville, Ulster County. 480-a Forest Tax Law, timber harvesting, and woodlot management along the Esopus Creek corridor. Henry Kowalec, 30+ years experience. Call (845) 754-8242.";
+const canonicalUrl = "https://eforestproducts.com/locations/ulster-county-ny/boiceville";
+
+const crumbs = [
+  { label: "Home",      href: "/" },
+  { label: "Locations", href: "/locations" },
+  { label: "Ulster County, NY", href: "/locations/ulster-county-ny" },
+  { label: "Boiceville", href: "/locations/ulster-county-ny/boiceville" },
+];
+
+const faqs = [
+  { question: "Do you provide forestry consulting near Boiceville, NY?", answer: "Yes. Environmental Forest Products serves private landowners in Boiceville and throughout Ulster County. Henry Kowalec has 30+ years of hands-on forestry experience in the Esopus Creek watershed area and provides on-site assessments for all service inquiries. Call (845) 754-8242." },
+  { question: "Does the Esopus Creek watershed affect forestry operations near Boiceville?", answer: "Yes. Boiceville sits along the Esopus Creek, which drains into the Ashokan Reservoir — part of New York City's water supply. Properties in and near this drainage may be subject to NYC DEP regulations governing forestry and land-disturbing activities. Henry Kowalec has worked on properties throughout this watershed zone and understands what regulatory requirements apply to specific parcels in this area." },
+  { question: "Does my Boiceville property qualify for 480-a Forest Tax Law enrollment?", answer: "New York's 480-a program generally requires 50 or more contiguous acres of qualifying woodland. Town of Olive properties with sufficient forested acreage are frequently strong candidates. An on-site assessment is the only way to determine eligibility for a specific parcel — call (845) 754-8242 to schedule one." },
+  { question: "Can you appraise the timber value on my Boiceville property?", answer: "Yes. A timber appraisal identifies species, diameter, volume, and current stumpage market value. The mixed hardwood stands in the Boiceville area — red oak, red maple, hemlock, black birch — hold timber value that most landowners have not had independently confirmed." },
+  { question: "Do you handle land clearing near Boiceville?", answer: "Yes. Land clearing is available throughout Ulster County. Every clearing project begins with a timber assessment to determine whether merchantable timber value can be recovered before clearing proceeds — a step that routinely reduces the net cost of the project." },
+];
+---
+
+<LocationLayout title={title} description={description} canonicalUrl={canonicalUrl}>
+  <ServiceSchema
+    pageType="location"
+    serviceName="Forestry Consulting — Boiceville, Ulster County"
+    description={description}
+    url={canonicalUrl}
+    areaServed={["Boiceville, NY", "Ulster County, NY"]}
+    crumbs={crumbs}
+  />
+  <FAQSchema items={faqs} />
+  <Breadcrumb crumbs={crumbs} />
+
+  <PageHero
+    title="Forestry Consulting in Boiceville, NY"
+    subtitle="Serving Boiceville and the Esopus Creek corridor — certified forestry for private landowners"
+  />
+
+  <article class="max-w-4xl mx-auto my-8 sm:my-10 px-8 sm:px-12 py-10 bg-white rounded-2xl shadow-md ring-1 ring-gray-200">
+
+    <KeyTakeaway
+      text="Environmental Forest Products provides certified forestry consulting for Boiceville area landowners. Henry Kowalec brings 30+ years of Ulster County experience — including direct familiarity with the Esopus Creek watershed and the regulatory framework that affects forestry in the Town of Olive."
+    />
+
+    <AuthorByline />
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Boiceville's Woodland and Forest Terrain</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Boiceville is a hamlet in the Town of Olive along the Esopus Creek valley on the Route 28 corridor. The Esopus Creek drains through the heart of the central Catskills and flows into the Ashokan Reservoir — placing Boiceville within the New York City watershed zone. The forest here is mixed hardwood and hemlock: red oak, red maple, black birch, and hemlock in the protected riparian corridors, transitioning to broader mixed hardwood stands on the upland terrain above the valley.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      The NYC DEP watershed regulatory overlay affects what forestry operations are permissible on properties near the Esopus and its tributaries. Understanding which regulations apply to a specific parcel — and how to structure a management plan within that framework — requires experience working in this zone specifically.
+    </p>
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Local Forestry Context — Boiceville</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      The Boiceville area is a gateway to the central Catskills, with a mix of year-round landowners and vacation property holders. The Town of Olive has extensive forested acreage — much of it unmanaged — and the combination of timber value, 480-a eligibility potential, and the complexity of the watershed regulatory framework makes professional forestry consulting particularly valuable here.
+    </p>
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Services Available Near Boiceville</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
+      {services.map(svc => (
+        <a href={'/services/' + svc.slug} class="flex items-start gap-3 p-4 border border-gray-200 rounded-lg hover:border-[#2d5a2d] hover:bg-green-50 transition-colors group">
+          <span class="text-2xl flex-shrink-0" aria-hidden="true">{svc.icon}</span>
+          <div>
+            <div class="font-semibold text-[#1a3c1a] group-hover:text-[#2d5a2d] text-sm">{svc.name}</div>
+            <div class="text-xs text-gray-500 mt-0.5 leading-snug">{svc.excerpt.split('—')[0].trim()}</div>
+          </div>
+        </a>
+      ))}
+    </div>
+
+    <div class="bg-green-50 border border-green-200 rounded-lg p-6 my-10">
+      <h3 class="font-bold text-[#1a3c1a] text-lg mb-2">480-a Forest Tax Law — Boiceville Area Properties</h3>
+      <p class="text-gray-700 text-sm mb-3">
+        New York's 480-a program provides a property and school tax exemption of up to 80% on enrolled woodland acreage for qualifying landowners with 50 or more contiguous acres. Environmental Forest Products prepares the required DEC-approved management plans — including the NYC DEP coordination required for watershed-zone properties — and manages the full enrollment process.
+      </p>
+      <a href="/services/480a-forest-tax-law" class="text-[#2d5a2d] font-semibold text-sm underline hover:text-[#1a3c1a]">Learn about 480-a enrollment for Ulster County landowners →</a>
+    </div>
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Why Boiceville Landowners Work With EFP</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Henry Kowalec has conducted timber assessments, harvest operations, and land management work across Ulster County for more than 30 years — including on properties with the Esopus Creek valley terrain in the Town of Olive and the red oak and hemlock-dominant forest composition that characterizes the Boiceville area. That site-specific experience — including direct familiarity with the NYC DEP watershed regulatory framework — means he can advise on both the forestry opportunity and the regulatory constraints specific to this part of Ulster County.
+    </p>
+
+    <div class="bg-[#1a3c1a] text-white rounded-lg p-6 my-10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <div>
+        <p class="font-bold text-lg mb-1">Schedule a Site Visit in Boiceville</p>
+        <p class="text-green-200 text-sm">On-site assessment — not a phone estimate. We walk the property with you.</p>
+      </div>
+      <a href="tel:+18454980208" class="inline-flex items-center gap-2 bg-white text-[#1a3c1a] font-bold px-5 py-3 rounded hover:bg-green-100 transition-colors text-sm whitespace-nowrap flex-shrink-0">
+        <svg class="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/></svg>
+        (845) 754-8242
+      </a>
+    </div>
+
+    <FAQSection items={faqs} />
+
+    <div class="border border-gray-200 rounded-lg p-5 my-10">
+      <h3 class="font-semibold text-[#1a3c1a] mb-3 text-sm uppercase tracking-wide">Other Ulster County Communities We Serve</h3>
+      <div class="flex flex-wrap gap-3 mb-4">
+        <a href="/locations/ulster-county-ny/shokan" class="text-sm text-[#2d5a2d] hover:underline">Shokan</a>
+        <a href="/locations/ulster-county-ny/west-shokan" class="text-sm text-[#2d5a2d] hover:underline">West Shokan</a>
+        <a href="/locations/ulster-county-ny/phoenicia" class="text-sm text-[#2d5a2d] hover:underline">Phoenicia</a>
+        <a href="/locations/ulster-county-ny/woodstock" class="text-sm text-[#2d5a2d] hover:underline">Woodstock</a>
+        <a href="/locations/ulster-county-ny" class="text-sm text-[#2d5a2d] hover:underline font-semibold">View all Ulster County towns →</a>
+      </div>
+      <div>
+        <p class="text-xs text-gray-500 uppercase tracking-wide mb-2">Also Serving Nearby Counties</p>
+        <div class="flex flex-wrap gap-3">
+          <a href="/locations/sullivan-county-ny" class="text-sm text-[#2d5a2d] hover:underline">Sullivan County, NY</a>
+          <a href="/locations/orange-county-ny" class="text-sm text-[#2d5a2d] hover:underline">Orange County, NY</a>
+        </div>
+      </div>
+    </div>
+
+    <EstimateForm variant="b2c" />
+  </article>
+</LocationLayout>

@@ -1,0 +1,50 @@
+---
+// CallButton.astro
+// ─── SINGLE SOURCE OF TRUTH FOR ALL CALL CTAs ────────────────────────────────
+//
+// ALWAYS dials:    phone.trackingTel  (+18454980208 — GHL tracking)
+// ALWAYS displays: phone.display      ((845) 754-8242 — the real visible number)
+//
+// ⚠️ NEVER change href to phone.displayTel — that bypasses GHL call tracking.
+// ⚠️ NEVER put phone.trackingTel in visible text or schema.
+//
+// USAGE:
+//   <CallButton class="inline-flex items-center gap-2 bg-[#1a3c1a] text-white ..." />
+//   <CallButton label="Call for a Free Quote" class="..." />
+//
+// Props:
+//   class      — Tailwind classes for styling (applied to the <a> element)
+//   label      — Override visible text (default: "Call {phone.display}")
+//   iconSize   — SVG size class (default: "w-5 h-5")
+//   showIcon   — Whether to render the phone icon (default: true)
+// ─────────────────────────────────────────────────────────────────────────────
+
+import { phone } from '../../data/client.config';
+
+interface Props {
+  class?:    string;
+  label?:    string;
+  iconSize?: string;
+  showIcon?: boolean;
+}
+
+const {
+  class:    className = '',
+  label     = `Call ${phone.display}`,
+  iconSize  = 'w-5 h-5',
+  showIcon  = true,
+} = Astro.props;
+---
+
+<a
+  href={`tel:${phone.trackingTel}`}
+  aria-label={`Call ${phone.display}`}
+  class={className}
+>
+  {showIcon && (
+    <svg class={`${iconSize} flex-shrink-0`} fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+      <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
+    </svg>
+  )}
+  {label}
+</a>

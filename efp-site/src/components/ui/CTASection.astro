@@ -4,7 +4,7 @@
 // Phone number large and prominent. Secondary form link below.
 // variant: 'b2c' (default) | 'b2b'
 
-import { business, cta } from '../../data/client.config';
+import { business, cta, phone } from '../../data/client.config';
 
 interface Props {
   variant?: 'b2c' | 'b2b';
@@ -45,7 +45,10 @@ const defaultSubtext = variant === 'b2b'
       {business.phone}
     </a>
 
-    <p class="text-green-300 text-sm mb-6 block">{activeCta.primary.label}</p>
+    <p class="text-green-300 text-sm mb-1 block">{activeCta.primary.label}</p>
+    <p class="mb-6">
+      <a href={`tel:${phone.trackingTel}`} class="text-green-400 hover:text-white text-sm transition-colors">{phone.display}</a>
+    </p>
 
     <!-- Secondary CTA — form link -->
     <div>

@@ -6,11 +6,11 @@ import CTASection from '../components/ui/CTASection.astro';
 import { buildTitle, buildCanonical, buildDescription } from '../lib/seo';
 import { business } from '../data/client.config';
 
-const title = buildTitle("About Environmental Forest Products — Since 1991");
+const title = buildTitle("About EFP — Certified Forestry Consulting Since 1991");
 const description = buildDescription(
-  "Environmental Forest Products has provided certified forestry consulting in the Tri-State area since 1991. " +
-  "Henry Kowalec and his team bring nearly 100 years of combined forestry experience to timber harvesting, " +
-  "480-a management plans, land clearing, and woodland management across Sullivan, Orange, and Ulster counties."
+  "Henry Kowalec founded Environmental Forest Products in 1991. " +
+  "Certified consulting forester serving Sullivan, Orange, and Ulster counties. " +
+  "Independent — no ties to timber buyers."
 );
 const canonicalUrl = buildCanonical("/about");
 
@@ -48,7 +48,7 @@ const clientTypes = [
     subtitle="Certified forestry consulting in the Tri-State area since 1991"
   />
 
-  <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+  <article class="max-w-4xl mx-auto my-8 sm:my-10 px-8 sm:px-12 py-10 bg-white rounded-2xl shadow-md ring-1 ring-gray-200">
 
     <!-- Henry photo + bio -->
     <div class="flex flex-col sm:flex-row gap-8 sm:gap-12 items-start mb-14">
@@ -67,7 +67,7 @@ const clientTypes = [
           <p class="text-gray-600 text-xs mt-0.5">Consulting Forester</p>
           <p class="text-gray-600 text-xs">Environmental Forest Products</p>
           <p class="text-gray-600 text-xs mt-1">Serving the Tri-State area since 1991</p>
-          <a href="tel:+18457548242" class="block mt-2 text-[#2d5a2d] font-semibold text-xs hover:underline">
+          <a href="tel:+18454980208" class="block mt-2 text-[#2d5a2d] font-semibold text-xs hover:underline">
             (845) 754-8242
           </a>
           <a href="mailto:henry@eforestproducts.com" class="block mt-1 text-[#2d5a2d] text-xs hover:underline">

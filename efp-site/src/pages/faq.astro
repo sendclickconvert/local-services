@@ -1,0 +1,175 @@
+---
+// pages/faq.astro — Standalone FAQ hub page
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CTASection from '../components/ui/CTASection.astro';
+import { buildTitle, buildCanonical, buildDescription } from '../lib/seo';
+import { business, phone } from '../data/client.config';
+
+const title = buildTitle("Frequently Asked Questions");
+const description = buildDescription(
+  "Answers to common questions about timber harvesting, 480-a Forest Tax Law, land clearing, " +
+  "woodlot management, and stump grinding in Sullivan, Orange, and Ulster counties, NY."
+);
+const canonicalUrl = buildCanonical("/faq");
+
+const faqGroups = [
+  {
+    heading: "Timber Harvesting & Valuation",
+    faqs: [
+      {
+        q: "How much do loggers pay landowners per acre in New York?",
+        a: "Timber payments vary based on species, volume, and market conditions. In New York, landowners typically receive $500 to $2,000+ per acre for timber harvests, depending on species quality and stand density. An on-site timber appraisal from a certified consulting forester is the only reliable way to know what your timber is worth at current market prices.",
+      },
+      {
+        q: "What trees are worth money for logging in New York?",
+        a: "High-value species in the Hudson Valley and Catskills include black cherry, red oak, sugar maple, white ash, hard maple, and black walnut. White pine and other softwoods also have commercial value depending on mill demand. A forester will identify which trees are harvest-ready and what the local market is paying for each species.",
+      },
+      {
+        q: "Can I sell my timber without having a logger clear-cut everything?",
+        a: "Yes. Selective timber harvesting — removing only mature or high-value trees while leaving the forest structure intact — is the standard professional approach. Henry Kowalec designs harvests that improve long-term forest health, not strip the land. Clear-cutting is rarely appropriate for private landowners in the Hudson Valley.",
+      },
+      {
+        q: "Do you buy standing timber directly from landowners?",
+        a: "Yes. Environmental Forest Products purchases standing timber outright, manages all harvesting operations, and handles timber marketing. We also provide independent timber appraisals if you want a professional valuation before accepting any offer — that way you know whether what you're being offered is competitive.",
+      },
+      {
+        q: "How long does a timber harvest take?",
+        a: "Timeline depends on the size of the harvest area, the volume of timber, access conditions, and weather. A selective harvest on a 10–20 acre woodlot might take 1–3 weeks. Larger operations take longer. Henry provides a project-specific timeline estimate after the site visit.",
+      },
+    ],
+  },
+  {
+    heading: "480-a Forest Tax Law",
+    faqs: [
+      {
+        q: "What is New York's 480-a Forest Tax Law?",
+        a: "New York's 480-a program allows landowners with 50 or more contiguous acres of qualifying woodland to apply for a property and school tax exemption of up to 80% on enrolled acreage. In exchange, the landowner commits to a 10-year forest management plan prepared by a certified consulting forester and approved by the NYS Department of Environmental Conservation.",
+      },
+      {
+        q: "Does my property qualify for 480-a?",
+        a: "To qualify, you generally need 50+ contiguous acres of forest land in New York State, and the forest must meet certain stocking and composition standards. The land cannot be primarily used for agricultural or commercial purposes. A site visit with Henry Kowalec is the most reliable way to determine eligibility — call (845) 754-8242 to schedule one.",
+      },
+      {
+        q: "How much can 480-a save me in property taxes?",
+        a: "The savings depend on your assessed value, school tax rate, and enrolled acreage. Many landowners in Sullivan, Orange, and Ulster counties see annual tax savings of $1,000 to $10,000 or more depending on acreage and local tax rates. The savings compound over the 10-year enrollment period. Henry can estimate your potential savings during the eligibility review.",
+      },
+      {
+        q: "Who writes the 480-a management plan?",
+        a: "The management plan must be written by a certified consulting forester and approved by the NYS DEC. Henry Kowalec is certified to write these plans for properties in Sullivan, Orange, and Ulster counties and across the region. He handles the full process from eligibility assessment through DEC submission and annual compliance guidance.",
+      },
+    ],
+  },
+  {
+    heading: "Land Clearing",
+    faqs: [
+      {
+        q: "How much does land clearing cost per acre in New York?",
+        a: "Land clearing costs $1,200 to $6,000+ per acre depending on vegetation density, tree size, terrain, clearing method, and whether stump removal is included. Forestry mulching on light brush runs $1,500–$3,000/acre. Full clearing with large hardwoods, stump extraction, and debris hauling can exceed $5,000/acre. An on-site assessment is required for accurate pricing.",
+      },
+      {
+        q: "What's the difference between forestry mulching and conventional land clearing?",
+        a: "Forestry mulching uses a single machine to grind trees, brush, and vegetation into a natural mulch layer that stays on-site. It's faster, eliminates hauling costs, and is ideal for properties that don't require full stump removal or deep grading. Conventional clearing uses excavators and trucks to remove all material and is necessary when the site needs stumps pulled and soil regraded for construction.",
+      },
+      {
+        q: "Do I need a permit to clear land in New York?",
+        a: "It depends on what you're clearing and where. Projects that disturb more than one acre may require a SPDES stormwater permit. Clearing within 100 feet of a regulated wetland requires a DEC permit under Article 24. Local municipalities may also have tree removal ordinances. EFP advises clients on permit requirements during the site assessment.",
+      },
+    ],
+  },
+  {
+    heading: "Stump Grinding & Tree Work",
+    faqs: [
+      {
+        q: "How much does stump grinding cost?",
+        a: "Stump grinding is typically priced per stump based on diameter, usually $100 to $400 per stump depending on size and accessibility. Per-acre pricing is available for properties with many stumps — typically $800 to $2,000 per acre depending on stump count and size. Scheduling stump grinding in the same visit as tree removal or land clearing is more cost-effective than a separate mobilization.",
+      },
+      {
+        q: "What is the difference between stump grinding and stump removal?",
+        a: "Stump grinding uses a mechanical grinder to reduce the stump to wood chips flush with or slightly below ground level — the root system remains but decomposes over time. Stump removal extracts the full root ball using an excavator. Grinding is sufficient for most landscaping, pasture, and general land management. Full stump removal is necessary for building pads, driveways, and construction footprints.",
+      },
+    ],
+  },
+  {
+    heading: "General & Service Area",
+    faqs: [
+      {
+        q: "What counties do you serve?",
+        a: "Our primary service area covers Sullivan County, Orange County, and Ulster County in New York. We also serve Pike County and Wayne County in Pennsylvania, and Sussex County in New Jersey. For large-scale timber harvesting and forestry consulting projects, Henry will travel beyond these counties — call to discuss.",
+      },
+      {
+        q: "Do you work with commercial developers and contractors, or only private landowners?",
+        a: "Both. EFP works with private landowners (the majority of our clients), residential developers, commercial contractors, conservation organizations, and municipalities. The approach is the same: site assessment first, then a plan tailored to the property's conditions and the owner's objectives.",
+      },
+      {
+        q: "Is the initial site visit really free?",
+        a: "Yes. The initial on-site assessment — where Henry walks your property to evaluate conditions and discuss your goals — is provided at no charge. You receive a written proposal following the visit. There is no obligation to proceed, and Henry does not charge a consulting fee for the initial visit.",
+      },
+    ],
+  },
+];
+
+const allFaqs = faqGroups.flatMap(g => g.faqs.map(faq => ({
+  "@type": "Question",
+  "name": faq.q,
+  "acceptedAnswer": { "@type": "Answer", "text": faq.a },
+})));
+---
+
+<BaseLayout title={title} description={description} canonicalUrl={canonicalUrl}>
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": allFaqs,
+  })} />
+
+  <!-- Header -->
+  <section class="bg-[#1a3c1a] text-white py-14 sm:py-16">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h1 class="text-3xl sm:text-4xl font-bold mb-3">Frequently Asked Questions</h1>
+      <p class="text-green-200 text-lg">
+        Answers about timber harvesting, 480-a, land clearing, and forestry services in
+        Sullivan, Orange, and Ulster counties, NY.
+      </p>
+    </div>
+  </section>
+
+  <!-- FAQ content -->
+  <section class="py-14 sm:py-20 bg-white">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      {faqGroups.map(group => (
+        <div class="mb-14">
+          <h2 class="text-xl font-bold text-[#1a3c1a] mb-7 pb-3 border-b border-gray-200">
+            {group.heading}
+          </h2>
+          <div class="space-y-8">
+            {group.faqs.map(faq => (
+              <div>
+                <h3 class="text-base font-semibold text-[#1a3c1a] mb-2">{faq.q}</h3>
+                <p class="text-gray-700 leading-relaxed text-sm">{faq.a}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
+
+      <div class="bg-[#1a3c1a] text-white rounded-xl p-8 mt-6 text-center">
+        <h2 class="text-xl font-bold mb-3">Have a Question Not Listed Here?</h2>
+        <p class="text-green-200 text-sm mb-5">
+          Call Henry directly or submit a request — he responds to all inquiries personally.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-3 justify-center">
+          <a href={`tel:${phone.trackingTel}`} class="inline-flex items-center justify-center gap-2 bg-white text-[#1a3c1a] font-bold px-6 py-3 rounded-lg hover:bg-green-100 transition-colors">
+            Call {business.phone}
+          </a>
+          <a href="/estimate" class="inline-flex items-center justify-center gap-2 border border-white text-white font-semibold px-6 py-3 rounded-lg hover:bg-white/10 transition-colors">
+            Request a Free Assessment
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <CTASection variant="b2c" />
+</BaseLayout>

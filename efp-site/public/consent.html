@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact &amp; SMS Consent | Environmental Forest Products</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: Georgia, 'Times New Roman', serif; background: #f4f1ec; color: #1a2e1a; font-size: 16px; line-height: 1.6; }
+    a { color: #2d5a2d; }
+    a:hover { color: #1a3c1a; }
+
+    header { background: #1a3c1a; padding: 18px 24px; display: flex; align-items: center; gap: 14px; }
+    header svg { width: 36px; height: 36px; flex-shrink: 0; }
+    .header-text { color: #fff; }
+    .header-text strong { display: block; font-size: 1.15rem; letter-spacing: 0.02em; }
+    .header-text span { font-size: 0.8rem; color: #a8c5a8; }
+
+    .container { max-width: 760px; margin: 0 auto; padding: 32px 20px 60px; }
+
+    h1 { font-size: 1.6rem; color: #1a3c1a; margin-bottom: 8px; }
+    .subtitle { color: #4a6741; font-size: 0.95rem; margin-bottom: 28px; }
+
+    .card { background: #fff; border: 1px solid #d4e4c8; border-radius: 8px; padding: 28px; margin-bottom: 28px; }
+
+    label { display: block; font-size: 0.88rem; font-weight: bold; color: #2d4a2d; margin-bottom: 4px; margin-top: 14px; font-family: Arial, sans-serif; }
+    label:first-child { margin-top: 0; }
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    select,
+    textarea { width: 100%; padding: 9px 12px; border: 1px solid #b8ceb4; border-radius: 4px; font-size: 0.95rem; font-family: Arial, sans-serif; color: #1a2e1a; background: #fafdfa; }
+    input:focus, select:focus, textarea:focus { outline: 2px solid #2d5a2d; border-color: #2d5a2d; }
+    textarea { resize: vertical; min-height: 100px; }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    @media (max-width: 520px) { .form-row { grid-template-columns: 1fr; } }
+
+    .consent-block { margin-top: 22px; padding-top: 18px; border-top: 1px solid #e0ead8; }
+    .consent-block h3 { font-size: 0.9rem; color: #2d4a2d; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 14px; font-family: Arial, sans-serif; }
+    .checkbox-label { display: flex; align-items: flex-start; gap: 10px; font-size: 0.87rem; font-family: Arial, sans-serif; color: #333; line-height: 1.5; cursor: pointer; margin-bottom: 14px; font-weight: normal; }
+    .checkbox-label input[type="checkbox"] { margin-top: 3px; flex-shrink: 0; width: 16px; height: 16px; accent-color: #2d5a2d; }
+
+    .consent-note { font-size: 0.8rem; color: #5a6e5a; margin-top: 14px; line-height: 1.55; font-family: Arial, sans-serif; }
+    .consent-note a { font-size: inherit; }
+
+    button[type="submit"] { margin-top: 22px; width: 100%; padding: 13px; background: #2d5a2d; color: #fff; border: none; border-radius: 5px; font-size: 1rem; font-family: Arial, sans-serif; font-weight: bold; cursor: pointer; letter-spacing: 0.03em; }
+    button[type="submit"]:hover { background: #1a3c1a; }
+
+    .section-divider { border: none; border-top: 2px solid #c8dcc0; margin: 40px 0; }
+
+    h2 { font-size: 1.3rem; color: #1a3c1a; margin-bottom: 6px; margin-top: 32px; }
+    h2:first-child { margin-top: 0; }
+    h3.policy-h3 { font-size: 1.05rem; color: #2d5a2d; margin-top: 22px; margin-bottom: 6px; }
+    p.policy-p { font-size: 0.9rem; color: #333; margin-bottom: 10px; font-family: Arial, sans-serif; line-height: 1.65; }
+    ul.policy-ul { margin: 8px 0 12px 20px; font-size: 0.9rem; color: #333; font-family: Arial, sans-serif; line-height: 1.65; }
+    ul.policy-ul li { margin-bottom: 5px; }
+
+    footer.site-footer { background: #1a3c1a; color: #a8c5a8; text-align: center; padding: 22px 20px; font-size: 0.82rem; font-family: Arial, sans-serif; line-height: 1.8; }
+    footer.site-footer strong { color: #fff; }
+    footer.site-footer a { color: #c5deb8; font-size: inherit; }
+    footer.site-footer a:hover { color: #fff; }
+  </style>
+</head>
+<body>
+
+<header>
+  <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <circle cx="18" cy="18" r="18" fill="#2d5a2d"/>
+    <path d="M18 6 L11 19 h4 v9 h6 v-9 h4 Z" fill="#a8d8a8"/>
+  </svg>
+  <div class="header-text">
+    <strong>Environmental Forest Products</strong>
+    <span>Certified Forestry Consulting &mdash; Westbrookville, NY</span>
+  </div>
+</header>
+
+<div class="container">
+
+  <h1>Contact &amp; Quote Request</h1>
+  <p class="subtitle">Serving Sullivan, Orange, Ulster counties and the tri-state region. Complete the form below to request a free consultation.</p>
+
+  <div class="card">
+    <form method="post" action="/contact" novalidate>
+
+      <div class="form-row">
+        <div>
+          <label for="first_name">First Name <span style="color:#c0392b">*</span></label>
+          <input type="text" id="first_name" name="first_name" required autocomplete="given-name" />
+        </div>
+        <div>
+          <label for="last_name">Last Name</label>
+          <input type="text" id="last_name" name="last_name" autocomplete="family-name" />
+        </div>
+      </div>
+
+      <label for="phone">Phone Number <span style="color:#c0392b">*</span></label>
+      <input type="tel" id="phone" name="phone" required autocomplete="tel" placeholder="(845) 000-0000" />
+
+      <label for="email">Email Address <span style="color:#c0392b">*</span></label>
+      <input type="email" id="email" name="email" required autocomplete="email" />
+
+      <label for="service">Service Needed</label>
+      <select id="service" name="service">
+        <option value="" disabled selected>Select a service&hellip;</option>
+        <option value="timber-harvesting">Timber Harvesting</option>
+        <option value="land-clearing">Land Clearing</option>
+        <option value="woodlot-management">Woodlot Management</option>
+        <option value="forestry-services">Forestry Services (General)</option>
+        <option value="standing-timber">Standing Timber Purchase / Appraisal</option>
+        <option value="other">Other</option>
+      </select>
+
+      <label for="property_address">Property Address</label>
+      <input type="text" id="property_address" name="property_address" placeholder="Street, Town, State, ZIP" autocomplete="street-address" />
+
+      <label for="message">Message / Project Description</label>
+      <textarea id="message" name="message" placeholder="Describe your property, goals, or questions&hellip;"></textarea>
+
+      <div class="consent-block">
+        <h3>Text Message Consent &mdash; Environmental Forest Products</h3>
+
+        <div style="font-size:0.85rem;font-family:Arial,sans-serif;color:#333;background:#f6faf4;border:1px solid #c8dcc0;border-radius:5px;padding:12px 14px;margin-bottom:16px;line-height:1.7;">
+          <strong>Business:</strong> Environmental Forest Products<br />
+          <strong>Message Types:</strong> Quote follow-ups, appointment coordination, project updates, requested information, and service-related communications.<br />
+          <strong>Message Frequency:</strong> Message frequency varies.<br />
+          <strong>Message &amp; Data Rates:</strong> Msg &amp; data rates may apply. Contact your carrier for details.<br />
+          <strong>Opt-Out:</strong> Reply STOP at any time to unsubscribe. You will receive one confirmation, then no further messages.<br />
+          <strong>Help:</strong> Reply HELP for assistance or call (845) 754-8242.
+        </div>
+
+        <label class="checkbox-label">
+          <input type="checkbox" name="sms_transactional_consent" value="yes" autocomplete="off" />
+          <span>I consent to receive non-marketing text messages from Environmental Forest Products about my inquiry, quote request, appointment coordination, project updates, and requested information. Message frequency varies. Msg &amp; data rates may apply. Reply STOP to opt out. Reply HELP for help. Consent is not required to receive services.</span>
+        </label>
+
+        <p class="consent-note">
+          This option is voluntary and not required to request a consultation or receive services.
+          We will never sell your information or share SMS opt-in data with third parties.
+        </p>
+      </div>
+
+      <button type="submit">Submit</button>
+
+      <p style="text-align:center;font-size:0.8rem;color:#888;margin-top:12px;font-family:Arial,sans-serif;">
+        <a href="#privacy-policy">Privacy Policy</a> &nbsp;|&nbsp; <a href="#terms">Terms of Service</a>
+      </p>
+
+    </form>
+  </div>
+
+  <hr class="section-divider" id="privacy-policy" />
+
+  <div class="card">
+    <h2>Privacy Policy</h2>
+    <p class="policy-p"><strong>Last Updated:</strong> April 21, 2026 &nbsp;&nbsp; <strong>Business:</strong> Environmental Forest Products, Westbrookville, NY 12785 &nbsp;&nbsp; <strong>Phone:</strong> (845) 754-8242 &nbsp;&nbsp; <strong>Email:</strong> henry@eforestproducts.com</p>
+
+    <h3 class="policy-h3">What Information We Collect</h3>
+    <p class="policy-p">We collect information you provide directly, including your name, phone number, email address, property address, county, and any project details you share through our contact form or by contacting us directly. We also collect anonymous aggregate website usage data through Google Analytics 4.</p>
+
+    <h3 class="policy-h3">How Data Is Used</h3>
+    <p class="policy-p">Information you provide is used exclusively to respond to your inquiry, schedule site assessments and consultations, send follow-up communications related to your request, and send SMS messages where you have explicitly opted in. We do not use your contact information for any purpose unrelated to your inquiry with Environmental Forest Products.</p>
+
+    <h3 class="policy-h3">SMS Opt-In Details</h3>
+    <p class="policy-p">You may opt in to receive SMS messages by checking one or both consent boxes on our contact form. <strong>SMS opt-in data and phone numbers collected through our opt-in process will not be shared with any third party under any circumstances.</strong> Consent is not required to receive services. You may opt out at any time by replying STOP. Reply HELP for help or call (845) 754-8242.</p>
+
+    <h3 class="policy-h3">No Sharing of SMS Opt-In Data</h3>
+    <p class="policy-p"><strong>We will not share, sell, rent, or disclose SMS opt-in data or phone numbers to third parties for any purpose, including marketing.</strong> Contact data is transmitted to our third-party CRM platform solely for the purpose of managing your inquiry and direct communications with you.</p>
+
+    <h3 class="policy-h3">Cookie &amp; Tracking Information</h3>
+    <p class="policy-p">This website uses Google Analytics 4 to collect anonymous, aggregated traffic data. This data does not identify you personally. You may disable cookies through your browser settings or opt out via the <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener noreferrer">Google Analytics Opt-out Add-on</a>. We do not use advertising cookies or cross-site tracking.</p>
+
+    <h3 class="policy-h3">Data Security Practices</h3>
+    <p class="policy-p">All data transmitted between your browser and this website is encrypted via HTTPS/TLS. We implement reasonable technical and organizational safeguards to protect your information against unauthorized access, alteration, disclosure, or destruction. No method of electronic transmission is 100% secure.</p>
+
+    <h3 class="policy-h3">User Rights — Unsubscribe, Update, Delete</h3>
+    <p class="policy-p">You have the right to request access to, correction of, or deletion of your personal information at any time. To opt out of SMS messages, reply STOP to any message. To update your contact information or request deletion of your data, contact henry@eforestproducts.com or call (845) 754-8242. We will respond to all requests within a reasonable timeframe.</p>
+
+    <h3 class="policy-h3">Data Retention</h3>
+    <p class="policy-p">We retain your contact information for as long as necessary to complete the business relationship or as required by applicable law.</p>
+
+    <h3 class="policy-h3">Contact</h3>
+    <p class="policy-p">Environmental Forest Products &mdash; Westbrookville, NY 12785 &mdash; (845) 754-8242 &mdash; henry@eforestproducts.com</p>
+  </div>
+
+  <hr class="section-divider" id="terms" />
+
+  <div class="card">
+    <h2>Terms of Service</h2>
+    <p class="policy-p"><strong>Last Updated:</strong> April 21, 2026</p>
+
+    <h3 class="policy-h3">SMS Program Description &amp; Messaging Use Cases</h3>
+    <p class="policy-p">Environmental Forest Products operates an SMS messaging program for customers and leads who have explicitly opted in via our website contact form. The program sends <strong>non-marketing, service-related messages only</strong>, including quote follow-ups, appointment confirmations, scheduling coordination, project status updates, and responses to requested information. No promotional or marketing messages are sent through this program.</p>
+
+    <h3 class="policy-h3">How to Opt Out — Text STOP</h3>
+    <p class="policy-p">To stop receiving SMS messages, reply <strong>STOP</strong> to any message at any time. After texting STOP you will receive one final confirmation message and no further SMS messages of that type will be sent. Opting out does not affect your ability to request or receive services from Environmental Forest Products.</p>
+
+    <h3 class="policy-h3">Support Contact Information</h3>
+    <p class="policy-p">For SMS help, reply <strong>HELP</strong> to any message. You may also contact us directly at: (845) 754-8242 &nbsp;|&nbsp; henry@eforestproducts.com &nbsp;|&nbsp; Environmental Forest Products, Westbrookville, NY 12785.</p>
+
+    <h3 class="policy-h3">Message &amp; Data Rates Disclosure</h3>
+    <p class="policy-p">Standard message and data rates may apply to all SMS messages sent and received. Message frequency varies. Contact your wireless carrier for details about your messaging plan.</p>
+
+    <h3 class="policy-h3">Carrier Liability Disclaimer</h3>
+    <p class="policy-p">Wireless carriers are not liable for delayed or undelivered messages. Environmental Forest Products is solely responsible for the content of all SMS messages sent through this program.</p>
+
+    <h3 class="policy-h3">Age Restriction (18+)</h3>
+    <p class="policy-p">Our SMS program is intended for users 18 years of age or older. By opting in to receive SMS messages you confirm that you are at least 18 years old.</p>
+
+    <h3 class="policy-h3">Privacy Policy</h3>
+    <p class="policy-p">Your use of this form and our SMS program is also governed by our <a href="#privacy-policy">Privacy Policy</a> above, which describes how we collect, use, and protect your information. SMS opt-in data will not be shared with third parties.</p>
+
+    <h3 class="policy-h3">Use of This Website</h3>
+    <p class="policy-p">This website is operated by Environmental Forest Products for informational and contact purposes. Submitting a contact form does not establish a professional consulting relationship. A formal engagement begins only when both parties agree in writing to a defined scope of work.</p>
+
+    <h3 class="policy-h3">Governing Law</h3>
+    <p class="policy-p">These terms are governed by the laws of the State of New York. Any disputes shall be resolved in the courts of New York State.</p>
+
+    <h3 class="policy-h3">Contact</h3>
+    <p class="policy-p">Environmental Forest Products &mdash; Westbrookville, NY 12785 &mdash; (845) 754-8242 &mdash; henry@eforestproducts.com</p>
+  </div>
+
+</div>
+
+<footer class="site-footer">
+  <strong>Environmental Forest Products</strong><br />
+  (845) 754-8242 &nbsp;&middot;&nbsp; henry@eforestproducts.com &nbsp;&middot;&nbsp; Westbrookville, NY 12785<br />
+  <a href="#privacy-policy">Privacy Policy</a> &nbsp;&middot;&nbsp; <a href="#terms">Terms of Service</a>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,137 @@
+---
+// Bearsville, Ulster County — individual static location page
+import LocationLayout from '../../../layouts/LocationLayout.astro';
+import PageHero from '../../../components/ui/PageHero.astro';
+import Breadcrumb from '../../../components/ui/Breadcrumb.astro';
+import FAQSection from '../../../components/ui/FAQSection.astro';
+import KeyTakeaway from '../../../components/ui/KeyTakeaway.astro';
+import AuthorByline from '../../../components/ui/AuthorByline.astro';
+import EstimateForm from '../../../components/forms/EstimateForm.astro';
+import ServiceSchema from '../../../components/schema/ServiceSchema.astro';
+import FAQSchema from '../../../components/schema/FAQSchema.astro';
+import { services } from '../../../data/services';
+
+const title       = "Forestry Consulting — Bearsville, NY | EFP";
+const description = "Certified forestry consulting in Bearsville, Ulster County. 480-a Forest Tax Law, timber harvesting, and woodlot management in the Woodstock/Catskill foothills area. Henry Kowalec, 30+ years experience. Call (845) 754-8242.";
+const canonicalUrl = "https://eforestproducts.com/locations/ulster-county-ny/bearsville";
+
+const crumbs = [
+  { label: "Home",      href: "/" },
+  { label: "Locations", href: "/locations" },
+  { label: "Ulster County, NY", href: "/locations/ulster-county-ny" },
+  { label: "Bearsville", href: "/locations/ulster-county-ny/bearsville" },
+];
+
+const faqs = [
+  { question: "Do you provide forestry consulting near Bearsville, NY?", answer: "Yes. Environmental Forest Products serves private landowners in Bearsville and throughout Ulster County. Henry Kowalec has 30+ years of hands-on forestry experience in the Woodstock area and surrounding Catskill foothills, and provides on-site assessments for all service inquiries. Call (845) 754-8242." },
+  { question: "What does a forestry site assessment in Bearsville involve?", answer: "An initial site visit covers the key questions: what species are present, what the timber volume and size-class distribution looks like, whether the property qualifies for the 480-a Forest Tax Law program, and what management approach makes the most sense given the landowner's objectives. Visits typically take 1–3 hours depending on parcel size and terrain." },
+  { question: "Does my Bearsville property qualify for 480-a Forest Tax Law enrollment?", answer: "New York's 480-a program generally requires 50 or more contiguous acres of qualifying woodland. The Bearsville area in the Town of Woodstock has properties with significant forested acreage that may qualify — particularly on the upland terrain above the Sawkill Creek drainage. An on-site assessment is the only way to confirm eligibility for a specific parcel." },
+  { question: "Can you appraise the timber value on my Bearsville property?", answer: "Yes. A timber appraisal identifies species, diameter, volume, and current stumpage market value. The mixed forest in the Bearsville area — sugar maple, red oak, red maple, and black cherry on the upland slopes — holds timber value that is frequently underestimated by landowners who have never had an independent assessment." },
+  { question: "Do you handle woodlot management near Bearsville?", answer: "Yes. Long-term woodlot management planning is available for Bearsville and the surrounding Town of Woodstock. A DEC-approved forest management plan is required for 480-a enrollment and is also useful for landowners who want to improve long-term timber quality and forest health. Henry Kowalec prepares these plans and manages the full DEC certification process." },
+];
+---
+
+<LocationLayout title={title} description={description} canonicalUrl={canonicalUrl}>
+  <ServiceSchema
+    pageType="location"
+    serviceName="Forestry Consulting — Bearsville, Ulster County"
+    description={description}
+    url={canonicalUrl}
+    areaServed={["Bearsville, NY", "Ulster County, NY"]}
+    crumbs={crumbs}
+  />
+  <FAQSchema items={faqs} />
+  <Breadcrumb crumbs={crumbs} />
+
+  <PageHero
+    title="Forestry Consulting in Bearsville, NY"
+    subtitle="Serving Bearsville and the Woodstock/Catskill foothills — certified forestry for private landowners"
+  />
+
+  <article class="max-w-4xl mx-auto my-8 sm:my-10 px-8 sm:px-12 py-10 bg-white rounded-2xl shadow-md ring-1 ring-gray-200">
+
+    <KeyTakeaway
+      text="Environmental Forest Products provides certified forestry consulting for Bearsville area landowners. Henry Kowalec brings 30+ years of hands-on experience in the Woodstock area and the Ulster County Catskill foothills — on-site assessments for 480-a enrollment, timber value, and long-term woodland management."
+    />
+
+    <AuthorByline />
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Bearsville's Woodland and Forest Terrain</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Bearsville is a hamlet in the Town of Woodstock, situated along the Sawkill Creek drainage at the transition between the lower Woodstock valley and the Catskill Mountain terrain rising to the northwest. The forest here is a transitional mixed hardwood type — sugar maple and red oak on the upland slopes, red maple and black birch in the valley drainages, with black cherry present wherever past canopy disturbance has created regeneration opportunities. This is a species mix with real timber market value.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      The Woodstock/Bearsville area has a significant second-home and arts community presence, and many landowners hold woodland acreage that has never been formally assessed. Properties with sufficient contiguous forested acreage may qualify for the 480-a Forest Tax Law program — a meaningful annual tax benefit that most landowners in this area have never evaluated.
+    </p>
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Local Forestry Context — Bearsville</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      The Town of Woodstock has an active real estate market and a landowner base that tends to be conservation-minded — interested in managing their woodland responsibly over the long term rather than maximizing short-term extraction. That orientation aligns well with a managed forestry approach: a properly written 480-a management plan and a carefully timed selective harvest can improve both long-term forest health and immediate financial return for the landowner.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Environmental Forest Products serves Bearsville landowners for timber appraisals, 480-a enrollment, competitive timber sale management, and long-term management planning. Every engagement starts with an on-site assessment.
+    </p>
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Services Available Near Bearsville</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
+      {services.map(svc => (
+        <a href={'/services/' + svc.slug} class="flex items-start gap-3 p-4 border border-gray-200 rounded-lg hover:border-[#2d5a2d] hover:bg-green-50 transition-colors group">
+          <span class="text-2xl flex-shrink-0" aria-hidden="true">{svc.icon}</span>
+          <div>
+            <div class="font-semibold text-[#1a3c1a] group-hover:text-[#2d5a2d] text-sm">{svc.name}</div>
+            <div class="text-xs text-gray-500 mt-0.5 leading-snug">{svc.excerpt.split('—')[0].trim()}</div>
+          </div>
+        </a>
+      ))}
+    </div>
+
+    <div class="bg-green-50 border border-green-200 rounded-lg p-6 my-10">
+      <h3 class="font-bold text-[#1a3c1a] text-lg mb-2">480-a Forest Tax Law — Bearsville Area Properties</h3>
+      <p class="text-gray-700 text-sm mb-3">
+        New York's 480-a Forest Tax Law program provides a property and school tax exemption of up to 80% on enrolled woodland acreage for qualifying landowners with 50 or more contiguous acres of qualifying forest. Properties in the Bearsville area of the Town of Woodstock with the right acreage and forest character may qualify. Environmental Forest Products prepares the required DEC-approved management plans and manages the full enrollment process.
+      </p>
+      <a href="/services/480a-forest-tax-law" class="text-[#2d5a2d] font-semibold text-sm underline hover:text-[#1a3c1a]">Learn about 480-a enrollment for Ulster County landowners →</a>
+    </div>
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Why Bearsville Landowners Work With EFP</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Henry Kowalec has conducted timber assessments, harvest operations, and land management work across Ulster County for more than 30 years — including on properties with the Sawkill Creek drainage terrain in the Town of Woodstock and the mixed sugar maple and red oak forest composition of the Catskill foothills that characterizes the Bearsville area. That accumulated site-specific experience means he can evaluate a property in Bearsville with the context of hundreds of comparable assessments in this same region.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Environmental Forest Products is headquartered in Westbrookville, Sullivan County. When Henry walks your property in Bearsville, he brings direct familiarity with Ulster County's terrain, timber markets, and 480-a program requirements.
+    </p>
+
+    <div class="bg-[#1a3c1a] text-white rounded-lg p-6 my-10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <div>
+        <p class="font-bold text-lg mb-1">Schedule a Site Visit in Bearsville</p>
+        <p class="text-green-200 text-sm">On-site assessment — not a phone estimate. We walk the property with you.</p>
+      </div>
+      <a href="tel:+18454980208" class="inline-flex items-center gap-2 bg-white text-[#1a3c1a] font-bold px-5 py-3 rounded hover:bg-green-100 transition-colors text-sm whitespace-nowrap flex-shrink-0">
+        <svg class="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/></svg>
+        (845) 754-8242
+      </a>
+    </div>
+
+    <FAQSection items={faqs} />
+
+    <div class="border border-gray-200 rounded-lg p-5 my-10">
+      <h3 class="font-semibold text-[#1a3c1a] mb-3 text-sm uppercase tracking-wide">Other Ulster County Communities We Serve</h3>
+      <div class="flex flex-wrap gap-3 mb-4">
+        <a href="/locations/ulster-county-ny/woodstock" class="text-sm text-[#2d5a2d] hover:underline">Woodstock</a>
+        <a href="/locations/ulster-county-ny/lake-hill" class="text-sm text-[#2d5a2d] hover:underline">Lake Hill</a>
+        <a href="/locations/ulster-county-ny/west-hurley" class="text-sm text-[#2d5a2d] hover:underline">West Hurley</a>
+        <a href="/locations/ulster-county-ny/phoenicia" class="text-sm text-[#2d5a2d] hover:underline">Phoenicia</a>
+        <a href="/locations/ulster-county-ny" class="text-sm text-[#2d5a2d] hover:underline font-semibold">View all Ulster County towns →</a>
+      </div>
+      <div>
+        <p class="text-xs text-gray-500 uppercase tracking-wide mb-2">Also Serving Nearby Counties</p>
+        <div class="flex flex-wrap gap-3">
+          <a href="/locations/sullivan-county-ny" class="text-sm text-[#2d5a2d] hover:underline">Sullivan County, NY</a>
+          <a href="/locations/orange-county-ny" class="text-sm text-[#2d5a2d] hover:underline">Orange County, NY</a>
+        </div>
+      </div>
+    </div>
+
+    <EstimateForm variant="b2c" />
+  </article>
+</LocationLayout>

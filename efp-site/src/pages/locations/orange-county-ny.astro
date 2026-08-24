@@ -1,0 +1,261 @@
+---
+// pages/locations/orange-county-ny.astro
+// CUSTOM — not generated from [county].astro template.
+// Orange County, NY — primary market, higher land values, diverse terrain.
+// Target: 1,600–2,000 words. 7 county-specific FAQs. #1 ranking objective.
+
+import LocationLayout from '../../layouts/LocationLayout.astro';
+import PageHero from '../../components/ui/PageHero.astro';
+import Breadcrumb from '../../components/ui/Breadcrumb.astro';
+import FAQSection from '../../components/ui/FAQSection.astro';
+import KeyTakeaway from '../../components/ui/KeyTakeaway.astro';
+import AuthorByline from '../../components/ui/AuthorByline.astro';
+import EstimateForm from '../../components/forms/EstimateForm.astro';
+import ServiceSchema from '../../components/schema/ServiceSchema.astro';
+import FAQSchema from '../../components/schema/FAQSchema.astro';
+import { buildTitle, buildCanonical, buildDescription } from '../../lib/seo';
+import { services } from '../../data/services';
+
+const title = buildTitle('Consulting Forester — Orange County, NY');
+const description = buildDescription(
+  'Consulting forester for Orange County, NY — 480-a enrollment, timber appraisals, land clearing. Shawangunks to Hudson Highlands. (845) 754-8242.'
+);
+const canonicalUrl = buildCanonical('/locations/orange-county-ny');
+
+const crumbs = [
+  { label: 'Home',      href: '/' },
+  { label: 'Locations', href: '/locations' },
+  { label: 'Orange County, NY', href: '/locations/orange-county-ny' },
+];
+
+const faqs = [
+  {
+    question: 'Does EFP provide forestry consulting throughout Orange County, NY?',
+    answer: 'Yes. Environmental Forest Products serves private woodland owners throughout Orange County — from the Warwick and Chester area in the south, through the central county communities of Goshen and Middletown, to the Hudson Highlands and Cornwall area in the north and the Delaware River corridor near Port Jervis in the west. Henry Kowalec has conducted timber appraisals, land clearing projects, and 480-a consultations on properties across the county.',
+  },
+  {
+    question: 'Can Orange County landowners qualify for the 480-a Forest Tax Law program?',
+    answer: 'Yes. Orange County properties with 50 or more contiguous acres of qualifying woodland are eligible for 480-a enrollment. Because Orange County assessed property values tend to run higher than in Sullivan County, the dollar value of the 80% property and school tax exemption is often proportionally larger for Orange County landowners. Environmental Forest Products prepares the DEC-approved management plans required for enrollment and manages the full application process.',
+  },
+  {
+    question: 'What timber species are most common on Orange County woodland properties?',
+    answer: 'Orange County\'s forest is dominated by red oak, white oak, black birch, tulip poplar, and hickory on most upland sites. Hemlock persists in the protected drainages, particularly in the Hudson Highlands and in the ravines along the Shawangunk Ridge. Tulip poplar — more common here than in Sullivan County — can reach merchantable size quickly on good sites and represents a timber value that landowners often overlook. Species composition varies significantly with elevation, soil type, and disturbance history across the county.',
+  },
+  {
+    question: 'Does EFP handle site clearing on Orange County development properties?',
+    answer: 'Yes. Land clearing for residential and commercial site preparation is part of EFP\'s service throughout Orange County. Orange County experiences active residential development pressure, particularly in the southern townships and along the Route 17 and I-87 corridors. EFP approaches every clearing project with a timber assessment first — identifying what merchantable value is present before equipment arrives, and recovering that value through a sale rather than chipping or burning trees that have real market worth.',
+  },
+  {
+    question: 'How does 480-a enrollment work differently for Orange County landowners compared to Sullivan County?',
+    answer: 'The eligibility requirements and DEC process are the same across both counties — 50+ acres of qualifying woodland, a certified forester-prepared management plan, and a 10-year commitment. The difference is in the financial calculation. Orange County assessed values tend to be higher, which means the 80% tax reduction applies to a larger base in many cases. The combination of higher land values and active school tax rates makes the annual savings figure compelling for qualifying Orange County properties.',
+  },
+  {
+    question: 'Does EFP serve the Port Jervis area and western Orange County?',
+    answer: 'Yes. The Port Jervis area and the western Orange County townships bordering Sullivan County and Pike County, PA are within the EFP service zone. The Delaware River corridor hardwood forests in Deerpark and Greenville townships share many of the same species and terrain characteristics as the Sullivan County townships directly across the county line. Henry Kowalec has worked on both sides of that border and has direct knowledge of the timber quality and market conditions in this part of the region.',
+  },
+  {
+    question: 'What does a woodland management consultation in Orange County typically cover?',
+    answer: 'An initial site assessment in Orange County covers species inventory, stand condition, timber volume and value, 480-a eligibility, and management options appropriate to the landowner\'s goals. Whether the objective is maximizing long-term timber revenue, reducing tax burden through 480-a enrollment, improving wildlife habitat, or preparing land for site development, the assessment provides the factual foundation for that decision. Call (845) 754-8242 to schedule a consultation.',
+  },
+];
+---
+
+<LocationLayout title={title} description={description} canonicalUrl={canonicalUrl}>
+  <ServiceSchema
+    pageType="location"
+    serviceName="Forestry Consulting — Orange County, NY"
+    description={description}
+    url={canonicalUrl}
+    areaServed={['Orange County, NY', 'Hudson Highlands, NY', 'Shawangunk Ridge, NY', 'Port Jervis, NY']}
+    crumbs={crumbs}
+  />
+  <FAQSchema items={faqs} />
+
+  <Breadcrumb crumbs={crumbs} />
+
+  <PageHero
+    title="Forestry Consulting in Orange County, NY"
+    subtitle="From the Shawangunk Ridge to the Hudson Highlands — serving woodland owners throughout Orange County"
+  />
+
+  <article class="max-w-4xl mx-auto my-8 sm:my-10 px-8 sm:px-12 py-10 bg-white rounded-2xl shadow-md ring-1 ring-gray-200">
+
+    <KeyTakeaway
+      text="Environmental Forest Products provides certified forestry consulting for private landowners throughout Orange County, NY. Services include 480-a Forest Tax Law enrollment, independent timber appraisals, competitive timber sale management, and land clearing with timber recovery. Henry Kowalec brings 30+ years of hands-on experience working in Orange County and the surrounding tri-state region."
+    />
+
+    <AuthorByline />
+
+    <!-- ── Orange County Terrain Overview ───────────────────── -->
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Orange County's Forest — Three Distinct Landscapes</h2>
+
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Orange County's woodland does not conform to a single type. The county spans three recognizably distinct terrain zones, each with its own forest composition, timber profile, and management context — and understanding which zone a property falls in shapes every aspect of how forestry consulting applies to it.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      In the northeast, the Hudson Highlands push the terrain toward steep, rock-dominated ridgelines with characteristic mixed hardwood and hemlock forest. Properties in the Cornwall, Highlands, and Woodbury area often include dramatic topography where conventional timber operations require careful planning around equipment access and slope conditions. The hardwood quality on well-stocked sites here can be strong — red oak and black birch are common — but it requires an experienced eye to separate the merchantable timber from the site constraints.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      The Shawangunk Ridge cuts through the northeast-to-central county and carries a distinctive forest type on its dry, quartzite spine — chestnut oak, pitch pine, and scrub oak on the exposed ridgetop, transitioning to mixed hardwood on the protected slopes below. This ridge terrain creates a sharp contrast between ridge-top sites of limited timber value and the more productive lower slopes and adjacent lowlands.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-5">
+      The central and southern county — the rolling farmland and woodland of Warwick, Chester, Goshen, and Middletown — contains the most productive agricultural-to-woodland transition landscape. Significant acreage of former farmland has reverted to forest here over the past 50–70 years, creating young-to-mature second-growth stands of red oak, white oak, black birch, tulip poplar, and hickory. These stands are increasingly entering the age range where timber management decisions matter — and where early intervention can shape the composition and quality of the forest they become.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      In the west, the Delaware River corridor and the Orange County townships adjacent to Sullivan County share the upland hardwood character of the broader Catskill foothills region. Port Jervis sits at the tri-state corner where New York, New Jersey, and Pennsylvania meet, and the forest character in the surrounding Deerpark and Greenville townships mirrors the timber country immediately north and west.
+    </p>
+
+    <!-- ── 480-a in Orange County ──────────────────────────── -->
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">480-a Forest Tax Law — Higher Values Mean Larger Savings in Orange County</h2>
+
+    <p class="text-gray-700 leading-relaxed mb-4">
+      New York's 480-a Forest Tax Law program is available to Orange County landowners who meet the same eligibility criteria that apply statewide: 50 or more contiguous acres of qualifying woodland, managed under a DEC-approved forest management plan prepared by a certified consulting forester. The program provides a property and school tax exemption of up to 80% on enrolled acreage in exchange for a 10-year management commitment.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      The reason 480-a deserves particular attention in Orange County is the assessed value differential. Orange County properties — particularly in the southern and central townships closer to the New York metropolitan area — carry assessed values that are often substantially higher than comparable acreage in Sullivan County. The 80% reduction applies to a larger tax base in these areas, which means the annual dollar savings from enrollment can be considerable for qualifying properties.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      EFP prepares the DEC-approved management plans required for 480-a enrollment and handles the full Orange County certification process — from initial eligibility assessment through plan approval and ongoing annual compliance. Learn more about the <a href="/services/480a-forest-tax-law" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">480-a enrollment process</a> or contact Henry Kowalec to discuss a specific Orange County property.
+    </p>
+
+    <!-- ── Timber Value ──────────────────────────────────────── -->
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Timber Value on Orange County Properties</h2>
+
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Orange County timber is active in regional markets, and the species mix across the county creates different buyer profiles for different areas. Red oak and white oak from the central county properties are in consistent demand. Tulip poplar — more prevalent in Orange County's lower elevations than elsewhere in the EFP service area — reaches large-diameter timber status on good sites and represents a species often undervalued by landowners who are unfamiliar with its market.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      An <a href="/services/sell-standing-timber" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">independent timber appraisal</a> is the starting point for any Orange County landowner considering a timber sale. The appraisal establishes what is actually present on the property — by species, size-class, volume, and current stumpage value — and gives the landowner an independent benchmark for evaluating any offer received. Properties that haven't been appraised in several years may be holding substantially more timber value than the most recent estimate reflects.
+    </p>
+
+    <!-- ── Land Clearing ────────────────────────────────────── -->
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Land Clearing in Orange County — Forestry-First Site Preparation</h2>
+
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Orange County experiences active residential development across much of the county — particularly in the southern and central townships, where proximity to New York City and good transportation infrastructure have sustained consistent construction activity. Land clearing for site preparation is a regular part of that process, and EFP provides certified forestry oversight on clearing projects throughout the county.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      The approach is consistent: before any equipment is dispatched, Henry Kowalec assesses what timber value exists on the clearing site. On Orange County sites with mature red oak, tulip poplar, or black cherry, that value can be meaningful — and recovering it through a properly managed sale before clearing begins reduces the net cost of the project for the landowner. Learn more about <a href="/services/land-clearing" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">land clearing with timber recovery</a>.
+    </p>
+
+    <!-- ── Services Grid ─────────────────────────────────────── -->
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Forestry Services Available in Orange County</h2>
+    <p class="text-gray-700 leading-relaxed mb-5">
+      All services below are available to Orange County landowners. Every engagement starts with an on-site assessment — Henry Kowalec walks the property before any scope is set.
+    </p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
+      {services.map(svc => (
+        <a
+          href={`/services/${svc.slug}`}
+          class="flex items-start gap-3 p-4 border border-gray-200 rounded-lg hover:border-[#2d5a2d] hover:bg-green-50 transition-colors group"
+        >
+          <span class="text-2xl flex-shrink-0" aria-hidden="true">{svc.icon}</span>
+          <div>
+            <div class="font-semibold text-[#1a3c1a] group-hover:text-[#2d5a2d] text-sm">{svc.name}</div>
+            <div class="text-xs text-gray-500 mt-0.5 leading-snug">{svc.excerpt.split('—')[0].trim()}</div>
+          </div>
+        </a>
+      ))}
+    </div>
+
+    <!-- ── CTA ────────────────────────────────────────────────── -->
+    <div class="bg-[#1a3c1a] text-white rounded-lg p-6 my-10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <div>
+        <p class="font-bold text-lg mb-1">Schedule a Site Assessment in Orange County</p>
+        <p class="text-green-200 text-sm">On-site consultation — not a phone estimate. All Orange County townships served.</p>
+      </div>
+      <a
+        href="tel:+18454980208"
+        class="inline-flex items-center gap-2 bg-white text-[#1a3c1a] font-bold px-5 py-3 rounded hover:bg-green-100 transition-colors text-sm whitespace-nowrap flex-shrink-0"
+      >
+        <svg class="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/></svg>
+        (845) 754-8242
+      </a>
+    </div>
+
+    <!-- ── Towns Grid ─────────────────────────────────────────── -->
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Orange County Communities Served</h2>
+    <p class="text-gray-600 text-sm mb-5">
+      Environmental Forest Products serves private landowners throughout all of Orange County. Select a community for locally-specific forestry information.
+    </p>
+    <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 mb-10">
+      {[
+        { name: 'Warwick', slug: 'warwick' },
+        { name: 'Port Jervis', slug: 'port-jervis' },
+        { name: 'Goshen', slug: 'goshen' },
+        { name: 'Middletown', slug: 'middletown' },
+        { name: 'Monroe', slug: 'monroe' },
+        { name: 'Chester', slug: 'chester' },
+        { name: 'Cornwall', slug: 'cornwall' },
+        { name: 'Tuxedo', slug: 'tuxedo' },
+        { name: 'Blooming Grove', slug: 'blooming-grove' },
+        { name: 'Deerpark', slug: 'deerpark' },
+        { name: 'Minisink', slug: 'minisink' },
+        { name: 'Washingtonville', slug: 'washingtonville' },
+        { name: 'Greenville', slug: 'greenville' },
+        { name: 'Hamptonburgh', slug: 'hamptonburgh' },
+        { name: 'Woodbury', slug: 'woodbury' },
+        { name: 'Highlands', slug: 'highlands' },
+        { name: 'Tuxedo Park', slug: 'tuxedo-park' },
+        { name: 'Sugar Loaf', slug: 'sugar-loaf' },
+        { name: 'Otisville', slug: 'otisville' },
+        { name: 'Unionville', slug: 'unionville' },
+        { name: 'Florida', slug: 'florida' },
+        { name: 'Slate Hill', slug: 'slate-hill' },
+        { name: 'Pine Island', slug: 'pine-island' },
+        { name: 'Huguenot', slug: 'huguenot' },
+        { name: 'Westtown', slug: 'westtown' },
+      ].map(town => (
+        <a
+          href={`/locations/orange-county-ny/${town.slug}`}
+          class="text-sm text-[#2d5a2d] hover:text-[#1a3c1a] hover:underline py-1"
+        >
+          {town.name}
+        </a>
+      ))}
+    </div>
+
+    <!-- ── Neighboring Counties ──────────────────────────────── -->
+    <div class="bg-gray-50 border border-gray-200 rounded-lg p-5 mb-10">
+      <h3 class="font-semibold text-[#1a3c1a] mb-3 text-sm uppercase tracking-wide">Also Serving Nearby Counties</h3>
+      <div class="flex flex-wrap gap-3">
+        <a href="/locations/sullivan-county-ny" class="text-sm text-[#2d5a2d] hover:text-[#1a3c1a] hover:underline">Sullivan County, NY</a>
+        <a href="/locations/ulster-county-ny" class="text-sm text-[#2d5a2d] hover:text-[#1a3c1a] hover:underline">Ulster County, NY</a>
+        <a href="/locations/sussex-county-nj" class="text-sm text-[#2d5a2d] hover:text-[#1a3c1a] hover:underline">Sussex County, NJ</a>
+        <a href="/locations/pike-county-pa" class="text-sm text-[#2d5a2d] hover:text-[#1a3c1a] hover:underline">Pike County, PA</a>
+      </div>
+    </div>
+
+    <!-- ── Free Tools ────────────────────────────────────────── -->
+    <div class="mt-10 mb-8">
+      <h2 class="text-xl font-bold text-[#1a3c1a] mb-1">Free Woodland Calculators</h2>
+      <p class="text-gray-500 text-sm mb-4">Use these tools to estimate timber value, 480-a tax savings, or tree removal costs before your first call.</p>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <a href="/services/sell-standing-timber/timber-value-estimator" class="group rounded-xl border border-gray-200 hover:border-[#2d5a2d] bg-white hover:bg-green-50 p-5 transition-colors block">
+          <p class="text-xs font-bold uppercase tracking-widest text-[#2d5a2d] mb-1">Timber</p>
+          <p class="font-semibold text-[#1a3c1a] text-sm mb-1 group-hover:text-[#2d5a2d]">Timber Value Estimator</p>
+          <p class="text-xs text-gray-500">Estimate stumpage value by species, diameter, and stand density.</p>
+        </a>
+        <a href="/services/480a-forest-tax-law/480a-savings-calculator" class="group rounded-xl border border-gray-200 hover:border-[#2d5a2d] bg-white hover:bg-green-50 p-5 transition-colors block">
+          <p class="text-xs font-bold uppercase tracking-widest text-[#2d5a2d] mb-1">Tax Law</p>
+          <p class="font-semibold text-[#1a3c1a] text-sm mb-1 group-hover:text-[#2d5a2d]">480-a Tax Savings Calculator</p>
+          <p class="text-xs text-gray-500">See annual and 15-year savings from enrolling your forest land.</p>
+        </a>
+        <a href="/services/tree-removal/tree-removal-cost-calculator" class="group rounded-xl border border-gray-200 hover:border-[#2d5a2d] bg-white hover:bg-green-50 p-5 transition-colors block">
+          <p class="text-xs font-bold uppercase tracking-widest text-[#2d5a2d] mb-1">Tree Removal</p>
+          <p class="font-semibold text-[#1a3c1a] text-sm mb-1 group-hover:text-[#2d5a2d]">Tree Removal Cost Calculator</p>
+          <p class="text-xs text-gray-500">Get a local price range estimate based on size and site access.</p>
+        </a>
+        <a href="/services/land-clearing/land-clearing-cost-calculator" class="group rounded-xl border border-gray-200 hover:border-[#2d5a2d] bg-white hover:bg-green-50 p-5 transition-colors block">
+          <p class="text-xs font-bold uppercase tracking-widest text-[#2d5a2d] mb-1">Land Clearing</p>
+          <p class="font-semibold text-[#1a3c1a] text-sm mb-1 group-hover:text-[#2d5a2d]">Land Clearing Cost Calculator</p>
+          <p class="text-xs text-gray-500">Estimate per-acre clearing costs by vegetation type and terrain.</p>
+        </a>
+      </div>
+    </div>
+
+    <FAQSection items={faqs} />
+    <EstimateForm variant="b2c" />
+
+  </article>
+</LocationLayout>

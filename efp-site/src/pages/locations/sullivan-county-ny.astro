@@ -1,0 +1,293 @@
+---
+// pages/locations/sullivan-county-ny.astro
+// CUSTOM — not generated from [county].astro template.
+// Sullivan County, NY is EFP's home county and primary market.
+// Target: 1,800–2,200 words. 7 county-specific FAQs. #1 ranking objective.
+
+import LocationLayout from '../../layouts/LocationLayout.astro';
+import PageHero from '../../components/ui/PageHero.astro';
+import Breadcrumb from '../../components/ui/Breadcrumb.astro';
+import FAQSection from '../../components/ui/FAQSection.astro';
+import KeyTakeaway from '../../components/ui/KeyTakeaway.astro';
+import AuthorByline from '../../components/ui/AuthorByline.astro';
+import EstimateForm from '../../components/forms/EstimateForm.astro';
+import ServiceSchema from '../../components/schema/ServiceSchema.astro';
+import FAQSchema from '../../components/schema/FAQSchema.astro';
+import { buildTitle, buildCanonical, buildDescription } from '../../lib/seo';
+import { services } from '../../data/services';
+
+const title = buildTitle('Consulting Forester — Sullivan County, NY');
+const description = buildDescription(
+  'Consulting forester for Sullivan County, NY — 480-a enrollment, timber appraisals, land clearing. Henry Kowalec, Westbrookville. (845) 754-8242.'
+);
+const canonicalUrl = buildCanonical('/locations/sullivan-county-ny');
+
+const crumbs = [
+  { label: 'Home',      href: '/' },
+  { label: 'Locations', href: '/locations' },
+  { label: 'Sullivan County, NY', href: '/locations/sullivan-county-ny' },
+];
+
+const faqs = [
+  {
+    question: 'Does EFP provide 480-a Forest Tax Law consulting throughout Sullivan County?',
+    answer: 'Yes. Environmental Forest Products has enrolled properties throughout Sullivan County in the 480-a program — from the Delaware River townships in the west (Callicoon, Cochecton, Narrowsburg) to the Catskill highlands in the east (Roscoe, Livingston Manor). Henry Kowalec prepares the DEC-approved forest management plans required for enrollment and guides landowners through the entire certification process. Sullivan County is where EFP does more 480-a work than in any other county.',
+  },
+  {
+    question: 'What timber species in Sullivan County have the most market value right now?',
+    answer: 'Red oak and black cherry consistently command the strongest stumpage prices in the current Sullivan County market. High-quality sugar maple — found primarily in the higher-elevation stands in the northeastern county — is also in active demand. White oak has strengthened in recent years. The specific value of any stand depends on diameter, grade, and access — factors that can only be established through an on-site timber appraisal, not a general estimate.',
+  },
+  {
+    question: 'How much of Sullivan County qualifies for 480-a enrollment?',
+    answer: 'A substantial portion of Sullivan County\'s private forestland meets the basic eligibility threshold — 50 or more contiguous acres of qualifying woodland capable of producing a merchantable forest crop. With 65% of the county\'s 968 square miles under forest cover and large parcel sizes common throughout the county, many Sullivan County landowners who have not explored 480-a are leaving significant annual tax savings on the table. A site assessment is the starting point for determining eligibility on a specific property.',
+  },
+  {
+    question: 'Does EFP serve the Delaware River corridor towns in western Sullivan County?',
+    answer: 'Yes. The Delaware River corridor towns — Callicoon, Cochecton, Narrowsburg, Eldred, Tusten, and the surrounding townships — are within the EFP primary service zone. This terrain produces some of the best hardwood in Sullivan County, and Henry Kowalec has conducted timber appraisals, harvest management, and 480-a enrollments in this part of the county for more than 30 years.',
+  },
+  {
+    question: 'What does a timber appraisal in Sullivan County typically involve?',
+    answer: 'An on-site timber appraisal covers species identification, diameter measurement, volume calculation, and current stumpage value assessment — tree by tree across the property. The result is an independent, documented picture of what your woodland is worth on today\'s market. This is essential before entering any timber sale negotiation, and it gives you a verifiable benchmark for evaluating any offers you receive. Contact EFP at (845) 754-8242 to discuss the scope of an appraisal for your specific property.',
+  },
+  {
+    question: 'Can EFP manage a selective timber harvest on my Sullivan County property?',
+    answer: 'Yes. EFP manages selective timber harvests for Sullivan County landowners from appraisal through sale completion. The process includes: on-site timber assessment, marking trees designated for harvest, soliciting competitive bids from qualified buyers, reviewing and recommending a contract, monitoring operations on the ground, and ensuring post-harvest site conditions meet the standards in the agreement. Henry Kowalec\'s knowledge of regional buyers and what they pay for specific species means that the bid process reaches the buyers who compete most actively for Sullivan County hardwood.',
+  },
+  {
+    question: 'How long does the 480-a application process take in Sullivan County?',
+    answer: 'The 480-a enrollment process typically takes one full growing season from initial site assessment to DEC certification of the forest management plan. The plan itself requires field data collection, species inventory, and prescription writing before DEC submission. Applications must generally be filed with the county assessor by March 1 of the tax year in which exemption is sought. Henry Kowalec can walk through the timeline and requirements specific to your property during an initial consultation.',
+  },
+];
+---
+
+<LocationLayout title={title} description={description} canonicalUrl={canonicalUrl}>
+  <ServiceSchema
+    pageType="location"
+    serviceName="Forestry Consulting — Sullivan County, NY"
+    description={description}
+    url={canonicalUrl}
+    areaServed={['Sullivan County, NY', 'Catskill Region, NY', 'Delaware River Corridor, NY']}
+    crumbs={crumbs}
+  />
+  <FAQSchema items={faqs} />
+
+  <Breadcrumb crumbs={crumbs} />
+
+  <PageHero
+    title="Forestry Consulting in Sullivan County, NY"
+    subtitle="EFP is headquartered in Westbrookville — this is our home county, and has been for 30+ years"
+  />
+
+  <article class="max-w-4xl mx-auto my-8 sm:my-10 px-8 sm:px-12 py-10 bg-white rounded-2xl shadow-md ring-1 ring-gray-200">
+
+    <KeyTakeaway
+      text="Environmental Forest Products is based in Westbrookville, Sullivan County. Henry Kowalec has provided on-site forestry consulting to private landowners throughout this county for more than 30 years — timber appraisals, 480-a Forest Tax Law enrollment, land clearing, and long-term woodland management across 968 square miles of predominantly forested terrain."
+    />
+
+    <AuthorByline />
+
+    <!-- ── SECTION 1: Sullivan County's Forest ──────────────── -->
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Sullivan County's Forests — 65% of a Very Large County</h2>
+
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Sullivan County covers 968 square miles — making it one of the largest counties in New York State — and roughly 65% of that area is under forest cover. For a private landowner, that statistic matters because it shapes everything about the market: who buys timber here, what the competition for high-quality hardwood looks like, and which management programs are worth pursuing.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      The county is not a single forest type. The western townships — Callicoon, Cochecton, Delaware, Tusten — sit along the Delaware River and the Catskill foothills that descend toward it. These are working hardwood townships: accessible terrain, large private parcels, and a track record of productive selective harvesting. The dominant species on the upland plateaus are red oak, white oak, and black cherry, with sugar maple becoming more prevalent at higher elevations toward the county interior.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Moving east through the county toward Liberty and Livingston Manor, the terrain rises into the Catskill foothills proper. Forest stands here are mixed — red maple and red oak at lower elevations, transitioning to sugar maple, beech, and yellow birch as the ridgelines gain elevation. The Beaverkill and Willowemoc Creek drainages cut through this terrain, and the forested hillsides above these streams often reflect management priorities that combine timber value with watershed protection.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-5">
+      In the far northeastern corner of the county — the Roscoe area and the higher Catskill elevations — the forest composition shifts toward true northern hardwood: sugar maple, beech, and yellow birch dominating the upper slopes, with hemlock persisting in the protected north-facing hollows. This is high-elevation Catskill woodland, and the management approach here is different from the river corridor — steep terrain, limited logging access, and a buyer market that specifically targets high-grade hardwood.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Sullivan County also carries a significant inventory of second-growth forest on formerly agricultural land — fields and pastures that were abandoned through the mid-20th century and have been reverting to woodland ever since. These stands, now 40–70 years old in many cases, are reaching the age where forestry management decisions become economically consequential. What you do with them now shapes what they become.
+    </p>
+
+    <!-- ── SECTION 2: 480-a ──────────────────────────────────── -->
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">480-a Forest Tax Law — Sullivan County's Most Significant Landowner Program</h2>
+
+    <p class="text-gray-700 leading-relaxed mb-4">
+      New York's 480-a Forest Tax Law program allows property owners with 50 or more contiguous acres of qualifying woodland to apply for a property and school tax exemption of up to 80% on enrolled acreage. Sullivan County is where EFP does more 480-a enrollment work than anywhere else, and for good reason: large parcel sizes are common throughout the county, school taxes on forested land can be meaningful, and the program's requirements align well with the management approaches already appropriate for this terrain.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      The program requires a DEC-approved forest management plan prepared by a certified consulting forester. That plan drives what can and cannot happen on the property for a 10-year commitment period. Henry Kowalec prepares these plans for Sullivan County landowners and handles the full process — eligibility assessment, field data collection, plan writing, DEC submission, and annual compliance guidance throughout the enrollment period.
+    </p>
+
+    <div class="bg-green-50 border border-green-200 rounded-lg p-6 mb-8">
+      <h3 class="font-bold text-[#1a3c1a] text-base mb-2">What the 480-a exemption actually means in dollars</h3>
+      <p class="text-gray-700 text-sm mb-3">
+        A Sullivan County landowner with 150 enrolled acres and a combined property and school tax assessment of $200 per acre on woodland would see the taxable basis on that acreage reduced by up to 80% — translating to roughly $24,000 in annual tax relief. Over a 10-year enrollment, that compounds significantly. The specific savings depend on local assessed values and tax rates, which vary by township, but the calculation is meaningful for most qualifying properties in the county.
+      </p>
+      <a href="/services/480a-forest-tax-law" class="text-[#2d5a2d] font-semibold text-sm underline hover:text-[#1a3c1a]">
+        Learn more about 480-a enrollment requirements and the application process →
+      </a>
+    </div>
+
+    <!-- ── SECTION 3: Timber Value ──────────────────────────── -->
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Timber Value in Sullivan County — What the Market Actually Pays</h2>
+
+    <p class="text-gray-700 leading-relaxed mb-4">
+      The stumpage market for Sullivan County timber is active, and it is not uniform. The Delaware River corridor townships — Callicoon, Cochecton, Narrowsburg — produce some of the most sought-after hardwood in the region. Accessible terrain, large lot sizes, and generations of selective management have left many of these properties with mature red oak, white oak, and black cherry that commands strong bid prices. Henry Kowalec knows which buyers compete most aggressively for this timber type and what a realistic bid spread looks like.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      In the central and northeastern county — Liberty, Livingston Manor, Roscoe — the timber profile changes. High-grade sugar maple and quality beech are the premium species here, targeting a buyer market that includes hardwood flooring mills and specialty woodworking operations. The terrain also changes: steeper, more access-constrained, requiring equipment and logging plans appropriate for the conditions.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Across the entire county, the consistent finding from timber appraisals is that landowners underestimate what they are sitting on. Properties that have not been assessed in 5–10 years reflect neither current stumpage prices nor the natural growth that has occurred in the intervening years. An independent appraisal before entering any timber negotiation is not optional — it is the only way to know what a fair offer looks like.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      EFP provides <a href="/services/sell-standing-timber" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">timber sale management</a> for Sullivan County landowners — from the initial appraisal through competitive bid solicitation, contract review, harvest monitoring, and final site inspection. The goal is always to maximize what the landowner receives while protecting the long-term productivity of the forest.
+    </p>
+
+    <!-- ── SECTION 4: Land Clearing ──────────────────────────── -->
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Land Clearing in Sullivan County — Recovering Value Before It Gets Chipped</h2>
+
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Land clearing requests come in across Sullivan County, driven by a mix of residential development near the Route 17/86 corridor, agricultural land conversion, and property improvements. The Monticello, Fallsburg, and Rock Hill areas see consistent clearing activity connected to residential construction. Larger commercial clearing projects appear periodically in the Route 52 and Route 17B corridors.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Every land clearing project EFP takes on begins with the same step: a timber assessment before any equipment arrives. If merchantable trees are present — and on many Sullivan County clearing sites they are — that value is recovered through a coordinated sale before the land is cleared. Trees that would otherwise be chipped or burned represent real stumpage value that most general contractors do not capture.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      This step requires a forester, not just an equipment operator. It requires knowing which species have market value, what size-class and grade the timber actually is, and which buyers will pay a competitive price for what is present on the site. When merchantable timber is present, recovering that value before clearing begins can meaningfully offset the cost of the project. Learn more about <a href="/services/land-clearing" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">land clearing services in Sullivan County</a>.
+    </p>
+
+    <!-- ── SECTION 5: Why EFP / Henry ─────────────────────────── -->
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Thirty Years in This County — What That Actually Means</h2>
+
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Environmental Forest Products is headquartered in Westbrookville, in the southern end of Sullivan County. Henry Kowalec has been working this county since before most of the woodland's current owners acquired their properties. That history is not a marketing claim — it translates into specific, practical knowledge that a company operating out of the area does not have.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Henry knows the access road conditions in Callicoon and Cochecton — which township roads can take loaded logging trucks and which cannot. He knows the difference in timber quality between the Beaverkill corridor stands and the lower-elevation properties near the Route 17 corridor. He knows the softwood pockets along the Neversink River drainage and what buyers are paying for them. He knows which school districts in the county carry the highest tax burden and where the 480-a savings calculation hits hardest for qualifying landowners.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      When EFP takes on a project in Sullivan County, Henry Kowalec walks the property himself. He conducts the assessment, plans the work, and is personally accountable for the outcome. That is not how large forestry operations work, but it is how EFP works — and it is why Sullivan County landowners who have worked with EFP once tend to call back.
+    </p>
+
+    <!-- ── Services Grid ─────────────────────────────────────── -->
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Forestry Services Available in Sullivan County</h2>
+    <p class="text-gray-700 leading-relaxed mb-5">
+      All services below are available to Sullivan County landowners. Each engagement begins with an on-site assessment — Henry Kowalec walks the property with you before any scope is set.
+    </p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
+      {services.map(svc => (
+        <a
+          href={`/services/${svc.slug}`}
+          class="flex items-start gap-3 p-4 border border-gray-200 rounded-lg hover:border-[#2d5a2d] hover:bg-green-50 transition-colors group"
+        >
+          <span class="text-2xl flex-shrink-0" aria-hidden="true">{svc.icon}</span>
+          <div>
+            <div class="font-semibold text-[#1a3c1a] group-hover:text-[#2d5a2d] text-sm">{svc.name}</div>
+            <div class="text-xs text-gray-500 mt-0.5 leading-snug">{svc.excerpt.split('—')[0].trim()}</div>
+          </div>
+        </a>
+      ))}
+    </div>
+
+    <!-- ── CTA ────────────────────────────────────────────────── -->
+    <div class="bg-[#1a3c1a] text-white rounded-lg p-6 my-10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <div>
+        <p class="font-bold text-lg mb-1">Schedule a Site Assessment in Sullivan County</p>
+        <p class="text-green-200 text-sm">We walk the property with you — not a phone estimate. Serving all 29 towns.</p>
+      </div>
+      <a
+        href="tel:+18454980208"
+        class="inline-flex items-center gap-2 bg-white text-[#1a3c1a] font-bold px-5 py-3 rounded hover:bg-green-100 transition-colors text-sm whitespace-nowrap flex-shrink-0"
+      >
+        <svg class="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/></svg>
+        (845) 754-8242
+      </a>
+    </div>
+
+    <!-- ── Towns Served ────────────────────────────────────────── -->
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Sullivan County Towns and Communities Served</h2>
+    <p class="text-gray-600 text-sm mb-5">
+      EFP provides forestry consulting to private landowners throughout all of Sullivan County. Select a community for locally-specific forestry information.
+    </p>
+    <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 mb-10">
+      {[
+        { name: 'Liberty', slug: 'liberty' },
+        { name: 'Monticello', slug: 'monticello' },
+        { name: 'Livingston Manor', slug: 'livingston-manor' },
+        { name: 'Fallsburg', slug: 'fallsburg' },
+        { name: 'Narrowsburg', slug: 'narrowsburg' },
+        { name: 'Callicoon', slug: 'callicoon' },
+        { name: 'Woodbourne', slug: 'woodbourne' },
+        { name: 'Wurtsboro', slug: 'wurtsboro' },
+        { name: 'Bethel', slug: 'bethel' },
+        { name: 'Eldred', slug: 'eldred' },
+        { name: 'Cochecton', slug: 'cochecton' },
+        { name: 'Roscoe', slug: 'roscoe' },
+        { name: 'White Lake', slug: 'white-lake' },
+        { name: 'Rock Hill', slug: 'rock-hill' },
+        { name: 'Loch Sheldrake', slug: 'loch-sheldrake' },
+        { name: 'Swan Lake', slug: 'swan-lake' },
+        { name: 'Westbrookville', slug: 'westbrookville' },
+        { name: 'Grahamsville', slug: 'grahamsville' },
+        { name: 'Neversink', slug: 'neversink' },
+        { name: 'Parksville', slug: 'parksville' },
+        { name: 'Barryville', slug: 'barryville' },
+        { name: 'Mongaup Valley', slug: 'mongaup-valley' },
+        { name: 'Forestburgh', slug: 'forestburgh' },
+        { name: 'Thompsonville', slug: 'thompsonville' },
+        { name: 'Harris', slug: 'harris' },
+        { name: 'Smallwood', slug: 'smallwood' },
+        { name: 'Jeffersonville', slug: 'jeffersonville' },
+        { name: 'Hortonville', slug: 'hortonville' },
+        { name: 'Glen Wild', slug: 'glen-wild' },
+      ].map(town => (
+        <a
+          href={`/locations/sullivan-county-ny/${town.slug}`}
+          class="text-sm text-[#2d5a2d] hover:text-[#1a3c1a] hover:underline py-1"
+        >
+          {town.name}
+        </a>
+      ))}
+    </div>
+
+    <!-- ── Neighboring Counties ─────────────────────────────── -->
+    <div class="bg-gray-50 border border-gray-200 rounded-lg p-5 mb-10">
+      <h3 class="font-semibold text-[#1a3c1a] mb-3 text-sm uppercase tracking-wide">Also Serving Nearby Counties</h3>
+      <div class="flex flex-wrap gap-3">
+        <a href="/locations/orange-county-ny" class="text-sm text-[#2d5a2d] hover:text-[#1a3c1a] hover:underline">Orange County, NY</a>
+        <a href="/locations/ulster-county-ny" class="text-sm text-[#2d5a2d] hover:text-[#1a3c1a] hover:underline">Ulster County, NY</a>
+        <a href="/locations/pike-county-pa" class="text-sm text-[#2d5a2d] hover:text-[#1a3c1a] hover:underline">Pike County, PA</a>
+      </div>
+    </div>
+
+    <!-- ── Free Tools ────────────────────────────────────────── -->
+    <div class="mt-10 mb-8">
+      <h2 class="text-xl font-bold text-[#1a3c1a] mb-1">Free Woodland Calculators</h2>
+      <p class="text-gray-500 text-sm mb-4">Use these tools to estimate timber value, 480-a tax savings, or tree removal costs before your first call.</p>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <a href="/services/sell-standing-timber/timber-value-estimator" class="group rounded-xl border border-gray-200 hover:border-[#2d5a2d] bg-white hover:bg-green-50 p-5 transition-colors block">
+          <p class="text-xs font-bold uppercase tracking-widest text-[#2d5a2d] mb-1">Timber</p>
+          <p class="font-semibold text-[#1a3c1a] text-sm mb-1 group-hover:text-[#2d5a2d]">Timber Value Estimator</p>
+          <p class="text-xs text-gray-500">Estimate stumpage value by species, diameter, and stand density.</p>
+        </a>
+        <a href="/services/480a-forest-tax-law/480a-savings-calculator" class="group rounded-xl border border-gray-200 hover:border-[#2d5a2d] bg-white hover:bg-green-50 p-5 transition-colors block">
+          <p class="text-xs font-bold uppercase tracking-widest text-[#2d5a2d] mb-1">Tax Law</p>
+          <p class="font-semibold text-[#1a3c1a] text-sm mb-1 group-hover:text-[#2d5a2d]">480-a Tax Savings Calculator</p>
+          <p class="text-xs text-gray-500">See annual and 15-year savings from enrolling your forest land.</p>
+        </a>
+        <a href="/services/tree-removal/tree-removal-cost-calculator" class="group rounded-xl border border-gray-200 hover:border-[#2d5a2d] bg-white hover:bg-green-50 p-5 transition-colors block">
+          <p class="text-xs font-bold uppercase tracking-widest text-[#2d5a2d] mb-1">Tree Removal</p>
+          <p class="font-semibold text-[#1a3c1a] text-sm mb-1 group-hover:text-[#2d5a2d]">Tree Removal Cost Calculator</p>
+          <p class="text-xs text-gray-500">Get a local price range estimate based on size and site access.</p>
+        </a>
+        <a href="/services/land-clearing/land-clearing-cost-calculator" class="group rounded-xl border border-gray-200 hover:border-[#2d5a2d] bg-white hover:bg-green-50 p-5 transition-colors block">
+          <p class="text-xs font-bold uppercase tracking-widest text-[#2d5a2d] mb-1">Land Clearing</p>
+          <p class="font-semibold text-[#1a3c1a] text-sm mb-1 group-hover:text-[#2d5a2d]">Land Clearing Cost Calculator</p>
+          <p class="text-xs text-gray-500">Estimate per-acre clearing costs by vegetation type and terrain.</p>
+        </a>
+      </div>
+    </div>
+
+    <FAQSection items={faqs} />
+    <EstimateForm variant="b2c" />
+
+  </article>
+</LocationLayout>

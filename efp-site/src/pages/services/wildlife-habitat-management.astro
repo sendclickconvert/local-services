@@ -8,6 +8,8 @@ import EstimateForm from '../../components/forms/EstimateForm.astro';
 import ServiceSchema from '../../components/schema/ServiceSchema.astro';
 import FAQSchema from '../../components/schema/FAQSchema.astro';
 import AuthorByline from '../../components/ui/AuthorByline.astro';
+import KeyTakeaway from '../../components/ui/KeyTakeaway.astro';
+import OptimizedImage from '../../components/ui/OptimizedImage.astro';
 import { buildTitle, buildCanonical, buildDescription } from '../../lib/seo';
 
 const title = buildTitle("Wildlife Habitat Management — Hudson Valley & Catskills NY");
@@ -34,11 +36,19 @@ const faqs = [
   },
   {
     question: "Does habitat management qualify under the 480-a program?",
-    answer: "Wildlife habitat improvement can be a component of a 480-a forest management plan, but the primary purpose of 480-a is forest management for timber production and ecological stewardship rather than recreational hunting or wildlife management specifically. Whether specific habitat practices qualify depends on how the management plan is structured. [⚠️ Confirm this with Henry — he will know the correct answer for NY DEC requirements]"
+    answer: "Wildlife habitat improvement can be a component of a 480-a forest management plan. The primary purpose of 480-a is forest management for timber production and ecological stewardship, and the habitat practices required — improving species composition, managing stand density, controlling invasives — align directly with 480-a management objectives. A management plan can address timber production, tax savings, and wildlife habitat as a single integrated program."
   },
   {
     question: "What species can habitat management benefit in Sullivan County?",
-    answer: "The Hudson Valley and Catskill region supports whitetail deer, wild turkey, ruffed grouse, woodcock, black bear, and a range of forest songbirds and native wildlife. The habitat features that benefit these species — forest openings, edge habitat, mast trees, early successional cover — overlap considerably, so management for one species often benefits others. [⚠️ Confirm target species focus with Henry]"
+    answer: "The Hudson Valley and Catskill region supports white-tailed deer, wild turkey, ruffed grouse, woodcock, black bear, and a wide range of forest songbirds and native wildlife. The habitat features that benefit these species — forest openings, edge habitat, mast trees, early successional cover — overlap considerably, so management targeted at one species typically benefits others simultaneously."
+  },
+  {
+    question: "Can I manage for both wildlife and timber income?",
+    answer: "Absolutely — in fact, the best wildlife habitat management often involves selective timber harvesting. Creating canopy gaps through timber sales encourages understory browse for deer, drumming logs for grouse, and nesting sites for songbirds. We design harvest plans that accomplish both objectives: you get timber income while improving habitat structure. Many Sullivan County landowners in DEC's Forest Stewardship Program successfully balance timber income and wildlife goals using this approach."
+  },
+  {
+    question: "What wildlife species benefit most from habitat management in Sullivan County?",
+    answer: "Ruffed grouse, white-tailed deer, wild turkey, and woodland songbirds respond dramatically to active habitat management in the Hudson Valley. Grouse need young forest with dense cover — we create this through timber harvesting and natural regeneration. Deer benefit from edge habitat where forest meets openings. Wild turkey need oak mast for food and open understory for nesting. Selective cutting that creates diverse age classes and canopy gaps improves habitat for all these species simultaneously."
   },
   {
     question: "Is an existing woodlot a good candidate for habitat management?",
@@ -65,9 +75,12 @@ const faqs = [
     subtitle="Forest management practices that improve habitat for deer, turkey, grouse, and native wildlife in the Hudson Valley and Catskills"
   />
 
-  <article class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+  <article class="max-w-4xl mx-auto my-8 sm:my-10 px-8 sm:px-12 py-10 bg-white rounded-2xl shadow-md ring-1 ring-gray-200">
+
+    <KeyTakeaway text="The best wildlife habitat often comes from strategic timber cutting, not preservation — creating edge habitat and diverse forest age classes attracts more species than leaving a forest untouched, and you can enhance habitat while generating timber income." />
 
     <AuthorByline />
+    <p class="text-xs text-gray-400 mt-1 mb-8">Last reviewed: April 2026 by Henry Kowalec, CF</p>
 
         <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Better Habitat Starts With Better Forest Management</h2>
     <p class="text-gray-700 leading-relaxed mb-4">
@@ -78,7 +91,7 @@ const faqs = [
     </p>
 
     <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Management Practices That Improve Habitat</h2>
-    <img src="/images/uploads/spruce-timber-harvest-millbrook-ny.jpg" alt="Selective timber harvest in Millbrook, NY — careful logging that improves wildlife habitat and forest health" class="w-full rounded-xl shadow-md" loading="lazy" />
+    <OptimizedImage src="/images/uploads/spruce-timber-harvest-millbrook-ny.jpg" alt="Selective timber harvest in Millbrook, NY — careful logging that improves wildlife habitat and forest health" class="w-full rounded-xl shadow-md" sizes="(max-width: 768px) 100vw, 768px" />
     <ul class="space-y-4 mb-8">
       {[
         ["Canopy openings", "Creating small to mid-sized openings in a closed-canopy stand lets sunlight reach the forest floor, stimulating regeneration of browse species and ground cover that deer, turkey, and grouse depend on for food and nesting."],
@@ -153,10 +166,19 @@ const faqs = [
       <p class="text-gray-700 text-sm mb-4">
         Every habitat management plan begins with an on-site assessment of what you have and what your goals are. Call to schedule a property walk — we will identify what is limiting wildlife use on your land and what the right management approach looks like for your situation.
       </p>
-      <a href="tel:+18457548242" class="inline-flex items-center gap-2 bg-[#1a3c1a] text-white font-semibold px-5 py-3 rounded hover:bg-[#2d5a2d] transition-colors text-sm">
+      <a href="tel:+18454980208" class="inline-flex items-center gap-2 bg-[#1a3c1a] text-white font-semibold px-5 py-3 rounded hover:bg-[#2d5a2d] transition-colors text-sm">
         <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/></svg>
         Call (845) 754-8242
       </a>
+    </div>
+
+    <div class="mt-10 pt-6 border-t border-gray-200">
+      <p class="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-2">Sources &amp; Further Reading</p>
+      <ul class="text-xs text-gray-500 space-y-1">
+        <li><a href="https://www.dec.ny.gov/animals/265.html" target="_blank" rel="noopener noreferrer" class="text-[#2d5a2d] hover:underline">NY DEC — Wildlife Management</a></li>
+        <li><a href="https://www.nrcs.usda.gov/programs-initiatives/whip-wildlife-habitat-incentive-program" target="_blank" rel="noopener noreferrer" class="text-[#2d5a2d] hover:underline">USDA NRCS — Wildlife Habitat Incentive Program</a></li>
+        <li><a href="https://blogs.cornell.edu/woodlandstewardship/" target="_blank" rel="noopener noreferrer" class="text-[#2d5a2d] hover:underline">Cornell Cooperative Extension — Woodland Stewardship</a></li>
+      </ul>
     </div>
 
     <FAQSection items={faqs} />

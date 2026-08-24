@@ -1,0 +1,186 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/ui/PageHero.astro';
+import Breadcrumb from '../components/ui/Breadcrumb.astro';
+import CTASection from '../components/ui/CTASection.astro';
+import AuthorByline from '../components/ui/AuthorByline.astro';
+import KeyTakeaway from '../components/ui/KeyTakeaway.astro';
+import OptimizedImage from '../components/ui/OptimizedImage.astro';
+import { buildTitle, buildCanonical, buildDescription } from '../lib/seo';
+
+const title = buildTitle("Project Gallery");
+const description = buildDescription(
+  "Photos from timber harvesting, land clearing, and forestry projects across Sullivan, Orange, and Ulster counties, NY. " +
+  "See the equipment, the terrain, and the results."
+);
+const canonicalUrl = buildCanonical("/gallery");
+
+const crumbs = [
+  { label: "Home",    href: "/" },
+  { label: "Gallery", href: "/gallery" },
+];
+
+const images = [
+  {
+    src: "/images/uploads/komatsu-feller-buncher-timber-harvest-1-ny.jpg",
+    alt: "Komatsu XT445L feller buncher during a selective timber harvest in New York",
+    caption: "Komatsu XT445L feller buncher during a selective timber harvest — Sullivan County, NY. Only marked trees are taken; the surrounding stand is protected.",
+    service: "Timber Harvesting",
+  },
+  {
+    src: "/images/uploads/komatsu-feller-buncher-timber-harvest-2-ny.jpg",
+    alt: "Komatsu feller buncher working through dense hardwood stand",
+    caption: "Working through a dense mixed hardwood stand. The feller buncher lays trees in bunches that minimize damage to the soil and residual stand.",
+    service: "Timber Harvesting",
+  },
+  {
+    src: "/images/uploads/komatsu-feller-buncher-timber-harvest-3-ny.jpg",
+    alt: "Timber harvesting operation with Komatsu equipment in the Hudson Valley",
+    caption: "A selective harvest in progress in the Hudson Valley. Equipment access is planned to protect stream buffers and minimize site disturbance.",
+    service: "Timber Harvesting",
+  },
+  {
+    src: "/images/uploads/komatsu-feller-buncher-timber-harvest-4-ny.jpg",
+    alt: "Feller buncher positioned on a selective harvest landing",
+    caption: "Feller buncher positioned at a log landing — the central collection point where trees are bucked to log lengths and sorted by species.",
+    service: "Timber Harvesting",
+  },
+  {
+    src: "/images/uploads/komatsu-feller-buncher-timber-harvest-5-ny.jpg",
+    alt: "Komatsu feller buncher completing a cut on a hardwood site",
+    caption: "Completing a cut on a Sullivan County hardwood site. The remaining canopy closes quickly over selectively harvested stands with good stocking.",
+    service: "Timber Harvesting",
+  },
+  {
+    src: "/images/uploads/komatsu-feller-buncher-selective-harvest-ny.jpg",
+    alt: "Selective harvest in progress — marked trees only, surrounding stand protected",
+    caption: "Selective harvest — all marked trees identified by a consulting forester before equipment arrives. No unmarked tree is taken.",
+    service: "Timber Harvesting",
+  },
+  {
+    src: "/images/uploads/forwarder-hardwood-logs-westbrookville-ny.jpg",
+    alt: "Forwarder loaded with hardwood logs at a Westbrookville, NY harvest site",
+    caption: "Forwarder loaded with red oak, hard maple, and black cherry logs at a Westbrookville, NY harvest site — ready for transport to the landing.",
+    service: "Timber Harvesting",
+  },
+  {
+    src: "/images/uploads/timberjack-forwarder-nyc-dep-carmel-ny.jpg",
+    alt: "TimberPro forwarder loading logs on an NYC DEP forestry project in Carmel, NY",
+    caption: "TimberPro forwarder on a New York City DEP forest management project in Carmel, NY — forestry under water supply watershed restrictions.",
+    service: "Timber Harvesting",
+  },
+  {
+    src: "/images/uploads/hand-felling-trees-nyc-dep-carmel-ny.jpg",
+    alt: "Hand felling trees on an NYC DEP project in Carmel, NY",
+    caption: "Hand felling on the NYC DEP Carmel, NY project. Hand operations are used where slope, proximity to structures, or terrain prevent mechanical access.",
+    service: "Tree Removal",
+  },
+  {
+    src: "/images/uploads/spruce-timber-harvest-millbrook-ny.jpg",
+    alt: "Spruce timber harvest in Millbrook, NY",
+    caption: "Spruce timber harvest in Millbrook, NY — a plantation softwood harvest producing pulpwood and saw logs from a maturing stand.",
+    service: "Timber Harvesting",
+  },
+  {
+    src: "/images/uploads/land-clearing-forestburgh-ny-komatsu.jpg",
+    alt: "Land clearing project in Forestburgh, NY with Komatsu excavators",
+    caption: "Site clearing in Forestburgh, NY — Komatsu excavators clearing second-growth forest for a residential development site. Merchantable timber was recovered before clearing began.",
+    service: "Land Clearing",
+  },
+  {
+    src: "/images/uploads/efp-log-truck-pup-trailer-environmental-forest-products.jpg",
+    alt: "EFP log truck with pup trailer hauling timber",
+    caption: "EFP log truck with pup trailer — hauling premium hardwood logs from a Sullivan County harvest to regional mills in New York and Pennsylvania.",
+    service: "Timber Harvesting",
+  },
+  {
+    src: "/images/uploads/log-truck-hardwood-timber-sparta-nj.jpg",
+    alt: "Log truck hauling premium hardwood timber from Sparta, NJ",
+    caption: "Premium hardwood timber from Sparta, NJ — black cherry, red oak, and hard maple destined for hardwood flooring and cabinet mills in the mid-Atlantic region.",
+    service: "Sell Standing Timber",
+  },
+  {
+    src: "/images/uploads/log-trucks-timber-export-hudson-valley-ny.jpg",
+    alt: "Log trucks loaded for timber export in the Hudson Valley, NY",
+    caption: "Multiple log trucks staged for timber export in the Hudson Valley. Competitive bid sales bring multiple buyers to the property — and significantly higher prices than single-offer deals.",
+    service: "Sell Standing Timber",
+  },
+  {
+    src: "/images/uploads/efp-new-timbermatic-harvester-equipment.jpg",
+    alt: "New Timbermatic harvester — EFP equipment investment",
+    caption: "EFP's Timbermatic harvester — a purpose-built forestry machine that fells, delimbs, and bucks trees to precise log lengths in a single pass. Used for softwood and moderate-terrain hardwood operations.",
+    service: "Timber Harvesting",
+  },
+  {
+    src: "/images/uploads/efp-wheeled-harvester-transport-ny.jpg",
+    alt: "EFP wheeled harvester being transported to a job site in New York",
+    caption: "EFP wheeled harvester in transport — headed to a Sullivan County job site. Wheeled machines minimize ground disturbance compared to tracked equipment on suitable terrain.",
+    service: "Timber Harvesting",
+  },
+  {
+    src: "/images/uploads/komatsu-harvester-transport-kingston-ny.jpg",
+    alt: "Komatsu harvester transport through Kingston, NY",
+    caption: "Komatsu harvester moving through Kingston, NY en route to an Ulster County project site — one of the larger harvesting machines in the EFP equipment fleet.",
+    service: "Timber Harvesting",
+  },
+];
+
+const serviceColors: Record<string, string> = {
+  "Timber Harvesting": "bg-amber-50 text-amber-800",
+  "Tree Removal": "bg-red-50 text-red-800",
+  "Land Clearing": "bg-orange-50 text-orange-800",
+  "Sell Standing Timber": "bg-green-50 text-green-800",
+};
+---
+
+<BaseLayout title={title} description={description} canonicalUrl={canonicalUrl}>
+  <Breadcrumb crumbs={crumbs} />
+
+  <PageHero
+    title="Project Gallery"
+    subtitle="Timber harvesting, land clearing, and forestry operations across the Hudson Valley, Catskills, and Tri-State region"
+  />
+
+  <section class="py-12 bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-10">
+      <div class="bg-white rounded-2xl shadow-md ring-1 ring-gray-200 px-8 sm:px-12 py-10">
+        <KeyTakeaway text="The equipment you see in these photos has operated across Sullivan, Orange, and Ulster counties for more than 30 years. Every project starts the same way — Henry Kowalec walks the property, assesses what is there, and determines what the right approach is before any machine is dispatched." />
+        <AuthorByline />
+        <p class="text-xs text-gray-400 mt-1 mb-8">Projects photographed by EFP field crews, 2018–2026</p>
+        <p class="text-gray-700 leading-relaxed mb-4">
+          These photos document real projects — timber harvests, land clearing operations, equipment transport, and log hauls — across the Hudson Valley and Catskills region. The scale ranges from single-parcel selective harvests on private woodland to multi-machine commercial clearing projects and NYC DEP watershed management operations.
+        </p>
+        <p class="text-gray-700 leading-relaxed">
+          The common thread is the same across all of it: a consulting forester is present before, during, and after the work — not just at the bid stage. That is what certified forestry oversight looks like in practice, and it is what separates EFP from a general tree service or clearing contractor.
+        </p>
+      </div>
+    </div>
+
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {images.map((img, i) => (
+          <figure class="overflow-hidden rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 bg-white ring-1 ring-gray-100">
+            <div class="overflow-hidden">
+              <OptimizedImage
+                src={img.src}
+                alt={img.alt}
+                class="w-full h-56 object-cover hover:scale-105 transition-transform duration-300"
+                loading={i < 3 ? 'eager' : 'lazy'}
+                fetchpriority={i === 0 ? 'high' : undefined}
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+              />
+            </div>
+            <figcaption class="p-4">
+              <span class={`inline-block text-xs font-semibold px-2 py-0.5 rounded-full mb-2 ${serviceColors[img.service] || 'bg-gray-100 text-gray-700'}`}>
+                {img.service}
+              </span>
+              <p class="text-sm text-gray-600 leading-snug">{img.caption}</p>
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CTASection variant="b2c" />
+</BaseLayout>

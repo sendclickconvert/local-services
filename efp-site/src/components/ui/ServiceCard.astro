@@ -1,25 +1,29 @@
 ---
 // ServiceCard.astro
 // Card with hover state, icon, title, excerpt, arrow link.
-// Resilient to uneven title and excerpt lengths — no layout breakage.
 
 interface Props {
   title: string;
   slug: string;
   excerpt: string;
   icon?: string;
+  iconImage?: string;
 }
 
-const { title, slug, excerpt, icon } = Astro.props;
+const { title, slug, excerpt, icon, iconImage } = Astro.props;
 ---
 
 <a
   href={`/services/${slug}`}
   class="group flex flex-col bg-white border border-gray-200 rounded-lg p-6 shadow-sm hover:shadow-md hover:border-[#2d5a2d] transition-all duration-200 h-full"
 >
-  {icon && (
+  {iconImage ? (
+    <div class="w-11 h-11 flex items-center justify-center mb-5">
+      <img src={iconImage} alt="" class="w-10 h-10 object-contain" aria-hidden="true" loading="lazy" />
+    </div>
+  ) : icon ? (
     <span class="text-3xl mb-4 block" aria-hidden="true">{icon}</span>
-  )}
+  ) : null}
 
   <h3 class="text-[#1a3c1a] font-bold text-lg mb-3 leading-snug group-hover:text-[#2d5a2d] transition-colors">
     {title}

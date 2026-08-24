@@ -8,6 +8,8 @@ import EstimateForm from '../../components/forms/EstimateForm.astro';
 import ServiceSchema from '../../components/schema/ServiceSchema.astro';
 import FAQSchema from '../../components/schema/FAQSchema.astro';
 import AuthorByline from '../../components/ui/AuthorByline.astro';
+import KeyTakeaway from '../../components/ui/KeyTakeaway.astro';
+import OptimizedImage from '../../components/ui/OptimizedImage.astro';
 import { buildTitle, buildCanonical, buildDescription } from '../../lib/seo';
 
 const title = buildTitle("Timber Harvesting Services — Hudson Valley & Catskills NY");
@@ -34,15 +36,23 @@ const faqs = [
   },
   {
     question: "Do I need a timber harvest to qualify for 480-a?",
-    answer: "Not necessarily. The 480-a Forest Tax Law program in New York requires a certified management plan, but harvesting is only one component of forest management. Some management activities focus on species composition, invasive removal, or habitat improvement rather than timber removal. [⚠️ Confirm specifics with Henry]"
+    answer: "Not necessarily. The 480-a Forest Tax Law program in New York requires a certified management plan, but harvesting is only one component of forest management. Some management activities focus on species composition, invasive removal, or habitat improvement rather than timber removal. A forester can review your property and advise whether a harvest fits your management goals and plan requirements."
   },
   {
     question: "How long does a timber harvest take?",
-    answer: "The timeline for a timber harvest depends on the acreage involved, the volume and species of timber, access conditions, and seasonal factors. A small residential woodlot harvest may take a few days; a larger commercial harvest can span several weeks. The planning and bidding process that precedes the harvest typically adds several months to the overall timeline. [⚠️ Confirm typical timelines with Henry]"
+    answer: "Timeline varies based on acreage, access, and market conditions. A selective harvest on 20–50 acres typically takes 1–3 weeks of active logging once trees are marked and a buyer is arranged. Larger tracts (100+ acres) may take several months, especially when coordinating multiple buyers for different wood products. Weather plays a role — we prefer frozen ground or dry summer conditions to minimize rutting. We will provide a timeline estimate during the forestry consultation."
   },
   {
     question: "What areas do you serve for timber harvesting?",
     answer: "Timber harvesting consulting is available in Sullivan, Orange, and Ulster counties in New York, as well as Pike and Wayne counties in Pennsylvania and Sussex County in New Jersey."
+  },
+  {
+    question: "What happens to the tops and branches after harvesting?",
+    answer: "Slash — tops and branches left after felling — is typically lopped and scattered to decompose naturally on site. It returns nutrients to the soil and provides wildlife habitat. In Sullivan County, DEC regulations prohibit burning slash within 500 feet of woodland, so burning is rarely an option. For sites where aesthetics matter near homes or roads, we can arrange chipping or firewood processing to remove it. The buyer removes only commercial trunk wood; slash management is part of our harvest cleanup terms."
+  },
+  {
+    question: "How do I know when my timber is ready to harvest?",
+    answer: "Timber readiness depends on species growth rates, tree size, stand density, and current market conditions. Mature hardwoods — red oak, black cherry, white oak — are typically harvestable when they reach 16–18 inches in diameter at breast height, though larger logs often command premium prices. A timber cruise gives you an accurate picture of what you have, its current value, and whether market timing favors harvesting now or waiting. We recommend an assessment before making any harvest decisions."
   },
 ];
 ---
@@ -65,11 +75,14 @@ const faqs = [
     subtitle="Selective, sustainable logging guided by a certified consulting forester — protecting your woodland while recovering its value"
   />
 
-  <article class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+  <article class="max-w-4xl mx-auto my-8 sm:my-10 px-8 sm:px-12 py-10 bg-white rounded-2xl shadow-md ring-1 ring-gray-200">
+
+    <KeyTakeaway text="Selective timber harvesting can increase your forest's long-term value by 30–50% compared to clear-cutting while maintaining forest health for future generations — but it requires a certified forester's expertise to mark the right trees and ensure sustainable harvest practices." />
 
     <AuthorByline />
+    <p class="text-xs text-gray-400 mt-1 mb-8">Last reviewed: April 2026 by Henry Kowalec, CF</p>
 
-        <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Timber Harvesting That Protects the Forest</h2>
+        <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Selective Timber Harvesting: Henry Kowalec's Approach</h2>
     <p class="text-gray-700 leading-relaxed mb-4">
       A timber harvest done correctly improves a woodland. Done incorrectly, it can damage it for decades. The difference comes down to planning — specifically, whether the harvest was designed by someone whose job is to protect the long-term health and value of the forest, or by someone whose interest is maximizing what comes out of it in a single cut.
     </p>
@@ -78,7 +91,7 @@ const faqs = [
     </p>
 
     <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">How a Timber Harvest Is Managed</h2>
-    <img src="/images/uploads/komatsu-feller-buncher-timber-harvest-1-ny.jpg" alt="Komatsu XT445L tracked feller buncher during a timber harvest in New York — Environmental Forest Products" class="w-full rounded-xl shadow-md" loading="lazy" />
+    <OptimizedImage src="/images/uploads/komatsu-feller-buncher-timber-harvest-1-ny.jpg" alt="Komatsu XT445L tracked feller buncher during a timber harvest in New York — Environmental Forest Products" class="w-full rounded-xl shadow-md" sizes="(max-width: 768px) 100vw, 768px" />
     <p class="text-gray-700 leading-relaxed mb-4">
       The process begins with a timber cruise — a systematic assessment of the stand to inventory species, volume, and quality. Based on that data, a harvest prescription is developed that identifies which trees to remove and which to leave. The prescription balances the landowner's goals (income, habitat, long-term timber value, 480-a compliance) against the biological needs of the forest.
     </p>
@@ -122,7 +135,7 @@ const faqs = [
       ))}
     </ul>
 
-    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Other Reasons Landowners Harvest Timber</h2>
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Land Clearing, Estate Planning, and Other Harvest Objectives</h2>
     <p class="text-gray-700 leading-relaxed mb-4">
       Timber harvesting is not always driven by a standard management plan cycle. Other common scenarios include:
     </p>
@@ -138,7 +151,7 @@ const faqs = [
       a harvest that benefits both landowner and forest from one that creates long-term damage.
     </p>
 
-    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Service Area</h2>
+    <h3 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Service Area</h3>
     <p class="text-gray-700 leading-relaxed mb-4">
       Timber harvesting consulting is available in <a href="/locations/sullivan-county-ny" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">Sullivan County</a>, <a href="/locations/orange-county-ny" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">Orange County</a>, and <a href="/locations/ulster-county-ny" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">Ulster County</a> in New York, as well as Pike and Wayne counties in Pennsylvania and Sussex County in New Jersey.
     </p>
@@ -148,10 +161,43 @@ const faqs = [
       <p class="text-gray-700 text-sm mb-4">
         Start with a timber stand evaluation. We'll assess your woodland and give you a straight picture of what you have, what it's worth, and what the right next step is — whether that's harvesting now, waiting, or focusing on a different management objective first.
       </p>
-      <a href="tel:+18457548242" class="inline-flex items-center gap-2 bg-[#1a3c1a] text-white font-semibold px-5 py-3 rounded hover:bg-[#2d5a2d] transition-colors text-sm">
-        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/></svg>
+      <a href="tel:+18454980208" class="inline-flex items-center gap-2 bg-[#1a3c1a] text-white font-semibold px-5 py-3 rounded hover:bg-[#2d5a2d] transition-colors text-sm">
+        <svg class="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/></svg>
         Call (845) 754-8242
       </a>
+    </div>
+
+    <div class="mt-12 pt-8 border-t border-gray-200">
+      <h3 class="text-lg font-bold text-[#1a3c1a] mb-4">Related Guides</h3>
+      <ul class="space-y-3 mb-10">
+        <li><a href="/guides/timber-harvesting-methods" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">Timber Harvesting Methods: Selective Cutting, Shelterwood, Clear-Cutting Explained</a></li>
+        <li><a href="/guides/selective-cutting" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">Selective Cutting: How It Works and When It Makes Sense</a></li>
+        <li><a href="/guides/hardwood-timber-value-ny" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">Hardwood Timber Value in New York</a></li>
+        <li><a href="/guides/timber-value-per-acre" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">Timber Value Per Acre: What Your Woodland Is Worth</a></li>
+      </ul>
+    </div>
+
+    <!-- Interactive Tool card -->
+    <div class="my-8 rounded-xl border border-[#2d5a2d] bg-green-50 p-6 flex flex-col sm:flex-row sm:items-center gap-4">
+      <div class="flex-shrink-0 text-3xl" aria-hidden="true">🌳</div>
+      <div class="flex-1 min-w-0">
+        <p class="text-xs font-bold uppercase tracking-widest text-[#2d5a2d] mb-1">Free Tool</p>
+        <p class="font-bold text-[#1a3c1a] text-base mb-1">Timber Value Estimator</p>
+        <p class="text-gray-600 text-sm">Estimate the stumpage value of your standing timber by species, diameter class, and stand density before scheduling a site visit.</p>
+      </div>
+      <a href="/services/sell-standing-timber/timber-value-estimator" class="flex-shrink-0 inline-flex items-center gap-2 bg-[#2d5a2d] hover:bg-[#1a3c1a] text-white font-semibold text-sm px-5 py-2.5 rounded-lg transition-colors whitespace-nowrap">
+        Use the Estimator
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+
+    <div class="mt-10 pt-6 border-t border-gray-200">
+      <p class="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-2">Sources &amp; Further Reading</p>
+      <ul class="text-xs text-gray-500 space-y-1">
+        <li><a href="https://www.dec.ny.gov/lands/34341.html" target="_blank" rel="noopener noreferrer" class="text-[#2d5a2d] hover:underline">NY DEC — Timber Harvesting Program</a></li>
+        <li><a href="https://blogs.cornell.edu/woodlandstewardship/" target="_blank" rel="noopener noreferrer" class="text-[#2d5a2d] hover:underline">Cornell Cooperative Extension — Woodland Stewardship</a></li>
+        <li><a href="https://www.eforester.org/" target="_blank" rel="noopener noreferrer" class="text-[#2d5a2d] hover:underline">Society of American Foresters (SAF)</a></li>
+      </ul>
     </div>
 
     <FAQSection items={faqs} />

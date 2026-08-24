@@ -1,31 +1,101 @@
 ---
-// pages/services/index.astro — Services hub
 import ServiceLayout from '../../layouts/ServiceLayout.astro';
 import PageHero from '../../components/ui/PageHero.astro';
 import ServiceCard from '../../components/ui/ServiceCard.astro';
+import AuthorByline from '../../components/ui/AuthorByline.astro';
+import KeyTakeaway from '../../components/ui/KeyTakeaway.astro';
 import { buildTitle, buildCanonical, buildDescription } from '../../lib/seo';
 
-const title = buildTitle("Forestry Services — Sullivan, Orange & Ulster Counties");
-const description = buildDescription("Certified forestry consulting services in the Hudson Valley and Catskills. 480-a Forest Tax Law, land clearing, timber harvesting, woodlot management, and more.");
+const title = buildTitle("Forestry Services — Sullivan, Orange & Ulster Counties NY");
+const description = buildDescription(
+  "Certified forestry consulting services in the Hudson Valley and Catskills. 480-a Forest Tax Law enrollment, timber harvesting, land clearing, woodlot management, and more — led by Henry Kowalec with 30+ years of regional experience."
+);
 const canonicalUrl = buildCanonical("/services");
 ---
 
 <ServiceLayout title={title} description={description} canonicalUrl={canonicalUrl}>
   <PageHero
     title="Forestry Consulting Services"
-    subtitle="480-a Forest Tax Law · Land Clearing · Timber Harvesting · Woodlot Management — serving Sullivan, Orange, and Ulster counties"
+    subtitle="480-a Forest Tax Law · Timber Harvesting · Land Clearing · Woodlot Management — Sullivan, Orange, and Ulster counties"
   />
-  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-      <ServiceCard title="480-a Forest Tax Law" slug="480a-forest-tax-law" excerpt="Reduce your property taxes with NY's 480-a Forest Tax Law program. Henry is one of a small number of certified foresters in the region qualified to write the required management plans." icon="🌲" />
-      <ServiceCard title="Land Clearing" slug="land-clearing" excerpt="Residential and commercial site preparation across Sullivan, Orange, and Ulster counties — clearing expertise grounded in forestry, not just excavation." icon="🚜" />
-      <ServiceCard title="Timber Harvesting" slug="timber-harvesting" excerpt="Selective, sustainable logging services. A consulting forester plans and oversees every harvest to protect your woodland and maximize what the timber is worth." icon="🪵" />
-      <ServiceCard title="Sell Standing Timber" slug="sell-standing-timber" excerpt="Timber appraisal, competitive bidding, and sale management. Find out what your timber is actually worth before you accept any offer." icon="💰" />
-      <ServiceCard title="Woodlot Management" slug="woodlot-management" excerpt="Forest management plans for private landowners — required for 480-a enrollment and the foundation of any long-term woodland stewardship program." icon="🗺️" />
-      <ServiceCard title="Wildlife Habitat" slug="wildlife-habitat-management" excerpt="Targeted forestry practices that improve habitat for deer, turkey, grouse, and native wildlife — fully compatible with 480-a and timber objectives." icon="🦌" />
-      <ServiceCard title="Stump Grinding" slug="stump-grinding" excerpt="Complete stump removal after tree work, land clearing, or timber harvesting — leaving the site clean and ready for its next use." icon="⚙️" />
-      <ServiceCard title="Tree Planting" slug="tree-planting" excerpt="Native species selection, site preparation, and reforestation guidance for New York woodland." icon="🌱" />
+
+  <article class="max-w-4xl mx-auto my-8 sm:my-10 px-8 sm:px-12 py-10 bg-white rounded-2xl shadow-md ring-1 ring-gray-200">
+
+    <KeyTakeaway text="Every EFP engagement starts with an on-site assessment — not a phone estimate. Henry Kowalec walks your property personally before any scope is set, any recommendation is made, or any work is scheduled. That direct approach is what 30+ years of regional forestry experience looks like in practice." />
+
+    <AuthorByline />
+    <p class="text-xs text-gray-400 mt-1 mb-8">Last reviewed: April 2026 by Henry Kowalec, CF</p>
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-2 mb-4">Forestry Services for Private Landowners and Commercial Clients</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Environmental Forest Products provides certified forestry consulting across Sullivan, Orange, and Ulster counties in New York, plus Pike and Wayne counties in Pennsylvania and Sussex County in New Jersey. Every service is led by Henry Kowalec — a consulting forester with more than 30 years of hands-on experience in this specific region.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      The firm's work ranges from New York's 480-a Forest Tax Law program — where Henry is one of a small number of foresters in the region certified to write the required DEC-approved management plans — to timber harvesting, land clearing, woodlot management, wildlife habitat improvement, and residential tree work. The common thread across all of these services is that every decision is grounded in what Henry actually observes on your property, not in a general estimate or a phone conversation.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-10">
+      Whether you own 10 acres or 1,000, the starting point is the same: a site assessment that tells you what you are working with, what your options are, and what any given course of action is actually worth pursuing. From there, the work is yours to direct.
+    </p>
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mb-6">All Services</h2>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6 mb-12">
+      <ServiceCard title="480-a Forest Tax Law" slug="480a-forest-tax-law" excerpt="Reduce your property taxes with NY's 480-a Forest Tax Law program. Henry is one of a small number of certified foresters in the region qualified to write the required management plans." iconImage="/images/icons/480a-tax-law.png" />
+      <ServiceCard title="Land Clearing" slug="land-clearing" excerpt="Residential and commercial site preparation across Sullivan, Orange, and Ulster counties — clearing expertise grounded in forestry, not just excavation." iconImage="/images/icons/land-clearing.png" />
+      <ServiceCard title="Timber Harvesting" slug="timber-harvesting" excerpt="Selective, sustainable logging services. A consulting forester plans and oversees every harvest to protect your woodland and maximize what the timber is worth." iconImage="/images/icons/timber-harvesting.png" />
+      <ServiceCard title="Sell Standing Timber" slug="sell-standing-timber" excerpt="Timber appraisal, competitive bidding, and sale management. Find out what your timber is actually worth before you accept any offer." iconImage="/images/icons/sell-standing-timber.png" />
+      <ServiceCard title="Woodlot Management" slug="woodlot-management" excerpt="Forest management plans for private landowners — required for 480-a enrollment and the foundation of any long-term woodland stewardship program." iconImage="/images/icons/woodlot-management.png" />
+      <ServiceCard title="Wildlife Habitat" slug="wildlife-habitat-management" excerpt="Targeted forestry practices that improve habitat for deer, turkey, grouse, and native wildlife — fully compatible with 480-a and timber objectives." iconImage="/images/icons/wildlife-habitat.png" />
+      <ServiceCard title="Forest Stewardship Planning" slug="forest-stewardship-planning" excerpt="Comprehensive stewardship planning for private woodland owners — goals-based forest management beyond the 480-a compliance framework." iconImage="/images/icons/woodlot-management.png" />
+      <ServiceCard title="Emerald Ash Borer" slug="emerald-ash-borer" excerpt="Identification, treatment options, and salvage timber strategies for ash trees threatened by emerald ash borer in the Hudson Valley and Catskills." iconImage="/images/icons/tree-planting.png" />
+      <ServiceCard title="Hemlock Woolly Adelgid" slug="hemlock-woolly-adelgid" excerpt="Assessment and treatment guidance for eastern hemlocks under threat from hemlock woolly adelgid — before decline advances past the point of recovery." iconImage="/images/icons/tree-planting.png" />
+      <ServiceCard title="Stump Grinding" slug="stump-grinding" excerpt="Complete stump removal after tree work, land clearing, or timber harvesting — leaving the site clean and ready for its next use." iconImage="/images/icons/stump-grinding.png" />
+      <ServiceCard title="Tree Planting" slug="tree-planting" excerpt="Native species selection, site preparation, and reforestation guidance for New York woodland." iconImage="/images/icons/tree-planting.png" />
       <ServiceCard title="Tree Removal" slug="tree-removal" excerpt="Safe removal of hazard trees, storm-damaged trees, and diseased timber — any size or species." icon="🪚" />
     </div>
-  </section>
+
+    <div class="bg-gray-50 border border-gray-200 rounded-xl p-6 mb-8">
+      <h3 class="font-bold text-[#1a3c1a] text-base mb-3">Free Interactive Tools</h3>
+      <p class="text-gray-600 text-sm mb-4">Estimate costs and savings before your first call. These tools use regional pricing and forestry benchmarks for the Hudson Valley and Catskills.</p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <a href="/services/480a-forest-tax-law/480a-savings-calculator" class="flex items-center gap-3 p-3 bg-white border border-gray-200 rounded-lg hover:border-[#2d5a2d] hover:bg-green-50 transition-colors group">
+          <span class="text-xl" aria-hidden="true">📊</span>
+          <div>
+            <div class="font-semibold text-[#1a3c1a] text-sm group-hover:text-[#2d5a2d]">480-a Tax Savings Calculator</div>
+            <div class="text-xs text-gray-500">Estimate annual property and school tax savings</div>
+          </div>
+        </a>
+        <a href="/services/sell-standing-timber/timber-value-estimator" class="flex items-center gap-3 p-3 bg-white border border-gray-200 rounded-lg hover:border-[#2d5a2d] hover:bg-green-50 transition-colors group">
+          <span class="text-xl" aria-hidden="true">🌳</span>
+          <div>
+            <div class="font-semibold text-[#1a3c1a] text-sm group-hover:text-[#2d5a2d]">Timber Value Estimator</div>
+            <div class="text-xs text-gray-500">Estimate stumpage value by species and diameter</div>
+          </div>
+        </a>
+        <a href="/services/tree-removal/tree-removal-cost-calculator" class="flex items-center gap-3 p-3 bg-white border border-gray-200 rounded-lg hover:border-[#2d5a2d] hover:bg-green-50 transition-colors group">
+          <span class="text-xl" aria-hidden="true">🪓</span>
+          <div>
+            <div class="font-semibold text-[#1a3c1a] text-sm group-hover:text-[#2d5a2d]">Tree Removal Cost Calculator</div>
+            <div class="text-xs text-gray-500">Local price range by size, species, and access</div>
+          </div>
+        </a>
+        <a href="/services/land-clearing/land-clearing-cost-calculator" class="flex items-center gap-3 p-3 bg-white border border-gray-200 rounded-lg hover:border-[#2d5a2d] hover:bg-green-50 transition-colors group">
+          <span class="text-xl" aria-hidden="true">🚜</span>
+          <div>
+            <div class="font-semibold text-[#1a3c1a] text-sm group-hover:text-[#2d5a2d]">Land Clearing Cost Calculator</div>
+            <div class="text-xs text-gray-500">Per-acre estimates by density, terrain, and disposal</div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div class="mt-4 pt-6 border-t border-gray-200">
+      <p class="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-2">Service Area</p>
+      <p class="text-sm text-gray-600 leading-relaxed">
+        All services are available in <a href="/locations/sullivan-county-ny" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">Sullivan County</a>, <a href="/locations/orange-county-ny" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">Orange County</a>, and <a href="/locations/ulster-county-ny" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">Ulster County</a>, NY. Select services are available in Pike and Wayne counties, PA and Sussex County, NJ. Call <a href="tel:+18454980208" class="text-[#2d5a2d] font-semibold">(845) 754-8242</a> to confirm availability for your location.
+      </p>
+    </div>
+
+  </article>
+
 </ServiceLayout>

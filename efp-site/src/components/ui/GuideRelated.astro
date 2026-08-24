@@ -1,0 +1,57 @@
+---
+// GuideRelated.astro
+// Sidebar related guides block — same-pillar contextual links.
+// Desktop: static bottom of sidebar. Mobile: horizontal scroll cards at bottom of article.
+
+interface LinkItem {
+  label: string;
+  href: string;
+}
+
+interface Props {
+  links: LinkItem[];
+}
+
+const { links } = Astro.props;
+if (links.length === 0) return;
+---
+
+{links.length > 0 && (
+  <>
+    <!-- Desktop: vertical list -->
+    <div class="hidden lg:block">
+      <p class="text-[10px] font-semibold tracking-[0.15em] uppercase text-gray-400 mb-3">Related Guides</p>
+      <hr class="border-gray-200 mb-3" />
+      <ul class="space-y-0">
+        {links.map((link, i) => (
+          <li>
+            {i > 0 && <hr class="border-gray-100 my-0" />}
+            <a
+              href={link.href}
+              class="block py-2.5 text-sm leading-snug text-[#1a3c1a] hover:text-[#2d5a2d] transition-colors"
+              style="font-family: Georgia, 'Times New Roman', serif;"
+            >
+              {link.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <!-- Mobile: horizontal scroll cards -->
+    <div class="lg:hidden mt-10">
+      <p class="text-[10px] font-semibold tracking-[0.15em] uppercase text-gray-400 mb-3">Related Guides</p>
+      <div class="flex gap-3 overflow-x-auto pb-2 -mx-1 px-1 snap-x snap-mandatory">
+        {links.map(link => (
+          <a
+            href={link.href}
+            class="flex-shrink-0 snap-start w-48 bg-white border border-gray-200 rounded-lg p-3 text-sm text-[#1a3c1a] hover:border-[#2d5a2d] hover:text-[#2d5a2d] transition-colors leading-snug"
+            style="font-family: Georgia, 'Times New Roman', serif;"
+          >
+            {link.label}
+          </a>
+        ))}
+      </div>
+    </div>
+  </>
+)}

@@ -30,7 +30,7 @@ const hasContent = upLinks.length + downLinks.length + serviceLinks.length + loc
             {upLinks.map(link => (
               <li>
                 <a href={link.href} class="flex items-center gap-2 text-sm text-[#1a3c1a] font-medium hover:text-[#2d5a2d] transition-colors">
-                  <svg class="w-4 h-4 text-[#2d5a2d] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/></svg>
+                  <svg class="w-4 h-4 text-[#2d5a2d] flex-shrink-0" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/></svg>
                   {link.label}
                 </a>
               </li>
@@ -46,7 +46,7 @@ const hasContent = upLinks.length + downLinks.length + serviceLinks.length + loc
             {downLinks.map(link => (
               <li>
                 <a href={link.href} class="flex items-center gap-2 text-sm text-[#1a3c1a] hover:text-[#2d5a2d] transition-colors">
-                  <svg class="w-4 h-4 text-gray-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                  <svg class="w-4 h-4 text-gray-400 flex-shrink-0" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
                   {link.label}
                 </a>
               </li>
@@ -62,7 +62,7 @@ const hasContent = upLinks.length + downLinks.length + serviceLinks.length + loc
             {serviceLinks.map(link => (
               <li>
                 <a href={link.href} class="flex items-center gap-2 text-sm text-[#1a3c1a] hover:text-[#2d5a2d] transition-colors">
-                  <svg class="w-4 h-4 text-gray-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                  <svg class="w-4 h-4 text-gray-400 flex-shrink-0" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
                   {link.label}
                 </a>
               </li>
@@ -78,7 +78,7 @@ const hasContent = upLinks.length + downLinks.length + serviceLinks.length + loc
             {locationLinks.map(link => (
               <li>
                 <a href={link.href} class="flex items-center gap-2 text-sm text-[#1a3c1a] hover:text-[#2d5a2d] transition-colors">
-                  <svg class="w-4 h-4 text-gray-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/></svg>
+                  <svg class="w-4 h-4 text-gray-400 flex-shrink-0" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/></svg>
                   {link.label}
                 </a>
               </li>

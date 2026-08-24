@@ -4,7 +4,7 @@
 // compact: true → inline one-liner (for article tops, guide index)
 // compact: false (default) → full card with bio and phone
 
-import { author } from '../../data/client.config';
+import { author, phone } from '../../data/client.config';
 
 interface Props {
   compact?: boolean;
@@ -15,9 +15,11 @@ const { compact = false } = Astro.props;
 {compact ? (
   <!-- Compact variant: single line, inline -->
   <div class="flex items-center gap-2 text-sm text-gray-500 my-4">
-    <span class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-[#2d5a2d] text-white text-xs font-bold flex-shrink-0" aria-hidden="true">
-      {author.name.charAt(0)}
-    </span>
+    <img
+      src="/images/henry-kowalec-consulting-forester-efp.webp"
+      alt="Henry Kowalec, Consulting Forester"
+      class="w-7 h-7 rounded-full object-cover flex-shrink-0"
+    />
     <span>
       By <strong class="text-gray-700">{author.name}</strong>
       <span class="mx-1">·</span>
@@ -30,12 +32,11 @@ const { compact = false } = Astro.props;
   <!-- Full variant: card with bio and phone -->
   <aside class="bg-gray-50 border border-gray-200 rounded-lg p-6 my-8">
     <div class="flex items-start gap-4">
-      <div
-        class="w-14 h-14 rounded-full bg-[#1a3c1a] text-white flex items-center justify-center text-xl font-bold flex-shrink-0"
-        aria-hidden="true"
-      >
-        {author.name.charAt(0)}
-      </div>
+      <img
+        src="/images/henry-kowalec-consulting-forester-efp.webp"
+        alt="Henry Kowalec, Consulting Forester"
+        class="w-14 h-14 rounded-full object-cover flex-shrink-0"
+      />
       <div class="min-w-0">
         <p class="text-xs font-semibold uppercase tracking-wider text-gray-500 mb-1">Written by</p>
         <p class="font-bold text-gray-900 text-lg leading-tight">{author.name}</p>
@@ -46,13 +47,13 @@ const { compact = false } = Astro.props;
           {author.bio}
         </p>
         <a
-          href={`tel:${author.phoneRaw}`}
+          href={`tel:${phone.trackingTel}`}
           class="inline-flex items-center gap-2 text-[#2d5a2d] hover:text-[#1a3c1a] font-semibold text-sm transition-colors"
         >
           <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
             <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
           </svg>
-          {author.phone}
+          {phone.display}
         </a>
       </div>
     </div>

@@ -1,16 +1,19 @@
 ---
 // ServiceSchema.astro
-// Injects Service + LocalBusiness JSON-LD for service pages AND county location pages.
-// Uses pageType prop to distinguish — no separate LocationSchema component exists or is needed.
+// Injects Service + BreadcrumbList + Person JSON-LD for service pages and county location pages.
 //
 // ─── DOCTRINE ─────────────────────────────────────────────────────────────────
-// The architecture blueprint listed "LocationSchema.astro" as a separate component.
-// That was consolidated during scaffold: ServiceSchema handles both page types via
-// the pageType prop. This is intentional — the schema structure is identical enough
-// that a separate component adds complexity without benefit.
-//
 // pageType: 'service'   → /services/ pages and /lp/ landing pages
-// pageType: 'location'  → /locations/ county pages (adds county-specific areaServed)
+// pageType: 'location'  → /services/[service]/[county] county-scoped pages
+//
+// Emits THREE separate top-level JSON-LD blocks (each its own <script> tag):
+//   1. Service schema          — the service entity
+//   2. BreadcrumbList schema   — standalone, NOT nested inside Service (required for rich results)
+//   3. Person schema           — Henry Kowalec with hasCredential (E-E-A-T signal)
+//
+// ⚠️ BreadcrumbList MUST be a separate top-level block — embedding it inside
+//    another schema's property with its own @context is invalid JSON-LD and
+//    prevents Google from generating breadcrumb rich results.
 //
 // ⚠️ Agent may generate this schema for NET-NEW pages only.
 //    Any page already indexed and ranking = manual edit only.
@@ -31,35 +34,50 @@ interface Props {
 
 const { pageType, serviceName, description, url, areaServed = [], crumbs } = Astro.props;
 
-const baseOrg = {
-  "@type": ["LocalBusiness", "ProfessionalService"],
-  "@id": `${business.domain}/#organization`,
-  "name": business.name,
-  "url": business.domain,
-  "telephone": business.phone,
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": business.address.city,
-    "addressRegion": business.address.stateAbbr,
-    "addressCountry": business.address.country,
-  },
-};
-
+// ─── 1. Service schema ────────────────────────────────────────────────────────
 const serviceSchema = {
   "@context": "https://schema.org",
   "@type": "Service",
+  "@id": `${url}#service`,
   "name": serviceName,
   "description": description,
   "url": url,
-  "provider": baseOrg,
+  "provider": {
+    "@id": `${business.domain}/#organization`,
+  },
   ...(areaServed.length > 0 && {
     "areaServed": areaServed.map(area => ({
       "@type": "AdministrativeArea",
       "name": area,
     })),
   }),
-  "breadcrumb": buildBreadcrumbs(crumbs),
+};
+
+// ─── 2. BreadcrumbList — standalone top-level block ──────────────────────────
+// buildBreadcrumbs() already includes "@context" — emit as its own <script> tag.
+const breadcrumbSchema = buildBreadcrumbs(crumbs);
+
+// ─── 3. Person schema — Henry Kowalec with hasCredential (E-E-A-T) ───────────
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": `${business.domain}/#henry-kowalec`,
+  "name": author.name,
+  "jobTitle": "Certified Consulting Forester",
+  "url": `${business.domain}/about`,
+  "telephone": author.phoneRaw,
+  "hasCredential": {
+    "@type": "EducationalOccupationalCredential",
+    "credentialCategory": "professional certification",
+    "name": "Certified Forester (CF), Society of American Foresters",
+  },
+  "worksFor": {
+    "@id": `${business.domain}/#organization`,
+  },
+  "sameAs": [...author.sameAs],
 };
 ---
 
 <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(personSchema)} />

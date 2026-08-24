@@ -1,15 +1,19 @@
 ---
-title: "New York's 480-a Forest Tax Law: Complete Guide for Landowners"
-slug: "480a-forest-tax-law-new-york"
-description: "A complete guide to New York's 480-a Forest Tax Law program — eligibility requirements, how much you can save, the management plan requirement, application process, rollback penalties, and how to enroll in Sullivan, Orange, and Ulster counties."
+title: "NY 480-a Forest Tax Law: How to Cut Property Taxes 80%"
+titleFull: "480-a Forest Tax Law NY: Cut Your Property Taxes"
+description: "How NY's 480-a Forest Tax Law lowers property taxes on wooded land — eligibility, plan requirements & savings. Certified forester. Call (845) 754-8242."
 keyTakeaway: "New York's 480-a Forest Tax Law program allows qualifying private woodland owners with 50 or more contiguous acres to reduce property and school taxes by up to 80% of assessed land value, in exchange for a 10-year commitment to manage their forest under a DEC-approved plan written by a certified forester."
 datePublished: "2025-03-01"
 dateModified: "2026-03-01"
-author: "Henry Kowalec"
-authorTitle: "Consulting Forester"
-authorPhone: "(845) 754-8242"
-category: "480-a Forest Tax Law"
-tags: ["480-a", "forest tax law", "New York", "property tax", "woodland management", "Sullivan County", "Orange County", "Ulster County"]
+isPillar: true
+relatedServices:
+  - "480a-forest-tax-law"
+  - "woodlot-management"
+  - "timber-harvesting"
+relatedLocations:
+  - "sullivan-county-ny"
+  - "orange-county-ny"
+  - "ulster-county-ny"
 faqs:
   - question: "What is the minimum acreage required for 480-a enrollment?"
     answer: "New York's 480-a program requires at least 50 contiguous acres of privately owned forest land. Land divided by roads, easements, or rights-of-way is still considered contiguous as long as vehicle access for forest management is not prevented."
@@ -139,7 +143,7 @@ The commitment to follow the management plan runs with the property, not the own
 
 ### Sullivan County
 
-Sullivan County is one of the most productive counties in New York for 480-a enrollments. Roughly 65% of the county is forested, with large private woodland blocks across all 15 townships. The dominant hardwood species — red oak, white oak, sugar maple, black cherry, and beech — have established stumpage markets, and the relatively modest assessed values on forested acreage make the program financially attractive even for properties at the 50-acre minimum. Environmental Forest Products is based in Westbrookville, Sullivan County, and has prepared 480-a management plans for landowners throughout the county.
+Sullivan County is one of the most productive counties in New York for 480-a enrollments. Environmental Forest Products works with the DEC Region 3 Regional Forester on plan submissions and harvest notices for properties throughout the county. Roughly 65% of the county is forested, with large private woodland blocks across all 15 townships. The dominant hardwood species — red oak, white oak, sugar maple, black cherry, and beech — have established stumpage markets, and the relatively modest assessed values on forested acreage make the program financially attractive even for properties at the 50-acre minimum. Environmental Forest Products is based in Westbrookville, Sullivan County, and has prepared 480-a management plans for landowners throughout the county.
 
 ### Orange County
 
@@ -149,13 +153,13 @@ Orange County's more active real estate market produces higher assessed values o
 
 Ulster County's Catskill-facing terrain produces some of the most diverse forest stands in the region — sugar maple, yellow birch, and beech at higher elevations, with red oak and black cherry in the transitional zones. The western townships of Shandaken, Hardenburgh, and Denning contain large private woodland holdings well-suited to 480-a enrollment. EFP serves Ulster County landowners for both 480-a management plan preparation and broader woodland management consulting.
 
-## Is 480-a Right for Your Property?
+## When 480-a Enrollment Makes Financial Sense
 
 A property is a reasonable candidate for a 480-a eligibility review if it has 50 or more contiguous acres of wooded land in New York State, has not been recently clear-cut without a management program in place, and the landowner is willing to follow a forest management plan and file the annual commitment.
 
-The only way to know whether a specific property qualifies — and what the management plan would actually require — is a site visit. That visit identifies the eligible acreage, assesses stand conditions, and gives the landowner a realistic picture of what enrollment involves before any paperwork begins. There is no obligation and no cost to the initial consultation.
+The only way to know whether a specific property qualifies — and what the management plan would actually require — is a site visit. That visit identifies the eligible acreage, assesses stand conditions, and gives the landowner a realistic picture of what enrollment involves before any paperwork begins. There is no obligation and no cost to the initial consultation. The [New York Forest Owners Association (NYFOA)](https://nyfoa.org) is a useful resource for landowners who want to do their own research before scheduling a visit.
 
-Call Henry Kowalec at (845) 754-8242 or use the contact form to request an eligibility review.
+Ready to [get a 480-a management plan](/services/480a-forest-tax-law) for your property? Call Henry Kowalec at (845) 754-8242, use the [480-a eligibility pre-check tool](/services/480a-forest-tax-law) on the service page, or [estimate your savings with the 480-a calculator](/services/480a-forest-tax-law/480a-savings-calculator) to start a conversation.
 
 ---
 

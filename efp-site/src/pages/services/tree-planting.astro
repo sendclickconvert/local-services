@@ -4,9 +4,11 @@ import PageHero from '../../components/ui/PageHero.astro';
 import Breadcrumb from '../../components/ui/Breadcrumb.astro';
 import FAQSection from '../../components/ui/FAQSection.astro';
 import KeyTakeaway from '../../components/ui/KeyTakeaway.astro';
+import EstimateForm from '../../components/forms/EstimateForm.astro';
 import AuthorByline from '../../components/ui/AuthorByline.astro';
 import ServiceSchema from '../../components/schema/ServiceSchema.astro';
 import FAQSchema from '../../components/schema/FAQSchema.astro';
+import OptimizedImage from '../../components/ui/OptimizedImage.astro';
 import { buildTitle, buildCanonical, buildDescription } from '../../lib/seo';
 
 const title = buildTitle("Tree Planting & Reforestation — Hudson Valley NY | EFP");
@@ -39,6 +41,18 @@ const faqs = [
     question: "Do you source the planting stock?",
     answer: "Environmental Forest Products can advise on species selection and appropriate nursery sources for the region. New York State DEC regional nurseries produce bare-root native species stock at low cost for qualifying reforestation projects. Henry can help identify whether your project qualifies for state nursery stock and what the ordering and delivery timeline looks like.",
   },
+  {
+    question: "What's the best time of year to plant trees in the Hudson Valley?",
+    answer: "Fall — September through October — is ideal for most tree species in Sullivan and Orange counties. Cooler temperatures and fall rains reduce transplant stress, and trees focus energy on root establishment rather than leaf production. Spring, April through May, is our second choice — plant after last frost but before summer heat arrives. Avoid summer planting if possible: June through August heat and drought stress significantly reduce survival rates unless you can commit to intensive watering throughout the season.",
+  },
+  {
+    question: "How do you choose which tree species to plant?",
+    answer: "We base species selection on three factors: your objectives — timber income, wildlife habitat, privacy screening — site conditions including soil type, drainage, and sun exposure, and climate adaptability for USDA Zone 5–6. For Sullivan County, we typically recommend native species like oaks, black cherry, and white pine. They are proven performers in our climate, provide wildlife value, and many have future timber value if you are planning long-term forest management. We will walk your property during the assessment and make specific recommendations based on what we observe.",
+  },
+  {
+    question: "What's the survival rate for newly planted trees?",
+    answer: "With proper species selection, site preparation, and planting technique, we typically see 85–95% survival rates for fall-planted trees in the Hudson Valley. Spring-planted trees have slightly lower survival — 75–85% — due to summer heat stress. The key factors are choosing the right species for your site, planting at the correct depth, protecting from deer browse with tree shelters or fencing, and ensuring adequate water during the first growing season. We provide planting instructions and first-year maintenance guidance with every reforestation project.",
+  },
 ];
 ---
 
@@ -60,18 +74,40 @@ const faqs = [
     subtitle="Species selection, site prep, and reforestation guidance — Sullivan, Orange, and Ulster counties"
   />
 
-  <article class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+  <article class="max-w-4xl mx-auto my-8 sm:my-10 px-8 sm:px-12 py-10 bg-white rounded-2xl shadow-md ring-1 ring-gray-200">
 
     <KeyTakeaway text="Tree planting and reforestation on private land in New York requires careful species selection based on site conditions — soil drainage, light availability, elevation, and management goals. A site assessment by a certified forester prevents costly species mismatches and sets reforestation projects up for long-term success." />
 
     <AuthorByline />
+    <p class="text-xs text-gray-400 mt-1 mb-8">Last reviewed: April 2026 by Henry Kowalec, CF</p>
 
-    <img
+    <OptimizedImage
       src="/images/uploads/spruce-timber-harvest-millbrook-ny.jpg"
       alt="Managed forest stand in Millbrook, NY — the result of long-term woodland management including selective harvest and species improvement"
       class="w-full rounded-xl shadow-md my-8"
-      loading="lazy"
+      sizes="(max-width: 768px) 100vw, 768px"
     />
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Best Time for Tree Planting in New York</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Timing is one of the most consequential decisions in any tree planting project — and one of the most frequently mishandled. We typically recommend fall planting for most species in the Hudson Valley, with spring as a viable second option. Here is how the planting windows break down for Sullivan and Orange counties:
+    </p>
+    <ul class="space-y-3 mb-6">
+      {[
+        ["Fall planting — September through October (recommended)", "Cooler temperatures and fall rains significantly reduce transplant stress. Trees focus energy on root establishment rather than leaf and shoot production. Root systems established in fall are better positioned to support spring growth, leading to higher survival rates and faster early growth compared to spring plantings."],
+        ["Spring planting — April through May", "A viable second option after last frost and before summer heat arrives. Spring-planted trees require more attentive watering through the first summer, and survival rates are typically 10–15 percentage points lower than fall plantings on similar sites."],
+        ["Summer planting — June through August (avoid when possible)", "Heat stress and drought pressure during Hudson Valley summers make summer planting the highest-risk window. If summer planting is unavoidable — for schedule or site prep reasons — intensive irrigation throughout the season is non-negotiable for acceptable survival rates."],
+        ["Winter dormant planting — December through March", "Bare-root stock of certain species can be planted during winter dormancy when the ground is not frozen. This approach is less common but viable for specific situations and species. We can advise on winter planting feasibility during the site assessment."],
+      ].map(([heading, body]) => (
+        <li class="flex gap-3">
+          <svg class="w-5 h-5 text-[#2d5a2d] flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+          <div>
+            <span class="font-semibold text-gray-900">{heading}.</span>
+            <span class="text-gray-600"> {body}</span>
+          </div>
+        </li>
+      ))}
+    </ul>
 
     <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Reforestation as Part of a Management Strategy</h2>
     <p class="text-gray-700 leading-relaxed mb-4">
@@ -159,7 +195,29 @@ const faqs = [
       after the first growing season reveals the problem.
     </p>
 
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Tree Planting Cost Factors</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Tree planting project costs vary considerably based on species, stock size, site conditions, and scope. Here is what typically drives the total investment for a reforestation project in Sullivan, Orange, or Ulster County:
+    </p>
+    <ul class="list-disc pl-6 text-gray-700 mb-6 space-y-2 text-sm leading-relaxed">
+      <li><strong>Seedling vs. sapling stock.</strong> One- to two-foot bare-root seedlings sourced through the NY State DEC nursery program run $5–15 each — the most cost-effective option for large-scale reforestation. Four- to six-foot containerized saplings from commercial nurseries run $50–150 each but establish faster and are more visible immediately after planting.</li>
+      <li><strong>Site preparation requirements.</strong> Sites with competing vegetation — grasses, shrubs, invasive species — require clearing before planting. Depending on density and acreage, site prep can represent a meaningful portion of project cost but is essential for survival rates.</li>
+      <li><strong>Deer protection.</strong> Individual tree shelters (plastic mesh tubes) run $3–8 per seedling installed. Fencing entire planting blocks is cost-effective at higher densities. Skipping deer protection on unprotected sites in Sullivan County is one of the most common causes of reforestation failure — the cost is worth budgeting from the start.</li>
+      <li><strong>Labor and equipment.</strong> Planting rates vary with terrain, stock size, and site prep requirements. Flat, cleared sites are faster than steep or brushy terrain.</li>
+      <li><strong>Typical project range.</strong> A 20–50 tree reforestation project on a prepared site in Sullivan County typically runs $500–2,000 depending on species, stock size, and protection requirements. Larger plantings of 100+ trees with DEC bare-root stock and proper deer protection can be accomplished for $1,500–4,000 on suitable sites.</li>
+    </ul>
+
+    <div class="mt-10 pt-6 border-t border-gray-200">
+      <p class="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-2">Sources &amp; Further Reading</p>
+      <ul class="text-xs text-gray-500 space-y-1">
+        <li><a href="https://www.dec.ny.gov/lands/34355.html" target="_blank" rel="noopener noreferrer" class="text-[#2d5a2d] hover:underline">NY DEC — Reforestation &amp; Tree Planting</a></li>
+        <li><a href="https://blogs.cornell.edu/woodlandstewardship/" target="_blank" rel="noopener noreferrer" class="text-[#2d5a2d] hover:underline">Cornell Cooperative Extension — Woodland Stewardship</a></li>
+        <li><a href="https://www.fs.usda.gov/managing-land/national-forests-grasslands/reforestation" target="_blank" rel="noopener noreferrer" class="text-[#2d5a2d] hover:underline">USDA Forest Service — Reforestation Guidance</a></li>
+      </ul>
+    </div>
+
     <FAQSection items={faqs} />
+    <EstimateForm variant="b2c" />
 
   </article>
 </ServiceLayout>

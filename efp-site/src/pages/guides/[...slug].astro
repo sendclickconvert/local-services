@@ -29,6 +29,7 @@ const {
   dateModified,
   isPillar,
   hubSlug,
+  spokeLinks,
   relatedServices,
   relatedLocations,
   faqs,
@@ -47,32 +48,63 @@ const crumbs = [
   { label: title, href: `/guides/${entry.slug}` },
 ];
 
-// Build RelatedLinks props
-const upLinks = !isPillar && hubSlug
-  ? [{ label: "Complete 480-a Forest Tax Law Guide", href: `/guides/${hubSlug}` }]
+// Build RelatedLinks props — look up hub title dynamically, auto-build downLinks for pillars
+const allGuides = await getCollection('guides');
+
+const upLinks = (!isPillar && hubSlug)
+  ? (() => {
+      const hub = allGuides.find(g => g.slug === hubSlug);
+      return [{ label: hub?.data.title ?? 'Complete Guide', href: `/guides/${hubSlug}` }];
+    })()
   : undefined;
 
-const serviceLinks = relatedServices.map(slug => ({
-  label: slug.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase()),
+const downLinks = isPillar
+  ? [
+      ...allGuides
+        .filter(g => g.data.hubSlug === entry.slug)
+        .map(g => ({ label: g.data.title, href: `/guides/${g.slug}` })),
+      ...(spokeLinks ?? []),
+    ]
+  : undefined;
+
+const serviceLinks = relatedServices.map((slug: string) => ({
+  label: slug.replace(/-/g, ' ').replace(/\b\w/g, (c: string) => c.toUpperCase()),
   href: `/services/${slug}`,
 }));
 
-const locationLinks = relatedLocations.map(slug => ({
-  label: slug.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase()),
+const locationLinks = relatedLocations.map((slug: string) => ({
+  label: slug.replace(/-/g, ' ').replace(/\b\w/g, (c: string) => c.toUpperCase()),
   href: `/locations/${slug}`,
 }));
+
+// Build related guides for sidebar — same-pillar guides, excluding current
+const pillarSlug = isPillar ? entry.slug : (hubSlug ?? null);
+const relatedGuides = pillarSlug
+  ? allGuides
+      .filter(g =>
+        g.slug !== entry.slug &&
+        (g.data.hubSlug === pillarSlug || g.slug === pillarSlug)
+      )
+      .slice(0, 4)
+      .map(g => ({ label: g.data.title, href: `/guides/${g.slug}` }))
+  : [];
 ---
 
 <GuideLayout
-  title={buildTitle(title)}
+  title={entry.data.titleFull ?? buildTitle(title)}
   description={buildDescription(description)}
   canonicalUrl={canonicalUrl}
   ogImage={ogImage}
   robotsContent={robotsContent}
   keyTakeaway={keyTakeaway}
   upLinks={upLinks}
+  downLinks={downLinks}
   serviceLinks={serviceLinks}
   locationLinks={locationLinks}
+  guideSlug={entry.slug}
+  hubSlug={hubSlug}
+  isPillar={isPillar}
+  relatedGuides={relatedGuides}
 >
   <!-- ⚠️ BlogPosting schema requires 3 OG image files before publish: 16:9, 4:3, 1:1 -->
   <ArticleSchema
@@ -91,7 +123,24 @@ const locationLinks = relatedLocations.map(slug => ({
   <h1 class="text-3xl sm:text-4xl font-bold text-[#1a3c1a] mt-6 mb-3 leading-tight">{title}</h1>
   <p class="text-sm text-gray-400 mb-8">Last updated: {dateModified}</p>
 
-  <Content />
+  <div class="prose prose-lg max-w-none mt-6
+    prose-headings:text-[#1a3c1a] prose-headings:font-bold prose-headings:leading-snug
+    prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-4
+    prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3
+    prose-h4:text-base prose-h4:mt-6 prose-h4:mb-2
+    prose-p:text-gray-700 prose-p:leading-relaxed prose-p:mb-4
+    prose-a:text-[#2d5a2d] prose-a:font-medium prose-a:no-underline hover:prose-a:underline
+    prose-strong:text-gray-900 prose-strong:font-semibold
+    prose-ul:my-4 prose-ul:pl-6 prose-li:my-1 prose-li:text-gray-700
+    prose-ol:my-4 prose-ol:pl-6
+    prose-li:marker:text-[#2d5a2d]
+    prose-table:text-sm prose-table:w-full
+    prose-th:bg-[#f0f7f0] prose-th:text-[#1a3c1a] prose-th:font-semibold prose-th:px-3 prose-th:py-2
+    prose-td:px-3 prose-td:py-2 prose-td:align-top
+    prose-blockquote:border-l-4 prose-blockquote:border-[#2d5a2d] prose-blockquote:bg-green-50 prose-blockquote:px-4 prose-blockquote:py-2 prose-blockquote:not-italic prose-blockquote:text-gray-700
+    prose-hr:border-gray-200 prose-hr:my-8">
+    <Content />
+  </div>
 
   {faqs.length > 0 && <FAQSection items={faqs} />}
 </GuideLayout>

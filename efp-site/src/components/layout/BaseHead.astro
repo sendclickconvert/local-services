@@ -12,6 +12,7 @@ interface Props {
   canonicalUrl: string;       // Always use buildCanonical() — never inline
   ogImage?: string;           // Absolute URL to OG image
   robotsContent?: string;     // Pass noindex() result; undefined = no tag rendered
+  ogType?: string;            // "website" (default) or "article" for guide pages
 }
 
 const {
@@ -20,6 +21,7 @@ const {
   canonicalUrl,
   ogImage = `${business.domain}${seo.ogImageDefault}`,
   robotsContent,
+  ogType = "website",
 } = Astro.props;
 
 const metaDescription = buildDescription(description);
@@ -33,12 +35,18 @@ const metaDescription = buildDescription(description);
 
 {robotsContent && <meta name="robots" content={robotsContent} />}
 
+<!-- Google Search Console verification -->
+<meta name="google-site-verification" content="de45fdb82a1a479089feec034e41c294" />
+
+<!-- Bing IndexNow / Webmaster Tools verification -->
+<meta name="msvalidate.01" content="a9b9cd996293f906fcab5d6bdab79acb" />
+
 <!-- Open Graph -->
 <meta property="og:title" content={title} />
 <meta property="og:description" content={metaDescription} />
 <meta property="og:url" content={canonicalUrl} />
 <meta property="og:image" content={ogImage} />
-<meta property="og:type" content="website" />
+<meta property="og:type" content={ogType} />
 <meta property="og:site_name" content={business.name} />
 
 <!-- Twitter Card -->

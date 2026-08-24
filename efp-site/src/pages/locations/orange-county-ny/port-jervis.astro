@@ -1,0 +1,187 @@
+---
+// pages/locations/orange-county-ny/port-jervis.astro
+// CUSTOM — Delaware River tri-state confluence, chestnut oak/pitch pine ridge character,
+// cross-state regulatory questions, high Orange County assessment + 480-a savings narrative.
+
+import LocationLayout from '../../../layouts/LocationLayout.astro';
+import PageHero from '../../../components/ui/PageHero.astro';
+import Breadcrumb from '../../../components/ui/Breadcrumb.astro';
+import FAQSection from '../../../components/ui/FAQSection.astro';
+import KeyTakeaway from '../../../components/ui/KeyTakeaway.astro';
+import AuthorByline from '../../../components/ui/AuthorByline.astro';
+import EstimateForm from '../../../components/forms/EstimateForm.astro';
+import ServiceSchema from '../../../components/schema/ServiceSchema.astro';
+import FAQSchema from '../../../components/schema/FAQSchema.astro';
+import { buildTitle, buildCanonical, buildDescription } from '../../../lib/seo';
+import { services } from '../../../data/services';
+
+const title = buildTitle('Forestry Consulting in Port Jervis, NY — Delaware River Tri-State Region');
+const description = buildDescription(
+  'Forestry consulting in Port Jervis, NY — timber appraisals, 480-a enrollment, land clearing, and woodland management for NY/NJ/PA tri-state landowners in the Delaware River region. Henry Kowalec. (845) 754-8242.'
+);
+const canonicalUrl = buildCanonical('/locations/orange-county-ny/port-jervis');
+
+const crumbs = [
+  { label: 'Home',          href: '/' },
+  { label: 'Locations',     href: '/locations' },
+  { label: 'Orange County', href: '/locations/orange-county-ny' },
+  { label: 'Port Jervis',   href: '/locations/orange-county-ny/port-jervis' },
+];
+
+const faqs = [
+  {
+    question: 'Does EFP provide forestry consulting near Port Jervis, NY?',
+    answer: 'Yes. Environmental Forest Products serves private landowners in and around Port Jervis — including the tri-state area where New York, New Jersey, and Pennsylvania meet along the Delaware River. Henry Kowalec\'s service area covers all three states, and he has conducted timber appraisals, 480-a management plans, and land clearing assessments on properties throughout the Minisink Valley and Delaware Water Gap region. Call (845) 754-8242 to discuss your property.',
+  },
+  {
+    question: 'What makes the Port Jervis area distinct from other Orange County forestry markets?',
+    answer: 'Port Jervis sits at the confluence of New York, New Jersey, and Pennsylvania — the only point in the eastern United States where three states meet at a river. The forest character here reflects the Delaware Water Gap region: chestnut oak and pitch pine on the dry, rocky ridgelines above the river; mixed hardwood (red oak, red maple, black birch) on the mid-elevation slopes; and hemlock in the sheltered ravines and stream drainages. This is a drier, more xeric ridge character than the interior Hudson Valley hardwood forest — the management approach and the buyer market for the timber are different from what applies to mid-Ulster County oak-cherry stands.',
+  },
+  {
+    question: 'My property spans the New York–New Jersey border near Port Jervis. Does EFP work across the state line?',
+    answer: 'Yes. Henry Kowalec\'s service area covers New York, New Jersey, and Pennsylvania, which is exactly the tri-state situation that Port Jervis-area landowners frequently face. Properties that straddle a state border are subject to the regulatory framework of each state for the acreage within that state — New York\'s 480-a program applies to the qualifying New York acreage, and New Jersey\'s Farmland Assessment program (which can include qualified woodland) may apply to the New Jersey portion. A consultant who works in all three states can give you an accurate picture of what programs apply to each portion of your land.',
+  },
+  {
+    question: 'Can Port Jervis area landowners qualify for New York\'s 480-a Forest Tax Law?',
+    answer: 'Yes. Orange County properties near Port Jervis that have 50 or more contiguous acres of qualifying woodland on the New York side of the border are 480-a candidates. Orange County\'s assessed property values are notably higher than in Sullivan County to the north — which means the dollar savings from an 80% exemption on enrolled acreage are proportionally larger. A property with $5,000–$6,000 in annual woodland taxes can see net savings of $35,000 or more over 15 years after plan costs and the 6% yield tax on commercial harvests. Henry Kowalec handles the complete enrollment process for Orange County landowners.',
+  },
+  {
+    question: 'What timber species are most valuable on Port Jervis area ridgelines?',
+    answer: 'The ridge-top forest in the Port Jervis area — chestnut oak, red oak, black birch on the slopes — has a timber market profile that differs from the prime hardwood timber types further north. Chestnut oak, historically sought for its tannin-rich bark, has a current timber market among specialty hardwood buyers and flooring producers. Red oak is actively purchased by flooring and structural lumber mills throughout the region. Black birch is a secondary hardwood with niche millwork markets. The practical challenge with ridge-top timber in this area is access — rocky terrain and limited road access affect what harvesting methods are feasible. A site assessment determines what the timber is worth and what equipment can realistically operate on your specific parcel.',
+  },
+  {
+    question: 'Does land clearing work differently near the Delaware River than in other parts of Orange County?',
+    answer: 'Any land clearing within the Delaware River\'s floodplain or within established riparian buffer zones is subject to Army Corps of Engineers Section 404 permits, New York DEC Freshwater Wetlands Act requirements, and potentially New Jersey or Pennsylvania regulatory requirements for properties near the border. For clearing on upland parcels away from the river corridor, standard New York DEC best management practices apply. Every clearing project EFP undertakes starts with a timber assessment — if merchantable trees are present, the timber value is recovered before the clearing work begins, which in many cases meaningfully offsets the clearing cost.',
+  },
+];
+---
+
+<LocationLayout title={title} description={description} canonicalUrl={canonicalUrl}>
+  <ServiceSchema
+    pageType="location"
+    serviceName="Forestry Consulting — Port Jervis, NY (Delaware River Tri-State Region)"
+    description={description}
+    url={canonicalUrl}
+    areaServed={['Port Jervis, NY', 'Minisink Valley, NY', 'Orange County, NY', 'Delaware River Tri-State Region']}
+    crumbs={crumbs}
+  />
+  <FAQSchema items={faqs} />
+  <Breadcrumb crumbs={crumbs} />
+
+  <PageHero
+    title="Forestry Consulting in Port Jervis, NY"
+    subtitle="Delaware River tri-state region — timber appraisals, 480-a enrollment, and land clearing for NY/NJ/PA landowners"
+  />
+
+  <article class="max-w-4xl mx-auto my-8 sm:my-10 px-8 sm:px-12 py-10 bg-white rounded-2xl shadow-md ring-1 ring-gray-200">
+
+    <KeyTakeaway
+      text="Environmental Forest Products serves landowners in the Port Jervis area and the broader Delaware River tri-state region where New York, New Jersey, and Pennsylvania meet. Henry Kowalec's service area covers all three states — giving tri-state landowners a consultant who can address the different regulatory frameworks, tax incentive programs, and timber markets that apply on each side of the border."
+    />
+
+    <AuthorByline />
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">The Port Jervis Forest — Delaware Water Gap Ridge Character</h2>
+
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Port Jervis sits at the only point in the eastern United States where three states converge on a river: New York, New Jersey, and Pennsylvania, all meeting at the Delaware. The landscape here is shaped by that geography — the Delaware River cutting through the Minisink Valley, with forested ridgelines rising steeply on both the New York and New Jersey sides, and the high ground to the west entering Pennsylvania's portion of the Delaware Water Gap region.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      The forest on those ridges is distinctly different from the mixed hardwood character of the interior Hudson Valley. Chestnut oak and pitch pine dominate the dry, rocky ridge tops — the xeric character typical of the Delaware Water Gap. Mid-slope terrain transitions to red oak, red maple, and black birch. Hemlock occupies the cool, sheltered ravines draining toward the river and its tributaries. Understanding this forest type requires a forester who works in this region, not one applying a generic Hudson Valley management approach to a materially different ecosystem.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Henry Kowalec has assessed woodland properties throughout the lower Orange County region and the tri-state Delaware drainage. He knows which species on these ridgelines have active buyer markets, which terrain constraints affect harvesting feasibility, and which regulatory frameworks — New York's, New Jersey's, Pennsylvania's — apply to which parts of a cross-border property.
+    </p>
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Tri-State Landowners — What Differs Across the Borders</h2>
+
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Landowners with property near the Port Jervis tri-state junction frequently hold land that straddles a state line, or own separate parcels on different sides of the border. The regulatory and tax program implications are material and differ significantly across all three states.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      In <strong>New York</strong>, qualifying woodland of 50 or more contiguous acres is eligible for the 480-a Forest Tax Law program — up to 80% off property and school taxes on enrolled acreage in exchange for a 10-year management commitment. In <strong>New Jersey</strong>, the Farmland Assessment program can include qualified woodland under certain conditions, providing a lower assessed value for enrolled land. In <strong>Pennsylvania</strong>, the Clean and Green program provides preferential assessment for agricultural and forest use land. Each program has different acreage thresholds, commitment structures, and management requirements.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      A landowner with parcels on both the New York and New Jersey sides of the border — or properties across all three states — can only get an accurate picture of their options from a consultant who works in all three regulatory environments. Environmental Forest Products provides that coverage.
+    </p>
+
+    <div class="bg-green-50 border border-green-200 rounded-lg p-6 my-10">
+      <h3 class="font-bold text-[#1a3c1a] text-lg mb-2">480-a in Orange County — Why the Numbers Work Here</h3>
+      <p class="text-gray-700 text-sm mb-3">
+        Orange County's higher assessed property values make the 480-a savings calculation particularly compelling compared to lower-value counties to the north. A property with $5,000–$6,000 in annual woodland taxes carrying an 80% exemption saves $4,000–$4,800 per year on enrolled acreage — a meaningful number even before considering the compound benefit over the required 10-year commitment period.
+      </p>
+      <p class="text-gray-700 text-sm mb-4">
+        The 6% yield tax on commercial timber harvests required under 480-a is a known cost, not a variable — it is a modest offset against the ongoing annual tax savings. For properties with mature timber that will generate a commercial harvest during the plan period, the combination of tax savings and timber stumpage frequently produces a substantially better financial outcome over 10–15 years than an unmanaged, unenrolled woodland parcel would.
+      </p>
+      <a href="/services/480a-forest-tax-law" class="text-[#2d5a2d] font-semibold text-sm underline hover:text-[#1a3c1a]">
+        Learn about 480-a enrollment for Orange County landowners →
+      </a>
+    </div>
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Timber Value on Port Jervis Area Ridgelines</h2>
+
+    <p class="text-gray-700 leading-relaxed mb-4">
+      The timber market for Delaware Water Gap ridge species is more specialized than the broad market for interior Hudson Valley hardwoods. Chestnut oak — the dominant ridge species in this area — has an active buyer market among specialty hardwood producers and flooring manufacturers who work with this distinctive species. It is not as widely purchased as red oak or black cherry, but for well-graded, large-diameter chestnut oak in accessible locations, there are buyers who pay competitive stumpage prices.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Red oak on the mid-slope terrain is more broadly marketable and is actively sought by regional flooring and lumber mills. The key variable is diameter and log quality — red oak stumpage prices drop significantly for timber that does not meet the minimum size and grade thresholds that premium buyers require. A timber appraisal identifies which trees on your specific parcel meet those thresholds today, and what the competitive stumpage value is for those trees at current market prices.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Access is a practical constraint on many ridge-top properties near Port Jervis. Rocky terrain, limited road penetration, and steep slopes mean that not all merchantable timber is accessible with conventional ground-based equipment. Environmental Forest Products provides appraisals that account for access conditions — identifying the recoverable value that a realistic harvest would return given the terrain and equipment constraints on your specific parcel.
+    </p>
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Land Clearing and Site Preparation Near Port Jervis</h2>
+
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Land clearing for residential or commercial site preparation is an active service need throughout the lower Orange County region, including the Port Jervis area. Every clearing project Environmental Forest Products approaches begins the same way: a timber assessment before equipment is mobilized, to determine whether the trees being removed carry merchantable value that should be recovered rather than chipped or buried on site.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-6">
+      For properties with mature ridgeline hardwood — chestnut oak, red oak, or red maple on the parcel being developed — that timber has real market value. Recovering it before clearing begins reduces the net clearing cost and ensures that material with economic value is not simply destroyed. That step requires a forester, not a general contractor. Learn more about <a href="/services/land-clearing" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">land clearing services in Orange County</a>.
+    </p>
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Services Available Near Port Jervis</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
+      {services.map(svc => (
+        <a
+          href={`/services/${svc.slug}`}
+          class="flex items-start gap-3 p-4 border border-gray-200 rounded-lg hover:border-[#2d5a2d] hover:bg-green-50 transition-colors group"
+        >
+          <span class="text-2xl flex-shrink-0" aria-hidden="true">{svc.icon}</span>
+          <div>
+            <div class="font-semibold text-[#1a3c1a] group-hover:text-[#2d5a2d] text-sm">{svc.name}</div>
+            <div class="text-xs text-gray-500 mt-0.5 leading-snug">{svc.excerpt.split('—')[0].trim()}</div>
+          </div>
+        </a>
+      ))}
+    </div>
+
+    <div class="bg-[#1a3c1a] text-white rounded-lg p-6 my-10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <div>
+        <p class="font-bold text-lg mb-1">Schedule a Site Visit Near Port Jervis</p>
+        <p class="text-green-200 text-sm">Tri-state service area — NY, NJ, and PA properties in the Delaware region.</p>
+      </div>
+      <a
+        href="tel:+18454980208"
+        class="inline-flex items-center gap-2 bg-white text-[#1a3c1a] font-bold px-5 py-3 rounded hover:bg-green-100 transition-colors text-sm whitespace-nowrap flex-shrink-0"
+      >
+        <svg class="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/></svg>
+        (845) 754-8242
+      </a>
+    </div>
+
+    <FAQSection items={faqs} />
+
+    <div class="border border-gray-200 rounded-lg p-5 my-10">
+      <h3 class="font-semibold text-[#1a3c1a] mb-3 text-sm uppercase tracking-wide">Nearby Orange County Communities We Serve</h3>
+      <div class="flex flex-wrap gap-3">
+        <a href="/locations/orange-county-ny/goshen" class="text-sm text-[#2d5a2d] hover:underline">Goshen</a>
+        <a href="/locations/orange-county-ny/middletown" class="text-sm text-[#2d5a2d] hover:underline">Middletown</a>
+        <a href="/locations/orange-county-ny/warwick" class="text-sm text-[#2d5a2d] hover:underline">Warwick</a>
+        <a href="/locations/orange-county-ny/monroe" class="text-sm text-[#2d5a2d] hover:underline">Monroe</a>
+        <a href="/locations/orange-county-ny" class="text-sm text-[#2d5a2d] hover:underline font-semibold">View all Orange County towns →</a>
+      </div>
+    </div>
+
+    <EstimateForm variant="b2c" />
+  </article>
+</LocationLayout>

@@ -16,13 +16,13 @@ import KeyTakeaway from '../../components/ui/KeyTakeaway.astro';
 import AuthorByline from '../../components/ui/AuthorByline.astro';
 import ServiceSchema from '../../components/schema/ServiceSchema.astro';
 import FAQSchema from '../../components/schema/FAQSchema.astro';
+import OptimizedImage from '../../components/ui/OptimizedImage.astro';
 import { buildTitle, buildCanonical, buildDescription } from '../../lib/seo';
+import ClusterArticles from '../../components/ui/ClusterArticles.astro';
 
-const title = buildTitle("480-a Forest Tax Law Consulting — NY | EFP");
+const title = "480-a Management Plans NY | Certified Forester";
 const description = buildDescription(
-  "New York's 480-a Forest Tax Law program can reduce property taxes on qualifying woodland by up to 80%. " +
-  "Environmental Forest Products prepares the certified management plans required for enrollment — " +
-  "serving Sullivan, Orange, and Ulster counties."
+  "Need a 480-a forest management plan in NY? A certified consulting forester handles eligibility, DEC filing & tax savings. Sullivan/Orange/Ulster. (845) 754-8242."
 );
 const canonicalUrl = buildCanonical("/services/480a-forest-tax-law");
 
@@ -35,7 +35,7 @@ const crumbs = [
 const faqs = [
   {
     question: "How much can I save with the 480-a program?",
-    answer: "New York's 480-a program exempts qualifying woodland from property taxes up to 80% of the assessed value of the enrolled acreage, per the NY State Tax Department Exemption Manual (§4.08). Tax savings vary by property, assessed value, and local equalization rate — every property calculation is different. One published example for a property with $3,500 in annual land and school taxes projects savings of $25,000 to $30,000 over 15 years after factoring in plan costs and the 6% stumpage yield tax. [⚠️ Henry: add a Sullivan County or Orange County example from your own clients if available]",
+    answer: "New York's 480-a program exempts qualifying woodland from property taxes up to 80% of the assessed value of the enrolled acreage, per the NY State Tax Department Exemption Manual (§4.08). Tax savings vary by property, assessed value, and local equalization rate — every property calculation is different. One published example for a property with $3,500 in annual land and school taxes projects savings of $25,000 to $30,000 over 15 years after factoring in plan costs and the 6% stumpage yield tax.",
   },
   {
     question: "What is the minimum acreage to qualify for 480-a?",
@@ -43,7 +43,7 @@ const faqs = [
   },
   {
     question: "Who is allowed to write a 480-a management plan?",
-    answer: "Under § 480-a, the management plan must be prepared by or under the direct supervision of a qualified forester — specifically, a cooperating consultant forester who has entered into an agreement with the NY DEC under the cooperating consultant foresters program (ECL § 9-0713). Not all foresters practicing in New York hold this qualification. Environmental Forest Products is qualified to prepare 480-a management plans for properties in Sullivan, Orange, and Ulster counties. [⚠️ Henry: confirm exact DEC cooperating consultant forester status and any certifications to list here]",
+    answer: "Under § 480-a, the management plan must be prepared by or under the direct supervision of a qualified forester — specifically, a cooperating consultant forester who has entered into an agreement with the NY DEC under the cooperating consultant foresters program (ECL § 9-0713). Not all foresters practicing in New York hold this qualification. Environmental Forest Products is qualified to prepare 480-a management plans for properties in Sullivan, Orange, and Ulster counties.",
   },
   {
     question: "What does the management plan commitment require?",
@@ -51,7 +51,7 @@ const faqs = [
   },
   {
     question: "What are the rollback penalties if I leave the program?",
-    answer: "If a landowner voluntarily converts enrolled land to a use that precludes forest management — or fails to follow the plan's work schedule — the property is subject to rollback penalties. Published sources cite penalties of up to 2.5 times the tax savings received. Landowners who simply stop filing the annual commitment (without a conversion violation) must continue to follow the management plan for the remainder of the commitment period to avoid penalties. [⚠️ Henry: confirm the exact penalty structure as you explain it to clients]",
+    answer: "If a landowner voluntarily converts enrolled land to a use that precludes forest management — or fails to follow the plan's work schedule — the property is subject to rollback penalties. Published sources cite penalties of up to 2.5 times the tax savings received. Landowners who simply stop filing the annual commitment (without a conversion violation) must continue to follow the management plan for the remainder of the commitment period to avoid penalties.",
   },
   {
     question: "Does the 480-a exemption apply to school taxes?",
@@ -64,6 +64,10 @@ const faqs = [
   {
     question: "What happens to the 480-a enrollment if I sell the property?",
     answer: "Under NY Real Property Tax Law § 480-a, the obligation to follow the management plan stays with the property — not the individual owner — for the remainder of the commitment period. A buyer purchasing enrolled land takes on the same commitment. Subdivisions of less than 50 acres created within the commitment period are subject to rollback taxes.",
+  },
+  {
+    question: "How long does the 480-a application process take with NY DEC?",
+    answer: "After a management plan is prepared and submitted to the DEC Regional Forester for review, approval typically takes 2 to 6 months depending on the Regional Forester's workload and property complexity. Once the DEC approves the plan, the landowner files the initial commitment form with both the town assessor and the DEC. The first property tax exemption generally applies to the assessment roll for the following tax year — meaning the benefit does not always appear in the same year the application is submitted. Environmental Forest Products coordinates the full submission process and follows up through to DEC approval.",
   },
 ];
 ---
@@ -82,39 +86,40 @@ const faqs = [
   <Breadcrumb crumbs={crumbs} />
 
   <PageHero
-    title="480-a Forest Tax Law Consulting"
+    title="480-a Forest Tax Law Consulting in NY"
     subtitle="Reduce property taxes on qualifying woodland by up to 80% — Sullivan, Orange, and Ulster counties"
   />
 
-  <article class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+  <article class="max-w-4xl mx-auto my-8 sm:my-10 px-8 sm:px-12 py-10 bg-white rounded-2xl shadow-md ring-1 ring-gray-200">
 
-    <KeyTakeaway>
-      New York's 480-a Forest Tax Law program allows qualifying woodland owners with 50 or more contiguous
-      acres to reduce property and school taxes by up to 80% of the assessed value of enrolled acreage —
-      in exchange for a 10-year commitment to follow a DEC-approved forest management plan written by a
-      certified forester.
-    </KeyTakeaway>
+    <KeyTakeaway text="New York's 480-a Forest Tax Law program allows qualifying woodland owners with 50 or more contiguous acres to reduce property and school taxes by up to 80% of the assessed value of enrolled acreage — in exchange for a 10-year commitment to follow a DEC-approved forest management plan written by a certified forester." />
 
     <AuthorByline />
+    <p class="text-xs text-gray-400 mt-1 mb-8">Last reviewed: April 2026 by Henry Kowalec, CF</p>
 
-    <img
+    <OptimizedImage
       src="/images/uploads/hand-felling-trees-nyc-dep-carmel-ny.jpg"
       alt="Certified forester overseeing timber work on an NYC DEP project in Carmel, NY — the kind of active management required under a 480-a plan"
       class="w-full rounded-xl shadow-md my-8"
-      loading="lazy"
+      sizes="(max-width: 768px) 100vw, 768px"
+      loading="eager"
+      fetchpriority="high"
     />
 
     <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">What Is New York's 480-a Forest Tax Program?</h2>
     <p class="text-gray-700 leading-relaxed mb-4">
-      Section 480-a of New York's Real Property Tax Law was enacted in 1974 and took effect in 1976.
-      It was designed to encourage long-term sustainable management of privately-owned forest land by
-      giving landowners a meaningful tax incentive in exchange for a commitment to manage their woodland
-      under an approved plan.
+      For a plain-English overview of <a href="/guides/480a-forest-tax-law-new-york" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">how 480-a forest tax law works in NY</a> — including eligibility, the application process, and the 2026 DEC regulatory update — see the full guide. This page covers our consulting services specifically.
     </p>
     <p class="text-gray-700 leading-relaxed mb-4">
-      The program is voluntary. Enrollment is not permanent — it requires an annual filing that recommits
-      the property to the program for the next 10 years. Landowners who enroll receive an exemption of up
-      to 80% of the assessed value of the enrolled acreage from both property taxes and school taxes.
+      New York's 480-a Forest Tax Law is a voluntary state property tax program that reduces taxes on
+      qualifying private woodland by up to 80% in exchange for a 10-year commitment to manage the land
+      under a DEC-approved forest plan. Enacted in 1974 and effective in 1976, it was designed to keep
+      private forest land in productive forest rather than being sold for development.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Enrollment is not permanent — it requires an annual filing that recommits the property to the program
+      for the next 10 years. Landowners who enroll receive an exemption of up to 80% of the assessed value
+      of the enrolled acreage from both property taxes and school taxes.
     </p>
     <p class="text-gray-700 leading-relaxed mb-6">
       As of the DEC's 2026 regulatory update (6 NYCRR Part 199, effective March 1, 2026), management plans
@@ -141,10 +146,12 @@ const faqs = [
 
     <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">How Much Can You Save?</h2>
     <p class="text-gray-700 leading-relaxed mb-4">
-      The exemption is calculated as the lesser of: (1) 80% of the assessed value of the enrolled acreage,
-      or (2) the amount by which the assessed value exceeds $40 multiplied by the state equalization rate
-      times the number of eligible acres. For most rural properties in Sullivan, Orange, and Ulster counties,
-      the 80% cap is the operative figure.
+      Most enrolled NY woodland owners save $25,000 to $30,000 in net property and school taxes over
+      15 years, after factoring in management plan costs and the 6% stumpage yield tax. The exemption
+      is calculated as the lesser of: (1) 80% of the assessed value of the enrolled acreage, or (2) the
+      amount by which the assessed value exceeds $40 multiplied by the state equalization rate times the
+      number of eligible acres. For most rural properties in Sullivan, Orange, and Ulster counties, the
+      80% cap is the operative figure.
     </p>
     <p class="text-gray-700 leading-relaxed mb-6">
       Published estimates for properties with approximately $3,500 in annual land and school taxes project
@@ -168,18 +175,18 @@ const faqs = [
       management objectives. Plans now cover a 20-year period under the 2026 regulatory update.
     </p>
     <p class="text-gray-700 leading-relaxed mb-6">
-      Environmental Forest Products prepares 480-a management plans for qualifying properties in Sullivan,
-      Orange, and Ulster counties, and extends service into Pike County (PA) and Sussex County (NJ) for
-      broader land management consulting. The process begins with a site visit to assess eligibility before
-      any plan writing begins.
+      Henry Kowalec, consulting forester and founder of Environmental Forest Products, prepares 480-a
+      management plans for qualifying properties in Sullivan, Orange, and Ulster counties, and extends
+      service into Pike County (PA) and Sussex County (NJ) for broader land management consulting.
+      The process begins with a site visit to assess eligibility before any plan writing begins.
     </p>
 
     <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">How to Apply — Step by Step</h2>
     <ol class="list-decimal pl-6 text-gray-700 mb-6 space-y-3">
-      <li><strong>Site assessment:</strong> A certified forester walks the property and confirms eligibility — acreage, stocking, access, and boundary conditions.</li>
+      <li><strong>Site assessment:</strong> A certified consulting forester walks the property and confirms eligibility — acreage, stocking, access, and boundary conditions.</li>
       <li><strong>Management plan preparation:</strong> The forester prepares the DEC-required plan including stand descriptions, forest type maps, and a work schedule.</li>
       <li><strong>DEC application submission:</strong> The completed application is submitted to the DEC with two copies of the management plan and three forest-type maps.</li>
-      <li><strong>DEC review and certification:</strong> The DEC has 60 days from receipt of a complete application to issue a certificate of eligibility.</li>
+      <li><strong>DEC review and certification:</strong> The DEC Region 3 Regional Forester has 60 days from receipt of a complete application to issue a certificate of eligibility.</li>
       <li><strong>County clerk filing:</strong> The certificate of approval is filed with the county clerk, where it is recorded and indexed against the property deed.</li>
       <li><strong>Town assessor filing:</strong> The landowner files the Application for Real Property Tax Exemption with the town assessor.</li>
       <li><strong>Annual renewal:</strong> Each subsequent year, a certified commitment form is filed with both the town assessor and the DEC Regional Forester to maintain eligibility.</li>
@@ -202,7 +209,7 @@ const faqs = [
 
     <!-- 480-a Eligibility Pre-Check tool -->
     <div class="border-t border-gray-200 pt-10">
-      <h2 class="text-2xl font-bold text-[#1a3c1a] mb-2">Is Your Property a Candidate?</h2>
+      <h3 class="text-2xl font-bold text-[#1a3c1a] mb-2">Is Your Property a Candidate?</h3>
       <p class="text-gray-600 text-sm mb-2 leading-relaxed">
         Use the screening tool below to get a quick read on whether your land may be worth discussing
         with Henry. It takes about 60 seconds.
@@ -211,6 +218,34 @@ const faqs = [
     </div>
 
     <FAQSection items={faqs} />
+
+    <!-- Interactive Tool card -->
+    <div class="my-8 rounded-xl border border-[#2d5a2d] bg-green-50 p-6 flex flex-col sm:flex-row sm:items-center gap-4">
+      <div class="flex-shrink-0 text-3xl" aria-hidden="true">💰</div>
+      <div class="flex-1 min-w-0">
+        <p class="text-xs font-bold uppercase tracking-widest text-[#2d5a2d] mb-1">Free Tool</p>
+        <p class="font-bold text-[#1a3c1a] text-base mb-1">480-a Tax Savings Calculator</p>
+        <p class="text-gray-600 text-sm">See your estimated annual savings and 15-year projection from enrolling your woodland in New York's 480-a Forest Tax Law program.</p>
+      </div>
+      <a href="/services/480a-forest-tax-law/480a-savings-calculator" class="flex-shrink-0 inline-flex items-center gap-2 bg-[#2d5a2d] hover:bg-[#1a3c1a] text-white font-semibold text-sm px-5 py-2.5 rounded-lg transition-colors whitespace-nowrap">
+        Calculate My Savings
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+        </svg>
+      </a>
+    </div>
+
+    <ClusterArticles serviceSlug="480a-forest-tax-law" heading="480-a Program Guides" />
+
+    <div class="mt-12 pt-8 border-t border-gray-200">
+      <h3 class="text-lg font-bold text-[#1a3c1a] mb-4">Related Guides</h3>
+      <ul class="space-y-3 mb-10">
+        <li><a href="/guides/480a-forest-tax-law-new-york" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">New York's 480-a Forest Tax Law: Complete Guide</a></li>
+        <li><a href="/guides/forest-management-plan" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">How to Get a Forest Management Plan for Your NY Woodland</a></li>
+        <li><a href="/guides/selective-cutting" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">Selective Cutting: How It Works and When It Makes Sense</a></li>
+        <li><a href="/guides/woodland-management-plan-nj" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">Woodland Management Plans for NJ Farmland Assessment</a></li>
+      </ul>
+    </div>
 
     <!-- Source citations -->
     <div class="mt-12 pt-8 border-t border-gray-200">

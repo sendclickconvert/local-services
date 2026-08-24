@@ -1,0 +1,129 @@
+---
+// pages/locations/sullivan-county-ny/bethel/kauneonga-lake.astro
+// CUSTOM neighborhood page — Kauneonga Lake is a lakeside hamlet in Bethel Township.
+
+import LocationLayout from '../../../../layouts/LocationLayout.astro';
+import PageHero from '../../../../components/ui/PageHero.astro';
+import Breadcrumb from '../../../../components/ui/Breadcrumb.astro';
+import FAQSection from '../../../../components/ui/FAQSection.astro';
+import KeyTakeaway from '../../../../components/ui/KeyTakeaway.astro';
+import AuthorByline from '../../../../components/ui/AuthorByline.astro';
+import EstimateForm from '../../../../components/forms/EstimateForm.astro';
+import ServiceSchema from '../../../../components/schema/ServiceSchema.astro';
+import FAQSchema from '../../../../components/schema/FAQSchema.astro';
+import { buildTitle, buildCanonical, buildDescription } from '../../../../lib/seo';
+
+const title = buildTitle('Consulting Forester — Kauneonga Lake, NY');
+const description = buildDescription(
+  'Forestry consulting near Kauneonga Lake, NY — woodland assessments, 480-a enrollment ' +
+  'for Bethel Township landowners. Henry Kowalec. (845) 754-8242.'
+);
+const canonicalUrl = buildCanonical('/locations/sullivan-county-ny/bethel/kauneonga-lake');
+
+const crumbs = [
+  { label: 'Home',             href: '/' },
+  { label: 'Locations',        href: '/locations' },
+  { label: 'Sullivan County',  href: '/locations/sullivan-county-ny' },
+  { label: 'Bethel',           href: '/locations/sullivan-county-ny/bethel' },
+  { label: 'Kauneonga Lake',   href: '/locations/sullivan-county-ny/bethel/kauneonga-lake' },
+];
+
+const faqs = [
+  {
+    question: 'Does EFP provide forestry consulting near Kauneonga Lake, NY?',
+    answer: 'Yes. Environmental Forest Products serves landowners in and around Kauneonga Lake and throughout Bethel Township. Henry Kowalec provides on-site timber appraisals, 480-a Forest Tax Law eligibility assessments, and woodland management consulting for properties in this part of Sullivan County. Call (845) 754-8242.',
+  },
+  {
+    question: 'What types of woodland do properties near Kauneonga Lake typically have?',
+    answer: 'Properties around Kauneonga Lake include lakeside residential woodlots, second-growth forest on surrounding uplands, and in some cases more substantial wooded parcels on the higher terrain. The second-growth stands in this part of Bethel Township — former agricultural fields that have been reverting to woodland for 40–60 years — are increasingly at the age where timber management and 480-a enrollment become relevant. Species are typically red maple, red oak, black cherry, and white ash.',
+  },
+  {
+    question: 'Can a property near Kauneonga Lake qualify for 480-a Forest Tax Law enrollment?',
+    answer: 'Possibly — depending on the acreage and woodland condition. Properties with 50 or more contiguous acres of qualifying woodland are eligible for the program. Landowners in the Bethel Township area who have larger wooded parcels adjacent to the lake community should schedule an on-site assessment to determine eligibility. Henry Kowalec handles the full 480-a enrollment process for Bethel Township landowners.',
+  },
+  {
+    question: 'What should a Kauneonga Lake landowner know before deciding to clear or develop forested land?',
+    answer: 'Before any clearing decision, a timber assessment by a certified consulting forester is the right first step. Red maple, red oak, and black cherry on second-growth upland sites in this area can have real stumpage value that offsets clearing costs. EFP conducts pre-clearing timber assessments throughout Bethel Township and provides an independent view of what is present and what it is worth before any clearing is contracted.',
+  },
+  {
+    question: 'How do I schedule a forestry assessment for my Kauneonga Lake property?',
+    answer: 'Call (845) 754-8242. Henry Kowalec will discuss your property and schedule an on-site visit. All assessments and recommendations are based on what is observed on the ground — not a phone estimate.',
+  },
+];
+---
+
+<LocationLayout title={title} description={description} canonicalUrl={canonicalUrl}>
+  <ServiceSchema
+    pageType="location"
+    serviceName="Forestry Consulting — Kauneonga Lake, NY"
+    description={description}
+    url={canonicalUrl}
+    areaServed={['Kauneonga Lake, NY', 'Bethel Township, NY', 'Sullivan County, NY']}
+    crumbs={crumbs}
+  />
+  <FAQSchema items={faqs} />
+  <Breadcrumb crumbs={crumbs} />
+
+  <PageHero
+    title="Forestry Consulting Near Kauneonga Lake, NY"
+    subtitle="Woodland assessments and 480-a enrollment for Bethel Township landowners"
+  />
+
+  <article class="max-w-4xl mx-auto my-8 sm:my-10 px-8 sm:px-12 py-10 bg-white rounded-2xl shadow-md ring-1 ring-gray-200">
+
+    <KeyTakeaway
+      text="Environmental Forest Products serves landowners near Kauneonga Lake, NY and throughout Bethel Township. Henry Kowalec conducts on-site timber appraisals and 480-a Forest Tax Law eligibility assessments for properties in this part of Sullivan County."
+    />
+
+    <AuthorByline />
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Woodland Context Near Kauneonga Lake</h2>
+
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Kauneonga Lake is a lake community in Bethel Township, surrounded by a mix of residential woodland, second-growth forest on former agricultural uplands, and the more substantial forested tracts of the surrounding Bethel countryside. This part of western Sullivan County contains significant acreage of second-growth forest that is now 40–60 years old — at the age where an assessment makes financial sense and where management decisions have real long-term consequences.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      For landowners with meaningful woodland acreage near Kauneonga Lake, the key services are: an <a href="/services/sell-standing-timber" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">independent timber appraisal</a> to establish current stand value, <a href="/services/480a-forest-tax-law" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">480-a enrollment</a> if acreage qualifies, and a <a href="/services/woodlot-management" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">woodland management plan</a> for landowners who want a long-term stewardship strategy. Henry Kowalec handles all of these services for Kauneonga Lake-area properties.
+    </p>
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">480-a Enrollment for Bethel Township Landowners</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      New York's 480-a Forest Tax Law program offers eligible landowners an exemption of up to 80% of assessed value on certified forest land. For properties near Kauneonga Lake with 50 or more contiguous acres of qualifying woodland, enrollment can produce meaningful annual savings — particularly given Bethel Township's school tax burden. The second-growth forest that covers much of this area is now old enough to meet the stocking and composition standards the DEC looks for, making the timing for enrollment assessment better than it was a decade ago.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Henry Kowalec prepares DEC-approved forest management plans and handles the full 480-a enrollment process for Bethel Township landowners. An initial site assessment determines whether the property qualifies, what the projected savings would be, and what the management plan would require. That visit is the starting point — not a phone conversation.
+    </p>
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Timber Assessment Before Clearing Near Kauneonga Lake</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Landowners in the Kauneonga Lake area who are considering site development or clearing should have a timber assessment completed before any clearing contract is signed. The second-growth red maple, red oak, and black cherry stands on the upland sites surrounding the lake community are frequently at the size and quality threshold where stumpage value is real. On well-stocked sites, that value can materially offset clearing costs — sometimes covering a significant portion of the project budget.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      EFP conducts pre-clearing assessments throughout Bethel Township. The process involves walking the parcel, estimating species and volume, checking current market prices, and advising whether a timber sale before clearing makes financial sense. On sites where it does, EFP manages the sale coordination so the landowner receives competitive value rather than a single buyer's offer.
+    </p>
+
+    <div class="bg-[#1a3c1a] text-white rounded-lg p-6 my-10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <div>
+        <p class="font-bold text-lg mb-1">Schedule a Site Visit Near Kauneonga Lake</p>
+        <p class="text-green-200 text-sm">Henry walks the property with you — on-site assessment, not a phone estimate.</p>
+      </div>
+      <a href="tel:+18454980208" class="inline-flex items-center gap-2 bg-white text-[#1a3c1a] font-bold px-5 py-3 rounded hover:bg-green-100 transition-colors text-sm whitespace-nowrap flex-shrink-0">
+        <svg class="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/></svg>
+        (845) 754-8242
+      </a>
+    </div>
+
+    <FAQSection items={faqs} />
+
+    <div class="border border-gray-200 rounded-lg p-5 my-10">
+      <h3 class="font-semibold text-[#1a3c1a] mb-3 text-sm uppercase tracking-wide">Also in Bethel Township</h3>
+      <div class="flex flex-wrap gap-3">
+        <a href="/locations/sullivan-county-ny/bethel" class="text-sm text-[#2d5a2d] hover:underline font-semibold">Bethel Township →</a>
+        <a href="/locations/sullivan-county-ny/white-lake" class="text-sm text-[#2d5a2d] hover:underline">White Lake</a>
+        <a href="/locations/sullivan-county-ny" class="text-sm text-[#2d5a2d] hover:underline">All Sullivan County Towns</a>
+      </div>
+    </div>
+
+    <EstimateForm variant="b2c" />
+  </article>
+</LocationLayout>

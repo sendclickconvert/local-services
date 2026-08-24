@@ -1,10 +1,8 @@
 ---
 // Footer.astro
-// 3-column grid: NAP / Services / County pages. Disclaimer row below.
-// All content pulled from config — no hardcoded EFP strings.
-// ⚠️ NAP block must match GBP character-for-character before launch.
+// 3-column grid: NAP / Services / Service Locations. Google Maps + disclaimer row below.
 
-import { business, serviceArea } from '../../data/client.config';
+import { business, serviceArea, phone } from '../../data/client.config';
 
 const services = [
   { label: '480-a Forest Tax Law', href: '/services/480a-forest-tax-law' },
@@ -12,11 +10,16 @@ const services = [
   { label: 'Timber Harvesting',    href: '/services/timber-harvesting'    },
   { label: 'Sell Standing Timber', href: '/services/sell-standing-timber' },
   { label: 'Woodlot Management',   href: '/services/woodlot-management'   },
-  { label: 'Wildlife Habitat',     href: '/services/wildlife-habitat-management' },
-  { label: 'Stump Grinding',       href: '/services/stump-grinding'       },
+  { label: 'Wildlife Habitat',         href: '/services/wildlife-habitat-management' },
+  { label: 'Forest Stewardship Planning', href: '/services/forest-stewardship-planning' },
+  { label: 'Emerald Ash Borer',       href: '/services/emerald-ash-borer'       },
+  { label: 'Hemlock Woolly Adelgid',  href: '/services/hemlock-woolly-adelgid'  },
+  { label: 'Stump Grinding',          href: '/services/stump-grinding'          },
   { label: 'Tree Planting',        href: '/services/tree-planting'        },
   { label: 'Tree Removal',         href: '/services/tree-removal'         },
 ];
+
+const mapSrc = `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d188843.84267764882!2d-74.7!3d41.5651!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c34a2e6d0bf5c5%3A0x2e5e4c9c33d5ac3!2sWestbrookville%2C%20NY%2012785!5e0!3m2!1sen!1sus!4v1700000000000!5m2!1sen!1sus`;
 ---
 
 <footer class="bg-[#0d1a0d] text-gray-300">
@@ -24,46 +27,34 @@ const services = [
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-16">
 
-      <!-- Column 1: NAP block -->
       <div>
         <a href="/" class="inline-block mb-5" aria-label="Environmental Forest Products — Home">
-          <svg width="200" height="40" viewBox="0 0 220 44" xmlns="http://www.w3.org/2000/svg"
-            class="opacity-70 hover:opacity-90 transition-opacity"
-            role="img" aria-label="Environmental Forest Products">
-            <polygon points="20,2 35,15 5,15" fill="white" opacity=".85"/>
-            <polygon points="20,9 37,22 3,22" fill="white" opacity=".60"/>
-            <polygon points="20,16 39,30 1,30" fill="white" opacity=".42"/>
-            <rect x="15.5" y="30" width="9" height="11" rx="1.5" fill="#c8906a" opacity=".75"/>
-            <line x1="52" y1="4" x2="52" y2="40" stroke="rgba(255,255,255,0.18)" stroke-width="1.5"/>
-            <text x="63" y="23" font-family="'Barlow Condensed','Arial Narrow',sans-serif"
-              font-weight="800" font-size="20" fill="rgba(255,255,255,0.85)" letter-spacing="1">ENVIRONMENTAL</text>
-            <text x="63" y="37" font-family="'Barlow Condensed','Arial Narrow',sans-serif"
-              font-weight="700" font-size="12" fill="#c8906a" opacity=".8" letter-spacing="3.2">FOREST PRODUCTS</text>
-          </svg>
+          <img
+            src="/images/logos/efp-logo.webp"
+            alt="Environmental Forest Products"
+            class="h-10 w-auto brightness-0 invert opacity-80 hover:opacity-100 transition-opacity"
+          />
         </a>
         <address class="not-italic text-sm leading-relaxed text-gray-400 space-y-1">
           <div>{business.address.city}, {business.address.stateAbbr} {business.address.zip}</div>
           <div>
             <a
-              href={`tel:${business.phoneRaw}`}
+              href={`tel:${phone.trackingTel}`}
               class="text-green-400 hover:text-green-300 font-semibold transition-colors text-base"
             >
-              {business.phone}
+              {phone.display}
             </a>
           </div>
-          {business.email && business.email !== '[TBD — confirm with Henry]' && (
-            <div>
-              <a href={`mailto:${business.email}`} class="text-green-400 hover:text-green-300 transition-colors">
-                {business.email}
-              </a>
-            </div>
-          )}
+          <div>
+            <a href={`mailto:${business.email}`} class="text-green-400 hover:text-green-300 transition-colors">
+              {business.email}
+            </a>
+          </div>
         </address>
         <p class="mt-4 text-xs text-gray-500 leading-relaxed">
           {business.owner} — {business.ownerTitle}<br />
           {business.ownerExperience} serving the Hudson Valley &amp; Catskills
         </p>
-        <!-- Social -->
         <div class="mt-4 flex items-center gap-3">
           <a
             href="https://www.facebook.com/EForestProducts/"
@@ -78,9 +69,21 @@ const services = [
             Follow on Facebook
           </a>
         </div>
+
+        <div class="mt-5 rounded-lg overflow-hidden border border-green-900">
+          <iframe
+            src={mapSrc}
+            width="100%"
+            height="180"
+            style="border:0;"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Environmental Forest Products location — Westbrookville, NY"
+          ></iframe>
+        </div>
       </div>
 
-      <!-- Column 2: Services -->
       <div>
         <h3 class="text-white font-semibold text-sm uppercase tracking-wider mb-4">Services</h3>
         <ul class="space-y-2">
@@ -94,9 +97,8 @@ const services = [
         </ul>
       </div>
 
-      <!-- Column 3: Service Area -->
       <div>
-        <h3 class="text-white font-semibold text-sm uppercase tracking-wider mb-4">Service Area</h3>
+        <h3 class="text-white font-semibold text-sm uppercase tracking-wider mb-4">Service Locations</h3>
         <div class="mb-3">
           <p class="text-xs text-gray-500 uppercase tracking-wide mb-2">Primary</p>
           <ul class="space-y-2">
@@ -125,13 +127,16 @@ const services = [
 
     </div>
 
-    <!-- Divider + disclaimer -->
     <div class="mt-12 pt-6 border-t border-green-950">
+      <div class="flex justify-center gap-5 mb-3 text-xs text-gray-500">
+        <a href="/terms" class="hover:text-green-300 transition-colors">Terms of Service</a>
+        <span aria-hidden="true">|</span>
+        <a href="/privacy" class="hover:text-green-300 transition-colors">Privacy Policy</a>
+      </div>
       <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 text-xs text-gray-600">
-        <p>© {new Date().getFullYear()} {business.name}. All rights reserved.</p>
-        <p class="text-right">
-          Certified forestry consulting — Hudson Valley, Catskills &amp; Poconos.<br class="sm:hidden" />
-          Licensed in NY, PA, NJ.
+        <p>&copy; {new Date().getFullYear()} {business.name}. All rights reserved.</p>
+        <p class="text-right italic">
+          Certified forestry consulting — Hudson Valley, Catskills &amp; Poconos. Licensed in NY, PA, NJ.
         </p>
       </div>
     </div>

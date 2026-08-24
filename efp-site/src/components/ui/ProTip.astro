@@ -1,0 +1,17 @@
+---
+// ProTip.astro
+// "EFP Pro Tip" expert callout box — green left-border style per blueprint.
+// Use after an H2 section to surface a key insider insight.
+// One per major section is the right frequency — not every paragraph.
+
+interface Props {
+  text: string;
+}
+
+const { text } = Astro.props;
+---
+
+<div class="bg-green-50 border-l-4 border-green-600 rounded-r-xl p-5 mb-8">
+  <p class="font-semibold text-green-800 mb-1">EFP Pro Tip</p>
+  <p class="text-sm text-green-700 leading-relaxed">{text}</p>
+</div>

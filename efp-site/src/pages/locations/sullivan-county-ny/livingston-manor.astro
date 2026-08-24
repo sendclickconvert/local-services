@@ -1,0 +1,147 @@
+---
+// pages/locations/sullivan-county-ny/livingston-manor.astro
+// CUSTOM — Livingston Manor is Catskill Mountains proper; Willowemoc Creek
+// watershed, premium sugar maple, multi-value management is the core narrative.
+
+import LocationLayout from '../../../layouts/LocationLayout.astro';
+import PageHero from '../../../components/ui/PageHero.astro';
+import Breadcrumb from '../../../components/ui/Breadcrumb.astro';
+import FAQSection from '../../../components/ui/FAQSection.astro';
+import KeyTakeaway from '../../../components/ui/KeyTakeaway.astro';
+import AuthorByline from '../../../components/ui/AuthorByline.astro';
+import EstimateForm from '../../../components/forms/EstimateForm.astro';
+import ServiceSchema from '../../../components/schema/ServiceSchema.astro';
+import FAQSchema from '../../../components/schema/FAQSchema.astro';
+import { buildTitle, buildCanonical, buildDescription } from '../../../lib/seo';
+import { services } from '../../../data/services';
+
+const title = buildTitle('Consulting Forester in Livingston Manor, NY');
+const description = buildDescription(
+  'Consulting forester in Livingston Manor, NY — sugar maple appraisals, 480-a enrollment, Catskill woodland management. (845) 754-8242.'
+);
+const canonicalUrl = buildCanonical('/locations/sullivan-county-ny/livingston-manor');
+
+const crumbs = [
+  { label: 'Home',             href: '/' },
+  { label: 'Locations',        href: '/locations' },
+  { label: 'Sullivan County',  href: '/locations/sullivan-county-ny' },
+  { label: 'Livingston Manor', href: '/locations/sullivan-county-ny/livingston-manor' },
+];
+
+const faqs = [
+  {
+    question: 'Does EFP provide forestry consulting near Livingston Manor?',
+    answer: 'Yes. Environmental Forest Products serves private landowners in Livingston Manor and throughout the Rockland Township area of Sullivan County. Henry Kowalec has worked on timber assessments, 480-a management plans, and woodland management projects in the Willowemoc Creek corridor for more than 30 years. Call (845) 754-8242 to discuss your property.',
+  },
+  {
+    question: 'Why is sugar maple timber important for Livingston Manor landowners?',
+    answer: 'Sugar maple stands in the Livingston Manor area are among the highest-quality in Sullivan County. High-grade sugar maple commands premium stumpage prices from hardwood flooring mills and specialty buyers — prices that are meaningfully above what mixed-species estimates typically project. Correctly appraising and marketing quality sugar maple requires both species knowledge and buyer relationships that a general contractor or non-forester-managed sale cannot provide. A site-specific timber appraisal is essential before any harvest or clearing decision involving this species.',
+  },
+  {
+    question: 'How does the Willowemoc Creek watershed affect forestry near Livingston Manor?',
+    answer: 'The Willowemoc Creek valley is internationally known for trout fishing, and many forest properties in the area are managed with both timber and watershed values in mind. Harvest plans near the Willowemoc and its tributaries must incorporate appropriate stream buffer protections and low-impact logging approaches to maintain water quality and bank stability. Henry Kowalec is experienced with writing management prescriptions that balance timber objectives with the watershed sensitivities present in this part of Sullivan County.',
+  },
+  {
+    question: 'Can my Livingston Manor property qualify for 480-a enrollment?',
+    answer: 'Yes — the higher elevations and quality hardwood stands around Livingston Manor support some of the strongest 480-a enrollment cases in Sullivan County. If your property has 50 or more contiguous acres of qualifying woodland, it is likely eligible. The management plan required for enrollment will need to reflect the specific forest conditions and terrain on your property. Henry Kowalec prepares these plans and handles the full DEC application process.',
+  },
+  {
+    question: 'What does a timber appraisal near Livingston Manor involve?',
+    answer: 'An on-site appraisal covers species identification, diameter distribution, stand volume, and current stumpage value based on actual market prices — not averages. In the Livingston Manor area, where sugar maple and beech are significant components of the forest, the appraisal process requires specific knowledge of what premium-grade hardwood buyers are paying for this species in this part of the market. Contact EFP to schedule an appraisal.',
+  },
+  {
+    question: 'Does EFP manage selective timber harvests near Livingston Manor?',
+    answer: 'Yes. On sites where a selective harvest is appropriate — and many Livingston Manor properties are — EFP manages the full process from appraisal to sale completion. The steep terrain in this part of the Catskills means that equipment selection and access planning are critical components of every harvest plan. Henry Kowalec has worked in this terrain for decades and designs harvest plans that are achievable with the equipment and access conditions present on the specific property.',
+  },
+];
+---
+
+<LocationLayout title={title} description={description} canonicalUrl={canonicalUrl}>
+  <ServiceSchema
+    pageType="location"
+    serviceName="Forestry Consulting — Livingston Manor, NY"
+    description={description}
+    url={canonicalUrl}
+    areaServed={['Livingston Manor, NY', 'Rockland Township, NY', 'Sullivan County, NY']}
+    crumbs={crumbs}
+  />
+  <FAQSchema items={faqs} />
+  <Breadcrumb crumbs={crumbs} />
+
+  <PageHero
+    title="Forestry Consulting in Livingston Manor, NY"
+    subtitle="Catskill Mountain timber appraisals, 480-a enrollment, and woodland management along the Willowemoc Creek corridor"
+  />
+
+  <article class="max-w-4xl mx-auto my-8 sm:my-10 px-8 sm:px-12 py-10 bg-white rounded-2xl shadow-md ring-1 ring-gray-200">
+
+    <KeyTakeaway
+      text="Environmental Forest Products serves landowners in Livingston Manor, NY and the surrounding Catskill Mountain townships. Henry Kowalec has 30+ years of experience working in the Willowemoc Creek corridor — where sugar maple quality is high, terrain is steep, and management decisions require both forestry expertise and local knowledge."
+    />
+
+    <AuthorByline />
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Catskill Mountain Forest — What Livingston Manor Properties Actually Contain</h2>
+
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Livingston Manor sits in the Catskill Mountains proper — not the foothills, but the mountains themselves. The Willowemoc Creek valley runs through the heart of the community, and the forested ridgelines on both sides of the valley rise steeply in the classic Catskill pattern. The forest here reflects that elevation and aspect in its species composition: sugar maple, beech, yellow birch, and black cherry dominate the upper slopes, with hemlock holding the protected north-facing ravines.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      The quality of the sugar maple stands in this part of Sullivan County is among the highest in the county. Well-stocked, mature maple on good sites in the Rockland Township area commands premium stumpage prices from hardwood buyers who know exactly what they are looking for. Getting those prices requires an <a href="/services/sell-standing-timber" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">independent timber appraisal</a> and a competitive bid process — not an informal agreement with the first buyer who shows interest.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      The Willowemoc Creek valley is internationally recognized as one of the premier fly-fishing destinations in the country, and the forested hillside properties above the stream carry both timber value and watershed significance. Forest management plans in this area balance timber objectives against the stream buffer protections and low-impact harvesting approaches that this terrain requires.
+    </p>
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">480-a Forest Tax Law and Long-Term Woodland Planning</h2>
+
+    <p class="text-gray-700 leading-relaxed mb-4">
+      The Livingston Manor area is one of the strongest 480-a enrollment markets in Sullivan County. High forest cover, large parcel sizes, and quality hardwood composition all work in the program's favor here. An enrollment in the Livingston Manor area also produces a management plan that directly addresses the terrain, species mix, and stream buffer requirements specific to this part of the Catskills — making it more than just a tax strategy.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Learn more about <a href="/services/480a-forest-tax-law" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">480-a Forest Tax Law enrollment</a> and how EFP manages the process for Sullivan County landowners, or contact Henry Kowalec directly to discuss eligibility for your specific property.
+    </p>
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Forestry Services Near Livingston Manor</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
+      {services.map(svc => (
+        <a
+          href={`/services/${svc.slug}`}
+          class="flex items-start gap-3 p-4 border border-gray-200 rounded-lg hover:border-[#2d5a2d] hover:bg-green-50 transition-colors group"
+        >
+          <span class="text-2xl flex-shrink-0" aria-hidden="true">{svc.icon}</span>
+          <div>
+            <div class="font-semibold text-[#1a3c1a] group-hover:text-[#2d5a2d] text-sm">{svc.name}</div>
+            <div class="text-xs text-gray-500 mt-0.5 leading-snug">{svc.excerpt.split('—')[0].trim()}</div>
+          </div>
+        </a>
+      ))}
+    </div>
+
+    <div class="bg-[#1a3c1a] text-white rounded-lg p-6 my-10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <div>
+        <p class="font-bold text-lg mb-1">Schedule a Site Visit Near Livingston Manor</p>
+        <p class="text-green-200 text-sm">Henry walks the property — not a phone assessment.</p>
+      </div>
+      <a href="tel:+18454980208" class="inline-flex items-center gap-2 bg-white text-[#1a3c1a] font-bold px-5 py-3 rounded hover:bg-green-100 transition-colors text-sm whitespace-nowrap flex-shrink-0">
+        <svg class="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/></svg>
+        (845) 754-8242
+      </a>
+    </div>
+
+    <FAQSection items={faqs} />
+
+    <div class="border border-gray-200 rounded-lg p-5 my-10">
+      <h3 class="font-semibold text-[#1a3c1a] mb-3 text-sm uppercase tracking-wide">Nearby Sullivan County Communities</h3>
+      <div class="flex flex-wrap gap-3">
+        <a href="/locations/sullivan-county-ny/roscoe" class="text-sm text-[#2d5a2d] hover:underline">Roscoe</a>
+        <a href="/locations/sullivan-county-ny/liberty" class="text-sm text-[#2d5a2d] hover:underline">Liberty</a>
+        <a href="/locations/sullivan-county-ny/jeffersonville" class="text-sm text-[#2d5a2d] hover:underline">Jeffersonville</a>
+        <a href="/locations/sullivan-county-ny/callicoon" class="text-sm text-[#2d5a2d] hover:underline">Callicoon</a>
+        <a href="/locations/sullivan-county-ny" class="text-sm text-[#2d5a2d] hover:underline font-semibold">View all Sullivan County towns →</a>
+      </div>
+    </div>
+
+    <EstimateForm variant="b2c" />
+  </article>
+</LocationLayout>

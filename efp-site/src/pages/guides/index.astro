@@ -1,22 +1,24 @@
 ---
-// pages/guides/index.astro
-// 480-a content hub index — lists pillar first, then supporting articles.
-// Exists so /guides breadcrumb links don't 404.
-
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHero from '../../components/ui/PageHero.astro';
 import CTASection from '../../components/ui/CTASection.astro';
+import AuthorByline from '../../components/ui/AuthorByline.astro';
+import KeyTakeaway from '../../components/ui/KeyTakeaway.astro';
 import { getCollection } from 'astro:content';
 import { buildTitle, buildCanonical, buildDescription } from '../../lib/seo';
 
-const title = buildTitle("480-a Forest Tax Law Guides — NY Woodland Owner Resources");
+const title = buildTitle("Forestry & Land Management Guides — NY Woodland Owner Resources");
 const description = buildDescription(
-  "Free guides for New York woodland owners. 480-a Forest Tax Law eligibility, " +
-  "management plan requirements, application timelines, and property tax reduction strategies."
+  "Free guides for New York woodland owners. Timber harvesting, land clearing costs, 480-a Forest Tax Law, " +
+  "selective cutting, forestry mulching, and woodland management — written by a certified consulting forester."
 );
 const canonicalUrl = buildCanonical("/guides");
 
 const allGuides = await getCollection('guides');
+const standaloneGuides = [
+  { slug: "should-i-sell-my-timber", title: "Should I Sell My Timber? What NY Landowners Need to Know", description: "Before you negotiate with a logger, read this. Timber appraisal, competitive bidding, and why independent assessment matters." },
+  { slug: "what-is-a-forest-management-plan", title: "What Is a Forest Management Plan?", description: "What a plan includes, who can write one for 480-a enrollment, and why private woodland owners need one." },
+];
 const pillar = allGuides.find(g => g.data.isPillar);
 const spokes = allGuides.filter(g => !g.data.isPillar).sort((a, b) =>
   a.data.title.localeCompare(b.data.title)
@@ -25,12 +27,29 @@ const spokes = allGuides.filter(g => !g.data.isPillar).sort((a, b) =>
 
 <BaseLayout title={title} description={description} canonicalUrl={canonicalUrl}>
   <PageHero
-    title="480-a Forest Tax Law — Complete Resource Library"
-    subtitle="Guides for NY landowners looking to reduce property taxes through the 480-a program"
+    title="Forestry & Land Management Guides"
+    subtitle="Practical guides for NY woodland owners — timber value, land clearing, forest tax programs, and more"
   />
 
-  <section class="py-16 sm:py-20 bg-white">
+  <section class="py-12 bg-white">
     <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <div class="bg-white rounded-2xl shadow-md ring-1 ring-gray-200 px-8 sm:px-12 py-10 mb-10">
+        <KeyTakeaway text="These guides are written for private woodland owners in Sullivan, Orange, and Ulster counties — not general forestry overviews. Every one is based on what Henry Kowalec actually sees on properties in this region and the questions landowners ask before and after their first site visit." />
+
+        <AuthorByline />
+        <p class="text-xs text-gray-400 mt-1 mb-8">All guides reviewed April 2026 by Henry Kowalec, CF</p>
+
+        <p class="text-gray-700 leading-relaxed mb-4">
+          The questions private landowners ask before calling a forester are usually the same questions — and they are good ones. What is my timber actually worth? What does land clearing cost per acre in New York? How does the 480-a Forest Tax Law work, and do I qualify? What is a forest management plan, and do I need one?
+        </p>
+        <p class="text-gray-700 leading-relaxed mb-4">
+          These guides answer those questions with the specificity that the Hudson Valley and Catskills region actually requires. General forestry information is available everywhere. What is harder to find is a clear explanation of what that information means for a 75-acre mixed hardwood woodlot in Sullivan County, or a cleared parcel in Orange County that a developer wants to assess before equipment arrives.
+        </p>
+        <p class="text-gray-700 leading-relaxed">
+          Read whichever guide is relevant to where you are right now. If it raises more questions than it answers, the next step is a site visit — and that starts with a call to <a href="tel:+18454980208" class="text-[#2d5a2d] font-semibold">(845) 754-8242</a>.
+        </p>
+      </div>
 
       {pillar && (
         <div class="bg-green-50 border-2 border-[#2d5a2d] rounded-xl p-6 mb-10">
@@ -43,17 +62,17 @@ const spokes = allGuides.filter(g => !g.data.isPillar).sort((a, b) =>
           <p class="text-gray-600 mb-4 leading-relaxed">{pillar.data.description}</p>
           <a href={`/guides/${pillar.slug}`} class="inline-flex items-center gap-1 font-semibold text-[#2d5a2d] hover:text-[#1a3c1a] transition-colors">
             Read the complete guide
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            <svg class="w-4 h-4" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
           </a>
         </div>
       )}
 
       {spokes.length > 0 && (
-        <div>
+        <div class="mb-10">
           <h2 class="text-xl font-bold text-[#1a3c1a] mb-6">In This Series</h2>
-          <ul class="divide-y divide-gray-100">
+          <ul class="divide-y divide-gray-100 bg-white rounded-xl shadow-sm ring-1 ring-gray-100 overflow-hidden">
             {spokes.map(guide => (
-              <li class="py-5">
+              <li class="py-5 px-5 hover:bg-green-50 transition-colors">
                 <a href={`/guides/${guide.slug}`} class="block font-semibold text-[#1a3c1a] hover:text-[#2d5a2d] transition-colors mb-1">
                   {guide.data.title}
                 </a>
@@ -64,20 +83,19 @@ const spokes = allGuides.filter(g => !g.data.isPillar).sort((a, b) =>
         </div>
       )}
 
-      {allGuides.length === 0 && (
-        <div class="space-y-4">
-          <a href="/guides/480a-forest-tax-law-new-york" class="block p-5 border border-gray-200 rounded-lg hover:border-[#2d5a2d] hover:bg-green-50 transition-colors group">
-            <div class="font-semibold text-[#1a3c1a] group-hover:text-[#2d5a2d]">New York's 480-a Forest Tax Law: Complete Guide</div>
-            <div class="text-sm text-gray-500 mt-1">Eligibility, tax savings, management plan requirements, and the application process — explained for landowners.</div>
-          </a>
-          <a href="/guides/should-i-sell-my-timber" class="block p-5 border border-gray-200 rounded-lg hover:border-[#2d5a2d] hover:bg-green-50 transition-colors group">
-            <div class="font-semibold text-[#1a3c1a] group-hover:text-[#2d5a2d]">Should I Sell My Timber? What NY Landowners Need to Know</div>
-            <div class="text-sm text-gray-500 mt-1">Before you negotiate with a logger, read this. Timber appraisal, competitive bidding, and why independent assessment matters.</div>
-          </a>
-          <a href="/guides/what-is-a-forest-management-plan" class="block p-5 border border-gray-200 rounded-lg hover:border-[#2d5a2d] hover:bg-green-50 transition-colors group">
-            <div class="font-semibold text-[#1a3c1a] group-hover:text-[#2d5a2d]">What Is a Forest Management Plan?</div>
-            <div class="text-sm text-gray-500 mt-1">What a plan includes, who can write one for 480-a enrollment, and why private woodland owners need one.</div>
-          </a>
+      {standaloneGuides.length > 0 && (
+        <div class="mb-10">
+          <h2 class="text-xl font-bold text-[#1a3c1a] mb-6">More Guides</h2>
+          <ul class="divide-y divide-gray-100 bg-white rounded-xl shadow-sm ring-1 ring-gray-100 overflow-hidden">
+            {standaloneGuides.map(guide => (
+              <li class="py-5 px-5 hover:bg-green-50 transition-colors">
+                <a href={`/guides/${guide.slug}`} class="block font-semibold text-[#1a3c1a] hover:text-[#2d5a2d] transition-colors mb-1">
+                  {guide.title}
+                </a>
+                <p class="text-sm text-gray-500 leading-relaxed">{guide.description}</p>
+              </li>
+            ))}
+          </ul>
         </div>
       )}
 

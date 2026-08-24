@@ -1,0 +1,187 @@
+---
+// pages/services/forest-stewardship-planning.astro
+import ServiceLayout from '../../layouts/ServiceLayout.astro';
+import PageHero from '../../components/ui/PageHero.astro';
+import Breadcrumb from '../../components/ui/Breadcrumb.astro';
+import FAQSection from '../../components/ui/FAQSection.astro';
+import KeyTakeaway from '../../components/ui/KeyTakeaway.astro';
+import EstimateForm from '../../components/forms/EstimateForm.astro';
+import ServiceSchema from '../../components/schema/ServiceSchema.astro';
+import FAQSchema from '../../components/schema/FAQSchema.astro';
+import AuthorByline from '../../components/ui/AuthorByline.astro';
+import { buildTitle, buildCanonical, buildDescription } from '../../lib/seo';
+
+const title = buildTitle("Forest Stewardship Planning — Sullivan, Orange & Ulster Counties NY");
+const description = buildDescription(
+  "Henry Kowalec helps private landowners in Sullivan, Orange, and Ulster counties develop long-term forest stewardship plans for forest health, wildlife habitat, timber value, and 480-a tax eligibility. Call (845) 754-8242."
+);
+const canonicalUrl = buildCanonical("/services/forest-stewardship-planning");
+
+const crumbs = [
+  { label: "Home",     href: "/"         },
+  { label: "Services", href: "/services" },
+  { label: "Forest Stewardship Planning", href: "/services/forest-stewardship-planning" },
+];
+
+const keyTakeaway = "Forest stewardship planning gives private landowners a long-term roadmap for improving forest health, protecting wildlife habitat, managing timber value, and qualifying for NY property tax programs like 480-a.";
+
+const faqs = [
+  {
+    question: "What is a forest stewardship plan?",
+    answer: "A forest stewardship plan is a written long-term vision for your forest property. It identifies what you have, what you want to achieve, and the specific management actions — like timber stand improvement, invasive species control, or habitat enhancement — that will move the forest toward those goals over time. It is broader than a forest management plan and serves as the foundation for all other forestry work on the property."
+  },
+  {
+    question: "Do I need a stewardship plan to enroll in 480-a?",
+    answer: "New York's 480-a program requires a formal forest management plan prepared by a cooperating consultant forester, not a stewardship plan per se. However, the stewardship planning process often precedes and informs the 480-a management plan. If your property is eligible for 480-a, Henry can integrate both into a single engagement."
+  },
+  {
+    question: "How is a stewardship plan different from a forest management plan?",
+    answer: "A stewardship plan is the big-picture vision — forest health goals, habitat priorities, long-term timber strategy, and property values. A forest management plan is the specific operational roadmap that comes out of that vision: what work gets done, in what order, and on what schedule. For 480-a purposes, the management plan is the required document. The stewardship plan is the thinking behind it."
+  },
+  {
+    question: "What does Henry do during a stewardship assessment?",
+    answer: "Henry walks the property with you, assesses timber stand composition and health, identifies invasive species or pest pressures, notes wildlife habitat features, reviews access and boundary conditions, and asks about your goals — timber income, tax reduction, wildlife improvement, aesthetic values, or a combination. From that, he develops a written plan tailored to your property and objectives."
+  },
+  {
+    question: "What counties does EFP serve for stewardship planning?",
+    answer: "Henry serves Sullivan, Orange, and Ulster counties in New York as primary territory. He also works in Pike and Wayne counties in Pennsylvania and Sussex County in New Jersey. For landowners in adjacent areas, call (845) 754-8242 to discuss your property."
+  },
+];
+---
+
+<ServiceLayout
+  title={title}
+  description={description}
+  canonicalUrl={canonicalUrl}
+>
+  <ServiceSchema
+    pageType="service"
+    serviceName="Forest Stewardship Planning"
+    description={description}
+    url={canonicalUrl}
+    areaServed={["Sullivan County", "Orange County", "Ulster County", "Pike County", "Wayne County", "Sussex County"]}
+    crumbs={crumbs}
+  />
+  <FAQSchema items={faqs} />
+
+  <PageHero
+    heading="Forest Stewardship Planning"
+    subheading="Long-term management plans for private landowners in Sullivan, Orange, and Ulster counties — forest health, wildlife habitat, timber value, and 480-a tax eligibility."
+    ctaText="Call (845) 754-8242"
+    ctaHref="tel:+18454980208"
+  />
+
+  <div class="max-w-4xl mx-auto my-8 sm:my-10 px-8 sm:px-12 py-10 bg-white rounded-2xl shadow-md ring-1 ring-gray-200">
+    <Breadcrumb crumbs={crumbs} />
+
+    <KeyTakeaway text={keyTakeaway} />
+    <AuthorByline />
+
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Forest stewardship planning helps private landowners in Sullivan, Orange, and Ulster counties understand what they have, set long-term goals, and take the right management actions to protect forest health, improve wildlife habitat, grow timber value, and qualify for New York property tax programs like 480-a.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Henry Kowalec has worked with private landowners across the Hudson Valley and Catskill region for more than 30 years. He is a certified consulting forester who has prepared forest management and stewardship plans for hundreds of properties — from small woodlots to large forested tracts.
+    </p>
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">What Forest Stewardship Planning Covers</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      A stewardship engagement with Henry begins with a property walkthrough and assessment. He evaluates:
+    </p>
+    <ul class="space-y-3 mb-6">
+      {[
+        ["Timber stand health and composition", "species mix, age structure, stocking density, and growth potential"],
+        ["Invasive species and pest pressure", "identification and priority control areas"],
+        ["Wildlife habitat features", "mast trees, den trees, wetland edges, travel corridors, and nesting habitat"],
+        ["Access and boundary conditions", "road quality, trail layout, property line clarity"],
+        ["Tax reduction eligibility", "whether the property qualifies for 480-a enrollment or other NY forestry programs"],
+      ].map(([heading, body]) => (
+        <li class="flex gap-3">
+          <svg class="w-5 h-5 text-[#2d5a2d] flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+          <div>
+            <span class="font-semibold text-gray-900">{heading} —</span>
+            <span class="text-gray-600"> {body}</span>
+          </div>
+        </li>
+      ))}
+    </ul>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      From the assessment, Henry produces a written stewardship plan that documents current conditions, states your goals, and outlines specific management actions with a realistic timeline.
+    </p>
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Why Stewardship Planning Matters for Long-Term Forest Ownership</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Without a plan, most private forest land drifts. Timber stands become overcrowded and lose vigor. Invasive species expand. Wildlife habitat degrades. High-value trees grow slowly because competing stems are not removed. Tax burdens remain high when 480-a enrollment could reduce them significantly.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      A stewardship plan changes that trajectory. It gives you a clear picture of what you own, what it is worth, and what it could become with the right management over the next 10 to 20 years.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      For landowners who have inherited forestland, recently purchased a wooded property, or simply never had a formal assessment done, a stewardship engagement with Henry is the logical first step.
+    </p>
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">How Forest Stewardship Connects to Other EFP Services</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Stewardship planning is not a standalone product — it is the foundation that makes every other forestry service more effective:
+    </p>
+    <ul class="space-y-3 mb-6">
+      {[
+        ["480-a forest tax law", "stewardship goals inform the required management plan and help Henry document the property's eligibility"],
+        ["Forest management plans", "the stewardship vision drives the specific work schedule and timber stand objectives"],
+        ["Woodlot management", "ongoing management actions are prioritized based on stewardship goals"],
+        ["Timber harvesting", "selective harvesting is scheduled to improve stand health, not just extract value"],
+        ["Wildlife habitat management", "habitat improvement work is designed as part of the stewardship plan, not added as an afterthought"],
+      ].map(([heading, body]) => (
+        <li class="flex gap-3">
+          <svg class="w-5 h-5 text-[#2d5a2d] flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+          <div>
+            <span class="font-semibold text-gray-900">{heading} —</span>
+            <span class="text-gray-600"> {body}</span>
+          </div>
+        </li>
+      ))}
+    </ul>
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Schedule a Stewardship Assessment</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Henry serves Sullivan, Orange, and Ulster counties in New York, plus Pike and Wayne counties in Pennsylvania and Sussex County in New Jersey.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-6">
+      Call <a href="tel:+18454980208" class="font-semibold text-[#2d5a2d] hover:underline">(845) 754-8242</a> to discuss your property and schedule an on-site assessment.
+    </p>
+    <p class="text-sm text-gray-500 italic mb-10">Henry Kowalec — Certified Consulting Forester — 30+ years serving private landowners in the Hudson Valley and Catskill region.</p>
+
+    <FAQSection items={faqs} />
+
+    <div class="mt-12 pt-8 border-t border-gray-200">
+      <h2 class="text-xl font-bold text-[#1a3c1a] mb-2">Related Services</h2>
+      <ul class="flex flex-wrap gap-3">
+        {[
+          ["480-a Forest Tax Law", "/services/480a-forest-tax-law"],
+          ["Woodlot Management", "/services/woodlot-management"],
+          ["Timber Harvesting", "/services/timber-harvesting"],
+          ["Wildlife Habitat Management", "/services/wildlife-habitat-management"],
+        ].map(([label, href]) => (
+          <li>
+            <a href={href} class="inline-block px-4 py-2 bg-[#f0f7f0] text-[#2d5a2d] rounded-lg text-sm font-medium hover:bg-[#daeeda] transition-colors">{label}</a>
+          </li>
+        ))}
+      </ul>
+      <h2 class="text-xl font-bold text-[#1a3c1a] mt-6 mb-2">Related Guides</h2>
+      <ul class="flex flex-wrap gap-3">
+        {[
+          ["What Is Forest Stewardship?", "/guides/what-is-forest-stewardship"],
+          ["Forest Stewardship Plan for Private Landowners", "/guides/forest-stewardship-plan-for-private-landowners"],
+          ["Stewardship Plan vs Management Plan", "/guides/forest-stewardship-vs-forest-management-plan"],
+          ["Forest Health & Long-Term Woodland Management", "/guides/forest-health-and-long-term-woodland-management"],
+        ].map(([label, href]) => (
+          <li>
+            <a href={href} class="inline-block px-4 py-2 bg-[#f0f7f0] text-[#2d5a2d] rounded-lg text-sm font-medium hover:bg-[#daeeda] transition-colors">{label}</a>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <EstimateForm />
+  </div>
+</ServiceLayout>

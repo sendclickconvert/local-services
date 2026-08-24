@@ -1,0 +1,181 @@
+---
+// Tannersville, Ulster County — individual static location page
+import LocationLayout from '../../../layouts/LocationLayout.astro';
+import PageHero from '../../../components/ui/PageHero.astro';
+import Breadcrumb from '../../../components/ui/Breadcrumb.astro';
+import FAQSection from '../../../components/ui/FAQSection.astro';
+import KeyTakeaway from '../../../components/ui/KeyTakeaway.astro';
+import AuthorByline from '../../../components/ui/AuthorByline.astro';
+import EstimateForm from '../../../components/forms/EstimateForm.astro';
+import ServiceSchema from '../../../components/schema/ServiceSchema.astro';
+import FAQSchema from '../../../components/schema/FAQSchema.astro';
+import { services } from '../../../data/services';
+
+const title       = "Forestry Consulting — Tannersville, NY | EFP";
+const description = "Certified forestry consulting in Tannersville, Ulster County. 480-a Forest Tax Law, timber harvesting, and woodlot management for Catskill landowners. Henry Kowalec, 30+ years experience. Call (845) 754-8242.";
+const canonicalUrl = "https://eforestproducts.com/locations/ulster-county-ny/tannersville";
+
+const crumbs = [
+  { label: "Home",      href: "/" },
+  { label: "Locations", href: "/locations" },
+  { label: "Ulster County, NY", href: "/locations/ulster-county-ny" },
+  { label: "Tannersville", href: "/locations/ulster-county-ny/tannersville" },
+];
+
+const faqs = [
+  { question: "Do you provide forestry consulting near Tannersville, NY?", answer: "Yes. Environmental Forest Products serves private landowners in Tannersville and throughout Ulster County. Henry Kowalec has 30+ years of hands-on forestry experience in the Catskill region and provides on-site assessments for all service inquiries. Call (845) 754-8242 to discuss your property." },
+  { question: "What does a forestry site assessment in Tannersville involve?", answer: "An initial site visit covers the key questions: what species are present, what the timber volume and size-class distribution looks like, whether the property qualifies for the 480-a Forest Tax Law program, and what management approach — harvest, improvement cutting, or a long-term management plan — makes the most sense given the landowner's objectives. Visits typically take 1–3 hours depending on parcel size and terrain." },
+  { question: "Does my Tannersville property qualify for 480-a Forest Tax Law enrollment?", answer: "New York's 480-a program generally requires 50 or more contiguous acres of qualifying woodland. The high-elevation forested parcels common in the Tannersville and Hunter Mountain area are frequently strong candidates — the terrain is predominantly forested, parcel sizes tend to be larger, and the northern hardwood stands are well-suited for the program. The only way to confirm eligibility for a specific parcel is an on-site assessment. Call (845) 754-8242 to schedule one." },
+  { question: "Can you appraise the timber value on my Tannersville property?", answer: "Yes. A timber appraisal identifies species, diameter, volume, and current stumpage market value for the trees on your property. Tannersville-area properties with mature sugar maple stands command strong prices when properly bid through a competitive process — buyers from flooring mills and specialty hardwood operations actively seek high-grade Catskill maple." },
+  { question: "Do you handle woodlot management near Tannersville?", answer: "Yes. Long-term woodlot management planning is available for Tannersville and surrounding Ulster County townships. A DEC-approved forest management plan is required for 480-a enrollment but is also independently useful for landowners who want to guide the long-term health, timber quality, and wildlife habitat of their Catskill woodland. Henry Kowalec prepares these plans and manages the DEC certification process." },
+];
+---
+
+<LocationLayout title={title} description={description} canonicalUrl={canonicalUrl}>
+  <ServiceSchema
+    pageType="location"
+    serviceName="Forestry Consulting — Tannersville, Ulster County"
+    description={description}
+    url={canonicalUrl}
+    areaServed={["Tannersville, NY", "Ulster County, NY"]}
+    crumbs={crumbs}
+  />
+  <FAQSchema items={faqs} />
+
+  <Breadcrumb crumbs={crumbs} />
+
+  <PageHero
+    title="Forestry Consulting in Tannersville, NY"
+    subtitle="Serving Tannersville and the high Catskill townships — certified forestry for private landowners"
+  />
+
+  <article class="max-w-4xl mx-auto my-8 sm:my-10 px-8 sm:px-12 py-10 bg-white rounded-2xl shadow-md ring-1 ring-gray-200">
+
+    <KeyTakeaway
+      text="Environmental Forest Products provides certified forestry consulting for Tannersville area landowners. Henry Kowalec brings 30+ years of hands-on experience in the Ulster County Catskill townships — on-site assessments for 480-a enrollment, timber value, and long-term woodland management."
+    />
+
+    <AuthorByline />
+
+    <!-- SECTION 1: Terrain + Species ─────────────────────── -->
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Tannersville's Woodland and Forest Terrain</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Tannersville sits at high elevation in the Town of Hunter, surrounded by the Catskill Mountain terrain that defines the western edge of Ulster County. The forest here is classic northern hardwood: sugar maple, beech, yellow birch, and black cherry dominate the upland slopes, with hemlock persisting in the protected drainages and north-facing hollows. This is among the most productive hardwood forest type in the entire Catskill region.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      The elevation and aspect of properties in the Tannersville area create conditions where sugar maple in particular reaches excellent form and grade. High-grade Catskill maple — when properly identified, measured, and marketed through a competitive bid process — commands strong prices from flooring mills and specialty hardwood buyers who actively source from this region.
+    </p>
+
+    <!-- SECTION 2: Local Context ─────────────────────────── -->
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Local Forestry Context — Tannersville</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      The Tannersville and Hunter Mountain area has a substantial second-home and vacation property market, and many landowners own significant forested acreage without having had an independent assessment of its timber value or management potential. The proximity to Catskill Park and the large forested parcel sizes common in this part of Ulster County make 480-a Forest Tax Law enrollment a particularly relevant consideration.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Environmental Forest Products serves Tannersville landowners for the full range of forestry consulting — timber appraisals, competitive timber sale management, 480-a enrollment, and long-term management planning. Henry Kowalec is a certified consulting forester with 30+ years of experience in Ulster County and the Catskill region. Every engagement starts with an on-site assessment of your specific property, not a phone estimate based on acreage alone.
+    </p>
+
+    <!-- SECTION 3: Services ──────────────────────────────── -->
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Services Available Near Tannersville</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      The following services are available to Ulster County landowners in the Tannersville area. Each starts with a site assessment that accounts for the actual conditions on your specific property.
+    </p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
+      {services.map(svc => (
+        <a
+          href={'/services/' + svc.slug}
+          class="flex items-start gap-3 p-4 border border-gray-200 rounded-lg hover:border-[#2d5a2d] hover:bg-green-50 transition-colors group"
+        >
+          <span class="text-2xl flex-shrink-0" aria-hidden="true">{svc.icon}</span>
+          <div>
+            <div class="font-semibold text-[#1a3c1a] group-hover:text-[#2d5a2d] text-sm">{svc.name}</div>
+            <div class="text-xs text-gray-500 mt-0.5 leading-snug">{svc.excerpt.split('—')[0].trim()}</div>
+          </div>
+        </a>
+      ))}
+    </div>
+
+    <!-- SECTION 4: Timber Value ──────────────────────────── -->
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Timber Value and Harvest Planning Near Tannersville</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Private woodland in the Tannersville area — carrying sugar maple, beech, yellow birch, and black cherry — holds timber value that most landowners have never had independently confirmed. Without an independent appraisal, there is no reliable baseline for evaluating any offer a buyer presents, and first offers in this timber type routinely undervalue what a competitive bid process would return.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Environmental Forest Products provides independent timber appraisals — not affiliated with any logging contractor — which means the appraisal reflects what the timber is worth at competitive market prices. When a harvest is appropriate, Henry Kowalec manages the competitive bidding process, reaching the buyers who most actively purchase high-elevation Catskill hardwoods.
+    </p>
+
+    <div class="bg-green-50 border border-green-200 rounded-lg p-6 my-10">
+      <h3 class="font-bold text-[#1a3c1a] text-lg mb-2">480-a Forest Tax Law — Tannersville Area Properties</h3>
+      <p class="text-gray-700 text-sm mb-3">
+        New York's 480-a Forest Tax Law program allows woodland owners with 50 or more contiguous acres of qualifying
+        forest to apply for a property and school tax exemption of up to 80% on enrolled acreage. The high-elevation
+        Catskill terrain around Tannersville — with large forested parcels and strong northern hardwood stands — is
+        among the most suitable in Ulster County for 480-a enrollment.
+      </p>
+      <p class="text-gray-700 text-sm mb-4">
+        The program requires a DEC-approved forest management plan prepared by a certified consulting forester.
+        Environmental Forest Products prepares these plans and manages the full DEC certification process for
+        Ulster County landowners.
+      </p>
+      <a href="/services/480a-forest-tax-law" class="text-[#2d5a2d] font-semibold text-sm underline hover:text-[#1a3c1a]">Learn about 480-a enrollment for Ulster County landowners →</a>
+    </div>
+
+    <!-- SECTION 5: Land Clearing ─────────────────────────── -->
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Land Clearing Near Tannersville</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Land clearing near Tannersville involves high-elevation terrain with slope, drainage, and access considerations that are different from lower-elevation properties. Site preparation for residential development or agricultural use in this part of Ulster County requires attention to terrain access, erosion risk on steeper slopes, and the merchantable value of trees being cleared.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-6">
+      Where merchantable timber is present on a clearing site, recovering that value before the land is cleared reduces the net cost of the project. Learn more about <a href="/services/land-clearing" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">land clearing services in Ulster County</a>, or contact EFP to discuss a specific site near Tannersville.
+    </p>
+
+    <!-- SECTION 6: Why EFP ───────────────────────────────── -->
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Why Tannersville Landowners Work With EFP</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Henry Kowalec has conducted timber assessments, harvest operations, and land management work across Ulster County for more than 30 years — including on properties with the high-elevation Catskill terrain near Hunter Mountain and the sugar maple-dominant northern hardwood forest composition that characterizes the Tannersville area. That accumulated site-specific experience means he can evaluate a property in Tannersville with the context of hundreds of comparable assessments in this same region, not just general forestry principles applied from the outside.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Environmental Forest Products is headquartered in Westbrookville, Sullivan County — not a regional franchise or an out-of-area firm taking remote bids. When Henry walks your property in Tannersville, he brings direct familiarity with Ulster County's Catskill terrain, access conditions, timber markets, and 480-a program requirements — developed over decades of hands-on work throughout this region.
+    </p>
+
+    <!-- CTA ──────────────────────────────────────────────── -->
+    <div class="bg-[#1a3c1a] text-white rounded-lg p-6 my-10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <div>
+        <p class="font-bold text-lg mb-1">Schedule a Site Visit in Tannersville</p>
+        <p class="text-green-200 text-sm">On-site assessment — not a phone estimate. We walk the property with you.</p>
+      </div>
+      <a
+        href="tel:+18454980208"
+        class="inline-flex items-center gap-2 bg-white text-[#1a3c1a] font-bold px-5 py-3 rounded hover:bg-green-100 transition-colors text-sm whitespace-nowrap flex-shrink-0"
+      >
+        <svg class="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/></svg>
+        (845) 754-8242
+      </a>
+    </div>
+
+    <FAQSection items={faqs} />
+
+    <div class="border border-gray-200 rounded-lg p-5 my-10">
+      <h3 class="font-semibold text-[#1a3c1a] mb-3 text-sm uppercase tracking-wide">
+        Other Ulster County Communities We Serve
+      </h3>
+      <div class="flex flex-wrap gap-3 mb-4">
+        <a href="/locations/ulster-county-ny/hunter" class="text-sm text-[#2d5a2d] hover:underline">Hunter</a>
+        <a href="/locations/ulster-county-ny/woodstock" class="text-sm text-[#2d5a2d] hover:underline">Woodstock</a>
+        <a href="/locations/ulster-county-ny/phoenicia" class="text-sm text-[#2d5a2d] hover:underline">Phoenicia</a>
+        <a href="/locations/ulster-county-ny/saugerties" class="text-sm text-[#2d5a2d] hover:underline">Saugerties</a>
+        <a href="/locations/ulster-county-ny" class="text-sm text-[#2d5a2d] hover:underline font-semibold">View all Ulster County towns →</a>
+      </div>
+      <div>
+        <p class="text-xs text-gray-500 uppercase tracking-wide mb-2">Also Serving Nearby Counties</p>
+        <div class="flex flex-wrap gap-3">
+          <a href="/locations/sullivan-county-ny" class="text-sm text-[#2d5a2d] hover:underline">Sullivan County, NY</a>
+          <a href="/locations/orange-county-ny" class="text-sm text-[#2d5a2d] hover:underline">Orange County, NY</a>
+        </div>
+      </div>
+    </div>
+
+    <EstimateForm variant="b2c" />
+
+  </article>
+</LocationLayout>

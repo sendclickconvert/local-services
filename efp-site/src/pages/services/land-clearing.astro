@@ -7,7 +7,10 @@ import KeyTakeaway from '../../components/ui/KeyTakeaway.astro';
 import AuthorByline from '../../components/ui/AuthorByline.astro';
 import ServiceSchema from '../../components/schema/ServiceSchema.astro';
 import FAQSchema from '../../components/schema/FAQSchema.astro';
+import EstimateForm from '../../components/forms/EstimateForm.astro';
+import OptimizedImage from '../../components/ui/OptimizedImage.astro';
 import { buildTitle, buildCanonical, buildDescription } from '../../lib/seo';
+import ClusterArticles from '../../components/ui/ClusterArticles.astro';
 
 const title = buildTitle("Land Clearing — Sullivan, Orange & Ulster Counties NY | EFP");
 const description = buildDescription(
@@ -47,6 +50,10 @@ const faqs = [
     question: "Do you provide land clearing in Orange and Ulster counties?",
     answer: "Yes. Land clearing services are available throughout Sullivan, Orange, and Ulster counties in New York, as well as Pike and Wayne counties in Pennsylvania and Sussex County in New Jersey.",
   },
+  {
+    question: "What's the best time of year for land clearing in New York?",
+    answer: "Late fall through early spring — November through March — is ideal for land clearing in Sullivan and Orange counties. Frozen or firm ground allows heavy equipment access with minimal rutting and soil compaction. We avoid clearing during mud season, typically late March through April, when wet soils are easily damaged. Summer clearing is possible but requires more careful equipment operation to prevent soil compaction, and vegetation regrowth is faster during that period, requiring more follow-up maintenance.",
+  },
 ];
 ---
 
@@ -64,21 +71,22 @@ const faqs = [
   <Breadcrumb crumbs={crumbs} />
 
   <PageHero
-    title="Land Clearing"
+    title="Land Clearing Services — Hudson Valley and Catskills NY"
     subtitle="Residential, commercial, and agricultural clearing — with certified forestry oversight"
   />
 
-  <article class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+  <article class="max-w-4xl mx-auto my-8 sm:my-10 px-8 sm:px-12 py-10 bg-white rounded-2xl shadow-md ring-1 ring-gray-200">
 
     <KeyTakeaway text="Before clearing equipment arrives on your property, a certified forester should walk the site — identifying timber with marketable value that can be separated and sold rather than chipped or burned. That step often offsets a significant portion of the clearing cost and changes the economics of the project entirely." />
 
     <AuthorByline />
+    <p class="text-xs text-gray-400 mt-1 mb-8">Last reviewed: April 2026 by Henry Kowalec, CF</p>
 
-    <img
+    <OptimizedImage
       src="/images/uploads/land-clearing-forestburgh-ny-komatsu.jpg"
       alt="Land clearing project in Forestburgh, NY — Komatsu excavators clearing second-growth forest for site preparation"
       class="w-full rounded-xl shadow-md my-8"
-      loading="lazy"
+      sizes="(max-width: 768px) 100vw, 768px"
     />
 
     <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Land Clearing in the Hudson Valley and Catskills</h2>
@@ -107,7 +115,7 @@ const faqs = [
         ["Selective clearing", "Removing specific species — invasives, dying trees, storm-damaged material — while protecting desirable trees. This is where forestry training matters most: knowing which trees are worth preserving and which are not."],
       ].map(([heading, body]) => (
         <li class="flex gap-3">
-          <svg class="w-5 h-5 text-[#2d5a2d] flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+          <svg aria-hidden="true" class="w-5 h-5 text-[#2d5a2d] flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
           <div>
             <span class="font-semibold text-gray-900">{heading}.</span>
             <span class="text-gray-600"> {body}</span>
@@ -204,7 +212,7 @@ const faqs = [
       and it is better to know that before the project is designed.
     </p>
 
-    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Service Area</h2>
+    <h3 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Service Area</h3>
     <p class="text-gray-700 leading-relaxed mb-4">
       Land clearing services are available throughout
       <a href="/locations/sullivan-county-ny" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">Sullivan County</a>,
@@ -212,6 +220,14 @@ const faqs = [
       <a href="/locations/ulster-county-ny" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">Ulster County</a>
       in New York, as well as Pike and Wayne counties in Pennsylvania and Sussex County in New Jersey.
     </p>
+    <ul class="grid grid-cols-2 sm:grid-cols-3 gap-2 text-sm mb-6">
+      <li><a href="/locations/sullivan-county-ny" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">Sullivan County, NY</a></li>
+      <li><a href="/locations/orange-county-ny" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">Orange County, NY</a></li>
+      <li><a href="/locations/ulster-county-ny" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">Ulster County, NY</a></li>
+      <li><a href="/locations/pike-county-pa" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">Pike County, PA</a></li>
+      <li><a href="/locations/wayne-county-pa" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">Wayne County, PA</a></li>
+      <li><a href="/locations/sussex-county-nj" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">Sussex County, NJ</a></li>
+    </ul>
 
     <div class="bg-green-50 border border-green-200 rounded-lg p-6 my-10">
       <h3 class="font-bold text-[#1a3c1a] text-lg mb-2">Get a Site Assessment</h3>
@@ -220,9 +236,45 @@ const faqs = [
         just a direct conversation about what the work involves, what timber value may be recoverable,
         and what it will realistically take.
       </p>
-      <a href="tel:+18457548242" class="inline-flex items-center gap-2 bg-[#1a3c1a] text-white font-semibold px-5 py-3 rounded hover:bg-[#2d5a2d] transition-colors text-sm">
-        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/></svg>
+      <a href="tel:+18454980208" class="inline-flex items-center gap-2 bg-[#1a3c1a] text-white font-semibold px-5 py-3 rounded hover:bg-[#2d5a2d] transition-colors text-sm">
+        <svg class="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/></svg>
         Call (845) 754-8242
+      </a>
+    </div>
+
+    <div class="mt-12 pt-8 border-t border-gray-200">
+      <h3 class="text-lg font-bold text-[#1a3c1a] mb-4">Related Guides</h3>
+      <ul class="space-y-3 mb-10">
+        <li><a href="/guides/land-clearing-cost" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">Land Clearing Cost Per Acre — What to Expect in NY</a></li>
+        <li><a href="/guides/land-clearing-equipment" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">Land Clearing Equipment: What's Used and Why It Matters</a></li>
+        <li><a href="/guides/forestry-mulching" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">Forestry Mulching: How It Works, What It Costs, and When to Use It</a></li>
+        <li><a href="/guides/forestry-mulching-vs-land-clearing" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">Forestry Mulching vs. Traditional Land Clearing</a></li>
+      </ul>
+    </div>
+
+    <ClusterArticles serviceSlug="land-clearing" heading="Land Clearing Guides" />
+
+    <div class="mt-10 pt-6 border-t border-gray-200">
+      <p class="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-2">Sources &amp; Further Reading</p>
+      <ul class="text-xs text-gray-500 space-y-1">
+        <li><a href="https://www.dec.ny.gov/lands/4937.html" target="_blank" rel="noopener noreferrer" class="text-[#2d5a2d] hover:underline">NY DEC — Freshwater Wetlands Program (Article 24)</a></li>
+        <li><a href="https://www.dec.ny.gov/permits/6042.html" target="_blank" rel="noopener noreferrer" class="text-[#2d5a2d] hover:underline">NY DEC — Permits for Activities Near Water</a></li>
+        <li><a href="https://blogs.cornell.edu/woodlandstewardship/" target="_blank" rel="noopener noreferrer" class="text-[#2d5a2d] hover:underline">Cornell Cooperative Extension — Woodland Stewardship</a></li>
+      </ul>
+    </div>
+
+    <!-- ─── Calculator callout ────────────────────────────────────── -->
+    <div class="bg-green-50 border border-green-200 rounded-xl p-6 my-10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <div>
+        <p class="text-xs font-bold uppercase tracking-widest text-[#2d5a2d] mb-1">Free Tool</p>
+        <p class="font-bold text-[#1a3c1a] text-base mb-1">Land Clearing Cost Calculator</p>
+        <p class="text-gray-600 text-sm">Estimate per-acre clearing costs by vegetation density, terrain, and disposal method — with local NY pricing ranges.</p>
+      </div>
+      <a href="/services/land-clearing/land-clearing-cost-calculator" class="flex-shrink-0 inline-flex items-center gap-2 bg-[#2d5a2d] hover:bg-[#1a3c1a] text-white font-semibold text-sm px-5 py-2.5 rounded-lg transition-colors whitespace-nowrap">
+        Use the Calculator
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+        </svg>
       </a>
     </div>
 

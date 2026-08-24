@@ -1,0 +1,420 @@
+---
+// pages/services/tree-removal/tree-removal-cost-calculator.astro
+// Interactive tree removal cost estimator.
+// URL: /services/tree-removal/tree-removal-cost-calculator
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../components/ui/Breadcrumb.astro';
+import CTASection from '../../../components/ui/CTASection.astro';
+import FAQSection from '../../../components/ui/FAQSection.astro';
+import FAQSchema from '../../../components/schema/FAQSchema.astro';
+import { buildTitle, buildCanonical, buildDescription } from '../../../lib/seo';
+import { business, author, phone } from '../../../data/client.config';
+
+const title    = buildTitle("Tree Removal Cost Calculator — NY Pricing Estimate");
+const desc     = "Estimate tree removal costs in New York based on tree size, site access, and stump grinding. Local pricing ranges for Sullivan, Orange, and Ulster County — with the timber value offset most companies miss.";
+const description = buildDescription(desc);
+const canonicalUrl = buildCanonical('/services/tree-removal/tree-removal-cost-calculator');
+
+const crumbs = [
+  { label: "Home",          href: "/"                      },
+  { label: "Services",      href: "/services"              },
+  { label: "Tree Removal",  href: "/services/tree-removal" },
+  { label: "Cost Calculator", href: canonicalUrl           },
+];
+
+const faqs = [
+  {
+    question: "What factors affect tree removal cost the most?",
+    answer: "The biggest drivers are tree diameter and height, proximity to structures or overhead utilities, equipment access to the site, and whether the tree is dead or structurally compromised (which often increases complexity and risk). Trees that require rigging, crane assistance, or section-by-section lowering over roofs or fences add significant labor time."
+  },
+  {
+    question: "Is stump grinding included in the tree removal price?",
+    answer: "Not automatically. Most contractors price stump grinding separately. Scheduling both services in one visit is more cost-effective — the equipment is already on-site. Expect to add $100–$400 per stump depending on diameter and root spread. If you're planning to replant or grade the area, stump grinding is usually necessary."
+  },
+  {
+    question: "Can larger trees have timber value that offsets removal cost?",
+    answer: "Yes — this is something most tree services skip but EFP always considers. Before a removal is scheduled, Henry assesses whether the trees have any merchantable timber value. A large-diameter red oak, black cherry, or white oak log can generate meaningful stumpage value that partially or fully offsets the removal cost. This step costs nothing and can save you thousands on rural or semi-rural removals."
+  },
+  {
+    question: "Do I need a permit to remove trees in Sullivan County?",
+    answer: "In most cases, no. Sullivan County and most towns within it do not require permits for tree removal on private residential or rural land. Exceptions include trees within 100 feet of a DEC-regulated wetland, and some planned communities or historic districts have their own approval processes. EFP advises on permit requirements during the site assessment."
+  },
+  {
+    question: "How is tree removal priced — per tree or per job?",
+    answer: "Most contractors price per tree, then give a total for the job. Per-tree pricing factors in size, access, and difficulty. Large jobs with multiple trees of similar size in an accessible area often get a volume discount — the crew can work efficiently and move between trees without re-rigging. Ask for a per-tree breakdown with any estimate so you can compare apples to apples."
+  },
+  {
+    question: "Should I get multiple estimates for tree removal?",
+    answer: "Yes — especially for large or complex removals. However, price should not be the only comparison point. Ask each contractor about their insurance coverage, whether they carry workers' comp, and whether they plan to chip on-site or haul away debris. A low estimate that doesn't include debris removal or uses an uninsured crew is not a bargain."
+  },
+];
+
+const pageSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "name": "Tree Removal Cost Calculator",
+      "description": desc,
+      "url": canonicalUrl,
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Web",
+      "isAccessibleForFree": true,
+      "provider": { "@id": `${business.domain}/#organization` },
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": crumbs.map((c, i) => ({
+        "@type": "ListItem",
+        "position": i + 1,
+        "name": c.label,
+        ...(c.href ? { "item": `${business.domain}${c.href}` } : {}),
+      })),
+    },
+  ],
+};
+---
+
+<BaseLayout title={title} description={description} canonicalUrl={canonicalUrl}>
+  <script type="application/ld+json" set:html={JSON.stringify(pageSchema)} />
+  <FAQSchema items={faqs} />
+
+  <Breadcrumb crumbs={crumbs} />
+
+  <article class="max-w-4xl mx-auto my-8 sm:my-10 px-8 sm:px-12 py-10 bg-white rounded-2xl shadow-md ring-1 ring-gray-200">
+
+    <header class="mb-8">
+      <h1 class="text-3xl sm:text-4xl font-bold text-[#1a3c1a] mb-4 leading-tight">
+        Tree Removal Cost Calculator
+      </h1>
+      <div class="flex items-center gap-4 text-sm text-gray-500 border-b border-gray-200 pb-5">
+        <span>By {author.name}, {author.title}</span>
+        <span>·</span>
+        <time datetime="2026-04-15">Updated April 2026</time>
+      </div>
+    </header>
+
+    <div class="prose prose-green prose-lg max-w-none mb-10">
+      <p>
+        Tree removal costs in New York vary widely — the same species of tree can cost $400 to remove
+        in an open field and $2,500+ to remove from a tight backyard with a roof directly below it.
+        Generic national averages rarely account for the terrain, access challenges, and species mix
+        found in Sullivan, Orange, and Ulster counties.
+      </p>
+      <p>
+        This estimator uses local pricing ranges from actual jobs in the Hudson Valley and Catskills
+        region. It also flags when larger hardwoods may carry <strong>timber value that offsets
+        removal cost</strong> — a step most companies skip but EFP always checks first.
+      </p>
+    </div>
+
+    <!-- ─── Calculator ─────────────────────────────────────────────── -->
+    <section
+      id="tree-calc"
+      class="bg-white border border-gray-200 rounded-2xl shadow-sm p-6 sm:p-8 my-10"
+      aria-label="Tree Removal Cost Calculator"
+    >
+      <div class="mb-7">
+        <p class="text-xs font-bold uppercase tracking-widest text-[#2d5a2d] mb-1">Free Pricing Tool</p>
+        <h2 class="text-xl sm:text-2xl font-bold text-[#1a3c1a] leading-tight">Estimate Your Tree Removal Cost</h2>
+        <p class="text-gray-600 text-sm mt-2">Answer 4 questions to get a local price range estimate.</p>
+      </div>
+
+      <form id="tree-form" novalidate>
+        <div class="space-y-7">
+
+          <!-- Q1: Tree count -->
+          <div>
+            <label for="tree-count" class="block text-sm font-semibold text-gray-800 mb-2">
+              1. How many trees are being removed?
+            </label>
+            <input
+              type="number"
+              id="tree-count"
+              name="treeCount"
+              min="1"
+              max="500"
+              placeholder="e.g. 3"
+              class="w-full sm:w-40 border border-gray-300 rounded-lg px-4 py-2.5 text-sm text-gray-800 bg-white focus:outline-none focus:ring-2 focus:ring-[#2d5a2d] focus:border-transparent"
+            />
+          </div>
+
+          <!-- Q2: Tree size -->
+          <fieldset>
+            <legend class="block text-sm font-semibold text-gray-800 mb-3">
+              2. Typical tree size <span class="text-gray-400 font-normal">(diameter at chest height)</span>
+            </legend>
+            <div class="flex flex-wrap gap-2">
+              {[
+                { value: "small",  label: `Small — under 12" diameter` },
+                { value: "medium", label: `Medium — 12–24"` },
+                { value: "large",  label: `Large — 24–36"` },
+                { value: "xl",     label: `Extra Large — 36"+` },
+              ].map(opt => (
+                <label class="trc-chip">
+                  <input type="radio" name="treeSize" value={opt.value} class="sr-only" />
+                  <span>{opt.label}</span>
+                </label>
+              ))}
+            </div>
+          </fieldset>
+
+          <!-- Q3: Site access -->
+          <fieldset>
+            <legend class="block text-sm font-semibold text-gray-800 mb-3">
+              3. Site access and difficulty
+            </legend>
+            <div class="flex flex-wrap gap-2">
+              {[
+                { value: "open",      label: "Open — no obstacles nearby" },
+                { value: "moderate",  label: "Near structure or fence" },
+                { value: "complex",   label: "Tight / complex — rigging required" },
+              ].map(opt => (
+                <label class="trc-chip">
+                  <input type="radio" name="siteAccess" value={opt.value} class="sr-only" />
+                  <span>{opt.label}</span>
+                </label>
+              ))}
+            </div>
+          </fieldset>
+
+          <!-- Q4: Stump grinding -->
+          <fieldset>
+            <legend class="block text-sm font-semibold text-gray-800 mb-3">
+              4. Include stump grinding?
+            </legend>
+            <div class="flex flex-wrap gap-2">
+              {[
+                { value: "yes", label: "Yes — grind the stumps" },
+                { value: "no",  label: "No — leave stumps" },
+              ].map(opt => (
+                <label class="trc-chip">
+                  <input type="radio" name="stumpGrind" value={opt.value} class="sr-only" />
+                  <span>{opt.label}</span>
+                </label>
+              ))}
+            </div>
+          </fieldset>
+
+        </div>
+
+        <div class="mt-8">
+          <p id="tree-error" class="text-red-600 text-sm mb-3 hidden" aria-live="polite">
+            Please answer all questions before estimating.
+          </p>
+          <button
+            type="submit"
+            class="inline-flex items-center gap-2 bg-[#2d5a2d] hover:bg-[#1a3c1a] text-white font-semibold text-sm px-7 py-3 rounded-lg transition-colors shadow-sm"
+          >
+            Get Cost Estimate
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+            </svg>
+          </button>
+        </div>
+      </form>
+
+      <div id="tree-result" class="hidden mt-8 pt-8 border-t border-gray-200" aria-live="polite" role="status"></div>
+    </section>
+
+    <!-- ─── FAQ ───────────────────────────────────────────────────── -->
+    <div class="mt-12">
+      <h2 class="text-2xl font-bold text-[#1a3c1a] mb-6">Frequently Asked Questions</h2>
+      <FAQSection items={faqs} />
+    </div>
+
+    <!-- ─── CTA bar ────────────────────────────────────────────────── -->
+    <div class="bg-[#1a3c1a] text-white rounded-xl p-6 my-10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <div>
+        <p class="font-bold text-lg mb-1">Get a Free On-Site Assessment</p>
+        <p class="text-green-200 text-sm">Henry assesses timber value before any saw starts — you may get more than you expect.</p>
+      </div>
+      <div class="flex flex-col sm:flex-row gap-3 flex-shrink-0">
+        <a href={`tel:${phone.trackingTel}`} class="inline-flex items-center justify-center gap-2 bg-white text-[#1a3c1a] font-bold px-4 py-2.5 rounded hover:bg-green-100 transition-colors text-sm">
+          {business.phone}
+        </a>
+        <a href="/estimate" class="inline-flex items-center justify-center gap-2 border border-white text-white font-semibold px-4 py-2.5 rounded hover:bg-white/10 transition-colors text-sm">
+          Request Assessment
+        </a>
+      </div>
+    </div>
+
+    <!-- ─── Back link ──────────────────────────────────────────────── -->
+    <div class="border border-gray-200 rounded-lg p-5 mt-6">
+      <p class="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-2">Parent Service</p>
+      <a href="/services/tree-removal" class="text-[#2d5a2d] font-semibold hover:text-[#1a3c1a] flex items-center gap-2">
+        <svg aria-hidden="true" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+        </svg>
+        Back to Tree Removal
+      </a>
+    </div>
+
+  </article>
+
+  <CTASection variant="b2c" />
+</BaseLayout>
+
+<!-- ─── Chip styles ─────────────────────────────────────────────── -->
+<style>
+  .trc-chip span {
+    display: inline-block;
+    padding: 0.4rem 1rem;
+    border-radius: 9999px;
+    border: 1.5px solid #d1d5db;
+    font-size: 0.875rem;
+    color: #374151;
+    cursor: pointer;
+    transition: background-color 0.12s, border-color 0.12s, color 0.12s;
+    user-select: none;
+    white-space: nowrap;
+  }
+  .trc-chip input:checked + span {
+    background-color: #2d5a2d;
+    border-color: #2d5a2d;
+    color: #ffffff;
+    font-weight: 600;
+  }
+  .trc-chip:hover span {
+    border-color: #2d5a2d;
+    color: #1a3c1a;
+  }
+  .trc-chip input:focus-visible + span {
+    outline: 2px solid #2d5a2d;
+    outline-offset: 2px;
+  }
+</style>
+
+<!-- ─── Calculator logic ────────────────────────────────────────── -->
+<script>
+(function () {
+
+  // Per-tree cost ranges [low, high] by size × access
+  const TREE_COST = {
+    small:  { open: [250, 500],   moderate: [400,  800],  complex: [600,  1200] },
+    medium: { open: [600, 1200],  moderate: [900,  1800], complex: [1200, 2500] },
+    large:  { open: [1200, 2500], moderate: [1800, 3500], complex: [2500, 5000] },
+    xl:     { open: [2000, 4000], moderate: [3000, 5500], complex: [4000, 7000] },
+  };
+
+  // Stump grinding add-on per stump [low, high]
+  const STUMP_COST = {
+    small:  [100, 200],
+    medium: [150, 300],
+    large:  [200, 400],
+    xl:     [300, 500],
+  };
+
+  // Timber value offset flag — show callout for large+ hardwoods
+  const TIMBER_OFFSET_SIZES = ['large', 'xl'];
+
+  const SIZE_LABELS   = { small: 'small (under 12")', medium: 'medium (12–24")', large: 'large (24–36")', xl: 'extra large (36"+)' };
+  const ACCESS_LABELS = { open: 'open area', moderate: 'near structure', complex: 'tight/complex' };
+
+  const form   = document.getElementById('tree-form');
+  const result = document.getElementById('tree-result');
+  const errMsg = document.getElementById('tree-error');
+
+  function fmt(n) {
+    return '$' + Math.round(n).toLocaleString('en-US');
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const treeCount  = parseInt(form.querySelector('[name="treeCount"]').value, 10);
+    const treeSize   = (form.querySelector('[name="treeSize"]:checked')   || {}).value;
+    const siteAccess = (form.querySelector('[name="siteAccess"]:checked') || {}).value;
+    const stumpGrind = (form.querySelector('[name="stumpGrind"]:checked') || {}).value;
+
+    if (!treeCount || treeCount < 1 || !treeSize || !siteAccess || !stumpGrind) {
+      errMsg.classList.remove('hidden');
+      errMsg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      return;
+    }
+    errMsg.classList.add('hidden');
+
+    const [perTreeLow, perTreeHigh] = TREE_COST[treeSize][siteAccess];
+    const [stumpLow, stumpHigh]     = stumpGrind === 'yes' ? STUMP_COST[treeSize] : [0, 0];
+
+    const totalLow  = treeCount * (perTreeLow  + stumpLow);
+    const totalHigh = treeCount * (perTreeHigh + stumpHigh);
+    const midpoint  = (totalLow + totalHigh) / 2;
+
+    const showTimberOffset = TIMBER_OFFSET_SIZES.includes(treeSize);
+
+    result.innerHTML = `
+      <div class="rounded-xl border border-green-200 bg-green-50 p-6 sm:p-8">
+        <span class="inline-block text-xs font-semibold px-3 py-1 rounded-full bg-green-100 text-green-800 border border-green-200 mb-4">Pricing Estimate</span>
+        <h3 class="text-xl font-bold text-[#1a3c1a] mb-1">Estimated Tree Removal Cost</h3>
+        <p class="text-gray-500 text-sm mb-6">
+          ${treeCount} ${treeCount === 1 ? 'tree' : 'trees'} · ${SIZE_LABELS[treeSize]} · ${ACCESS_LABELS[siteAccess]}${stumpGrind === 'yes' ? ' · stump grinding included' : ''}
+        </p>
+
+        <div class="grid grid-cols-3 gap-3 mb-6">
+          <div class="text-center bg-white rounded-xl p-4 border border-green-100">
+            <p class="text-xs text-gray-400 font-medium mb-1">Low Estimate</p>
+            <p class="text-xl sm:text-2xl font-bold text-gray-700">${fmt(totalLow)}</p>
+          </div>
+          <div class="text-center bg-[#1a3c1a] text-white rounded-xl p-4">
+            <p class="text-xs text-green-300 font-medium mb-1">Typical</p>
+            <p class="text-xl sm:text-2xl font-bold">${fmt(midpoint)}</p>
+          </div>
+          <div class="text-center bg-white rounded-xl p-4 border border-green-100">
+            <p class="text-xs text-gray-400 font-medium mb-1">High Estimate</p>
+            <p class="text-xl sm:text-2xl font-bold text-gray-700">${fmt(totalHigh)}</p>
+          </div>
+        </div>
+
+        <div class="text-xs text-gray-500 mb-2">
+          Per-tree estimate: ${fmt(perTreeLow + stumpLow)} – ${fmt(perTreeHigh + stumpHigh)}
+          ${stumpGrind === 'yes' ? ` (includes stump grinding at ${fmt(stumpLow)}–${fmt(stumpHigh)} per stump)` : ''}
+        </div>
+
+        ${showTimberOffset ? `
+        <div class="bg-amber-50 border border-amber-200 rounded-lg p-4 mt-5 mb-5">
+          <p class="text-sm font-semibold text-amber-900 mb-1">Timber Value Offset — Check Before You Cut</p>
+          <p class="text-sm text-amber-800 leading-relaxed">
+            Large-diameter hardwoods often carry merchantable timber value. Before any removal,
+            Henry assesses whether the trees have stumpage value — a large red oak, black cherry,
+            or white oak log can offset a significant portion of the removal cost. This assessment
+            is free and takes 15 minutes on-site.
+          </p>
+        </div>
+        ` : ''}
+
+        <p class="text-xs text-gray-400 leading-relaxed mb-6">
+          <strong>Disclaimer:</strong> This is a pricing estimate based on typical ranges for
+          Sullivan, Orange, and Ulster County, NY. Actual costs vary by site conditions, contractor,
+          and seasonal demand. Get an on-site quote before committing to any removal.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-3">
+          <a href="/estimate" class="inline-flex items-center justify-center gap-2 bg-[#2d5a2d] hover:bg-[#1a3c1a] text-white font-semibold text-sm px-6 py-3 rounded-lg transition-colors shadow-sm">
+            Get a Free On-Site Estimate
+          </a>
+          <a href="tel:+18454980208" class="inline-flex items-center justify-center gap-2 text-[#2d5a2d] hover:text-[#1a3c1a] border border-[#2d5a2d] font-semibold text-sm px-6 py-3 rounded-lg transition-colors">
+            Call (845) 754-8242
+          </a>
+        </div>
+      </div>
+      <button id="tree-reset" class="mt-4 text-xs text-[#2d5a2d] hover:underline focus:outline-none" type="button">
+        ← Start over
+      </button>
+    `;
+
+    result.classList.remove('hidden');
+    result.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+    document.getElementById('tree-reset').addEventListener('click', function () {
+      form.reset();
+      form.querySelectorAll('input[type="radio"]').forEach(function(r) { r.checked = false; });
+      result.classList.add('hidden');
+      result.innerHTML = '';
+      errMsg.classList.add('hidden');
+      document.getElementById('tree-count').focus();
+    });
+  });
+
+})();
+</script>

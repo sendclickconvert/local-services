@@ -1,0 +1,32 @@
+---
+// pages/[...slug].astro — SSR catch-all for legacy URL redirect handling
+// This page is never rendered directly — it issues 301 redirects to canonical URLs.
+// Add redirect mappings to the REDIRECTS map below as legacy URLs are identified.
+//
+// DOCTRINE: trailingSlash: 'never' is enforced in astro.config.mjs.
+// All redirects here should point to non-trailing-slash destinations.
+
+export const prerender = false;
+
+const REDIRECTS: Record<string, string> = {
+  // Legacy URL → Canonical URL (301 redirects)
+  // Pattern: '/old-path': '/new-path',
+  //
+  // Add entries here as legacy URLs from the previous site are identified.
+  // Example:
+  // '/services/tree-removal/': '/services/tree-removal',
+  // '/about-us': '/about',
+};
+
+const { slug } = Astro.params;
+const path = slug ? `/${slug}` : '/';
+
+const destination = REDIRECTS[path] ?? REDIRECTS[path.replace(/\/$/, '')];
+
+if (destination) {
+  return Astro.redirect(destination, 301);
+}
+
+// No matching redirect — return 404
+return new Response(null, { status: 404 });
+---

@@ -1,0 +1,44 @@
+---
+interface Props {
+  src: string;
+  alt: string;
+  class?: string;
+  loading?: 'lazy' | 'eager';
+  fetchpriority?: 'high' | 'low' | 'auto';
+  sizes?: string;
+  width?: number;
+  height?: number;
+}
+
+const {
+  src,
+  alt,
+  class: className = '',
+  loading = 'lazy',
+  fetchpriority,
+  sizes = '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 800px',
+  width,
+  height,
+} = Astro.props;
+
+const base = src.replace(/\.[^.]+$/, '').replace('/images/uploads/', '/images/uploads/optimized/');
+const fallback = base + '-1200.jpg';
+---
+
+<picture>
+  <source
+    type="image/webp"
+    srcset={`${base}-480.webp 480w, ${base}-800.webp 800w, ${base}-1200.webp 1200w`}
+    sizes={sizes}
+  />
+  <img
+    src={fallback}
+    alt={alt}
+    class={className}
+    loading={loading}
+    fetchpriority={fetchpriority}
+    width={width}
+    height={height}
+    decoding="async"
+  />
+</picture>

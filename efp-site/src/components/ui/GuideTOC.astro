@@ -1,0 +1,109 @@
+---
+// GuideTOC.astro
+// Auto-generated Table of Contents for guide pages.
+// Desktop: sticky sidebar block. Mobile: collapsible dropdown at top of article.
+// Headings are extracted client-side from the article body via IntersectionObserver.
+---
+
+<!-- Desktop TOC (lg+): rendered as sidebar block -->
+<nav id="guide-toc" aria-label="On this page" class="hidden lg:block">
+  <p class="text-[10px] font-semibold tracking-[0.15em] uppercase text-gray-400 mb-3">On This Page</p>
+  <hr class="border-gray-200 mb-3" />
+  <ul id="toc-list" class="space-y-1 text-sm">
+    <!-- Populated by JS -->
+  </ul>
+  <hr class="border-gray-200 mt-3" />
+</nav>
+
+<!-- Mobile TOC: collapsible dropdown -->
+<details id="guide-toc-mobile" class="lg:hidden mb-6 border border-gray-200 rounded-lg overflow-hidden">
+  <summary class="flex items-center justify-between px-4 py-3 bg-white cursor-pointer select-none text-sm font-semibold text-[#1a3c1a]">
+    <span class="flex items-center gap-2">
+      <svg class="w-4 h-4 text-[#2d5a2d]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h10M4 14h16M4 18h10"/>
+      </svg>
+      On this page
+    </span>
+    <svg class="w-4 h-4 text-gray-400 transition-transform details-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+    </svg>
+  </summary>
+  <ul id="toc-list-mobile" class="px-4 py-3 space-y-2 bg-white text-sm border-t border-gray-100">
+    <!-- Populated by JS -->
+  </ul>
+</details>
+
+<script>
+  function buildTOC() {
+    const article = document.getElementById('guide-article-body');
+    if (!article) return;
+
+    const headings = Array.from(article.querySelectorAll('h2, h3')) as HTMLElement[];
+    if (headings.length === 0) return;
+
+    // Ensure IDs exist
+    headings.forEach((h, i) => {
+      if (!h.id) {
+        h.id = 'toc-' + i + '-' + h.textContent!.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+      }
+    });
+
+    function renderList(listEl: HTMLElement | null) {
+      if (!listEl) return;
+      listEl.innerHTML = '';
+      headings.forEach(h => {
+        const isH3 = h.tagName === 'H3';
+        const li = document.createElement('li');
+        li.className = isH3 ? 'pl-3' : '';
+        const a = document.createElement('a');
+        a.href = '#' + h.id;
+        a.textContent = h.textContent ?? '';
+        a.dataset.tocTarget = h.id;
+        a.className = [
+          'block py-0.5 leading-snug transition-colors duration-150',
+          isH3 ? 'text-[0.8rem] text-gray-400 hover:text-[#2d5a2d]' : 'text-gray-500 hover:text-[#2d5a2d]',
+        ].join(' ');
+        a.addEventListener('click', e => {
+          e.preventDefault();
+          document.getElementById(h.id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          // close mobile dropdown
+          const details = document.getElementById('guide-toc-mobile') as HTMLDetailsElement | null;
+          if (details) details.open = false;
+        });
+        li.appendChild(a);
+        listEl.appendChild(li);
+      });
+    }
+
+    renderList(document.getElementById('toc-list'));
+    renderList(document.getElementById('toc-list-mobile'));
+
+    // Active section highlight via IntersectionObserver
+    const allLinks = () => document.querySelectorAll('[data-toc-target]') as NodeListOf<HTMLElement>;
+
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            allLinks().forEach(link => {
+              const active = link.dataset.tocTarget === entry.target.id;
+              link.classList.toggle('text-[#2d5a2d]', active);
+              link.classList.toggle('font-semibold', active);
+              link.classList.toggle('text-gray-500', !active && link.closest('#toc-list') !== null && link.closest('li')?.classList.contains('pl-3') === false);
+              link.classList.toggle('text-gray-400', !active && link.closest('li')?.classList.contains('pl-3') === true);
+            });
+          }
+        });
+      },
+      { rootMargin: '-10% 0px -70% 0px', threshold: 0 }
+    );
+
+    headings.forEach(h => observer.observe(h));
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', buildTOC);
+  } else {
+    buildTOC();
+  }
+</script>

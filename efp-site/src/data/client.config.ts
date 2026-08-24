@@ -21,6 +21,8 @@ export const business = {
   combinedExperience: "nearly 100 years", // Team combined experience per company copy
   phone: "(845) 754-8242",
   phoneRaw: "+18457548242",
+  phoneDirect: "(845) 754-8242",       // Henry's direct line — for About/Contact display only
+  phoneDirectRaw: "+18457548242",
   address: {
     street: "[TBD — confirm mailing address with Henry before launch]",
     city: "Westbrookville",
@@ -36,7 +38,7 @@ export const business = {
   },
   domain: "https://eforestproducts.com",
   email: "henry@eforestproducts.com",
-  gbpUrl: "[TBD — paste full GBP URL after claiming/optimizing]",
+  gbpUrl: "https://g.co/kgs/zBPpp24",
   foundedYear: "1991",
 } as const;
 
@@ -71,6 +73,21 @@ export const serviceArea = {
   },
 } as const;
 
+// ─── PHONE ────────────────────────────────────────────────
+// Three distinct values — never mix them up:
+//   display     → visible text on every CTA, footer NAP, meta descriptions
+//   displayTel  → real E.164 number for schema telephone fields ONLY (NAP/GBP consistency)
+//   trackingTel → GHL tracking number for tel: href on call buttons ONLY
+//
+// ⚠️ trackingTel MUST NEVER appear in schema telephone fields or visible text.
+// ⚠️ displayTel  MUST NEVER appear in tel: href on buttons (breaks call tracking).
+// ⚠️ All call button components import phone.trackingTel — never hardcode either number.
+export const phone = {
+  display:     "(845) 754-8242",
+  displayTel:  "+18457548242",
+  trackingTel: "+18454980208",
+} as const;
+
 // ─── CTA ──────────────────────────────────────────────────
 // b2c: private landowners and property owners
 // b2b: developers, land investors, commercial contractors
@@ -78,21 +95,21 @@ export const cta = {
   b2c: {
     primary: {
       label: "Call for a Free Consultation",
-      href:  `tel:${business.phoneRaw}`,
+      href:  `tel:${phone.trackingTel}`,
     },
     secondary: {
       label: "Request a Property Assessment",
-      href:  "#contact-form",
+      href:  "/contact",
     },
   },
   b2b: {
     primary: {
       label: "Schedule a Timber Appraisal",
-      href:  `tel:${business.phoneRaw}`,
+      href:  `tel:${phone.trackingTel}`,
     },
     secondary: {
       label: "Request a Commercial Quote",
-      href:  "#contact-form",
+      href:  "/contact",
     },
   },
 } as const;
@@ -125,6 +142,7 @@ export const author = {
   phoneRaw: "+18457548242",
   sameAs: [
     "https://eforestproducts.com/about",
+    "https://www.linkedin.com/in/henry-kowalec-2918a21a9/",
     // "[TBD] SAF member directory profile URL",
     // "[TBD] NYFOA member profile URL",
     // "[TBD] NY woodproducts.ny.gov forester directory URL",

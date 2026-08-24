@@ -1,0 +1,147 @@
+---
+// pages/locations/sullivan-county-ny/callicoon.astro
+// CUSTOM — Callicoon is the best timber township in Sullivan County; the
+// competitive bidding narrative and maximum value capture are the core angle.
+
+import LocationLayout from '../../../layouts/LocationLayout.astro';
+import PageHero from '../../../components/ui/PageHero.astro';
+import Breadcrumb from '../../../components/ui/Breadcrumb.astro';
+import FAQSection from '../../../components/ui/FAQSection.astro';
+import KeyTakeaway from '../../../components/ui/KeyTakeaway.astro';
+import AuthorByline from '../../../components/ui/AuthorByline.astro';
+import EstimateForm from '../../../components/forms/EstimateForm.astro';
+import ServiceSchema from '../../../components/schema/ServiceSchema.astro';
+import FAQSchema from '../../../components/schema/FAQSchema.astro';
+import { buildTitle, buildCanonical, buildDescription } from '../../../lib/seo';
+import { services } from '../../../data/services';
+
+const title = buildTitle('Timber Appraisal & Forestry Consulting — Callicoon, NY');
+const description = buildDescription(
+  'Consulting forester in Callicoon, NY — timber appraisals, competitive timber sales, 480-a enrollment. Henry Kowalec. (845) 754-8242.'
+);
+const canonicalUrl = buildCanonical('/locations/sullivan-county-ny/callicoon');
+
+const crumbs = [
+  { label: 'Home',            href: '/' },
+  { label: 'Locations',       href: '/locations' },
+  { label: 'Sullivan County', href: '/locations/sullivan-county-ny' },
+  { label: 'Callicoon',       href: '/locations/sullivan-county-ny/callicoon' },
+];
+
+const faqs = [
+  {
+    question: 'Is Callicoon considered prime timber country in Sullivan County?',
+    answer: 'Yes. Callicoon township contains some of the best-quality hardwood timber in Sullivan County — large private parcels, high-quality red oak and white oak on accessible upland plateaus above the Delaware River, and a history of productive selective harvesting. The combination of timber quality and access conditions makes Callicoon one of the areas where a properly managed competitive timber sale can return the most meaningful revenue to the landowner.',
+  },
+  {
+    question: 'Why is competitive bidding especially important for Callicoon timber sales?',
+    answer: 'Because buyers know this timber market well, and they compete for it. The spread between the first offer a landowner receives and the result of a properly managed competitive bid process — solicited through EFP\'s network of regional buyers — can be substantial on a Callicoon property with quality red oak, white oak, or black cherry. Accepting an unsolicited offer or negotiating with a single buyer leaves that spread on the table. An independent appraisal followed by a competitive bid process is the only way to know you received fair market value.',
+  },
+  {
+    question: 'Does EFP serve landowners in Callicoon Township?',
+    answer: 'Yes. Environmental Forest Products has worked on timber projects, 480-a enrollments, and woodland management plans in Callicoon Township for more than 30 years. Henry Kowalec has direct knowledge of the terrain, access road conditions, and what buyers are paying for Callicoon-quality hardwood. That knowledge is what makes the bid process effective.',
+  },
+  {
+    question: 'Can Callicoon landowners qualify for 480-a Forest Tax Law enrollment?',
+    answer: 'Yes. Large parcels are common in Callicoon township, and the combination of high forest cover and good hardwood quality makes 480-a enrollment a clear financial benefit for most qualifying properties. Henry Kowalec prepares the DEC-approved management plans required for enrollment and can assess eligibility during an initial site visit.',
+  },
+  {
+    question: 'What timber species are most valuable on Callicoon properties?',
+    answer: 'Red oak and white oak on the upland plateaus above the Delaware River are the premium species in Callicoon. Black cherry is also present in disturbed areas and carries strong market prices when diameter and grade are adequate. Hard maple appears on higher-elevation sites within the township. A site-specific timber appraisal is the only way to determine what is present and what it is currently worth on your specific parcel.',
+  },
+  {
+    question: 'What does a timber sale managed by EFP in Callicoon typically look like?',
+    answer: 'The process starts with an on-site timber appraisal — species, diameter, volume, and current stumpage value. From there, EFP solicits competitive bids from qualified regional buyers, reviews the bids with the landowner, recommends a contract, monitors harvest operations on the ground, and inspects the site at project completion. Henry Kowalec\'s knowledge of Callicoon terrain — which logging routes are viable, what equipment the site can accommodate — is part of what makes the bid solicitation realistic and the harvest plan executable.',
+  },
+];
+---
+
+<LocationLayout title={title} description={description} canonicalUrl={canonicalUrl}>
+  <ServiceSchema
+    pageType="location"
+    serviceName="Timber Appraisal & Forestry Consulting — Callicoon, NY"
+    description={description}
+    url={canonicalUrl}
+    areaServed={['Callicoon, NY', 'Callicoon Township, NY', 'Sullivan County, NY']}
+    crumbs={crumbs}
+  />
+  <FAQSchema items={faqs} />
+  <Breadcrumb crumbs={crumbs} />
+
+  <PageHero
+    title="Timber Appraisal & Forestry Consulting in Callicoon, NY"
+    subtitle="Sullivan County's best hardwood country — competitive timber sales, 480-a enrollment, and woodland management"
+  />
+
+  <article class="max-w-4xl mx-auto my-8 sm:my-10 px-8 sm:px-12 py-10 bg-white rounded-2xl shadow-md ring-1 ring-gray-200">
+
+    <KeyTakeaway
+      text="Callicoon township contains some of the best hardwood timber in Sullivan County. Environmental Forest Products manages competitive timber sales, independent appraisals, and 480-a Forest Tax Law enrollment for Callicoon landowners — with Henry Kowalec's 30+ years of direct knowledge of this terrain and the buyers who compete for this timber."
+    />
+
+    <AuthorByline />
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Why Callicoon Is Different From the Rest of Sullivan County</h2>
+
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Callicoon township occupies some of the most productive hardwood terrain in Sullivan County. The upland plateaus above the Delaware River support large private parcels with accessible red oak, white oak, and black cherry stands that have been the subject of selective timber harvesting for generations. This is working hardwood country — the terrain is manageable, the parcels are large, and the species composition on well-stocked sites commands consistent buyer interest.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      The Callicoon Creek drains the interior of the township, and the forest along the creek's drainage and on the surrounding ridges reflects the variation between valley-bottom hardwood and the higher-quality upland stands. Henry Kowalec has conducted timber appraisals and harvest management projects in this township for more than 30 years — which means he knows which ground produces the best timber, which logging access routes can support loaded trucks, and what this specific timber type is worth to the buyers who compete for it.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      That knowledge matters most in one specific context: when a Callicoon landowner is considering a timber sale. The buyers who purchase Callicoon hardwood know this market well. Getting full value requires a process that is equally well-informed — starting with an <a href="/services/sell-standing-timber" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">independent timber appraisal</a> that establishes what the timber is actually worth, followed by a competitive bid solicitation that reaches the buyers most likely to pay a premium for this timber type.
+    </p>
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">The Bid Spread — What Landowners Leave on the Table</h2>
+
+    <p class="text-gray-700 leading-relaxed mb-4">
+      In a well-managed timber sale on a Callicoon property with quality hardwood, the difference between the highest and lowest competitive bids can be significant. Buyers have different cost structures, different product targets, and different levels of interest in specific species and diameter classes. A bid process that reaches the right buyer pool — not just the first logger who calls — captures that spread rather than leaving it with the buyer.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      This is not a generic claim — it reflects the specific market dynamics of Delaware River corridor hardwood, where timber quality is known and buyers compete. EFP's approach is to conduct the appraisal first to establish the benchmark, then solicit bids from buyers with demonstrated interest in this timber type, then review results with the landowner before any agreement is signed. That process is how the spread gets captured.
+    </p>
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Forestry Services Available in Callicoon</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
+      {services.map(svc => (
+        <a
+          href={`/services/${svc.slug}`}
+          class="flex items-start gap-3 p-4 border border-gray-200 rounded-lg hover:border-[#2d5a2d] hover:bg-green-50 transition-colors group"
+        >
+          <span class="text-2xl flex-shrink-0" aria-hidden="true">{svc.icon}</span>
+          <div>
+            <div class="font-semibold text-[#1a3c1a] group-hover:text-[#2d5a2d] text-sm">{svc.name}</div>
+            <div class="text-xs text-gray-500 mt-0.5 leading-snug">{svc.excerpt.split('—')[0].trim()}</div>
+          </div>
+        </a>
+      ))}
+    </div>
+
+    <div class="bg-[#1a3c1a] text-white rounded-lg p-6 my-10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <div>
+        <p class="font-bold text-lg mb-1">Schedule a Timber Appraisal in Callicoon</p>
+        <p class="text-green-200 text-sm">On-site assessment — know what your timber is worth before negotiating.</p>
+      </div>
+      <a href="tel:+18454980208" class="inline-flex items-center gap-2 bg-white text-[#1a3c1a] font-bold px-5 py-3 rounded hover:bg-green-100 transition-colors text-sm whitespace-nowrap flex-shrink-0">
+        <svg class="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/></svg>
+        (845) 754-8242
+      </a>
+    </div>
+
+    <FAQSection items={faqs} />
+
+    <div class="border border-gray-200 rounded-lg p-5 my-10">
+      <h3 class="font-semibold text-[#1a3c1a] mb-3 text-sm uppercase tracking-wide">Nearby Sullivan County Communities</h3>
+      <div class="flex flex-wrap gap-3">
+        <a href="/locations/sullivan-county-ny/cochecton" class="text-sm text-[#2d5a2d] hover:underline">Cochecton</a>
+        <a href="/locations/sullivan-county-ny/jeffersonville" class="text-sm text-[#2d5a2d] hover:underline">Jeffersonville</a>
+        <a href="/locations/sullivan-county-ny/narrowsburg" class="text-sm text-[#2d5a2d] hover:underline">Narrowsburg</a>
+        <a href="/locations/sullivan-county-ny/livingston-manor" class="text-sm text-[#2d5a2d] hover:underline">Livingston Manor</a>
+        <a href="/locations/sullivan-county-ny" class="text-sm text-[#2d5a2d] hover:underline font-semibold">View all Sullivan County towns →</a>
+      </div>
+    </div>
+
+    <EstimateForm variant="b2c" />
+  </article>
+</LocationLayout>

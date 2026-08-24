@@ -1,0 +1,190 @@
+---
+// pages/services/[service]/[slug].astro
+// Cluster article route — renders service-specific supporting articles.
+// URL pattern: /services/[service-slug]/[article-slug]
+// Content: src/content/articles/ — each article has a "service" frontmatter field.
+//
+// Per blueprint:
+//   Pillar articles: 2,000-2,500 words
+//   Supporting articles: 800-1,100 words
+//   FAQs: 5-7 per article, all visible in DOM
+
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../components/ui/Breadcrumb.astro';
+import AuthorByline from '../../../components/ui/AuthorByline.astro';
+import FAQSection from '../../../components/ui/FAQSection.astro';
+import FAQSchema from '../../../components/schema/FAQSchema.astro';
+import CTASection from '../../../components/ui/CTASection.astro';
+import KeyTakeaway from '../../../components/ui/KeyTakeaway.astro';
+import { buildTitle, buildCanonical, buildDescription, noindex } from '../../../lib/seo';
+import { business, author, phone } from '../../../data/client.config';
+import { services } from '../../../data/services';
+
+export async function getStaticPaths() {
+  const allArticles = await getCollection('articles');
+  return allArticles.map(article => {
+    const siblings = allArticles.filter(
+      a => a.data.service === article.data.service && a.slug !== article.slug && !a.data.noindex
+    );
+    return {
+      params: {
+        service: article.data.service,
+        slug: article.slug,
+      },
+      props: { article, siblings },
+    };
+  });
+}
+
+const { article, siblings } = Astro.props;
+const { Content } = await article.render();
+const { data } = article;
+
+const parentService = services.find(s => s.slug === data.service);
+const parentHref = `/services/${data.service}`;
+const parentLabel = parentService?.name ?? data.service;
+
+const title = data.titleFull ?? buildTitle(data.title);
+const description = buildDescription(data.description);
+const canonicalUrl = buildCanonical(`/services/${data.service}/${article.slug}`);
+const robotsContent = data.noindex ? noindex(true) : undefined;
+
+const crumbs = [
+  { label: "Home",        href: "/"           },
+  { label: "Services",    href: "/services"   },
+  { label: parentLabel,   href: parentHref    },
+  { label: data.title,    href: canonicalUrl  },
+];
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": data.title,
+      "description": data.description,
+      "datePublished": data.datePublished,
+      "dateModified": data.dateModified,
+      "inLanguage": "en-US",
+      "author": {
+        "@id": `${business.domain}/about#henry-kowalec`,
+      },
+      "publisher": {
+        "@id": `${business.domain}/#organization`,
+      },
+      "url": canonicalUrl,
+    },
+    {
+      "@type": "Person",
+      "@id": `${business.domain}/about#henry-kowalec`,
+      "name": author.name,
+      "jobTitle": author.title,
+      "worksFor": { "@id": `${business.domain}/#organization` },
+      "sameAs": author.sameAs,
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": crumbs.map((crumb, i) => ({
+        "@type": "ListItem",
+        "position": i + 1,
+        "name": crumb.label,
+        ...(crumb.href ? { "item": `${business.domain}${crumb.href}` } : {}),
+      })),
+    },
+  ],
+};
+---
+
+<BaseLayout title={title} description={description} canonicalUrl={canonicalUrl} robotsContent={robotsContent} ogType="article">
+  <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+  {data.faqs.length > 0 && <FAQSchema items={data.faqs} />}
+
+  <Breadcrumb crumbs={crumbs} />
+
+  <article class="max-w-4xl mx-auto my-8 sm:my-10 px-8 sm:px-12 py-10 bg-white rounded-2xl shadow-md ring-1 ring-gray-200">
+
+    <header class="mb-8">
+      <h1 class="text-3xl sm:text-4xl font-bold text-[#1a3c1a] mb-4 leading-tight">{data.title}</h1>
+      <div class="flex items-center gap-4 text-sm text-gray-500 border-b border-gray-200 pb-5">
+        <span>By {author.name}, {author.title}</span>
+        <span>·</span>
+        <time datetime={data.dateModified}>Last reviewed: {new Date(data.dateModified).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}</time>
+      </div>
+    </header>
+
+    {data.keyTakeaway && <KeyTakeaway text={data.keyTakeaway} />}
+
+    <AuthorByline />
+
+    <div class="prose prose-green prose-lg max-w-none mt-8">
+      <Content />
+    </div>
+
+    {data.faqs.length > 0 && (
+      <div class="mt-12">
+        <FAQSection items={data.faqs} />
+      </div>
+    )}
+
+    <!-- Mid-article CTA -->
+    <div class="bg-[#1a3c1a] text-white rounded-xl p-6 my-10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <div>
+        <p class="font-bold text-lg mb-1">Get a Free On-Site Assessment</p>
+        <p class="text-green-200 text-sm">Henry Kowalec walks your property personally — no phone estimates.</p>
+      </div>
+      <div class="flex flex-col sm:flex-row gap-3 flex-shrink-0">
+        <a href={`tel:${phone.trackingTel}`} class="inline-flex items-center justify-center gap-2 bg-white text-[#1a3c1a] font-bold px-4 py-2.5 rounded hover:bg-green-100 transition-colors text-sm">
+          {business.phone}
+        </a>
+        <a href="/estimate" class="inline-flex items-center justify-center gap-2 border border-white text-white font-semibold px-4 py-2.5 rounded hover:bg-white/10 transition-colors text-sm">
+          Request Assessment
+        </a>
+      </div>
+    </div>
+
+    <!-- Sibling articles in the same service cluster -->
+    {siblings.length > 0 && (
+      <div class="mt-10 border-t border-gray-200 pt-8">
+        <p class="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-4">More {parentLabel} Guides</p>
+        <ul class="space-y-2">
+          {siblings.map(s => (
+            <li>
+              <a
+                href={`/services/${data.service}/${s.slug}`}
+                class="group flex items-start gap-3 p-4 rounded-lg border border-gray-200 hover:border-[#2d5a2d] hover:bg-green-50 transition-colors"
+              >
+                <svg aria-hidden="true" class="w-4 h-4 text-[#2d5a2d] flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                </svg>
+                <div class="min-w-0">
+                  <span class="font-semibold text-[#1a3c1a] group-hover:text-[#2d5a2d] block leading-snug text-sm">{s.data.title}</span>
+                  {s.data.description && (
+                    <span class="text-gray-500 text-xs mt-0.5 block line-clamp-1">{s.data.description}</span>
+                  )}
+                </div>
+                <svg aria-hidden="true" class="w-4 h-4 text-gray-400 group-hover:text-[#2d5a2d] flex-shrink-0 mt-0.5 ml-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                </svg>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    )}
+
+    <!-- Back to service pillar -->
+    <div class="border border-gray-200 rounded-lg p-5 mt-6">
+      <p class="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-2">Parent Service</p>
+      <a href={parentHref} class="text-[#2d5a2d] font-semibold hover:text-[#1a3c1a] flex items-center gap-2">
+        <svg aria-hidden="true" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+        </svg>
+        Back to {parentLabel}
+      </a>
+    </div>
+
+  </article>
+
+  <CTASection variant="b2c" />
+</BaseLayout>

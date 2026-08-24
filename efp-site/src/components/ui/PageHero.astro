@@ -1,36 +1,64 @@
 ---
 // PageHero.astro
-// Full-width hero: H1, subtitle, CTA button.
+// Full-width hero: H1, subtitle, CTA buttons.
 // Renders cleanly with or without a background image.
 // With bgImage: dark overlay for text legibility.
 // Without bgImage: solid forest green band.
+// LCP optimisation: bg image rendered as <img fetchpriority="high"> so the
+// browser preload scanner discovers it immediately — NOT a CSS background-image.
 
-import { business } from '../../data/client.config';
+import { business, phone } from '../../data/client.config';
 
 interface Props {
   title: string;
   subtitle?: string;
   ctaLabel?: string;
   ctaHref?: string;
+  cta2Label?: string;
+  cta2Href?: string;
   bgImage?: string;
+  bgImageAlt?: string;
 }
 
 const {
   title,
   subtitle,
   ctaLabel = 'Call for a Free Consultation',
-  ctaHref  = `tel:${business.phoneRaw}`,
+  ctaHref  = `tel:${phone.trackingTel}`,
+  cta2Label,
+  cta2Href,
   bgImage,
+  bgImageAlt = '',
 } = Astro.props;
+
+// Derive optimized WebP path (uses pre-generated 1200w variant if available)
+const bgImageWebp = bgImage
+  ? bgImage
+      .replace('/images/uploads/', '/images/uploads/optimized/')
+      .replace(/\.(jpe?g|png)$/i, '-1200.webp')
+  : undefined;
 ---
 
-<section
-  class={`relative py-20 sm:py-28 ${bgImage ? 'bg-cover bg-center bg-no-repeat' : 'bg-[#1a3c1a]'}`}
-  style={bgImage ? `background-image: url('${bgImage}');` : ''}
->
-  {/* Dark overlay when image is present */}
+<section class={`relative py-20 sm:py-28 overflow-hidden ${bgImage ? '' : 'bg-[#1a3c1a]'}`}>
+
   {bgImage && (
-    <div class="absolute inset-0 bg-[#0d1a0d]/70" aria-hidden="true" />
+    <>
+      <picture>
+        {bgImageWebp && bgImageWebp !== bgImage && (
+          <source srcset={bgImageWebp} type="image/webp" />
+        )}
+        <img
+          src={bgImage}
+          alt={bgImageAlt}
+          fetchpriority="high"
+          decoding="sync"
+          class="absolute inset-0 w-full h-full object-cover object-center"
+          width="1200"
+          height="675"
+        />
+      </picture>
+      <div class="absolute inset-0 bg-[#0d1a0d]/70" aria-hidden="true" />
+    </>
   )}
 
   <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -44,16 +72,30 @@ const {
       </p>
     )}
 
-    <a
-      href={ctaHref}
-      class="inline-flex items-center gap-2 bg-white text-[#1a3c1a] hover:bg-green-50 font-bold text-base sm:text-lg px-8 py-4 rounded shadow-lg transition-colors"
-    >
-      {ctaHref.startsWith('tel:') && (
-        <svg class="w-5 h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
-          <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
-        </svg>
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+      <a
+        href={ctaHref}
+        class="inline-flex items-center gap-2 bg-white text-[#1a3c1a] hover:bg-green-50 font-bold text-base sm:text-lg px-8 py-4 rounded shadow-lg transition-colors"
+      >
+        {ctaHref.startsWith('tel:') && (
+          <svg class="w-5 h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+            <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
+          </svg>
+        )}
+        {ctaLabel}
+      </a>
+
+      {cta2Label && cta2Href && (
+        <a
+          href={cta2Href}
+          class="inline-flex items-center gap-2 border-2 border-white text-white hover:bg-white/10 font-bold text-base sm:text-lg px-8 py-4 rounded shadow-lg transition-colors"
+        >
+          {cta2Label}
+          <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+          </svg>
+        </a>
       )}
-      {ctaLabel}
-    </a>
+    </div>
   </div>
 </section>

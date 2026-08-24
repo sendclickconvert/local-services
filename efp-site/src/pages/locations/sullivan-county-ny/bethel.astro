@@ -1,0 +1,148 @@
+---
+// pages/locations/sullivan-county-ny/bethel.astro
+// CUSTOM — Former farmland reverting to second-growth; the "when is the right
+// time to manage" and second-growth opportunity narrative drives this page.
+
+import LocationLayout from '../../../layouts/LocationLayout.astro';
+import PageHero from '../../../components/ui/PageHero.astro';
+import Breadcrumb from '../../../components/ui/Breadcrumb.astro';
+import FAQSection from '../../../components/ui/FAQSection.astro';
+import KeyTakeaway from '../../../components/ui/KeyTakeaway.astro';
+import AuthorByline from '../../../components/ui/AuthorByline.astro';
+import EstimateForm from '../../../components/forms/EstimateForm.astro';
+import ServiceSchema from '../../../components/schema/ServiceSchema.astro';
+import FAQSchema from '../../../components/schema/FAQSchema.astro';
+import { buildTitle, buildCanonical, buildDescription } from '../../../lib/seo';
+import { services } from '../../../data/services';
+
+const title = buildTitle('Consulting Forester in Bethel, NY');
+const description = buildDescription(
+  'Forestry consulting in Bethel, NY — second-growth woodland management, ' +
+  '480-a enrollment, timber appraisals. Henry Kowalec, Sullivan County. (845) 754-8242.'
+);
+const canonicalUrl = buildCanonical('/locations/sullivan-county-ny/bethel');
+
+const crumbs = [
+  { label: 'Home',            href: '/' },
+  { label: 'Locations',       href: '/locations' },
+  { label: 'Sullivan County', href: '/locations/sullivan-county-ny' },
+  { label: 'Bethel',          href: '/locations/sullivan-county-ny/bethel' },
+];
+
+const faqs = [
+  {
+    question: 'Does EFP provide forestry consulting in Bethel, NY?',
+    answer: 'Yes. Environmental Forest Products serves private landowners in Bethel and throughout the surrounding Sullivan County area, including the communities of Kauneonga Lake, White Lake, and the broader western Catskill foothills. Henry Kowalec has conducted woodland assessments, 480-a enrollments, and timber appraisals on properties in the Bethel area for more than 30 years. Call (845) 754-8242 to discuss your property.',
+  },
+  {
+    question: 'My Bethel property has a mix of old farmland and woodland. Is it worth having assessed?',
+    answer: 'Yes — and the timing may be more important than you think. Bethel has a significant inventory of former pasture and field land that has been reverting to forest since mid-20th century agricultural abandonment. These second-growth stands are now 40–70 years old in many cases and are entering the window where timber management decisions have real economic consequences. What species are present, what size-class they are, and whether an early intervention would improve the stand\'s future value are exactly the questions a forestry assessment answers. Waiting on a decision is itself a decision.',
+  },
+  {
+    question: 'What species are typical in Bethel\'s second-growth woodlands?',
+    answer: 'Red maple, red oak, white ash, and black cherry are the primary species in Bethel\'s second-growth stands. The composition varies by site — former pasture areas tend to favor red maple and black cherry, while areas with better soil drainage support red oak and white ash. Black cherry regenerates aggressively where past disturbance has occurred, and its current stumpage market is active. A site assessment identifies what is actually present on a specific parcel.',
+  },
+  {
+    question: 'Can my Bethel property qualify for 480-a Forest Tax Law enrollment?',
+    answer: 'If your property has 50 or more contiguous acres of qualifying woodland, it is likely eligible. Bethel\'s combination of second-growth woodlands and relatively large parcel sizes — many of which were former agricultural properties — makes it a productive area for 480-a enrollment. Properties that were acquired as agricultural land that has since reforested are often strong candidates. Henry Kowalec handles the full enrollment process from eligibility assessment through DEC plan certification.',
+  },
+  {
+    question: 'Is it too late to do anything meaningful with mature second-growth forest in Bethel?',
+    answer: 'No — and this is one of the most common misconceptions Henry Kowalec encounters in assessments on Bethel-area properties. Second-growth stands in the 40–70 year range are not beyond intervention; they are at the age where intervention is most productive. A correctly timed selective harvest or improvement cutting can accelerate the development of the most valuable trees, reduce competition from less desirable species, and shape the forest composition for the next generation. The alternative — no intervention — produces a different forest, not necessarily a better one.',
+  },
+  {
+    question: 'Does EFP serve the communities of Kauneonga Lake and White Lake in Bethel?',
+    answer: 'Yes. Kauneonga Lake, White Lake, and other communities within Bethel Township are all within the EFP service area. Landowners in lakeside communities often have forested parcels on the surrounding hills that benefit from the same assessment, 480-a, and management services available throughout Sullivan County. Call (845) 754-8242 to discuss your specific property.',
+  },
+];
+---
+
+<LocationLayout title={title} description={description} canonicalUrl={canonicalUrl}>
+  <ServiceSchema
+    pageType="location"
+    serviceName="Forestry Consulting — Bethel, NY"
+    description={description}
+    url={canonicalUrl}
+    areaServed={['Bethel, NY', 'Kauneonga Lake, NY', 'White Lake, NY', 'Sullivan County, NY']}
+    crumbs={crumbs}
+  />
+  <FAQSchema items={faqs} />
+  <Breadcrumb crumbs={crumbs} />
+
+  <PageHero
+    title="Forestry Consulting in Bethel, NY"
+    subtitle="Second-growth woodland management, 480-a enrollment, and timber appraisals in western Sullivan County"
+  />
+
+  <article class="max-w-4xl mx-auto my-8 sm:my-10 px-8 sm:px-12 py-10 bg-white rounded-2xl shadow-md ring-1 ring-gray-200">
+
+    <KeyTakeaway
+      text="Environmental Forest Products serves private landowners in Bethel Township, NY — including Kauneonga Lake and White Lake — where 40–70 year old second-growth forest on former agricultural land is entering the management window that shapes its long-term value. Henry Kowalec conducts on-site assessments and handles 480-a enrollment for Bethel area landowners."
+    />
+
+    <AuthorByline />
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Bethel's Second-Growth Forest — The Management Window Is Open</h2>
+
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Bethel Township is historically known as the site of the 1969 Woodstock music festival, but its land character is defined by generations of mixed farming and woodland ownership. A significant portion of Bethel's landmass consists of former pasture and field land that was progressively abandoned through the mid-20th century and has been reverting to forest ever since. Those stands — now 40–70 years old in many cases — are at an age where forestry management decisions carry real consequences.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Second-growth forest of this age is not mature in the sense of having passed its management window — quite the opposite. These stands are in the growth phase where species competition is intense, and what you do now determines which trees dominate the canopy for the next 50 years. A correctly timed selective harvest or improvement cutting can favor the most valuable species — red oak, black cherry, white ash — while reducing competition from less desirable red maple or poor-form stems. Left unmanaged, the stand makes its own decisions about species composition, and those decisions are not always what the landowner would choose.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      The first step for any Bethel-area landowner with significant woodland acreage is an on-site assessment by a certified consulting forester. That assessment identifies what species are present, what size-class distribution looks like, whether the stand is a candidate for a <a href="/services/sell-standing-timber" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">timber sale</a>, and what management approach — harvesting, improvement cutting, or a longer-term plan — best matches the landowner's objectives.
+    </p>
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">480-a Enrollment for Bethel Township Landowners</h2>
+
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Bethel's combination of second-growth woodlands and relatively large parcel sizes — many of them former agricultural properties that have reforested — makes it a productive area for <a href="/services/480a-forest-tax-law" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">480-a Forest Tax Law enrollment</a>. The program requires 50 or more contiguous acres of qualifying woodland managed under a DEC-approved plan. Second-growth stands that are old enough to be considered productive forest — which most Bethel-area stands now are — qualify, and the management plan written for enrollment also serves as the roadmap for the stand improvement work described above.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Henry Kowalec handles the full 480-a enrollment process for Bethel Township landowners, from initial eligibility assessment through DEC plan certification and annual compliance guidance throughout the 10-year commitment period.
+    </p>
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Forestry Services Near Bethel</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
+      {services.map(svc => (
+        <a
+          href={`/services/${svc.slug}`}
+          class="flex items-start gap-3 p-4 border border-gray-200 rounded-lg hover:border-[#2d5a2d] hover:bg-green-50 transition-colors group"
+        >
+          <span class="text-2xl flex-shrink-0" aria-hidden="true">{svc.icon}</span>
+          <div>
+            <div class="font-semibold text-[#1a3c1a] group-hover:text-[#2d5a2d] text-sm">{svc.name}</div>
+            <div class="text-xs text-gray-500 mt-0.5 leading-snug">{svc.excerpt.split('—')[0].trim()}</div>
+          </div>
+        </a>
+      ))}
+    </div>
+
+    <div class="bg-[#1a3c1a] text-white rounded-lg p-6 my-10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <div>
+        <p class="font-bold text-lg mb-1">Schedule a Site Assessment in Bethel</p>
+        <p class="text-green-200 text-sm">Henry walks the property — on-site assessment only, not a phone estimate.</p>
+      </div>
+      <a href="tel:+18454980208" class="inline-flex items-center gap-2 bg-white text-[#1a3c1a] font-bold px-5 py-3 rounded hover:bg-green-100 transition-colors text-sm whitespace-nowrap flex-shrink-0">
+        <svg class="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/></svg>
+        (845) 754-8242
+      </a>
+    </div>
+
+    <FAQSection items={faqs} />
+
+    <div class="border border-gray-200 rounded-lg p-5 my-10">
+      <h3 class="font-semibold text-[#1a3c1a] mb-3 text-sm uppercase tracking-wide">Nearby Sullivan County Communities</h3>
+      <div class="flex flex-wrap gap-3">
+        <a href="/locations/sullivan-county-ny/narrowsburg" class="text-sm text-[#2d5a2d] hover:underline">Narrowsburg</a>
+        <a href="/locations/sullivan-county-ny/monticello" class="text-sm text-[#2d5a2d] hover:underline">Monticello</a>
+        <a href="/locations/sullivan-county-ny/white-lake" class="text-sm text-[#2d5a2d] hover:underline">White Lake</a>
+        <a href="/locations/sullivan-county-ny/fallsburg" class="text-sm text-[#2d5a2d] hover:underline">Fallsburg</a>
+        <a href="/locations/sullivan-county-ny" class="text-sm text-[#2d5a2d] hover:underline font-semibold">View all Sullivan County towns →</a>
+      </div>
+    </div>
+
+    <EstimateForm variant="b2c" />
+  </article>
+</LocationLayout>

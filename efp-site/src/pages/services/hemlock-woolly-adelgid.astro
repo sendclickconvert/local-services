@@ -1,0 +1,196 @@
+---
+// pages/services/hemlock-woolly-adelgid.astro
+
+import ServiceLayout from '../../layouts/ServiceLayout.astro';
+import PageHero from '../../components/ui/PageHero.astro';
+import Breadcrumb from '../../components/ui/Breadcrumb.astro';
+import FAQSection from '../../components/ui/FAQSection.astro';
+import KeyTakeaway from '../../components/ui/KeyTakeaway.astro';
+import AuthorByline from '../../components/ui/AuthorByline.astro';
+import ServiceSchema from '../../components/schema/ServiceSchema.astro';
+import FAQSchema from '../../components/schema/FAQSchema.astro';
+import { buildTitle, buildCanonical, buildDescription } from '../../lib/seo';
+
+const title = buildTitle("Hemlock Woolly Adelgid Assessment for NY Woodland Owners | EFP");
+const description = buildDescription(
+  "Hemlock woolly adelgid is spreading through the Catskills and Hudson Valley. Henry Kowalec helps private landowners assess HWA impact, evaluate treatment options, and protect hemlock stands before decline is irreversible."
+);
+const canonicalUrl = buildCanonical("/services/hemlock-woolly-adelgid");
+
+const crumbs = [
+  { label: "Home",     href: "/"          },
+  { label: "Services", href: "/services"  },
+  { label: "Hemlock Woolly Adelgid", href: "/services/hemlock-woolly-adelgid" },
+];
+
+const faqs = [
+  {
+    question: "What is hemlock woolly adelgid?",
+    answer: "Hemlock woolly adelgid (Adelges tsugae) is an invasive insect from Japan that feeds exclusively on eastern hemlock (Tsuga canadensis) and Carolina hemlock. It extracts sap from the base of hemlock needles, eventually causing needle drop, branch dieback, and tree death. Infested hemlocks typically die within 4 to 10 years of initial infestation in northeastern conditions — faster in drought years. HWA was first confirmed in New York in the mid-1980s and has spread steadily northward through the Catskills and Hudson Valley.",
+  },
+  {
+    question: "How do I know if my hemlocks have woolly adelgid?",
+    answer: "The most visible sign is small white woolly masses at the base of hemlock needles on the undersides of twigs — present year-round but most visible in fall through spring. Affected needles may show a grayish-green color rather than the normal deep green, and premature needle drop creates a thinning appearance in the canopy. Henry Kowalec identifies HWA as part of every woodland assessment on properties with hemlock.",
+  },
+  {
+    question: "Can hemlock woolly adelgid be treated?",
+    answer: "Yes — systemic insecticides are effective at protecting hemlock from HWA and are the primary management tool for individual trees and high-value stands. Soil injection with imidacloprid or dinotefuran provides protection for 4 to 7 years per application. Stem injection with dinotefuran is faster-acting and useful for trees showing advanced symptoms. Biological control — using predatory beetles introduced by DEC — is available at a landscape scale but not as a property-level treatment.",
+  },
+  {
+    question: "Is it too late to treat hemlock with woolly adelgid?",
+    answer: "Trees showing early to moderate decline — less than 50% canopy thinning — respond well to treatment. Trees in advanced decline with greater than 50% canopy loss and significant branch dieback have a lower recovery rate but can sometimes be stabilized. Trees that are nearly dead or dead cannot be treated effectively. Earlier treatment consistently produces better results.",
+  },
+  {
+    question: "What happens to a forest when hemlock dies?",
+    answer: "Eastern hemlock plays an outsized ecological role relative to its abundance. Hemlock-dominated drainages maintain stream temperatures 5 to 10 degrees cooler than adjacent hardwood forest — critical habitat for wild trout. Hemlock provides winter thermal cover for white-tailed deer yards. Its loss creates major canopy gaps that are often colonized by invasive shrubs before native regeneration can establish. Loss of hemlock from private woodland is an irreversible change on any timescale that matters to a landowner.",
+  },
+];
+---
+
+<ServiceLayout title={title} description={description} canonicalUrl={canonicalUrl}>
+  <ServiceSchema
+    pageType="service"
+    serviceName="Hemlock Woolly Adelgid Assessment"
+    description={description}
+    url={canonicalUrl}
+    areaServed={["Sullivan County, NY", "Orange County, NY", "Ulster County, NY"]}
+    crumbs={crumbs}
+  />
+  <FAQSchema items={faqs} />
+
+  <Breadcrumb crumbs={crumbs} />
+
+  <PageHero
+    title="Hemlock Woolly Adelgid Assessment for NY Woodland Owners"
+    subtitle="Protect eastern hemlock from HWA before decline is irreversible — Sullivan, Orange, and Ulster counties"
+  />
+
+  <article class="max-w-4xl mx-auto my-8 sm:my-10 px-8 sm:px-12 py-10 bg-white rounded-2xl shadow-md ring-1 ring-gray-200">
+
+    <KeyTakeaway>
+      Hemlock woolly adelgid is an invasive pest that kills eastern hemlock within
+      4 to 10 years of infestation without intervention. For private landowners
+      in Sullivan, Orange, and Ulster counties — where hemlock is a significant
+      component of riparian corridors and north-facing drainages — an accurate
+      assessment of HWA spread and treatment options is the first step to keeping
+      hemlock on the landscape.
+    </KeyTakeaway>
+
+    <AuthorByline />
+    <p class="text-xs text-gray-400 mt-1 mb-8">Last reviewed: April 2026 by Henry Kowalec, CF</p>
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Hemlock Woolly Adelgid in the Hudson Valley and Catskills</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Eastern hemlock is one of the most ecologically important trees in the forests of
+      Sullivan, Orange, and Ulster counties. Hemlock-dominated drainages shade cold-water
+      streams, provide winter deer yards, and create the distinctive dark, cool understory
+      that defines hemlock forest in the Catskill landscape.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Hemlock woolly adelgid (HWA) has been advancing through these forests for decades.
+      Its spread is not uniform — hemlock in some drainages is heavily infested while
+      adjacent stands remain relatively clean — but the trend is clear and the pest does
+      not retreat on its own.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-6">
+      For private landowners with hemlock on their property, the question is not whether
+      to pay attention to HWA. It is what to do about it.
+    </p>
+
+    <div class="my-6 p-5 bg-green-50 rounded-xl border border-[#2d5a2d]">
+      <p class="text-gray-700 font-medium">
+        Call <a href="tel:+18454980208" class="text-[#2d5a2d] font-bold hover:underline">(845) 754-8242</a> to schedule a free woodland assessment.
+        Henry identifies HWA on every property he walks with hemlock present.
+      </p>
+    </div>
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">HWA Assessment: What the Evaluation Covers</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Henry Kowalec includes HWA assessment in every woodland walkthrough on properties
+      with hemlock. He looks for current infestation signs, assesses canopy condition and
+      decline stage, and advises landowners on the management options that make sense for
+      their specific trees and their specific goals.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">The assessment covers:</p>
+    <ul class="list-disc pl-6 text-gray-700 mb-6 space-y-2">
+      <li>
+        <strong>HWA presence and distribution</strong> — which hemlock stands on the property
+        show active infestation, and how far the infestation has spread within each stand.
+      </li>
+      <li>
+        <strong>Decline stage</strong> — how far each affected stand has progressed and what
+        the realistic treatment outcome would be at that stage.
+      </li>
+      <li>
+        <strong>Treatment options</strong> — which insecticide delivery method is appropriate
+        for the tree size, location, and proximity to water (water buffers affect product selection),
+        and what the realistic protection window is.
+      </li>
+      <li>
+        <strong>Salvage harvest evaluation</strong> — for stands in advanced decline where
+        treatment is no longer cost-effective, whether a salvage harvest recovers timber value
+        before the wood deteriorates.
+      </li>
+      <li>
+        <strong>DEC biological control access</strong> — information on whether the property
+        is in an area where DEC's predatory beetle release program is active.
+      </li>
+    </ul>
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Imidacloprid Restrictions and Riparian Hemlock Treatment</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Many of the hemlock stands most in need of treatment are also the ones most constrained
+      by proximity to water. Soil-applied imidacloprid — the most widely used HWA treatment
+      — has restrictions on application within 75 feet of surface water due to aquatic
+      toxicity concerns.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-6">
+      For hemlock in riparian corridors — exactly where it is most ecologically important —
+      the product choice shifts to dinotefuran (Safari), which has a shorter soil half-life
+      and is approved for use closer to water, or to stem injection methods that bypass soil
+      application entirely. Henry identifies applicable product restrictions for every treatment
+      recommendation based on the location of the specific trees.
+    </p>
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">When Salvage Harvest Is the Answer</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      For hemlock stands in advanced decline — more than 50% canopy loss, significant branch
+      dieback, trees that are economically past the point of treatment — salvage harvest
+      recovers timber value before the wood deteriorates.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Hemlock is not a high-value timber species, but it has commercial value for pulpwood
+      and some sawlog applications while the wood is sound. Waiting too long eliminates
+      even that value.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-6">
+      Henry assesses salvage harvest viability as part of the HWA evaluation and manages
+      the timber sale if salvage is the right choice.
+    </p>
+
+    <h3 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Service Area</h3>
+    <p class="text-gray-700 leading-relaxed mb-6">
+      Henry Kowalec serves private landowners in Sullivan County, Orange County, and Ulster
+      County, NY, and adjacent areas of Pike and Wayne counties, PA and Sussex County, NJ.
+    </p>
+
+    <div class="my-6 p-5 bg-green-50 rounded-xl border border-[#2d5a2d]">
+      <p class="text-gray-700 font-medium">
+        Call <a href="tel:+18454980208" class="text-[#2d5a2d] font-bold hover:underline">(845) 754-8242</a> to schedule a free woodland assessment.
+        Henry identifies HWA on every property he walks with hemlock present.
+      </p>
+    </div>
+
+    <FAQSection items={faqs} />
+
+    <div class="mt-12 pt-8 border-t border-gray-200">
+      <h3 class="text-lg font-bold text-[#1a3c1a] mb-4">Related Guides</h3>
+      <ul class="space-y-3 mb-10">
+        <li><a href="/guides/hemlock-woolly-adelgid-signs" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">Signs of Hemlock Woolly Adelgid: What to Look For on Your Property</a></li>
+        <li><a href="/guides/hemlock-woolly-adelgid-treatment" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">Hemlock Woolly Adelgid Treatment: What Works for Private Woodland</a></li>
+        <li><a href="/services/woodlot-management" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">Woodlot Management — Environmental Forest Products</a></li>
+      </ul>
+    </div>
+
+  </article>
+</ServiceLayout>

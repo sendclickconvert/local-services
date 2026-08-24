@@ -1,0 +1,415 @@
+---
+// pages/services/sell-standing-timber/timber-value-estimator.astro
+// Interactive stumpage value screening tool.
+// URL: /services/sell-standing-timber/timber-value-estimator
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../components/ui/Breadcrumb.astro';
+import CTASection from '../../../components/ui/CTASection.astro';
+import FAQSection from '../../../components/ui/FAQSection.astro';
+import FAQSchema from '../../../components/schema/FAQSchema.astro';
+import { buildTitle, buildCanonical, buildDescription } from '../../../lib/seo';
+import { business, author, phone } from '../../../data/client.config';
+
+const title    = buildTitle("Timber Value Estimator — How Much Is My Timber Worth?");
+const desc     = "Estimate the stumpage value of your standing timber by species, diameter class, and stand density. Free screening tool for woodland owners in Sullivan, Orange, and Ulster County, NY.";
+const description = buildDescription(desc);
+const canonicalUrl = buildCanonical('/services/sell-standing-timber/timber-value-estimator');
+
+const crumbs = [
+  { label: "Home",                  href: "/"                              },
+  { label: "Services",              href: "/services"                      },
+  { label: "Sell Standing Timber",  href: "/services/sell-standing-timber" },
+  { label: "Timber Value Estimator",href: canonicalUrl                     },
+];
+
+const faqs = [
+  {
+    question: "How accurate is this timber value estimate?",
+    answer: "This tool produces a rough screening range, not a formal appraisal. Actual stumpage value depends on individual tree grades (not just average diameter), current mill pricing at the time of harvest, logging contractor costs, skidding distance, road access, and stand condition. A professional timber cruise by a licensed forester can pin down actual value far more accurately than any online tool."
+  },
+  {
+    question: "What is stumpage value?",
+    answer: "Stumpage value is what a timber buyer or logger pays the landowner for standing timber — it's the price per thousand board feet (MBF) at the stump, before logging costs are deducted. Stumpage is the landowner's share of the wood value after the logger accounts for equipment, labor, and hauling. Prices fluctuate by species, log grade, regional demand, and season."
+  },
+  {
+    question: "Why does species matter so much for timber pricing?",
+    answer: "Species is often the single biggest variable in stumpage value. Black cherry commands the highest prices in the northeast — sometimes 4–6× what mixed hardwood fetches — driven by furniture and cabinet demand. White oak is strong due to whiskey barrel and flooring markets. Red oak is solid but more dependent on export markets. White ash has dropped sharply in many areas due to Emerald Ash Borer-forced harvests flooding supply."
+  },
+  {
+    question: "How do I know what species I have on my property?",
+    answer: "The most reliable way is a site visit from a consulting forester who can walk the stand and identify and inventory your species mix. For self-identification, the NY DEC Forestry Division and Cornell Cooperative Extension publish tree ID guides specific to the Hudson Valley and Catskills region. Common marketable species in Sullivan, Orange, and Ulster counties include red oak, white oak, black cherry, hard maple, basswood, and white ash."
+  },
+  {
+    question: "When is the best time to sell timber?",
+    answer: "Timber market timing matters, but stand readiness matters more. Selling timber through a well-planned selective cut — where a certified forester has marked which trees to remove for forest health — typically yields better long-term value than optimizing around short-term market windows. EFP recommends thinking in 10–20 year management cycles. The best time to sell is when your forest is ready, not when you need the money urgently."
+  },
+  {
+    question: "What costs reduce the stumpage check I receive?",
+    answer: "Stumpage is already net of logging costs, so what you receive as a landowner is the stumpage payment directly. However, you should budget for: a forest management plan ($800–$2,000 if not already done), a timber cruise and sale administration fee if you use a consulting forester (typically 10–15% of stumpage), and any required permits or DEC notifications. Some landowners also invest in access road improvements before a harvest."
+  },
+];
+
+const pageSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "name": "Timber Value Estimator",
+      "description": desc,
+      "url": canonicalUrl,
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Web",
+      "isAccessibleForFree": true,
+      "provider": { "@id": `${business.domain}/#organization` },
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": crumbs.map((c, i) => ({
+        "@type": "ListItem",
+        "position": i + 1,
+        "name": c.label,
+        ...(c.href ? { "item": `${business.domain}${c.href}` } : {}),
+      })),
+    },
+  ],
+};
+---
+
+<BaseLayout title={title} description={description} canonicalUrl={canonicalUrl}>
+  <script type="application/ld+json" set:html={JSON.stringify(pageSchema)} />
+  <FAQSchema items={faqs} />
+
+  <Breadcrumb crumbs={crumbs} />
+
+  <article class="max-w-4xl mx-auto my-8 sm:my-10 px-8 sm:px-12 py-10 bg-white rounded-2xl shadow-md ring-1 ring-gray-200">
+
+    <header class="mb-8">
+      <h1 class="text-3xl sm:text-4xl font-bold text-[#1a3c1a] mb-4 leading-tight">
+        Timber Value Estimator
+      </h1>
+      <div class="flex items-center gap-4 text-sm text-gray-500 border-b border-gray-200 pb-5">
+        <span>By {author.name}, {author.title}</span>
+        <span>·</span>
+        <time datetime="2026-04-15">Updated April 2026</time>
+      </div>
+    </header>
+
+    <div class="prose prose-green prose-lg max-w-none mb-10">
+      <p>
+        "What's my timber worth?" is the question Henry hears most often from landowners in Sullivan,
+        Orange, and Ulster counties. The honest answer: <em>it depends heavily on species, tree size,
+        stand density, and what mills are paying that month.</em>
+      </p>
+      <p>
+        This estimator gives you a rough screening range to calibrate expectations before a
+        professional timber cruise. It is <strong>not a formal appraisal</strong> — real value
+        requires a site visit and species-by-species assessment. Use this to get a ballpark, then
+        call Henry if the number is meaningful to you.
+      </p>
+    </div>
+
+    <!-- ─── Calculator ─────────────────────────────────────────────── -->
+    <section
+      id="timber-calc"
+      class="bg-white border border-gray-200 rounded-2xl shadow-sm p-6 sm:p-8 my-10"
+      aria-label="Timber Value Estimator"
+    >
+      <div class="mb-7">
+        <p class="text-xs font-bold uppercase tracking-widest text-[#2d5a2d] mb-1">Free Screening Tool</p>
+        <h2 class="text-xl sm:text-2xl font-bold text-[#1a3c1a] leading-tight">Estimate Your Timber Value</h2>
+        <p class="text-gray-600 text-sm mt-2">Enter your woodland details to get an estimated stumpage value range.</p>
+      </div>
+
+      <form id="timber-form" novalidate>
+        <div class="space-y-7">
+
+          <!-- Q1: Acres -->
+          <div>
+            <label for="timber-acres" class="block text-sm font-semibold text-gray-800 mb-2">
+              1. How many wooded acres are you assessing?
+            </label>
+            <input
+              type="number"
+              id="timber-acres"
+              name="acres"
+              min="1"
+              max="10000"
+              placeholder="e.g. 75"
+              class="w-full sm:w-48 border border-gray-300 rounded-lg px-4 py-2.5 text-sm text-gray-800 bg-white focus:outline-none focus:ring-2 focus:ring-[#2d5a2d] focus:border-transparent"
+            />
+          </div>
+
+          <!-- Q2: Species -->
+          <fieldset>
+            <legend class="block text-sm font-semibold text-gray-800 mb-2">
+              2. Primary timber species (select the dominant species or best match)
+            </legend>
+            <select
+              name="species"
+              id="timber-species"
+              class="w-full sm:w-80 border border-gray-300 rounded-lg px-4 py-2.5 text-sm text-gray-800 bg-white focus:outline-none focus:ring-2 focus:ring-[#2d5a2d] focus:border-transparent"
+            >
+              <option value="">— Select species —</option>
+              <option value="black-cherry">Black Cherry — highest value</option>
+              <option value="white-oak">White Oak</option>
+              <option value="red-oak">Red Oak</option>
+              <option value="hard-maple">Hard Maple / Sugar Maple</option>
+              <option value="mixed-hardwood">Mixed Hardwood</option>
+              <option value="white-pine">Eastern White Pine</option>
+              <option value="white-ash">White Ash</option>
+            </select>
+          </fieldset>
+
+          <!-- Q3: Diameter -->
+          <fieldset>
+            <legend class="block text-sm font-semibold text-gray-800 mb-3">
+              3. Average tree diameter at chest height (DBH)
+            </legend>
+            <div class="flex flex-wrap gap-2">
+              {[
+                { value: "small",  label: `Small (8–12")` },
+                { value: "medium", label: `Medium (12–18")` },
+                { value: "large",  label: `Large (18–24")` },
+                { value: "mature", label: `Mature (24"+)` },
+              ].map(opt => (
+                <label class="tvc-chip">
+                  <input type="radio" name="diameter" value={opt.value} class="sr-only" />
+                  <span>{opt.label}</span>
+                </label>
+              ))}
+            </div>
+          </fieldset>
+
+          <!-- Q4: Stand density -->
+          <fieldset>
+            <legend class="block text-sm font-semibold text-gray-800 mb-3">
+              4. Stand density — how crowded are the trees?
+            </legend>
+            <div class="flex flex-wrap gap-2">
+              {[
+                { value: "light",    label: "Light — scattered, open canopy" },
+                { value: "moderate", label: "Moderate — mostly closed canopy" },
+                { value: "dense",    label: "Dense — fully stocked woodlot" },
+              ].map(opt => (
+                <label class="tvc-chip">
+                  <input type="radio" name="density" value={opt.value} class="sr-only" />
+                  <span>{opt.label}</span>
+                </label>
+              ))}
+            </div>
+          </fieldset>
+
+        </div>
+
+        <div class="mt-8">
+          <p id="timber-error" class="text-red-600 text-sm mb-3 hidden" aria-live="polite">
+            Please fill in all fields before estimating.
+          </p>
+          <button
+            type="submit"
+            class="inline-flex items-center gap-2 bg-[#2d5a2d] hover:bg-[#1a3c1a] text-white font-semibold text-sm px-7 py-3 rounded-lg transition-colors shadow-sm"
+          >
+            Estimate Timber Value
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+            </svg>
+          </button>
+        </div>
+      </form>
+
+      <div id="timber-result" class="hidden mt-8 pt-8 border-t border-gray-200" aria-live="polite" role="status"></div>
+    </section>
+
+    <!-- ─── FAQ ───────────────────────────────────────────────────── -->
+    <div class="mt-12">
+      <h2 class="text-2xl font-bold text-[#1a3c1a] mb-6">Frequently Asked Questions</h2>
+      <FAQSection items={faqs} />
+    </div>
+
+    <!-- ─── CTA bar ────────────────────────────────────────────────── -->
+    <div class="bg-[#1a3c1a] text-white rounded-xl p-6 my-10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <div>
+        <p class="font-bold text-lg mb-1">Get a Real Timber Appraisal</p>
+        <p class="text-green-200 text-sm">Henry walks your property personally and gives you an honest assessment — no obligation.</p>
+      </div>
+      <div class="flex flex-col sm:flex-row gap-3 flex-shrink-0">
+        <a href={`tel:${phone.trackingTel}`} class="inline-flex items-center justify-center gap-2 bg-white text-[#1a3c1a] font-bold px-4 py-2.5 rounded hover:bg-green-100 transition-colors text-sm">
+          {business.phone}
+        </a>
+        <a href="/estimate" class="inline-flex items-center justify-center gap-2 border border-white text-white font-semibold px-4 py-2.5 rounded hover:bg-white/10 transition-colors text-sm">
+          Request Assessment
+        </a>
+      </div>
+    </div>
+
+    <!-- ─── Back link ──────────────────────────────────────────────── -->
+    <div class="border border-gray-200 rounded-lg p-5 mt-6">
+      <p class="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-2">Parent Service</p>
+      <a href="/services/sell-standing-timber" class="text-[#2d5a2d] font-semibold hover:text-[#1a3c1a] flex items-center gap-2">
+        <svg aria-hidden="true" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+        </svg>
+        Back to Sell Standing Timber
+      </a>
+    </div>
+
+  </article>
+
+  <CTASection variant="b2c" />
+</BaseLayout>
+
+<!-- ─── Chip styles (matching EligibilityPrecheck) ─────────────── -->
+<style>
+  .tvc-chip span {
+    display: inline-block;
+    padding: 0.4rem 1rem;
+    border-radius: 9999px;
+    border: 1.5px solid #d1d5db;
+    font-size: 0.875rem;
+    color: #374151;
+    cursor: pointer;
+    transition: background-color 0.12s, border-color 0.12s, color 0.12s;
+    user-select: none;
+    white-space: nowrap;
+  }
+  .tvc-chip input:checked + span {
+    background-color: #2d5a2d;
+    border-color: #2d5a2d;
+    color: #ffffff;
+    font-weight: 600;
+  }
+  .tvc-chip:hover span {
+    border-color: #2d5a2d;
+    color: #1a3c1a;
+  }
+  .tvc-chip input:focus-visible + span {
+    outline: 2px solid #2d5a2d;
+    outline-offset: 2px;
+  }
+</style>
+
+<!-- ─── Calculator logic ────────────────────────────────────────── -->
+<script>
+(function () {
+
+  // Harvestable volume ranges [low, high] in MBF/acre by diameter × density
+  const VOLUME = {
+    small:  { light: [1.5, 3.5], moderate: [3,  7],   dense: [5,  10] },
+    medium: { light: [4,   8],   moderate: [7,  14],  dense: [10, 20] },
+    large:  { light: [6,   12],  moderate: [12, 22],  dense: [18, 35] },
+    mature: { light: [9,   18],  moderate: [15, 30],  dense: [22, 45] },
+  };
+
+  // Current stumpage rates [low, high] in $/MBF — Hudson Valley / Catskills region
+  const RATES = {
+    'black-cherry':   [500,  950],
+    'white-oak':      [300,  575],
+    'red-oak':        [210,  440],
+    'hard-maple':     [185,  375],
+    'mixed-hardwood': [130,  275],
+    'white-pine':     [90,   185],
+    'white-ash':      [70,   145],
+  };
+
+  const SPECIES_LABELS = {
+    'black-cherry':   'Black Cherry',
+    'white-oak':      'White Oak',
+    'red-oak':        'Red Oak',
+    'hard-maple':     'Hard Maple',
+    'mixed-hardwood': 'Mixed Hardwood',
+    'white-pine':     'Eastern White Pine',
+    'white-ash':      'White Ash',
+  };
+
+  const DIAM_LABELS = { small: 'small', medium: 'medium', large: 'large', mature: 'mature' };
+  const DENS_LABELS = { light: 'light', moderate: 'moderate', dense: 'dense' };
+
+  const form   = document.getElementById('timber-form');
+  const result = document.getElementById('timber-result');
+  const errMsg = document.getElementById('timber-error');
+
+  function fmt(n) {
+    return '$' + Math.round(n).toLocaleString('en-US');
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const acres   = parseFloat(form.querySelector('[name="acres"]').value);
+    const species = form.querySelector('[name="species"]').value;
+    const diam    = (form.querySelector('[name="diameter"]:checked') || {}).value;
+    const dens    = (form.querySelector('[name="density"]:checked')  || {}).value;
+
+    if (!acres || acres < 1 || !species || !diam || !dens) {
+      errMsg.classList.remove('hidden');
+      errMsg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      return;
+    }
+    errMsg.classList.add('hidden');
+
+    const [volLow, volHigh]   = VOLUME[diam][dens];
+    const [rateLow, rateHigh] = RATES[species];
+
+    const totalLow  = acres * volLow  * rateLow;
+    const totalHigh = acres * volHigh * rateHigh;
+    const midpoint  = (totalLow + totalHigh) / 2;
+
+    const specLabel = SPECIES_LABELS[species];
+
+    result.innerHTML = `
+      <div class="rounded-xl border border-green-200 bg-green-50 p-6 sm:p-8">
+        <span class="inline-block text-xs font-semibold px-3 py-1 rounded-full bg-green-100 text-green-800 border border-green-200 mb-4">Screening Estimate</span>
+        <h3 class="text-xl font-bold text-[#1a3c1a] mb-1">Estimated Stumpage Value Range</h3>
+        <p class="text-gray-500 text-sm mb-6">${acres.toLocaleString()} acres · ${specLabel} · ${DIAM_LABELS[diam]} diameter · ${DENS_LABELS[dens]} density</p>
+
+        <div class="grid grid-cols-3 gap-3 mb-6">
+          <div class="text-center bg-white rounded-xl p-4 border border-green-100">
+            <p class="text-xs text-gray-400 font-medium mb-1">Conservative</p>
+            <p class="text-xl sm:text-2xl font-bold text-gray-700">${fmt(totalLow)}</p>
+          </div>
+          <div class="text-center bg-[#1a3c1a] text-white rounded-xl p-4">
+            <p class="text-xs text-green-300 font-medium mb-1">Midpoint</p>
+            <p class="text-xl sm:text-2xl font-bold">${fmt(midpoint)}</p>
+          </div>
+          <div class="text-center bg-white rounded-xl p-4 border border-green-100">
+            <p class="text-xs text-gray-400 font-medium mb-1">High End</p>
+            <p class="text-xl sm:text-2xl font-bold text-gray-700">${fmt(totalHigh)}</p>
+          </div>
+        </div>
+
+        <p class="text-xs text-gray-500 leading-relaxed mb-6">
+          <strong>Estimated range: ${fmt(totalLow)} – ${fmt(totalHigh)}</strong> in stumpage value.
+          This is a screening estimate only — not a formal appraisal. Actual value depends on individual
+          tree grades, log quality, current mill pricing, site access, and logging contractor costs
+          at time of harvest. Consult a licensed forester for a formal timber cruise before any sale.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-3">
+          <a href="/estimate" class="inline-flex items-center justify-center gap-2 bg-[#2d5a2d] hover:bg-[#1a3c1a] text-white font-semibold text-sm px-6 py-3 rounded-lg transition-colors shadow-sm">
+            Request a Timber Appraisal
+          </a>
+          <a href="tel:+18454980208" class="inline-flex items-center justify-center gap-2 text-[#2d5a2d] hover:text-[#1a3c1a] border border-[#2d5a2d] font-semibold text-sm px-6 py-3 rounded-lg transition-colors">
+            Call (845) 754-8242
+          </a>
+        </div>
+      </div>
+      <button id="timber-reset" class="mt-4 text-xs text-[#2d5a2d] hover:underline focus:outline-none" type="button">
+        ← Start over
+      </button>
+    `;
+
+    result.classList.remove('hidden');
+    result.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+    document.getElementById('timber-reset').addEventListener('click', function () {
+      form.reset();
+      form.querySelectorAll('input[type="radio"]').forEach(function(r) { r.checked = false; });
+      result.classList.add('hidden');
+      result.innerHTML = '';
+      errMsg.classList.add('hidden');
+      document.getElementById('timber-acres').focus();
+    });
+  });
+
+})();
+</script>

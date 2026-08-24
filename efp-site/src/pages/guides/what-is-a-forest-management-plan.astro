@@ -1,12 +1,12 @@
 ---
 // Landowner education page — supports 480-a authority, high AI citation value
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import PageHero from '../../components/ui/PageHero.astro';
+import GuideLayout from '../../layouts/GuideLayout.astro';
 import Breadcrumb from '../../components/ui/Breadcrumb.astro';
 import FAQSection from '../../components/ui/FAQSection.astro';
 import KeyTakeaway from '../../components/ui/KeyTakeaway.astro';
 import AuthorByline from '../../components/ui/AuthorByline.astro';
-import CTASection from '../../components/ui/CTASection.astro';
+import OptimizedImage from '../../components/ui/OptimizedImage.astro';
+import RelatedLinks from '../../components/ui/RelatedLinks.astro';
 import { buildTitle, buildCanonical, buildDescription } from '../../lib/seo';
 
 const title  = buildTitle("What Is a Forest Management Plan? NY Landowner Guide");
@@ -45,31 +45,54 @@ const faqs = [
     answer: "Yes. Under 480-a, amendments to an approved management plan can be made through a written request to the DEC. Conditions on the ground change — storm damage, pest or disease events, shifts in market conditions — and the plan can be updated to reflect those changes through the amendment process.",
   },
 ];
+
+const relatedGuides = [
+  { label: "Forest Management Plan: What It Covers and Why Private Landowners Need One", href: "/guides/forest-management-plan" },
+  { label: "Forest Stewardship Plan vs Forest Management Plan: What's the Difference?", href: "/guides/forest-stewardship-vs-forest-management-plan" },
+  { label: "Woodlot Management for Private Landowners in New York", href: "/guides/woodlot-management" },
+  { label: "What Is Forest Stewardship? A Plain-Language Guide for Private Landowners", href: "/guides/what-is-forest-stewardship" },
+];
 ---
 
-<BaseLayout title={title} description={description} canonicalUrl={canonicalUrl}>
+<GuideLayout
+  title={title}
+  description={description}
+  canonicalUrl={canonicalUrl}
+  keyTakeaway="A forest management plan documents the current condition of your woodland — species composition, stocking levels, stand structure — and establishes a schedule of management activities over a defined period. For New York landowners, it is required for enrollment in the 480-a Forest Tax Law program and must be written by a DEC cooperating consultant forester."
+  guideSlug="what-is-a-forest-management-plan"
+  hubSlug="woodlot-management"
+  isPillar={false}
+  relatedGuides={relatedGuides}
+  upLinks={[{ label: "Woodlot Management for Private Landowners in New York: Why Your Woodland Doesn't Take Care of Itself", href: "/guides/woodlot-management" }]}
+  serviceLinks={[
+    { label: "Woodlot Management", href: "/services/woodlot-management" },
+    { label: "480-a Forest Tax Law", href: "/services/480a-forest-tax-law" },
+  ]}
+>
   <Breadcrumb crumbs={crumbs} />
 
-  <PageHero
-    title="What Is a Forest Management Plan?"
-    subtitle="A guide for private woodland owners in New York's Hudson Valley and Catskills region"
-  />
+  <h1 class="text-3xl sm:text-4xl font-bold text-[#1a3c1a] mt-6 mb-3 leading-tight">What Is a Forest Management Plan?</h1>
+  <p class="text-sm text-gray-400 mb-8">Last updated: 2026-04-26</p>
 
-  <article class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+  <div id="guide-article-body" class="prose prose-lg max-w-none mt-6
+    prose-headings:text-[#1a3c1a] prose-headings:font-bold prose-headings:leading-snug
+    prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-4
+    prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3
+    prose-p:text-gray-700 prose-p:leading-relaxed prose-p:mb-4
+    prose-a:text-[#2d5a2d] prose-a:font-medium prose-a:no-underline hover:prose-a:underline
+    prose-strong:text-gray-900 prose-strong:font-semibold
+    prose-ul:my-4 prose-ul:pl-6 prose-li:my-1 prose-li:text-gray-700
+    prose-li:marker:text-[#2d5a2d]">
 
-    <KeyTakeaway text="A forest management plan documents the current condition of your woodland — species composition, stocking levels, stand structure — and establishes a schedule of management activities over a defined period. For New York landowners, it is required for enrollment in the 480-a Forest Tax Law program and must be written by a DEC cooperating consultant forester." />
-
-    <AuthorByline />
-
-    <img
+    <OptimizedImage
       src="/images/uploads/timberjack-forwarder-nyc-dep-carmel-ny.jpg"
       alt="TimberPro forwarder loading logs on an NYC DEP project in Carmel, NY — professional forestry operations under an active management plan"
       class="w-full rounded-xl shadow-md my-8"
-      loading="lazy"
+      sizes="(max-width: 768px) 100vw, 768px"
     />
 
-    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">What a Forest Management Plan Does</h2>
-    <p class="text-gray-700 leading-relaxed mb-4">
+    <h2>What a Forest Management Plan Does</h2>
+    <p>
       A forest management plan has two core functions. First, it documents existing conditions: the species
       present on the property, the volume and quality of the standing timber, the stand structure (age classes,
       canopy layers, understory composition), the forest access system, and any significant ecological features
@@ -77,19 +100,19 @@ const faqs = [
       plan period — what will be cut, what will be planted, what improvements will be made, and in what
       sequence.
     </p>
-    <p class="text-gray-700 leading-relaxed mb-4">
+    <p>
       Without a plan, management decisions on a woodland property are typically reactive — a landowner calls
       a logger when they need money, or addresses problems as they become visible. A management plan shifts
       that to a proactive approach: the forester and landowner agree on what the forest should look like in
       10 or 20 years, and the plan maps the path to get there.
     </p>
 
-    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">What a 480-a Plan Must Include</h2>
-    <p class="text-gray-700 leading-relaxed mb-4">
+    <h2>What a 480-a Plan Must Include</h2>
+    <p>
       For a management plan to qualify for approval under New York's 480-a Forest Tax Law program,
       it must address the following elements as required by § 480-a and the DEC's implementing regulations:
     </p>
-    <ul class="list-disc pl-6 text-gray-700 mb-6 space-y-2 text-sm leading-relaxed">
+    <ul>
       <li><strong>Stand descriptions:</strong> Species composition, stocking levels, average tree sizes, and stand condition for each distinct forest type on the property.</li>
       <li><strong>Stocking and cutting standards:</strong> The minimum and maximum stocking levels to be maintained, and the criteria that will trigger prescribed cuts.</li>
       <li><strong>Harvest schedule:</strong> The timing and type of commercial harvests and non-commercial thinning activities over the plan period.</li>
@@ -98,21 +121,21 @@ const faqs = [
       <li><strong>Species protections:</strong> Provisions accommodating any threatened or endangered animals and plants documented on the property.</li>
       <li><strong>Forest-type maps:</strong> Maps at sufficient scale to show stand conditions across the enrolled area.</li>
     </ul>
-    <p class="text-gray-700 leading-relaxed mb-6">
+    <p>
       Under the DEC's 2026 regulatory update (6 NYCRR Part 199, effective March 1, 2026), 480-a plans
       now follow a DEC-issued template. This standardized format is designed to make the plan review
       process more consistent and predictable for both foresters and DEC staff.
     </p>
 
-    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Who Writes It — and Why It Matters</h2>
-    <p class="text-gray-700 leading-relaxed mb-4">
+    <h2>Who Writes It — and Why It Matters</h2>
+    <p>
       For 480-a enrollment, the plan must be prepared by or under the direct supervision of a DEC
       cooperating consultant forester. This is a specific professional credential — the forester must
       have entered into a formal agreement with the NY DEC under the cooperating consultant foresters
       program (ECL § 9-0713). A plan written by a forester without this credential cannot be approved
       by the DEC, regardless of its technical quality.
     </p>
-    <p class="text-gray-700 leading-relaxed mb-6">
+    <p>
       For management plans outside the 480-a context, the credential requirement is not the same — but
       the quality of the plan still depends on the forester's knowledge of the species, markets, and
       site conditions in the specific region. A forester who works regularly in the Hudson Valley and
@@ -120,20 +143,39 @@ const faqs = [
       and local mill relationships.
     </p>
 
-    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Management Plans and Other Programs</h2>
-    <p class="text-gray-700 leading-relaxed mb-4">
-      A forest management plan can support eligibility for several programs beyond 480-a:
-    </p>
-    <ul class="list-disc pl-6 text-gray-700 mb-6 space-y-2 text-sm">
+    <h2>Management Plans and Other Programs</h2>
+    <p>A forest management plan can support eligibility for several programs beyond 480-a:</p>
+    <ul>
       <li><strong>American Tree Farm System certification</strong> — requires a written management plan</li>
       <li><strong>Forest Stewardship Council (FSC) certification</strong> — requires a management plan meeting FSC standards</li>
       <li><strong>USDA EQIP (Environmental Quality Incentives Program)</strong> — management plan can support cost-share funding for conservation practices</li>
       <li><strong>NY Forest Stewardship Program</strong> — technical and financial assistance for plan preparation on qualifying properties</li>
     </ul>
 
-    <FAQSection items={faqs} />
+  </div>
 
-  </article>
+  <!-- Calculator callout -->
+  <div class="my-8 rounded-xl border border-[#2d5a2d] bg-green-50 p-6 flex flex-col sm:flex-row sm:items-center gap-4">
+    <div class="flex-shrink-0 text-3xl" aria-hidden="true">💰</div>
+    <div class="flex-1 min-w-0">
+      <p class="text-xs font-bold uppercase tracking-widest text-[#2d5a2d] mb-1">Free Tool</p>
+      <p class="font-bold text-[#1a3c1a] text-base mb-1">480-a Tax Savings Calculator</p>
+      <p class="text-gray-600 text-sm">If a management plan supports 480-a enrollment, see how much you could save annually and over 15 years before your first consultation.</p>
+    </div>
+    <a href="/services/480a-forest-tax-law/480a-savings-calculator" class="flex-shrink-0 inline-flex items-center gap-2 bg-[#2d5a2d] hover:bg-[#1a3c1a] text-white font-semibold text-sm px-5 py-2.5 rounded-lg transition-colors whitespace-nowrap">
+      Calculate Savings
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+    </a>
+  </div>
 
-  <CTASection variant="b2c" heading="Ready to discuss a management plan for your property?" />
-</BaseLayout>
+  <FAQSection items={faqs} />
+
+  <RelatedLinks
+    upLinks={[{ label: "Woodlot Management for Private Landowners in New York: Why Your Woodland Doesn't Take Care of Itself", href: "/guides/woodlot-management" }]}
+    serviceLinks={[
+      { label: "Woodlot Management", href: "/services/woodlot-management" },
+      { label: "480-a Forest Tax Law", href: "/services/480a-forest-tax-law" },
+    ]}
+  />
+
+</GuideLayout>

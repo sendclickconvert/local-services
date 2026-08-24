@@ -1,0 +1,62 @@
+---
+// pages/thank-you.astro — Post-form submission confirmation (noindex)
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { buildTitle, buildCanonical, noindex } from '../lib/seo';
+import { business, phone } from '../data/client.config';
+
+const title = buildTitle("Thank You");
+const canonicalUrl = buildCanonical("/thank-you");
+const robotsContent = noindex(true);
+---
+
+<BaseLayout title={title} canonicalUrl={canonicalUrl} robotsContent={robotsContent}>
+  <section class="min-h-[60vh] flex items-center justify-center bg-gray-50 py-20">
+    <div class="max-w-lg mx-auto px-4 text-center">
+
+      <!-- Checkmark icon -->
+      <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+        <svg aria-hidden="true" class="w-8 h-8 text-[#2d5a2d]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+        </svg>
+      </div>
+
+      <h1 class="text-3xl font-bold text-[#1a3c1a] mb-4">Request Received</h1>
+      <p class="text-gray-600 text-lg leading-relaxed mb-8">
+        Thank you for reaching out to Environmental Forest Products.
+        Henry Kowalec will review your request and follow up within one business day.
+      </p>
+
+      <div class="bg-white border border-gray-200 rounded-xl p-6 shadow-sm mb-8 text-left">
+        <p class="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-3">What Happens Next</p>
+        <ol class="space-y-3 text-sm text-gray-700">
+          <li class="flex gap-3">
+            <span class="font-bold text-[#2d5a2d] flex-shrink-0">1.</span>
+            Henry reviews your inquiry and contacts you to discuss your property and goals.
+          </li>
+          <li class="flex gap-3">
+            <span class="font-bold text-[#2d5a2d] flex-shrink-0">2.</span>
+            A site visit is scheduled at a time that works for you — no charge for the initial visit.
+          </li>
+          <li class="flex gap-3">
+            <span class="font-bold text-[#2d5a2d] flex-shrink-0">3.</span>
+            You receive a written proposal outlining scope, timeline, and pricing.
+          </li>
+        </ol>
+      </div>
+
+      <p class="text-sm text-gray-500 mb-2">Need to speak with someone immediately?</p>
+      <a href={`tel:${phone.trackingTel}`} class="text-[#2d5a2d] font-bold text-lg hover:text-[#1a3c1a]">
+        {business.phone}
+      </a>
+
+      <div class="mt-10">
+        <a href="/" class="inline-flex items-center gap-2 text-sm text-[#2d5a2d] hover:text-[#1a3c1a] font-semibold">
+          <svg aria-hidden="true" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+          </svg>
+          Return to homepage
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

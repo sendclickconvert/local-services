@@ -1,0 +1,28 @@
+---
+// PhoneConsent.astro
+// A2P-compliant SMS consent disclosure block.
+// Render directly beneath the phone input in any form that collects a phone number.
+// The hidden smsConsent field participates in standard form POSTs (EstimateForm).
+// For JS-driven forms (EligibilityQuiz), the payload handler reads phone directly.
+---
+
+<input type="hidden" name="smsConsent" value="yes" />
+
+<div class="mt-2 text-[11px] text-gray-500 leading-relaxed space-y-2">
+  <p>
+    By providing your phone number and submitting this form, you agree to receive both text
+    messages and phone calls from ENVIRONMENTAL FOREST PRODUCTS. You understand and consent
+    that calls may be automated, pre-recorded, or made using an AI voice system. You agree
+    to receive marketing communications about our products and services. You can opt out at
+    any time by replying STOP to any text message or requesting removal during any call.
+    Message and data rates may apply. Your consent is not a condition of any purchase.
+  </p>
+  <p>
+    By submitting, you authorize ENVIRONMENTAL FOREST PRODUCTS to text/call the number above
+    for informational/transactional messages, possibly using automated means. Msg/data rates
+    apply, msg frequency varies. Consent is not a condition of purchase.
+    <a href="/terms" class="underline hover:text-gray-700">See terms</a> and
+    <a href="/privacy" class="underline hover:text-gray-700">privacy policy</a>.
+    Text HELP for help and STOP to unsubscribe.
+  </p>
+</div>

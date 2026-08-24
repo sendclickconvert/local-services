@@ -13,7 +13,10 @@ import EstimateForm from '../../components/forms/EstimateForm.astro';
 import ServiceSchema from '../../components/schema/ServiceSchema.astro';
 import FAQSchema from '../../components/schema/FAQSchema.astro';
 import AuthorByline from '../../components/ui/AuthorByline.astro';
+import KeyTakeaway from '../../components/ui/KeyTakeaway.astro';
+import OptimizedImage from '../../components/ui/OptimizedImage.astro';
 import { buildTitle, buildCanonical, buildDescription } from '../../lib/seo';
+import ClusterArticles from '../../components/ui/ClusterArticles.astro';
 
 const title = buildTitle("Woodlot Management & Forest Management Plans — NY");
 const description = buildDescription(
@@ -35,7 +38,7 @@ const faqs = [
   },
   {
     question: "Who is qualified to write a forest management plan in New York?",
-    answer: "New York's 480-a program requires that management plans be written by a licensed professional forester or someone operating under their supervision. Not all foresters working in the state are qualified to write 480-a plans — the state has specific requirements for the forester's credentials and the plan's content. Environmental Forest Products works with landowners to prepare plans that meet all state requirements. [⚠️ Confirm exact NY DEC credentialing requirements with Henry]"
+    answer: "New York's 480-a program requires that management plans be written by a licensed professional forester or someone operating under their supervision. Not all foresters working in the state are qualified to write 480-a plans — the state has specific requirements for the forester's credentials and the plan's content. Henry Kowalec is certified to write DEC-approved 480-a management plans under New York State law, and Environmental Forest Products works with landowners to prepare plans that meet all state requirements."
   },
   {
     question: "What does a forest management plan typically include?",
@@ -43,7 +46,15 @@ const faqs = [
   },
   {
     question: "How often does a forest management plan need to be updated?",
-    answer: "Most forest management plans in New York are written for a 10-year management period. At the end of that period the plan must be renewed and updated to reflect what was accomplished and what the next management cycle should include. Annual compliance reports may also be required for properties enrolled in 480-a. [⚠️ Confirm 480-a renewal and reporting requirements with Henry]"
+    answer: "Most forest management plans in New York are written for a 10-year management period. At the end of that period the plan must be renewed and updated to reflect what was accomplished and what the next management cycle should include. Annual compliance reports are also required for properties enrolled in 480-a to document that prescribed management activities are being carried out."
+  },
+  {
+    question: "How much does a forest management plan cost?",
+    answer: "Forest management plans in Sullivan and Orange counties typically cost $8–15 per acre, with a minimum fee of $500–800 for small properties. A 50-acre plan usually runs $800–1,200 depending on complexity and objectives. Plans required for 480-a enrollment must meet specific DEC standards and include a timber inventory, which adds cost — but the property tax savings from 480-a typically offset the plan expense within one to two years. We provide a fixed quote after walking your property."
+  },
+  {
+    question: "Do I need to implement everything in my management plan right away?",
+    answer: "No. A good management plan phases recommendations over 10–20 years based on priorities and budget. We typically recommend starting with high-priority items like hazard tree removal, timber stand improvement in your best stands, or 480-a enrollment if tax savings are a goal. Lower-priority activities like trail development or wildlife plantings can wait until year three to five. The plan provides a roadmap; you control the pace of implementation based on your time and budget."
   },
   {
     question: "Can woodlot management improve habitat for wildlife at the same time?",
@@ -70,11 +81,14 @@ const faqs = [
     subtitle="Professional management plans and ongoing woodland stewardship for private landowners in the Hudson Valley and Catskills"
   />
 
-  <article class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+  <article class="max-w-4xl mx-auto my-8 sm:my-10 px-8 sm:px-12 py-10 bg-white rounded-2xl shadow-md ring-1 ring-gray-200">
+
+    <KeyTakeaway text="A well-managed woodlot can provide continuous income for generations while improving wildlife habitat and forest health — but most landowners don't have a written management plan, which means they're managing by accident instead of design." />
 
     <AuthorByline />
+    <p class="text-xs text-gray-400 mt-1 mb-8">Last reviewed: April 2026 by Henry Kowalec, CF</p>
 
-        <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">What Woodlot Management Actually Means</h2>
+        <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Active Woodlot Management vs. Unmanaged Forest</h2>
     <p class="text-gray-700 leading-relaxed mb-4">
       Most private woodland in New York is not actively managed. It grows, it changes, invasive species move in, stand density increases, and valuable species get crowded out — all without any deliberate intervention. Over time, the timber value declines, the wildlife habitat degrades, and the property becomes harder to manage with each passing year.
     </p>
@@ -82,7 +96,7 @@ const faqs = [
       Woodlot management is the practice of changing that trajectory. It means having a current understanding of what is on your property, what it is worth, and what it could become — and then taking the specific actions that move it in the right direction. A certified consulting forester provides the professional assessment and written plan that makes that possible.
     </p>
 
-    <img src="/images/uploads/hand-felling-trees-nyc-dep-carmel-ny.jpg" alt="Forester hand-felling trees on an NYC DEP project in Carmel, NY — skilled woodland management in action" class="w-full rounded-xl shadow-md" loading="lazy" />
+    <OptimizedImage src="/images/uploads/hand-felling-trees-nyc-dep-carmel-ny.jpg" alt="Forester hand-felling trees on an NYC DEP project in Carmel, NY — skilled woodland management in action" class="w-full rounded-xl shadow-md" sizes="(max-width: 768px) 100vw, 768px" />
 
     <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Forest Management Plans</h2>
     <p class="text-gray-700 leading-relaxed mb-4">
@@ -142,7 +156,7 @@ const faqs = [
       landowners a written framework for responding to them rather than making reactive decisions under pressure.
     </p>
 
-    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Service Area</h2>
+    <h3 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Service Area</h3>
     <p class="text-gray-700 leading-relaxed mb-4">
       Woodlot management and forest management plan services are available throughout <a href="/locations/sullivan-county-ny" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">Sullivan County</a>, <a href="/locations/orange-county-ny" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">Orange County</a>, and <a href="/locations/ulster-county-ny" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">Ulster County</a> in New York, as well as Pike and Wayne counties in Pennsylvania and Sussex County in New Jersey.
     </p>
@@ -152,12 +166,47 @@ const faqs = [
       <p class="text-gray-700 text-sm mb-4">
         Whether you are pursuing 480-a enrollment, planning a harvest, or simply want to understand what you have and what it is worth, the right starting point is an on-site assessment. Call to schedule a visit — we will walk the property with you and give you a clear picture of your woodland's current condition and what a management plan would involve.
       </p>
-      <a href="tel:+18457548242" class="inline-flex items-center gap-2 bg-[#1a3c1a] text-white font-semibold px-5 py-3 rounded hover:bg-[#2d5a2d] transition-colors text-sm">
+      <a href="tel:+18454980208" class="inline-flex items-center gap-2 bg-[#1a3c1a] text-white font-semibold px-5 py-3 rounded hover:bg-[#2d5a2d] transition-colors text-sm">
         <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
           <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
         </svg>
         Call (845) 754-8242
       </a>
+    </div>
+
+    <div class="mt-12 pt-8 border-t border-gray-200">
+      <h3 class="text-lg font-bold text-[#1a3c1a] mb-4">Related Guides</h3>
+      <ul class="space-y-3 mb-10">
+        <li><a href="/guides/what-is-a-forest-management-plan" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">What Is a Forest Management Plan?</a></li>
+        <li><a href="/guides/forest-management-plan" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">How to Get a Forest Management Plan for Your NY Woodland</a></li>
+        <li><a href="/guides/selective-cutting" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">Selective Cutting: How It Works and When It Makes Sense</a></li>
+        <li><a href="/guides/woodland-management-plan-nj" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">Woodland Management Plans for NJ Farmland Assessment</a></li>
+      </ul>
+    </div>
+
+    <!-- Interactive Tool card -->
+    <div class="my-8 rounded-xl border border-[#2d5a2d] bg-green-50 p-6 flex flex-col sm:flex-row sm:items-center gap-4">
+      <div class="flex-shrink-0 text-3xl" aria-hidden="true">💰</div>
+      <div class="flex-1 min-w-0">
+        <p class="text-xs font-bold uppercase tracking-widest text-[#2d5a2d] mb-1">Free Tool</p>
+        <p class="font-bold text-[#1a3c1a] text-base mb-1">480-a Tax Savings Calculator</p>
+        <p class="text-gray-600 text-sm">A woodlot management plan is the foundation of 480-a enrollment. See what the tax savings could look like on your property.</p>
+      </div>
+      <a href="/services/480a-forest-tax-law/480a-savings-calculator" class="flex-shrink-0 inline-flex items-center gap-2 bg-[#2d5a2d] hover:bg-[#1a3c1a] text-white font-semibold text-sm px-5 py-2.5 rounded-lg transition-colors whitespace-nowrap">
+        Calculate Savings
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+
+    <ClusterArticles serviceSlug="woodlot-management" heading="Woodlot Management Guides" />
+
+    <div class="mt-10 pt-6 border-t border-gray-200">
+      <p class="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-2">Sources &amp; Further Reading</p>
+      <ul class="text-xs text-gray-500 space-y-1">
+        <li><a href="https://blogs.cornell.edu/woodlandstewardship/" target="_blank" rel="noopener noreferrer" class="text-[#2d5a2d] hover:underline">Cornell Cooperative Extension — Woodland Stewardship</a></li>
+        <li><a href="https://www.dec.ny.gov/lands/5236.html" target="_blank" rel="noopener noreferrer" class="text-[#2d5a2d] hover:underline">NY DEC — Forest Tax Law (480-a)</a></li>
+        <li><a href="https://www.eforester.org/" target="_blank" rel="noopener noreferrer" class="text-[#2d5a2d] hover:underline">Society of American Foresters (SAF)</a></li>
+      </ul>
     </div>
 
     <FAQSection items={faqs} />

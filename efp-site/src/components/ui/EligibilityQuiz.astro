@@ -1,0 +1,545 @@
+---
+// EligibilityQuiz.astro
+// 480-a Eligibility Quiz Widget — 4-state multi-step form
+// States: intro → quiz (Q1-Q7) → email gate → results
+// Vanilla JS state machine + CSS transitions. No React/Framer required.
+// GHL webhook POST on submit. Anchor: id="qualify" (linked from guide sidebar CTAs)
+import PhoneConsent from '../forms/PhoneConsent.astro';
+---
+
+<div id="qualify" class="quiz-widget bg-white rounded-2xl shadow-xl ring-1 ring-gray-200 overflow-hidden w-full">
+
+  <!-- ─── INTRO STATE ──────────────────────────────────────── -->
+  <div id="quiz-intro" class="quiz-state p-7 sm:p-8">
+    <p class="text-[10px] font-bold tracking-[0.18em] uppercase text-[#2d5a2d] mb-3">Free Eligibility Check</p>
+    <h2 class="text-xl sm:text-2xl font-bold text-[#1a3c1a] leading-snug mb-2" style="font-family: Georgia, 'Times New Roman', serif;">
+      Do You Qualify for NY 480-a Property Tax Reduction?
+    </h2>
+    <p class="text-sm text-gray-500 mb-6 leading-relaxed">
+      60-second eligibility check. Get your personalized estimate.
+    </p>
+    <button id="quiz-start" class="w-full bg-[#1a3c1a] hover:bg-[#2d5a2d] text-white font-semibold text-base px-6 py-3.5 rounded-lg transition-colors text-center">
+      Start the Quiz
+    </button>
+    <p class="text-[10px] text-gray-400 text-center mt-3">Takes about 60 seconds · No obligation</p>
+  </div>
+
+  <!-- ─── QUIZ STATE ───────────────────────────────────────── -->
+  <div id="quiz-questions" class="quiz-state hidden p-7 sm:p-8">
+    <!-- Progress bar -->
+    <div class="flex items-center justify-between mb-2">
+      <span id="quiz-progress-label" class="text-[10px] font-semibold tracking-wider uppercase text-gray-400">Question 1 of 7</span>
+      <span id="quiz-progress-pct" class="text-[10px] text-gray-400">0%</span>
+    </div>
+    <div class="w-full bg-gray-100 rounded-full h-1 mb-6">
+      <div id="quiz-progress-bar" class="bg-[#2d5a2d] h-1 rounded-full transition-all duration-300" style="width:0%"></div>
+    </div>
+
+    <!-- Question area -->
+    <div id="quiz-question-wrap">
+      <p id="quiz-q-text" class="text-base sm:text-lg font-semibold text-[#1a3c1a] mb-5 leading-snug min-h-[3rem]"></p>
+      <div id="quiz-options" class="space-y-2"></div>
+    </div>
+
+    <!-- Back link -->
+    <button id="quiz-back" class="mt-5 text-xs text-gray-400 hover:text-[#2d5a2d] transition-colors hidden">← Back</button>
+  </div>
+
+  <!-- ─── EMAIL GATE STATE ─────────────────────────────────── -->
+  <div id="quiz-email-gate" class="quiz-state hidden p-7 sm:p-8">
+    <p class="text-[10px] font-bold tracking-[0.18em] uppercase text-[#2d5a2d] mb-3">Almost there</p>
+    <h2 class="text-xl font-bold text-[#1a3c1a] leading-snug mb-2" style="font-family: Georgia, 'Times New Roman', serif;">
+      Where should we send your results?
+    </h2>
+    <p class="text-sm text-gray-500 mb-5 leading-relaxed">
+      We'll email your personalized 480-a eligibility report and estimated annual savings.
+    </p>
+
+    <form id="quiz-form" class="space-y-3" novalidate>
+      <div class="grid grid-cols-2 gap-3">
+        <div>
+          <label for="qf-first" class="block text-xs font-semibold text-gray-600 mb-1">First Name <span class="text-red-500">*</span></label>
+          <input type="text" id="qf-first" name="first_name" autocomplete="given-name" required
+            class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#2d5a2d] focus:border-transparent" />
+        </div>
+        <div>
+          <label for="qf-last" class="block text-xs font-semibold text-gray-600 mb-1">Last Name <span class="text-red-500">*</span></label>
+          <input type="text" id="qf-last" name="last_name" autocomplete="family-name" required
+            class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#2d5a2d] focus:border-transparent" />
+        </div>
+      </div>
+      <div>
+        <label for="qf-email" class="block text-xs font-semibold text-gray-600 mb-1">Email <span class="text-red-500">*</span></label>
+        <input type="email" id="qf-email" name="email" autocomplete="email" required
+          class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#2d5a2d] focus:border-transparent" />
+        <p id="qf-email-err" class="text-xs text-red-500 mt-1 hidden">Please enter a valid email address.</p>
+      </div>
+      <div>
+        <label for="qf-county" class="block text-xs font-semibold text-gray-600 mb-1">County</label>
+        <select id="qf-county" name="county"
+          class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#2d5a2d] focus:border-transparent bg-white">
+          <option value="">Select a county…</option>
+          <option>Sullivan</option>
+          <option>Orange</option>
+          <option>Ulster</option>
+          <option>Dutchess</option>
+          <option>Other</option>
+        </select>
+      </div>
+
+      <!-- Error banner -->
+      <div id="quiz-submit-err" class="hidden rounded-lg bg-red-50 border border-red-200 px-4 py-3 text-sm text-red-700">
+        Something went wrong sending your results. Email Henry at
+        <a href="mailto:henry@eforestproducts.com" class="underline font-semibold">henry@eforestproducts.com</a>
+        or call <a href="tel:+18454980208" class="underline font-semibold">(845) 754-8242</a>.
+      </div>
+
+      <button type="submit" id="quiz-submit-btn"
+        class="w-full bg-[#1a3c1a] hover:bg-[#2d5a2d] text-white font-semibold text-base px-6 py-3.5 rounded-lg transition-colors flex items-center justify-center gap-2">
+        <span id="quiz-submit-label">Send My Results</span>
+        <svg id="quiz-spinner" class="hidden w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
+          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/>
+          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"/>
+        </svg>
+      </button>
+      <p class="text-xs text-gray-500 text-center">
+        Have a question before submitting? Use the <strong>chat widget</strong> at the bottom of the page to reach us directly.
+      </p>
+    </form>
+  </div>
+
+  <!-- ─── RESULTS STATE ─────────────────────────────────────── -->
+  <div id="quiz-results" class="quiz-state hidden p-7 sm:p-8">
+    <div id="quiz-results-inner"></div>
+  </div>
+
+</div>
+
+<style>
+  .quiz-state { transition: opacity 0.2s ease; }
+  .quiz-state.hidden { display: none; }
+
+  /* #quiz-options is in template HTML — scoped selector works fine */
+  #quiz-options { display: flex; flex-direction: column; gap: 0.5rem; align-items: stretch; }
+
+  /* .quiz-option buttons are created dynamically in JS — must be :global */
+  :global(.quiz-option) {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    width: 100%;
+    text-align: left;
+    padding: 0.625rem 1rem;
+    border: 1.5px solid #e5e7eb;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    color: #1a3c1a;
+    background: #fff;
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+    box-sizing: border-box;
+  }
+  :global(.quiz-option:hover) { border-color: #2d5a2d; background: #f0f7f0; }
+  :global(.quiz-option.selected) { border-color: #1a3c1a; background: #f0f7f0; font-weight: 600; }
+
+  :global(.quiz-option input[type="radio"]) {
+    flex-shrink: 0;
+    width: 1.1rem;
+    height: 1.1rem;
+    accent-color: #1a3c1a;
+    cursor: pointer;
+  }
+</style>
+
+<script>
+  // ─── DATA ─────────────────────────────────────────────────────────────────
+
+  const QUESTIONS = [
+    {
+      key: 'acreage',
+      text: 'How many acres of forested land do you own?',
+      options: ['Under 50 acres', '50–99 acres', '100–249 acres', '250 or more acres'],
+    },
+    {
+      key: 'state',
+      text: 'Where is your land located?',
+      options: ['New York', 'Pennsylvania', 'New Jersey', 'Other state'],
+    },
+    {
+      key: 'forest_type',
+      text: "What's growing on your land?",
+      options: [
+        'Mostly hardwoods (oak, maple, cherry, ash)',
+        'Mostly softwoods (pine, spruce, hemlock)',
+        'Mixed hardwoods and softwoods',
+        'Mostly cleared, pasture, or fields',
+      ],
+    },
+    {
+      key: 'current_480a',
+      text: 'Are you currently enrolled in NY 480-a?',
+      options: [
+        'Yes, currently enrolled',
+        'No, never enrolled',
+        'Used to be — withdrew or expired',
+        "I don't know",
+      ],
+    },
+    {
+      key: 'timeline',
+      text: 'How long do you plan to keep this land?',
+      options: ['10 or more years', 'Less than 10 years', 'Not sure yet'],
+    },
+    {
+      key: 'annual_tax',
+      text: 'Roughly what do you pay in annual property tax on the forested portion?',
+      options: [
+        'Under $5,000',
+        '$5,000 – $15,000',
+        '$15,000 – $30,000',
+        '$30,000 or more',
+        "I'm not sure",
+      ],
+    },
+    {
+      key: 'primary_goal',
+      text: 'What matters most to you for this land?',
+      options: [
+        'Reducing my property tax bill',
+        'Sustainable timber income',
+        'Wildlife habitat, recreation, or legacy for family',
+        'Selling within a few years',
+      ],
+    },
+  ];
+
+  const SAVINGS_MAP: Record<string, { label: string; low: number; high: number }> = {
+    'Under $5,000':       { label: '$1,500 – $3,500 / year',  low: 1500,  high: 3500  },
+    '$5,000 – $15,000':   { label: '$4,000 – $11,000 / year', low: 4000,  high: 11000 },
+    '$15,000 – $30,000':  { label: '$11,000 – $22,000 / year',low: 11000, high: 22000 },
+    '$30,000 or more':    { label: '$22,000 – $45,000 / year',low: 22000, high: 45000 },
+    "I'm not sure":       { label: "We'll calculate this on a free 15-min call", low: 0, high: 0 },
+  };
+
+  const WEBHOOK_URL = 'https://services.leadconnectorhq.com/hooks/DbaQMw9y6LjrTaVFJ9jA/webhook-trigger/648db402-c102-486c-a2be-ceb2dd201522';
+  const CALENDAR_URL = 'https://calendar.app/henry';
+
+  // ─── STATE ───────────────────────────────────────────────────────────────
+
+  type Answers = Record<string, string>;
+  let currentQ = 0;
+  const answers: Answers = {};
+
+  // ─── ELEMENTS ────────────────────────────────────────────────────────────
+
+  const stateIntro    = document.getElementById('quiz-intro')!;
+  const stateQuiz     = document.getElementById('quiz-questions')!;
+  const stateGate     = document.getElementById('quiz-email-gate')!;
+  const stateResults  = document.getElementById('quiz-results')!;
+  const progressBar   = document.getElementById('quiz-progress-bar')!;
+  const progressLabel = document.getElementById('quiz-progress-label')!;
+  const progressPct   = document.getElementById('quiz-progress-pct')!;
+  const qText         = document.getElementById('quiz-q-text')!;
+  const qOptions      = document.getElementById('quiz-options')!;
+  const backBtn       = document.getElementById('quiz-back')!;
+  const startBtn      = document.getElementById('quiz-start')!;
+  const form          = document.getElementById('quiz-form') as HTMLFormElement;
+  const submitBtn     = document.getElementById('quiz-submit-btn') as HTMLButtonElement;
+  const submitLabel   = document.getElementById('quiz-submit-label')!;
+  const spinner       = document.getElementById('quiz-spinner')!;
+  const submitErr     = document.getElementById('quiz-submit-err')!;
+  const emailInput    = document.getElementById('qf-email') as HTMLInputElement;
+  const emailErr      = document.getElementById('qf-email-err')!;
+  const resultsInner  = document.getElementById('quiz-results-inner')!;
+
+  // ─── HELPERS ─────────────────────────────────────────────────────────────
+
+  function show(el: HTMLElement) { el.classList.remove('hidden'); }
+  function hide(el: HTMLElement) { el.classList.add('hidden'); }
+
+  function showState(state: HTMLElement) {
+    [stateIntro, stateQuiz, stateGate, stateResults].forEach(s => {
+      s === state ? show(s) : hide(s);
+    });
+    // Scroll widget into view on mobile
+    document.getElementById('qualify')?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  function updateProgress(qIndex: number) {
+    const pct = Math.round((qIndex / QUESTIONS.length) * 100);
+    progressBar.style.width = pct + '%';
+    progressLabel.textContent = `Question ${qIndex + 1} of ${QUESTIONS.length}`;
+    progressPct.textContent = pct + '%';
+  }
+
+  function renderQuestion(index: number) {
+    const q = QUESTIONS[index];
+    updateProgress(index);
+    qText.textContent = q.text;
+    qOptions.innerHTML = '';
+
+    q.options.forEach(opt => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'quiz-option' + (answers[q.key] === opt ? ' selected' : '');
+      btn.dataset.value = opt;
+
+      // Real radio input
+      const radio = document.createElement('input');
+      radio.type = 'radio';
+      radio.name = `q-${q.key}`;
+      radio.value = opt;
+      radio.checked = answers[q.key] === opt;
+      radio.tabIndex = -1; // button handles focus
+
+      // Label text
+      const label = document.createElement('span');
+      label.textContent = opt;
+
+      btn.appendChild(radio);
+      btn.appendChild(label);
+      btn.addEventListener('click', () => handleAnswer(q.key, opt, index));
+      qOptions.appendChild(btn);
+    });
+
+    backBtn.classList.toggle('hidden', index === 0);
+  }
+
+  function handleAnswer(key: string, value: string, index: number) {
+    answers[key] = value;
+
+    // Brief visual feedback — highlight row and check the radio
+    qOptions.querySelectorAll('.quiz-option').forEach(b => {
+      const el = b as HTMLElement;
+      const isSelected = el.dataset.value === value;
+      el.classList.toggle('selected', isSelected);
+      const radioInput = el.querySelector('input[type="radio"]') as HTMLInputElement | null;
+      if (radioInput) radioInput.checked = isSelected;
+    });
+
+    setTimeout(() => {
+      if (index + 1 < QUESTIONS.length) {
+        currentQ = index + 1;
+        renderQuestion(currentQ);
+      } else {
+        showState(stateGate);
+      }
+    }, 180);
+  }
+
+  // ─── QUALIFICATION LOGIC ─────────────────────────────────────────────────
+
+  type QualStatus = 'not-eligible' | 'qualified-hot' | 'qualified-standard' | 'needs-review';
+  type QualResult = { status: QualStatus; reason: string };
+
+  const NOT_ELIGIBLE_LABELS: Record<string, string> = {
+    under_50_acres: 'your parcel is under 50 acres, which is the program minimum',
+    not_in_ny:      'your land is outside New York — 480-a is a NY-only program',
+    cleared_land:   'your land is primarily cleared or pasture rather than forested',
+    short_timeline: 'your ownership timeline is under the 10-year program commitment',
+  };
+
+  function qualify(a: Answers): QualResult {
+    if (a.acreage === 'Under 50 acres')                         return { status: 'not-eligible', reason: 'under_50_acres' };
+    if (a.state !== 'New York')                                 return { status: 'not-eligible', reason: 'not_in_ny' };
+    if (a.forest_type === 'Mostly cleared, pasture, or fields') return { status: 'not-eligible', reason: 'cleared_land' };
+    if (a.timeline === 'Less than 10 years')                    return { status: 'not-eligible', reason: 'short_timeline' };
+    if (a.current_480a === "I don't know")                      return { status: 'needs-review', reason: '' };
+    if (a.timeline === 'Not sure yet')                          return { status: 'needs-review', reason: '' };
+    if (
+      a.acreage === '100–249 acres' || a.acreage === '250 or more acres' ||
+      a.annual_tax === '$15,000 – $30,000' || a.annual_tax === '$30,000 or more' ||
+      a.primary_goal === 'Reducing my property tax bill'
+    ) return { status: 'qualified-hot', reason: '' };
+    return { status: 'qualified-standard', reason: '' };
+  }
+
+  function buildPayload(
+    firstName: string, lastName: string, email: string, county: string, phone: string, a: Answers
+  ): Record<string, unknown> {
+    const q = qualify(a);
+    const s = SAVINGS_MAP[a.annual_tax] ?? SAVINGS_MAP["I'm not sure"];
+    return {
+      first_name: firstName,
+      last_name:  lastName,
+      email,
+      phone,
+      sms_consent: phone.trim().length > 0,
+      county,
+      acreage_range:              a.acreage,
+      land_state:                 a.state,
+      forest_type:                a.forest_type,
+      current_480a_status:        a.current_480a,
+      ownership_timeline:         a.timeline,
+      annual_tax_range:           a.annual_tax,
+      primary_goal:               a.primary_goal,
+      qualification_status:       q.status,
+      estimated_savings_low:      s.low,
+      estimated_savings_high:     s.high,
+      estimated_savings_label:    s.label,
+      not_eligible_reason:        q.reason,
+      not_eligible_reason_label:  q.reason ? NOT_ELIGIBLE_LABELS[q.reason] : '',
+      submission_timestamp:       new Date().toISOString(),
+      lead_source:                '480-a Quiz',
+      tags: [
+        '480a-quiz',
+        q.status,
+        `${(county || 'unknown').toLowerCase().replace(/\s+/g, '-')}-county`,
+      ],
+    };
+  }
+
+  // ─── RESULTS RENDERER ────────────────────────────────────────────────────
+
+  function renderResults(status: QualStatus, email: string) {
+    const savings = SAVINGS_MAP[answers.annual_tax] ?? SAVINGS_MAP["I'm not sure"];
+
+    if (status === 'not-eligible') {
+      resultsInner.innerHTML = `
+        <p class="text-[10px] font-bold tracking-[0.18em] uppercase text-amber-600 mb-3">Your Results</p>
+        <h3 class="text-lg font-bold text-[#1a3c1a] leading-snug mb-3" style="font-family:Georgia,'Times New Roman',serif;">
+          Based on your answers, 480-a may not be the right fit — but other options exist.
+        </h3>
+        <p class="text-sm text-gray-600 mb-5 leading-relaxed">
+          480-a requires 50+ contiguous acres of forested land in New York with a 10-year commitment.
+          Your situation may not match all of those — but Environmental Forest Products offers other
+          services that might help.
+        </p>
+        <a href="/services" class="block w-full text-center bg-[#1a3c1a] hover:bg-[#2d5a2d] text-white font-semibold text-sm px-5 py-3 rounded-lg transition-colors mb-3">
+          See Our Services
+        </a>
+        <a href="/contact" class="block w-full text-center border border-[#1a3c1a] text-[#1a3c1a] hover:bg-green-50 font-semibold text-sm px-5 py-3 rounded-lg transition-colors">
+          Talk to Henry anyway
+        </a>
+      `;
+      return;
+    }
+
+    if (status === 'needs-review') {
+      resultsInner.innerHTML = `
+        <p class="text-[10px] font-bold tracking-[0.18em] uppercase text-blue-600 mb-3">Your Results</p>
+        <h3 class="text-lg font-bold text-[#1a3c1a] leading-snug mb-3" style="font-family:Georgia,'Times New Roman',serif;">
+          Almost there — Henry needs a few details to confirm.
+        </h3>
+        <p class="text-sm text-gray-600 mb-5 leading-relaxed">
+          Some of your answers need a quick clarification before we can give you an accurate estimate.
+          Henry will email you within one business day.
+        </p>
+        <a href="/services" class="block w-full text-center bg-[#1a3c1a] hover:bg-[#2d5a2d] text-white font-semibold text-sm px-5 py-3 rounded-lg transition-colors">
+          See Our Services
+        </a>
+      `;
+      return;
+    }
+
+    // Qualified (hot or standard)
+    const savingsLabel = savings.label;
+    const showSavings = savings.low > 0;
+
+    resultsInner.innerHTML = `
+      <div class="flex items-center gap-2 mb-3">
+        <svg class="w-5 h-5 text-[#2d5a2d] flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+        <p class="text-[10px] font-bold tracking-[0.18em] uppercase text-[#2d5a2d]">Good news</p>
+      </div>
+      <h3 class="text-lg font-bold text-[#1a3c1a] leading-snug mb-2" style="font-family:Georgia,'Times New Roman',serif;">
+        You appear to qualify.
+      </h3>
+      <p class="text-sm text-gray-600 mb-4 leading-relaxed">
+        Based on your answers, your land likely meets NY 480-a eligibility.
+      </p>
+      ${showSavings ? `
+        <div class="bg-[#f0f7f0] rounded-xl px-5 py-4 mb-4 text-center">
+          <p class="text-[10px] uppercase tracking-wider text-[#2d5a2d] font-semibold mb-1">Estimated Annual Tax Savings</p>
+          <p class="text-2xl font-bold text-[#1a3c1a]" style="font-family:Georgia,'Times New Roman',serif;">${savingsLabel}</p>
+        </div>
+      ` : `
+        <div class="bg-[#f0f7f0] rounded-xl px-5 py-4 mb-4 text-center">
+          <p class="text-sm text-[#2d5a2d] font-semibold">${savingsLabel}</p>
+        </div>
+      `}
+      <p class="text-xs text-gray-500 mb-4">Your personalized eligibility report has been sent to <span class="font-semibold">${email}</span>.</p>
+      <p class="text-xs font-semibold text-gray-700 mb-3">What happens next</p>
+      <p class="text-xs text-gray-500 mb-5 leading-relaxed">
+        Henry Kowalec, our DEC-certified consulting forester, will review your responses and reach out
+        within one business day to schedule a free 30-minute call.
+      </p>
+      <a href="${CALENDAR_URL}" class="block w-full text-center bg-[#1a3c1a] hover:bg-[#2d5a2d] text-white font-semibold text-sm px-5 py-3 rounded-lg transition-colors mb-3">
+        Schedule Your Free Call Now
+      </a>
+      <a href="tel:+18454980208" class="block w-full text-center text-[#2d5a2d] hover:text-[#1a3c1a] text-sm font-semibold transition-colors">
+        Or call (845) 754-8242
+      </a>
+    `;
+  }
+
+  // ─── FORM SUBMISSION ─────────────────────────────────────────────────────
+
+  async function submitQuiz() {
+    const firstName = (document.getElementById('qf-first') as HTMLInputElement).value.trim();
+    const lastName  = (document.getElementById('qf-last')  as HTMLInputElement).value.trim();
+    const email     = (document.getElementById('qf-email') as HTMLInputElement).value.trim();
+    const phone     = (document.getElementById('qf-phone') as HTMLInputElement | null)?.value.trim() ?? '';
+    const county    = (document.getElementById('qf-county') as HTMLSelectElement).value;
+
+    // Validate required fields
+    let valid = true;
+    if (!firstName || !lastName) valid = false;
+
+    const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email || !emailRe.test(email)) {
+      show(emailErr);
+      valid = false;
+    } else {
+      hide(emailErr);
+    }
+
+    if (!valid) return;
+
+    const payload = buildPayload(firstName, lastName, email, county, phone, answers);
+    const status = payload.qualification_status as QualStatus;
+
+    // Loading state
+    submitLabel.textContent = 'Sending…';
+    spinner.classList.remove('hidden');
+    submitBtn.disabled = true;
+    hide(submitErr);
+
+    try {
+      const res = await fetch(WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      if (!res.ok) console.error('Webhook failed:', res.status);
+      // Always proceed to results regardless of GHL response
+      renderResults(status, email);
+      showState(stateResults);
+    } catch (err) {
+      console.error('Webhook error:', err);
+      show(submitErr);
+      submitLabel.textContent = 'Send My Results';
+      spinner.classList.add('hidden');
+      submitBtn.disabled = false;
+    }
+  }
+
+  // ─── EVENT LISTENERS ─────────────────────────────────────────────────────
+
+  startBtn.addEventListener('click', () => {
+    currentQ = 0;
+    showState(stateQuiz);
+    renderQuestion(0);
+  });
+
+  backBtn.addEventListener('click', () => {
+    if (currentQ > 0) {
+      currentQ--;
+      renderQuestion(currentQ);
+    }
+  });
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    submitQuiz();
+  });
+</script>

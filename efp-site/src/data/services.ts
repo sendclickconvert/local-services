@@ -8,17 +8,19 @@
 export interface Service {
   name: string;
   slug: string;
-  excerpt: string;      // Used in ServiceCard and service grids
-  icon: string;         // Emoji icon for cards
-  isPrimary: boolean;   // Primary services appear in nav + hero grids
+  excerpt: string;
+  icon: string;
+  iconImage?: string;
+  isPrimary: boolean;
 }
 
 export const services: Service[] = [
   {
     name: "480-a Forest Tax Law",
     slug: "480a-forest-tax-law",
-    excerpt: "Reduce property taxes on qualifying wooded land through New York's 480-a program — Henry is one of a small number of certified foresters in the region qualified to write the required management plans.",
+    excerpt: "Reduce your property taxes with NY's 480-a program. Henry is one of a small number of certified foresters in the region qualified to write the required management plans.",
     icon: "🌲",
+    iconImage: "/images/icons/480a-tax-law.png",
     isPrimary: true,
   },
   {
@@ -26,6 +28,7 @@ export const services: Service[] = [
     slug: "land-clearing",
     excerpt: "Residential and commercial site preparation across Sullivan, Orange, and Ulster counties — clearing expertise grounded in forestry, not just excavation.",
     icon: "🚜",
+    iconImage: "/images/icons/land-clearing.png",
     isPrimary: true,
   },
   {
@@ -33,6 +36,7 @@ export const services: Service[] = [
     slug: "timber-harvesting",
     excerpt: "Selective, sustainable logging services. A consulting forester plans and oversees every harvest to protect your woodland and maximize what the timber is worth.",
     icon: "🪵",
+    iconImage: "/images/icons/timber-harvesting.png",
     isPrimary: true,
   },
   {
@@ -40,13 +44,15 @@ export const services: Service[] = [
     slug: "sell-standing-timber",
     excerpt: "Timber appraisal, competitive bidding, and sale management. Find out what your timber is actually worth before you accept any offer.",
     icon: "💰",
-    isPrimary: true,
+    iconImage: "/images/icons/sell-standing-timber.png",
+    isPrimary: false,
   },
   {
     name: "Woodlot Management",
     slug: "woodlot-management",
     excerpt: "Forest management plans for private landowners — required for 480-a enrollment and the foundation of any long-term woodland stewardship program.",
     icon: "🗺️",
+    iconImage: "/images/icons/woodlot-management.png",
     isPrimary: true,
   },
   {
@@ -54,6 +60,15 @@ export const services: Service[] = [
     slug: "wildlife-habitat-management",
     excerpt: "Targeted forestry practices that improve habitat for deer, turkey, grouse, and native wildlife — fully compatible with 480-a and timber objectives.",
     icon: "🦌",
+    iconImage: "/images/icons/wildlife-habitat.png",
+    isPrimary: false,
+  },
+  {
+    name: "Tree Removal",
+    slug: "tree-removal",
+    excerpt: "Safe, professional tree removal for residential and rural properties in Sullivan, Orange, and Ulster counties — with timber value assessment before the saw starts.",
+    icon: "🪚",
+    iconImage: "/images/icons/tree-removal.png",
     isPrimary: false,
   },
   {
@@ -61,6 +76,7 @@ export const services: Service[] = [
     slug: "stump-grinding",
     excerpt: "Complete stump removal after tree work, land clearing, or timber harvesting — leaving the site clean and ready for its next use.",
     icon: "⚙️",
+    iconImage: "/images/icons/stump-grinding.png",
     isPrimary: false,
   },
   {
@@ -68,14 +84,13 @@ export const services: Service[] = [
     slug: "tree-planting",
     excerpt: "Reforestation and species improvement planting — restoring woodland character and supporting long-term forest health.",
     icon: "🌱",
+    iconImage: "/images/icons/tree-planting.png",
     isPrimary: false,
   },
 ];
 
-/** Primary services only — for nav and hero service grids */
 export const primaryServices = services.filter(s => s.isPrimary);
 
-/** Get a service by slug */
 export function getService(slug: string): Service | undefined {
   return services.find(s => s.slug === slug);
 }

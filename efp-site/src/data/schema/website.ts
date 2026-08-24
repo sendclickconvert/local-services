@@ -16,7 +16,7 @@ export const websiteSchema = {
   "@id": `${business.domain}/#website`,
   "url": business.domain,
   "name": business.name,
-  "description": "[TBD — match homepage meta description exactly]",
+  "description": "Environmental Forest Products provides timber harvesting, land clearing, woodlot management, and 480-a tax consulting across Sullivan, Orange, and Ulster counties in NY. Professional forestry services since 1991. Call (845) 754-8242.",
   "publisher": {
     "@id": `${business.domain}/#organization`,
   },

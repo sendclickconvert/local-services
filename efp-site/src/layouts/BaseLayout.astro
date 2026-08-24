@@ -3,14 +3,15 @@
 // Master layout: <head> + Header + main slot + Footer.
 // All other layouts extend this one.
 //
-// NOTE: WebSite schema is injected directly on index.astro (homepage only).
-// BaseLayout does not handle this — keeping sitewide and page-specific schema
-// concerns separate is intentional.
+// SCHEMA DOCTRINE:
+//   LocalBusiness schema → homepage ONLY (injected directly in index.astro)
+//   All other pages → Service/Article/FAQ schemas reference org by @id only
+//   BaseLayout does NOT inject org schema — that is intentional per blueprint.
 
 import BaseHead from '../components/layout/BaseHead.astro';
 import Header from '../components/layout/Header.astro';
 import Footer from '../components/layout/Footer.astro';
-import { organizationSchema } from '../data/schema/organization';
+import ChatWidget from '../components/ChatWidget.astro';
 
 interface Props {
   title: string;
@@ -18,6 +19,8 @@ interface Props {
   canonicalUrl: string;   // Always from buildCanonical() in src/lib/seo.ts
   ogImage?: string;       // Always from buildOgImage() — absolute URL
   robotsContent?: string; // From noindex() — undefined means no robots tag rendered
+  ogType?: string;        // "website" (default) or "article" for guide pages
+  suppressChatWidget?: boolean; // Set true on pages with phone-collecting forms (A2P: one opt-in source per page)
 }
 
 const {
@@ -26,6 +29,8 @@ const {
   canonicalUrl,
   ogImage,
   robotsContent,
+  ogType,
+  suppressChatWidget = false,
 } = Astro.props;
 ---
 
@@ -38,15 +43,15 @@ const {
     canonicalUrl={canonicalUrl}
     ogImage={ogImage}
     robotsContent={robotsContent}
+    ogType={ogType}
   />
-  <!-- ⚠️ MANUAL-ONLY: Organization schema — do not agent-edit -->
-  <script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
 </head>
 <body>
   <Header currentPath={Astro.url.pathname} />
-  <main>
+  <main class="bg-gray-50">
     <slot />
   </main>
   <Footer />
+  {!suppressChatWidget && <ChatWidget />}
 </body>
 </html>

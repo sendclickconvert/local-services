@@ -17,6 +17,9 @@ const guides = defineCollection({
   schema: z.object({
     // ─── Required fields ─────────────────────────────────
     title: z.string(),
+    // titleFull: when set, used as-is for the <title> tag (no suffix appended).
+    // Use for pages where title + " | Environmental Forest Products" exceeds ~60 chars.
+    titleFull: z.string().optional(),
     description: z.string(),
     datePublished: z.string(),   // ISO 8601: "2025-01-15"
     dateModified: z.string(),    // ISO 8601: "2025-01-15" — update on every edit
@@ -26,6 +29,8 @@ const guides = defineCollection({
     // hubSlug: spoke articles set this to the pillar's filename slug
     isPillar: z.boolean().default(false),
     hubSlug: z.string().optional(),   // e.g. "480a-forest-tax-law-new-york"
+    // spokeLinks: pillar pages list any static-page spokes not in the collection
+    spokeLinks: z.array(z.object({ label: z.string(), href: z.string() })).optional(),
 
     // ─── Internal linking ─────────────────────────────────
     // Slugs of related service pages and county location pages.
@@ -59,4 +64,37 @@ const guides = defineCollection({
   }),
 });
 
-export const collections = { guides };
+// ─── ARTICLES — Service cluster articles ──────────────────
+// Rendered at /services/[service]/[slug]
+// Each article belongs to exactly one parent service pillar.
+// Word count: pillar-support articles 1,500-2,500w | supporting 800-1,100w
+const articles = defineCollection({
+  type: 'content',
+  schema: z.object({
+    // ─── Required ──────────────────────────────────────────
+    title: z.string(),
+    // titleFull: when set, used as-is for the <title> tag (no suffix appended).
+    // Use for pages where title + " | Environmental Forest Products" exceeds ~60 chars.
+    titleFull: z.string().optional(),
+    description: z.string(),
+    datePublished: z.string(),   // ISO 8601
+    dateModified: z.string(),    // ISO 8601 — update on every edit
+    service: z.string(),         // Parent service slug: "tree-removal", "land-clearing", etc.
+
+    // ─── Content components ───────────────────────────────
+    faqs: z.array(
+      z.object({
+        question: z.string(),
+        answer: z.string(),
+      })
+    ).default([]),
+    keyTakeaway: z.string().optional(),
+
+    // ─── Schema / linking ─────────────────────────────────
+    ogImageSlug: z.string().optional(),
+    relatedArticles: z.array(z.string()).default([]),  // sibling article slugs
+    noindex: z.boolean().default(false),
+  }),
+});
+
+export const collections = { guides, articles };

@@ -1,0 +1,406 @@
+---
+// pages/services/480a-forest-tax-law/480a-savings-calculator.astro
+// Interactive 480-a property tax savings calculator.
+// URL: /services/480a-forest-tax-law/480a-savings-calculator
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../components/ui/Breadcrumb.astro';
+import CTASection from '../../../components/ui/CTASection.astro';
+import FAQSection from '../../../components/ui/FAQSection.astro';
+import FAQSchema from '../../../components/schema/FAQSchema.astro';
+import { buildTitle, buildCanonical, buildDescription } from '../../../lib/seo';
+import { business, author, phone } from '../../../data/client.config';
+
+const title    = buildTitle("480-a Tax Savings Calculator — NY Forest Tax Law Estimate");
+const desc     = "Calculate how much you could save annually and over 15 years by enrolling your woodland in New York's 480-a Forest Tax Law program. Free screening tool for Sullivan, Orange, and Ulster County landowners.";
+const description = buildDescription(desc);
+const canonicalUrl = buildCanonical('/services/480a-forest-tax-law/480a-savings-calculator');
+
+const crumbs = [
+  { label: "Home",              href: "/"                             },
+  { label: "Services",          href: "/services"                     },
+  { label: "480-a Forest Tax",  href: "/services/480a-forest-tax-law" },
+  { label: "Tax Savings Calculator", href: canonicalUrl               },
+];
+
+const faqs = [
+  {
+    question: "How does the 480-a exemption reduce my tax bill?",
+    answer: "Under New York's 480-a Forest Tax Law, the assessed value of your enrolled forest land is reduced by 80% for property tax and school tax purposes. If your forested acres are assessed at $100,000, the taxable value drops to $20,000 — and you pay tax only on that $20,000. That 80% reduction in the taxable base is what this calculator models."
+  },
+  {
+    question: "Is this estimate legally binding or a guaranteed savings figure?",
+    answer: "No. This tool is a planning aid only — not legal or tax advice. Your actual savings depend on your municipality's specific equalization rate, your assessor's value for the enrolled land, and any changes to local tax rates over the enrollment period. Always consult a tax professional and a consulting forester before making enrollment decisions."
+  },
+  {
+    question: "What is the minimum acreage to qualify for 480-a?",
+    answer: "The enrolled parcel must contain at least 50 acres of forest land managed under an approved management plan. The 50 acres do not need to be entirely contiguous on one parcel — you may be able to combine parcels in some cases. A consulting forester can assess your specific situation."
+  },
+  {
+    question: "What does the forest management plan cost?",
+    answer: "A professionally prepared forest management plan written by a Certified Forester typically costs $800 to $2,000 depending on acreage, site complexity, and the forester's fee structure. This is a one-time cost at the start of enrollment and must be approved by the NY DEC. Henry Kowalec, CF, prepares 480-a plans for properties in Sullivan, Orange, and Ulster counties."
+  },
+  {
+    question: "What is the yield tax and when does it apply?",
+    answer: "When enrolled timber is harvested, a yield tax of 6% of stumpage value is assessed in lieu of the income you avoided while in the program. This replaces, rather than adds to, the exempted taxes. Most landowners find the yield tax is far smaller than the cumulative tax savings accrued over the enrollment period, especially on large, mature stands with slower harvest cycles."
+  },
+  {
+    question: "What happens if I sell the property or pull out of 480-a?",
+    answer: "Withdrawing from the 480-a program early triggers a rollback tax — you owe back the taxes that were exempted for up to 6 years, plus interest. The new owner can continue enrollment if they choose to do so and maintain the management plan obligations. This rollback provision is why 480-a is most beneficial for landowners with a long-term ownership horizon."
+  },
+];
+
+const pageSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "name": "480-a Forest Tax Law Savings Calculator",
+      "description": desc,
+      "url": canonicalUrl,
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Web",
+      "isAccessibleForFree": true,
+      "provider": { "@id": `${business.domain}/#organization` },
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": crumbs.map((c, i) => ({
+        "@type": "ListItem",
+        "position": i + 1,
+        "name": c.label,
+        ...(c.href ? { "item": `${business.domain}${c.href}` } : {}),
+      })),
+    },
+  ],
+};
+---
+
+<BaseLayout title={title} description={description} canonicalUrl={canonicalUrl}>
+  <script type="application/ld+json" set:html={JSON.stringify(pageSchema)} />
+  <FAQSchema items={faqs} />
+
+  <Breadcrumb crumbs={crumbs} />
+
+  <article class="max-w-4xl mx-auto my-8 sm:my-10 px-8 sm:px-12 py-10 bg-white rounded-2xl shadow-md ring-1 ring-gray-200">
+
+    <header class="mb-8">
+      <h1 class="text-3xl sm:text-4xl font-bold text-[#1a3c1a] mb-4 leading-tight">
+        480-a Tax Savings Calculator
+      </h1>
+      <div class="flex items-center gap-4 text-sm text-gray-500 border-b border-gray-200 pb-5">
+        <span>By {author.name}, {author.title}</span>
+        <span>·</span>
+        <time datetime="2026-04-15">Updated April 2026</time>
+      </div>
+    </header>
+
+    <div class="prose prose-green prose-lg max-w-none mb-10">
+      <p>
+        New York's 480-a Forest Tax Law reduces the taxable assessed value of qualifying forest land
+        by <strong>80%</strong> — for both property tax and school tax — in exchange for maintaining
+        an approved forest management plan and allowing only planned, sustainable timber harvesting.
+      </p>
+      <p>
+        This calculator estimates your potential annual savings and the long-term projection over a
+        15-year enrollment window. Enter what you currently pay in property and school taxes on your
+        forested acres to see the numbers.
+      </p>
+      <p class="text-sm text-gray-600 not-prose bg-amber-50 border border-amber-200 rounded-lg p-4">
+        <strong>How to estimate your forested land tax:</strong> If your tax bill covers the whole
+        parcel (house, field, and woods), multiply your total tax by the fraction that is wooded.
+        For example: $4,000 total tax on a 100-acre parcel with 70 wooded acres = $4,000 × 0.70 =
+        $2,800 to enter below.
+      </p>
+    </div>
+
+    <!-- ─── Calculator ─────────────────────────────────────────────── -->
+    <section
+      id="tax-calc"
+      class="bg-white border border-gray-200 rounded-2xl shadow-sm p-6 sm:p-8 my-10"
+      aria-label="480-a Tax Savings Calculator"
+    >
+      <div class="mb-7">
+        <p class="text-xs font-bold uppercase tracking-widest text-[#2d5a2d] mb-1">Free Planning Tool</p>
+        <h2 class="text-xl sm:text-2xl font-bold text-[#1a3c1a] leading-tight">480-a Savings Estimate</h2>
+        <p class="text-gray-600 text-sm mt-2">Enter your current tax figures to see projected savings.</p>
+      </div>
+
+      <form id="tax-form" novalidate>
+        <div class="space-y-7">
+
+          <!-- Q1: Acres -->
+          <div>
+            <label for="tax-acres" class="block text-sm font-semibold text-gray-800 mb-2">
+              1. How many forested acres would you enroll? <span class="text-gray-400 font-normal">(minimum 50)</span>
+            </label>
+            <input
+              type="number"
+              id="tax-acres"
+              name="acres"
+              min="50"
+              max="10000"
+              placeholder="e.g. 85"
+              class="w-full sm:w-48 border border-gray-300 rounded-lg px-4 py-2.5 text-sm text-gray-800 bg-white focus:outline-none focus:ring-2 focus:ring-[#2d5a2d] focus:border-transparent"
+            />
+          </div>
+
+          <!-- Q2: Property tax -->
+          <div>
+            <label for="tax-property" class="block text-sm font-semibold text-gray-800 mb-2">
+              2. Estimated annual property tax on those forested acres ($)
+            </label>
+            <div class="relative w-full sm:w-56">
+              <span class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm font-medium">$</span>
+              <input
+                type="number"
+                id="tax-property"
+                name="propertyTax"
+                min="0"
+                max="1000000"
+                placeholder="e.g. 1800"
+                class="w-full border border-gray-300 rounded-lg pl-8 pr-4 py-2.5 text-sm text-gray-800 bg-white focus:outline-none focus:ring-2 focus:ring-[#2d5a2d] focus:border-transparent"
+              />
+            </div>
+          </div>
+
+          <!-- Q3: School tax -->
+          <div>
+            <label for="tax-school" class="block text-sm font-semibold text-gray-800 mb-2">
+              3. Estimated annual school tax on those forested acres ($)
+            </label>
+            <div class="relative w-full sm:w-56">
+              <span class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm font-medium">$</span>
+              <input
+                type="number"
+                id="tax-school"
+                name="schoolTax"
+                min="0"
+                max="1000000"
+                placeholder="e.g. 2400"
+                class="w-full border border-gray-300 rounded-lg pl-8 pr-4 py-2.5 text-sm text-gray-800 bg-white focus:outline-none focus:ring-2 focus:ring-[#2d5a2d] focus:border-transparent"
+              />
+            </div>
+          </div>
+
+          <!-- Q4: Have plan? -->
+          <fieldset>
+            <legend class="block text-sm font-semibold text-gray-800 mb-3">
+              4. Do you already have an approved 480-a management plan?
+            </legend>
+            <div class="flex flex-wrap gap-2">
+              {[
+                { value: "yes",      label: "Yes — plan in place" },
+                { value: "no",       label: "No — need a plan" },
+                { value: "not-sure", label: "Not sure" },
+              ].map(opt => (
+                <label class="tsc-chip">
+                  <input type="radio" name="hasPlan" value={opt.value} class="sr-only" />
+                  <span>{opt.label}</span>
+                </label>
+              ))}
+            </div>
+          </fieldset>
+
+        </div>
+
+        <div class="mt-8">
+          <p id="tax-error" class="text-red-600 text-sm mb-3 hidden" aria-live="polite">
+            Please fill in all fields before calculating.
+          </p>
+          <button
+            type="submit"
+            class="inline-flex items-center gap-2 bg-[#2d5a2d] hover:bg-[#1a3c1a] text-white font-semibold text-sm px-7 py-3 rounded-lg transition-colors shadow-sm"
+          >
+            Calculate My Savings
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+            </svg>
+          </button>
+        </div>
+      </form>
+
+      <div id="tax-result" class="hidden mt-8 pt-8 border-t border-gray-200" aria-live="polite" role="status"></div>
+    </section>
+
+    <!-- ─── FAQ ───────────────────────────────────────────────────── -->
+    <div class="mt-12">
+      <h2 class="text-2xl font-bold text-[#1a3c1a] mb-6">Frequently Asked Questions</h2>
+      <FAQSection items={faqs} />
+    </div>
+
+    <!-- ─── CTA bar ────────────────────────────────────────────────── -->
+    <div class="bg-[#1a3c1a] text-white rounded-xl p-6 my-10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <div>
+        <p class="font-bold text-lg mb-1">Start Your 480-a Enrollment</p>
+        <p class="text-green-200 text-sm">Henry prepares 480-a management plans for Sullivan, Orange, and Ulster counties. No obligation to find out if you qualify.</p>
+      </div>
+      <div class="flex flex-col sm:flex-row gap-3 flex-shrink-0">
+        <a href={`tel:${phone.trackingTel}`} class="inline-flex items-center justify-center gap-2 bg-white text-[#1a3c1a] font-bold px-4 py-2.5 rounded hover:bg-green-100 transition-colors text-sm">
+          {business.phone}
+        </a>
+        <a href="/estimate" class="inline-flex items-center justify-center gap-2 border border-white text-white font-semibold px-4 py-2.5 rounded hover:bg-white/10 transition-colors text-sm">
+          Request a Review
+        </a>
+      </div>
+    </div>
+
+    <!-- ─── Back link ──────────────────────────────────────────────── -->
+    <div class="border border-gray-200 rounded-lg p-5 mt-6">
+      <p class="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-2">Parent Service</p>
+      <a href="/services/480a-forest-tax-law" class="text-[#2d5a2d] font-semibold hover:text-[#1a3c1a] flex items-center gap-2">
+        <svg aria-hidden="true" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+        </svg>
+        Back to 480-a Forest Tax Law
+      </a>
+    </div>
+
+  </article>
+
+  <CTASection variant="b2c" />
+</BaseLayout>
+
+<!-- ─── Chip styles ─────────────────────────────────────────────── -->
+<style>
+  .tsc-chip span {
+    display: inline-block;
+    padding: 0.4rem 1rem;
+    border-radius: 9999px;
+    border: 1.5px solid #d1d5db;
+    font-size: 0.875rem;
+    color: #374151;
+    cursor: pointer;
+    transition: background-color 0.12s, border-color 0.12s, color 0.12s;
+    user-select: none;
+    white-space: nowrap;
+  }
+  .tsc-chip input:checked + span {
+    background-color: #2d5a2d;
+    border-color: #2d5a2d;
+    color: #ffffff;
+    font-weight: 600;
+  }
+  .tsc-chip:hover span {
+    border-color: #2d5a2d;
+    color: #1a3c1a;
+  }
+  .tsc-chip input:focus-visible + span {
+    outline: 2px solid #2d5a2d;
+    outline-offset: 2px;
+  }
+</style>
+
+<!-- ─── Calculator logic ────────────────────────────────────────── -->
+<script>
+(function () {
+
+  const EXEMPTION_RATE   = 0.80;   // 480-a exempts 80% of assessed value
+  const PLAN_COST_LOW    = 800;
+  const PLAN_COST_HIGH   = 2000;
+  const PLAN_COST_MID    = 1400;
+
+  const form   = document.getElementById('tax-form');
+  const result = document.getElementById('tax-result');
+  const errMsg = document.getElementById('tax-error');
+
+  function fmt(n) {
+    return '$' + Math.round(n).toLocaleString('en-US');
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const acres      = parseFloat(form.querySelector('[name="acres"]').value);
+    const propTax    = parseFloat(form.querySelector('[name="propertyTax"]').value) || 0;
+    const schoolTax  = parseFloat(form.querySelector('[name="schoolTax"]').value)   || 0;
+    const hasPlan    = (form.querySelector('[name="hasPlan"]:checked') || {}).value;
+
+    if (!acres || acres < 50 || (!propTax && !schoolTax) || !hasPlan) {
+      errMsg.classList.remove('hidden');
+      errMsg.textContent = acres < 50
+        ? 'Enrolled acreage must be at least 50 acres to qualify for 480-a.'
+        : 'Please fill in all fields before calculating.';
+      errMsg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      return;
+    }
+    errMsg.classList.add('hidden');
+
+    const totalTax      = propTax + schoolTax;
+    const annualSavings = totalTax * EXEMPTION_RATE;
+    const savings10yr   = annualSavings * 10;
+    const savings15yr   = annualSavings * 15;
+    const needsPlan     = hasPlan === 'no' || hasPlan === 'not-sure';
+    const netSavings15  = needsPlan ? savings15yr - PLAN_COST_MID : savings15yr;
+
+    result.innerHTML = `
+      <div class="rounded-xl border border-green-200 bg-green-50 p-6 sm:p-8">
+        <span class="inline-block text-xs font-semibold px-3 py-1 rounded-full bg-green-100 text-green-800 border border-green-200 mb-4">Projected Savings</span>
+        <h3 class="text-xl font-bold text-[#1a3c1a] mb-1">Your 480-a Savings Estimate</h3>
+        <p class="text-gray-500 text-sm mb-6">Based on ${acres.toLocaleString()} enrolled acres · ${fmt(totalTax)}/yr in current taxes on forested land</p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+          <div class="text-center bg-white rounded-xl p-5 border border-green-100">
+            <p class="text-xs text-gray-400 font-medium mb-1 uppercase tracking-wide">Annual Savings</p>
+            <p class="text-2xl font-bold text-[#1a3c1a]">${fmt(annualSavings)}</p>
+            <p class="text-xs text-gray-400 mt-1">per year</p>
+          </div>
+          <div class="text-center bg-white rounded-xl p-5 border border-green-100">
+            <p class="text-xs text-gray-400 font-medium mb-1 uppercase tracking-wide">10-Year Savings</p>
+            <p class="text-2xl font-bold text-[#1a3c1a]">${fmt(savings10yr)}</p>
+            <p class="text-xs text-gray-400 mt-1">gross</p>
+          </div>
+          <div class="text-center bg-[#1a3c1a] text-white rounded-xl p-5">
+            <p class="text-xs text-green-300 font-medium mb-1 uppercase tracking-wide">15-Year Net</p>
+            <p class="text-2xl font-bold">${fmt(netSavings15 > 0 ? netSavings15 : savings15yr)}</p>
+            <p class="text-xs text-green-300 mt-1">${needsPlan ? 'after plan cost' : 'gross savings'}</p>
+          </div>
+        </div>
+
+        ${needsPlan ? `
+        <div class="bg-white rounded-lg border border-amber-200 p-4 mb-5 text-sm">
+          <p class="font-semibold text-gray-800 mb-1">Management Plan Cost</p>
+          <p class="text-gray-600">A 480-a management plan typically costs <strong>${fmt(PLAN_COST_LOW)}–${fmt(PLAN_COST_HIGH)}</strong> (one-time). At a midpoint of ${fmt(PLAN_COST_MID)}, your 15-year net savings after plan cost is estimated at <strong>${fmt(Math.max(0, netSavings15))}</strong>.</p>
+        </div>
+        ` : ''}
+
+        <div class="bg-white rounded-lg border border-gray-200 p-4 mb-6 text-sm">
+          <p class="font-semibold text-gray-800 mb-1">Yield Tax at Harvest (informational)</p>
+          <p class="text-gray-600">When enrolled timber is harvested, a 6% yield tax on stumpage value applies in lieu of the exempted taxes. This replaces, rather than adds to, your tax savings.</p>
+        </div>
+
+        <p class="text-xs text-gray-400 leading-relaxed mb-6">
+          <strong>Disclaimer:</strong> This is a planning estimate only — not legal or tax advice. Actual savings
+          depend on your municipality's equalization rate, assessed value of the enrolled land, and local tax
+          rates at the time of enrollment and over the program period. Consult a tax professional and certified
+          forester before making enrollment decisions.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-3">
+          <a href="/estimate" class="inline-flex items-center justify-center gap-2 bg-[#2d5a2d] hover:bg-[#1a3c1a] text-white font-semibold text-sm px-6 py-3 rounded-lg transition-colors shadow-sm">
+            Request a 480-a Review
+          </a>
+          <a href="tel:+18454980208" class="inline-flex items-center justify-center gap-2 text-[#2d5a2d] hover:text-[#1a3c1a] border border-[#2d5a2d] font-semibold text-sm px-6 py-3 rounded-lg transition-colors">
+            Call (845) 754-8242
+          </a>
+        </div>
+      </div>
+      <button id="tax-reset" class="mt-4 text-xs text-[#2d5a2d] hover:underline focus:outline-none" type="button">
+        ← Start over
+      </button>
+    `;
+
+    result.classList.remove('hidden');
+    result.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+    document.getElementById('tax-reset').addEventListener('click', function () {
+      form.reset();
+      form.querySelectorAll('input[type="radio"]').forEach(function(r) { r.checked = false; });
+      result.classList.add('hidden');
+      result.innerHTML = '';
+      errMsg.classList.add('hidden');
+      document.getElementById('tax-acres').focus();
+    });
+  });
+
+})();
+</script>

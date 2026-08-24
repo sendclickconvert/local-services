@@ -1,0 +1,132 @@
+---
+// pages/locations/sullivan-county-ny/fallsburg/south-fallsburg.astro
+// CUSTOM neighborhood page — 3rd tier of location hierarchy.
+// South Fallsburg is the commercial/residential hub of Fallsburg Township.
+
+import LocationLayout from '../../../../layouts/LocationLayout.astro';
+import PageHero from '../../../../components/ui/PageHero.astro';
+import Breadcrumb from '../../../../components/ui/Breadcrumb.astro';
+import FAQSection from '../../../../components/ui/FAQSection.astro';
+import KeyTakeaway from '../../../../components/ui/KeyTakeaway.astro';
+import AuthorByline from '../../../../components/ui/AuthorByline.astro';
+import EstimateForm from '../../../../components/forms/EstimateForm.astro';
+import ServiceSchema from '../../../../components/schema/ServiceSchema.astro';
+import FAQSchema from '../../../../components/schema/FAQSchema.astro';
+import { buildTitle, buildCanonical, buildDescription } from '../../../../lib/seo';
+
+const title = buildTitle('Consulting Forester — South Fallsburg, NY');
+const description = buildDescription(
+  'Forestry consulting in South Fallsburg, NY — timber appraisals before clearing, land clearing oversight. Henry Kowalec. (845) 754-8242.'
+);
+const canonicalUrl = buildCanonical('/locations/sullivan-county-ny/fallsburg/south-fallsburg');
+
+const crumbs = [
+  { label: 'Home',            href: '/' },
+  { label: 'Locations',       href: '/locations' },
+  { label: 'Sullivan County', href: '/locations/sullivan-county-ny' },
+  { label: 'Fallsburg',       href: '/locations/sullivan-county-ny/fallsburg' },
+  { label: 'South Fallsburg', href: '/locations/sullivan-county-ny/fallsburg/south-fallsburg' },
+];
+
+const faqs = [
+  {
+    question: 'Does EFP provide forestry consulting in South Fallsburg, NY?',
+    answer: 'Yes. Environmental Forest Products serves landowners in South Fallsburg and throughout Fallsburg Township. South Fallsburg sits in Sullivan County\'s most active development corridor, and timber assessment before land clearing is the most common forestry service need in this area. Henry Kowalec provides on-site appraisals — call (845) 754-8242 to discuss your property.',
+  },
+  {
+    question: 'Do I need a timber appraisal before clearing trees on my South Fallsburg property?',
+    answer: 'If you have mature trees on the property, yes — a timber assessment before clearing is worth doing. South Fallsburg\'s commercial and residential development activity means that many clearing projects involve trees that have real market value. Red oak, red maple, and black birch on residential lots in this area can carry stumpage value that reduces the net clearing cost. EFP assesses what is present and whether a timber sale before clearing makes financial sense.',
+  },
+  {
+    question: 'Does EFP handle land clearing in South Fallsburg?',
+    answer: 'Yes. Land clearing for residential and commercial site preparation is available throughout Fallsburg Township, including South Fallsburg. EFP\'s approach is to conduct a timber assessment first — identifying merchantable trees and recovering their value through a sale before the clearing equipment arrives. Learn more at <a href="/services/land-clearing">land clearing services</a>.',
+  },
+  {
+    question: 'What species are typically present on South Fallsburg-area properties?',
+    answer: 'Red maple, red oak, black birch, and white pine are common in the woodland surrounding South Fallsburg. On properties on the higher terrain above the commercial corridor, stand quality and timber value can be stronger. An on-site assessment is the only reliable way to determine what is present and what it is worth on a specific parcel.',
+  },
+  {
+    question: 'How do I get started with EFP for a South Fallsburg property?',
+    answer: 'Call (845) 754-8242. Henry Kowalec will discuss your property and schedule an on-site visit if appropriate. Site assessments are the basis for all recommendations — nothing is scoped by phone.',
+  },
+];
+---
+
+<LocationLayout title={title} description={description} canonicalUrl={canonicalUrl}>
+  <ServiceSchema
+    pageType="location"
+    serviceName="Forestry Consulting — South Fallsburg, NY"
+    description={description}
+    url={canonicalUrl}
+    areaServed={['South Fallsburg, NY', 'Fallsburg Township, NY', 'Sullivan County, NY']}
+    crumbs={crumbs}
+  />
+  <FAQSchema items={faqs} />
+  <Breadcrumb crumbs={crumbs} />
+
+  <PageHero
+    title="Forestry Consulting in South Fallsburg, NY"
+    subtitle="Timber appraisals before clearing and land clearing oversight for South Fallsburg area landowners"
+  />
+
+  <article class="max-w-4xl mx-auto my-8 sm:my-10 px-8 sm:px-12 py-10 bg-white rounded-2xl shadow-md ring-1 ring-gray-200">
+
+    <KeyTakeaway
+      text="Environmental Forest Products provides on-site timber appraisals, land clearing assessment, and woodland management consulting for South Fallsburg, NY area landowners. Henry Kowalec — certified consulting forester with 30+ years in Sullivan County — assesses timber value before any clearing begins."
+    />
+
+    <AuthorByline />
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">South Fallsburg — Timber Assessment in a Development Zone</h2>
+
+    <p class="text-gray-700 leading-relaxed mb-4">
+      South Fallsburg is Sullivan County's most commercially active hamlet, and the woodland surrounding the Route 42 and Route 52 corridors is under regular development pressure. Many landowners preparing to build or expand come to the clearing decision without having assessed the timber value on the trees being removed. On properties with mature red oak, red maple, or black birch, that value can be real — and recovering it through a coordinated sale before clearing begins reduces the net project cost.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      EFP's role in the South Fallsburg area is most often a pre-clearing timber assessment: an on-site visit to identify species, estimate volume and stumpage value, and determine whether a timber sale before clearing is practical. This step takes less time than most landowners expect, and on sites where merchantable timber is present, it produces returns that offset clearing costs. Learn more about <a href="/services/sell-standing-timber" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">timber appraisals</a> and <a href="/services/land-clearing" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">land clearing with timber recovery</a>.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      For landowners in the broader Fallsburg Township area with significant woodland acreage, <a href="/services/480a-forest-tax-law" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">480-a Forest Tax Law enrollment</a>, <a href="/services/timber-harvesting" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">timber harvesting</a>, and <a href="/services/woodlot-management" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">woodlot management planning</a> are also available. Henry Kowalec handles the full range of forestry consulting services for this area.
+    </p>
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">What a Pre-Clearing Assessment Looks Like</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      A pre-clearing timber assessment by EFP is not a lengthy process. Henry Kowalec walks the parcel with the landowner, identifies tree species and approximate size class, estimates standing volume, and cross-references current stumpage prices for the region. The output is a straightforward recommendation: whether a timber sale before clearing is worth doing, what that sale would realistically return, and how it should be structured to protect the landowner's interests.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      On South Fallsburg-area properties where the assessment indicates a sale makes sense, EFP manages the process from bid solicitation through contract execution — ensuring the landowner receives competitive offers rather than accepting a single buyer's terms. On properties where merchantable volume is limited or site access makes a sale impractical, the assessment clearly says so, and the landowner can proceed to clearing with an informed baseline.
+    </p>
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Species and Value on Fallsburg Township Sites</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      The woodland surrounding South Fallsburg's commercial corridors reflects the broader Fallsburg Township forest character: red maple dominant on wetter sites and lower slopes, red oak and black birch on the better-drained uplands, with white pine appearing on old field reverting parcels. Stands with significant red oak, especially in larger diameter classes, consistently attract the most competitive stumpage prices in this region. Black cherry, when present in sufficient volume and quality, also draws strong interest from regional buyers.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Many South Fallsburg-area landowners are surprised to learn that their woodland carries meaningful value. Trees that look ordinary from the road frequently have real market worth when assessed by someone who understands the regional timber market. An independent appraisal before any clearing decision is the only way to know.
+    </p>
+
+    <div class="bg-[#1a3c1a] text-white rounded-lg p-6 my-10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <div>
+        <p class="font-bold text-lg mb-1">Schedule a Site Visit in South Fallsburg</p>
+        <p class="text-green-200 text-sm">On-site timber assessment before your clearing project begins.</p>
+      </div>
+      <a href="tel:+18454980208" class="inline-flex items-center gap-2 bg-white text-[#1a3c1a] font-bold px-5 py-3 rounded hover:bg-green-100 transition-colors text-sm whitespace-nowrap flex-shrink-0">
+        <svg class="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/></svg>
+        (845) 754-8242
+      </a>
+    </div>
+
+    <FAQSection items={faqs} />
+
+    <div class="border border-gray-200 rounded-lg p-5 my-10">
+      <h3 class="font-semibold text-[#1a3c1a] mb-3 text-sm uppercase tracking-wide">Also in Fallsburg Township</h3>
+      <div class="flex flex-wrap gap-3">
+        <a href="/locations/sullivan-county-ny/fallsburg/loch-sheldrake" class="text-sm text-[#2d5a2d] hover:underline">Loch Sheldrake</a>
+        <a href="/locations/sullivan-county-ny/fallsburg" class="text-sm text-[#2d5a2d] hover:underline font-semibold">Fallsburg Township →</a>
+        <a href="/locations/sullivan-county-ny" class="text-sm text-[#2d5a2d] hover:underline">All Sullivan County Towns</a>
+      </div>
+    </div>
+
+    <EstimateForm variant="b2c" />
+  </article>
+</LocationLayout>

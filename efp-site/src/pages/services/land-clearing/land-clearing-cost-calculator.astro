@@ -1,0 +1,450 @@
+---
+// pages/services/land-clearing/land-clearing-cost-calculator.astro
+// Interactive land clearing cost estimator.
+// URL: /services/land-clearing/land-clearing-cost-calculator
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../../components/ui/Breadcrumb.astro';
+import CTASection from '../../../components/ui/CTASection.astro';
+import FAQSection from '../../../components/ui/FAQSection.astro';
+import FAQSchema from '../../../components/schema/FAQSchema.astro';
+import { buildTitle, buildCanonical, buildDescription } from '../../../lib/seo';
+import { business, author, phone } from '../../../data/client.config';
+
+const title    = buildTitle("Land Clearing Cost Calculator — NY Pricing Estimate Per Acre");
+const desc     = "Estimate land clearing costs per acre in New York based on vegetation density, terrain, and disposal method. Local pricing ranges for Sullivan, Orange, and Ulster County — includes timber credit offset most companies never mention.";
+const description = buildDescription(desc);
+const canonicalUrl = buildCanonical('/services/land-clearing/land-clearing-cost-calculator');
+
+const crumbs = [
+  { label: "Home",           href: "/"                       },
+  { label: "Services",       href: "/services"               },
+  { label: "Land Clearing",  href: "/services/land-clearing" },
+  { label: "Cost Calculator", href: canonicalUrl             },
+];
+
+const faqs = [
+  {
+    question: "How much does land clearing cost per acre in New York?",
+    answer: "Land clearing costs in New York typically range from $1,500 to $14,000 per acre depending on vegetation density, terrain, tree size, and what you do with the debris. Light brush and scrub on flat ground runs $1,500–$3,000/acre. Dense woodland with large trees on steep, rocky terrain can reach $10,000–$14,000/acre when full stump removal and debris hauling are included. Sullivan, Orange, and Ulster County pricing generally falls in the middle of national ranges due to mixed terrain and relatively accessible job sites."
+  },
+  {
+    question: "What is the biggest factor in land clearing cost?",
+    answer: "Vegetation density and tree size are the primary cost drivers — they determine how much time the equipment spends per acre and what size machines are required. A tracked feller buncher working open hardwood is far faster than the same machine picking through rocky terrain with root-bound stumps. Terrain slope is the second biggest variable: steep ground requires slower, more careful operation and increases equipment risk. Disposal method — chipping on-site vs. hauling debris off — adds 15–30% to the total when haul-off is chosen."
+  },
+  {
+    question: "Can timber value offset land clearing costs?",
+    answer: "Yes — and this is something most clearing contractors never check. When the trees being cleared are merchantable hardwoods (red oak, white oak, black cherry, hard maple with trunk diameters over 10 inches), the standing timber has stumpage value that can be sold to a mill. EFP assesses every clearing project for timber value before any equipment arrives. On wooded lots with quality hardwoods, the timber credit can reduce the net clearing cost by 20–80% or, in some cases, eliminate it entirely."
+  },
+  {
+    question: "Do I need a permit for land clearing in Sullivan County NY?",
+    answer: "It depends on location and scope. Most land clearing on private rural parcels in Sullivan, Orange, and Ulster counties does not require a county-level permit. However, you may need a DEC permit if work occurs within 100 feet of a regulated wetland, within a floodplain, or if the clearing disturbs more than one acre (triggering SPDES stormwater permit requirements). Some towns also have local tree removal or grading ordinances. EFP advises on permit requirements as part of every site assessment."
+  },
+  {
+    question: "What is the difference between mulching and full clearing?",
+    answer: "Mulching uses a forestry mulcher to grind all vegetation — trees, brush, stumps — into wood chips that are spread across the ground surface. It is faster, less disruptive to the soil, and leaves no debris to haul. Full clearing involves felling trees, chipping or removing brush, and then grinding or excavating stumps so the root zone is removed. Full clearing costs more but leaves a cleaner site suitable for construction, seeding, or planting. If you plan to build or do major grading, full clearing is usually required."
+  },
+  {
+    question: "How long does it take to clear an acre of land?",
+    answer: "With a tracked forestry mulcher on light-to-moderate brush, an experienced operator can clear 1–3 acres per day. Heavy woodland with large-diameter trees drops that to 0.5–1.5 acres per day with a feller buncher and supporting equipment. Stump grinding and debris removal add additional time. Terrain, slope, and rock outcrops can cut production rates in half. Most residential-scale clearing jobs (1–5 acres) are completed in 1–3 days with the right equipment."
+  },
+];
+
+const pageSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "name": "Land Clearing Cost Calculator",
+      "description": desc,
+      "url": canonicalUrl,
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Web",
+      "isAccessibleForFree": true,
+      "provider": { "@id": `${business.domain}/#organization` },
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": crumbs.map((c, i) => ({
+        "@type": "ListItem",
+        "position": i + 1,
+        "name": c.label,
+        ...(c.href ? { "item": `${business.domain}${c.href}` } : {}),
+      })),
+    },
+  ],
+};
+---
+
+<BaseLayout title={title} description={description} canonicalUrl={canonicalUrl}>
+  <script type="application/ld+json" set:html={JSON.stringify(pageSchema)} />
+  <FAQSchema items={faqs} />
+
+  <Breadcrumb crumbs={crumbs} />
+
+  <article class="max-w-4xl mx-auto my-8 sm:my-10 px-8 sm:px-12 py-10 bg-white rounded-2xl shadow-md ring-1 ring-gray-200">
+
+    <header class="mb-8">
+      <h1 class="text-3xl sm:text-4xl font-bold text-[#1a3c1a] mb-4 leading-tight">
+        Land Clearing Cost Calculator
+      </h1>
+      <div class="flex items-center gap-4 text-sm text-gray-500 border-b border-gray-200 pb-5">
+        <span>By {author.name}, {author.title}</span>
+        <span>·</span>
+        <time datetime="2026-04-15">Updated April 2026</time>
+      </div>
+    </header>
+
+    <div class="prose prose-green prose-lg max-w-none mb-10">
+      <p>
+        Land clearing quotes in New York swing from $1,500 to over $14,000 per acre — and two
+        contractors standing on the same lot can come in thousands apart. The spread comes down to
+        vegetation density, terrain, what they plan to do with the debris, and whether anyone bothered
+        to check if the trees being cleared have any timber value.
+      </p>
+      <p>
+        This estimator uses real pricing ranges from clearing projects in Sullivan, Orange, and Ulster
+        counties. It also flags when a timber credit assessment makes sense — something EFP always
+        checks before a single machine is unloaded, and something most clearing contractors never
+        mention.
+      </p>
+    </div>
+
+    <!-- ─── Calculator ─────────────────────────────────────────────── -->
+    <section
+      id="lc-calc"
+      class="bg-white border border-gray-200 rounded-2xl shadow-sm p-6 sm:p-8 my-10"
+      aria-label="Land Clearing Cost Calculator"
+    >
+      <div class="mb-7">
+        <p class="text-xs font-bold uppercase tracking-widest text-[#2d5a2d] mb-1">Free Pricing Tool</p>
+        <h2 class="text-xl sm:text-2xl font-bold text-[#1a3c1a] leading-tight">Estimate Your Land Clearing Cost</h2>
+        <p class="text-gray-600 text-sm mt-2">Answer 4 questions to get a local price range estimate.</p>
+      </div>
+
+      <form id="lc-form" novalidate>
+        <div class="space-y-7">
+
+          <!-- Q1: Acres -->
+          <div>
+            <label for="lc-acres" class="block text-sm font-semibold text-gray-800 mb-2">
+              1. How many acres need to be cleared?
+            </label>
+            <input
+              type="number"
+              id="lc-acres"
+              name="acres"
+              min="0.25"
+              max="5000"
+              step="0.25"
+              placeholder="e.g. 5"
+              class="w-full sm:w-40 border border-gray-300 rounded-lg px-4 py-2.5 text-sm text-gray-800 bg-white focus:outline-none focus:ring-2 focus:ring-[#2d5a2d] focus:border-transparent"
+            />
+          </div>
+
+          <!-- Q2: Vegetation type -->
+          <fieldset>
+            <legend class="block text-sm font-semibold text-gray-800 mb-3">
+              2. Vegetation type — what is growing on the land?
+            </legend>
+            <div class="flex flex-wrap gap-2">
+              {[
+                { value: "brush",   label: "Light brush & scrub — mostly under 4\" diameter" },
+                { value: "mixed",   label: "Mixed growth — saplings and brush up to 8\"" },
+                { value: "woodland",label: "Established woodland — trees mostly 8–18\" diameter" },
+                { value: "heavy",   label: "Heavy timber — large trees 18\"+ with dense understory" },
+              ].map(opt => (
+                <label class="lcc-chip">
+                  <input type="radio" name="vegType" value={opt.value} class="sr-only" />
+                  <span>{opt.label}</span>
+                </label>
+              ))}
+            </div>
+          </fieldset>
+
+          <!-- Q3: Terrain -->
+          <fieldset>
+            <legend class="block text-sm font-semibold text-gray-800 mb-3">
+              3. Terrain and site conditions
+            </legend>
+            <div class="flex flex-wrap gap-2">
+              {[
+                { value: "flat",   label: "Flat to gentle slope — good equipment access" },
+                { value: "rolling",label: "Rolling — some slope and grade changes" },
+                { value: "steep",  label: "Steep or rocky — difficult access, ledge outcrops" },
+              ].map(opt => (
+                <label class="lcc-chip">
+                  <input type="radio" name="terrain" value={opt.value} class="sr-only" />
+                  <span>{opt.label}</span>
+                </label>
+              ))}
+            </div>
+          </fieldset>
+
+          <!-- Q4: Disposal -->
+          <fieldset>
+            <legend class="block text-sm font-semibold text-gray-800 mb-3">
+              4. Debris disposal method
+            </legend>
+            <div class="flex flex-wrap gap-2">
+              {[
+                { value: "chip",  label: "Chip & spread on-site — mulch stays on the ground" },
+                { value: "pile",  label: "Pile & burn — debris piled and burned on-site" },
+                { value: "haul",  label: "Haul all debris off-site — clean removal" },
+              ].map(opt => (
+                <label class="lcc-chip">
+                  <input type="radio" name="disposal" value={opt.value} class="sr-only" />
+                  <span>{opt.label}</span>
+                </label>
+              ))}
+            </div>
+          </fieldset>
+
+        </div>
+
+        <div class="mt-8">
+          <p id="lc-error" class="text-red-600 text-sm mb-3 hidden" aria-live="polite">
+            Please answer all questions before estimating.
+          </p>
+          <button
+            type="submit"
+            class="inline-flex items-center gap-2 bg-[#2d5a2d] hover:bg-[#1a3c1a] text-white font-semibold text-sm px-7 py-3 rounded-lg transition-colors shadow-sm"
+          >
+            Get Cost Estimate
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+            </svg>
+          </button>
+        </div>
+      </form>
+
+      <div id="lc-result" class="hidden mt-8 pt-8 border-t border-gray-200" aria-live="polite" role="status"></div>
+    </section>
+
+    <!-- ─── FAQ ───────────────────────────────────────────────────── -->
+    <div class="mt-12">
+      <h2 class="text-2xl font-bold text-[#1a3c1a] mb-6">Frequently Asked Questions</h2>
+      <FAQSection items={faqs} />
+    </div>
+
+    <!-- ─── CTA bar ────────────────────────────────────────────────── -->
+    <div class="bg-[#1a3c1a] text-white rounded-xl p-6 my-10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <div>
+        <p class="font-bold text-lg mb-1">Get a Free On-Site Assessment</p>
+        <p class="text-green-200 text-sm">Henry checks timber value before any equipment arrives — you may owe far less than you think.</p>
+      </div>
+      <div class="flex flex-col sm:flex-row gap-3 flex-shrink-0">
+        <a href={`tel:${phone.trackingTel}`} class="inline-flex items-center justify-center gap-2 bg-white text-[#1a3c1a] font-bold px-4 py-2.5 rounded hover:bg-green-100 transition-colors text-sm">
+          {business.phone}
+        </a>
+        <a href="/estimate" class="inline-flex items-center justify-center gap-2 border border-white text-white font-semibold px-4 py-2.5 rounded hover:bg-white/10 transition-colors text-sm">
+          Request Assessment
+        </a>
+      </div>
+    </div>
+
+    <!-- ─── Back link ──────────────────────────────────────────────── -->
+    <div class="border border-gray-200 rounded-lg p-5 mt-6">
+      <p class="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-2">Parent Service</p>
+      <a href="/services/land-clearing" class="text-[#2d5a2d] font-semibold hover:text-[#1a3c1a] flex items-center gap-2">
+        <svg aria-hidden="true" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+        </svg>
+        Back to Land Clearing
+      </a>
+    </div>
+
+  </article>
+
+  <CTASection variant="b2c" />
+</BaseLayout>
+
+<!-- ─── Chip styles ─────────────────────────────────────────────── -->
+<style>
+  .lcc-chip span {
+    display: inline-block;
+    padding: 0.4rem 1rem;
+    border-radius: 9999px;
+    border: 1.5px solid #d1d5db;
+    font-size: 0.875rem;
+    color: #374151;
+    cursor: pointer;
+    transition: background-color 0.12s, border-color 0.12s, color 0.12s;
+    user-select: none;
+    white-space: nowrap;
+  }
+  .lcc-chip input:checked + span {
+    background-color: #2d5a2d;
+    border-color: #2d5a2d;
+    color: #ffffff;
+    font-weight: 600;
+  }
+  .lcc-chip:hover span {
+    border-color: #2d5a2d;
+    color: #1a3c1a;
+  }
+  .lcc-chip input:focus-visible + span {
+    outline: 2px solid #2d5a2d;
+    outline-offset: 2px;
+  }
+</style>
+
+<!-- ─── Calculator logic ────────────────────────────────────────── -->
+<script>
+(function () {
+
+  // Base cost per acre [low, high] by vegetation type
+  // Sullivan/Orange/Ulster County, NY — April 2026 ranges
+  const BASE_COST = {
+    brush:    [1500,  3000],
+    mixed:    [2800,  5500],
+    woodland: [4500,  8500],
+    heavy:    [7000, 14000],
+  };
+
+  // Terrain multipliers [low, high]
+  const TERRAIN_MULT = {
+    flat:    [1.00, 1.00],
+    rolling: [1.15, 1.25],
+    steep:   [1.35, 1.55],
+  };
+
+  // Disposal add-on per acre [low, high]
+  const DISPOSAL_ADDER = {
+    chip: [0,    0],
+    pile: [200,  500],
+    haul: [600, 1400],
+  };
+
+  // Timber credit callout — show for woodland and heavy
+  const TIMBER_VEG = ['woodland', 'heavy'];
+
+  const VEG_LABELS = {
+    brush:    'light brush & scrub',
+    mixed:    'mixed growth',
+    woodland: 'established woodland',
+    heavy:    'heavy timber',
+  };
+  const TERRAIN_LABELS = {
+    flat:    'flat / gentle slope',
+    rolling: 'rolling terrain',
+    steep:   'steep / rocky',
+  };
+  const DISPOSAL_LABELS = {
+    chip: 'chip & spread on-site',
+    pile: 'pile & burn on-site',
+    haul: 'haul debris off-site',
+  };
+
+  const form   = document.getElementById('lc-form');
+  const result = document.getElementById('lc-result');
+  const errMsg = document.getElementById('lc-error');
+
+  function fmt(n) {
+    return '$' + Math.round(n).toLocaleString('en-US');
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const acres   = parseFloat(form.querySelector('[name="acres"]').value);
+    const vegType = (form.querySelector('[name="vegType"]:checked')  || {}).value;
+    const terrain = (form.querySelector('[name="terrain"]:checked')  || {}).value;
+    const disposal= (form.querySelector('[name="disposal"]:checked') || {}).value;
+
+    if (!acres || acres < 0.25 || !vegType || !terrain || !disposal) {
+      errMsg.classList.remove('hidden');
+      errMsg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      return;
+    }
+    errMsg.classList.add('hidden');
+
+    const [baseLow,  baseHigh]  = BASE_COST[vegType];
+    const [multLow,  multHigh]  = TERRAIN_MULT[terrain];
+    const [dispLow,  dispHigh]  = DISPOSAL_ADDER[disposal];
+
+    const perAcreLow  = baseLow  * multLow  + dispLow;
+    const perAcreHigh = baseHigh * multHigh + dispHigh;
+
+    const totalLow  = acres * perAcreLow;
+    const totalHigh = acres * perAcreHigh;
+    const midpoint  = (totalLow + totalHigh) / 2;
+
+    const showTimberCredit = TIMBER_VEG.includes(vegType);
+
+    result.innerHTML = `
+      <div class="rounded-xl border border-green-200 bg-green-50 p-6 sm:p-8">
+        <span class="inline-block text-xs font-semibold px-3 py-1 rounded-full bg-green-100 text-green-800 border border-green-200 mb-4">Pricing Estimate</span>
+        <h3 class="text-xl font-bold text-[#1a3c1a] mb-1">Estimated Land Clearing Cost</h3>
+        <p class="text-gray-500 text-sm mb-6">
+          ${acres.toLocaleString()} ${acres === 1 ? 'acre' : 'acres'} &nbsp;&middot;&nbsp;
+          ${VEG_LABELS[vegType]} &nbsp;&middot;&nbsp;
+          ${TERRAIN_LABELS[terrain]} &nbsp;&middot;&nbsp;
+          ${DISPOSAL_LABELS[disposal]}
+        </p>
+
+        <div class="grid grid-cols-3 gap-3 mb-6">
+          <div class="text-center bg-white rounded-xl p-4 border border-green-100">
+            <p class="text-xs text-gray-400 font-medium mb-1">Low Estimate</p>
+            <p class="text-xl sm:text-2xl font-bold text-gray-700">${fmt(totalLow)}</p>
+          </div>
+          <div class="text-center bg-[#1a3c1a] text-white rounded-xl p-4">
+            <p class="text-xs text-green-300 font-medium mb-1">Typical</p>
+            <p class="text-xl sm:text-2xl font-bold">${fmt(midpoint)}</p>
+          </div>
+          <div class="text-center bg-white rounded-xl p-4 border border-green-100">
+            <p class="text-xs text-gray-400 font-medium mb-1">High Estimate</p>
+            <p class="text-xl sm:text-2xl font-bold text-gray-700">${fmt(totalHigh)}</p>
+          </div>
+        </div>
+
+        <div class="text-xs text-gray-500 mb-4">
+          Per-acre range: ${fmt(perAcreLow)} – ${fmt(perAcreHigh)}
+        </div>
+
+        ${showTimberCredit ? `
+        <div class="bg-amber-50 border border-amber-200 rounded-lg p-4 mt-2 mb-5">
+          <p class="text-sm font-semibold text-amber-900 mb-1">Timber Credit Check — Could Reduce Your Cost Significantly</p>
+          <p class="text-sm text-amber-800 leading-relaxed">
+            Established woodland and heavy timber sites often contain merchantable hardwoods — red oak,
+            white oak, black cherry — that carry real stumpage value. EFP assesses timber value before
+            any equipment is mobilized. On wooded lots with quality hardwoods, the timber credit can
+            reduce your net clearing cost by 20–80%. This assessment is free.
+          </p>
+        </div>
+        ` : ''}
+
+        <p class="text-xs text-gray-400 leading-relaxed mb-6">
+          <strong>Disclaimer:</strong> This is a pricing estimate based on typical ranges for Sullivan,
+          Orange, and Ulster County, NY. Actual costs vary by site conditions, contractor, equipment
+          availability, and season. Obtain an on-site quote before committing to any clearing project.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-3">
+          <a href="/estimate" class="inline-flex items-center justify-center gap-2 bg-[#2d5a2d] hover:bg-[#1a3c1a] text-white font-semibold text-sm px-6 py-3 rounded-lg transition-colors shadow-sm">
+            Get a Free On-Site Estimate
+          </a>
+          <a href="tel:+18454980208" class="inline-flex items-center justify-center gap-2 text-[#2d5a2d] hover:text-[#1a3c1a] border border-[#2d5a2d] font-semibold text-sm px-6 py-3 rounded-lg transition-colors">
+            Call (845) 754-8242
+          </a>
+        </div>
+      </div>
+      <button id="lc-reset" class="mt-4 text-xs text-[#2d5a2d] hover:underline focus:outline-none" type="button">
+        ← Start over
+      </button>
+    `;
+
+    result.classList.remove('hidden');
+    result.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+    document.getElementById('lc-reset').addEventListener('click', function () {
+      form.reset();
+      form.querySelectorAll('input[type="radio"]').forEach(function(r) { r.checked = false; });
+      result.classList.add('hidden');
+      result.innerHTML = '';
+      errMsg.classList.add('hidden');
+      document.getElementById('lc-acres').focus();
+    });
+  });
+
+})();
+</script>

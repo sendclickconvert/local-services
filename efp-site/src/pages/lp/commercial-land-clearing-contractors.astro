@@ -1,8 +1,200 @@
 ---
-// PLACEHOLDER — full content pending
-// This page intentionally returns 404 until content is written
-// Remove this redirect when page is ready
-import { buildCanonical } from '../../lib/seo';
-export const prerender = false;
+// /lp/commercial-land-clearing-contractors
+// B2B landing page — commercial developers, general contractors, land investors
+// Target: "commercial land clearing contractor Sullivan County NY" and related
+import ServiceLayout from '../../layouts/ServiceLayout.astro';
+import PageHero from '../../components/ui/PageHero.astro';
+import Breadcrumb from '../../components/ui/Breadcrumb.astro';
+import FAQSection from '../../components/ui/FAQSection.astro';
+import KeyTakeaway from '../../components/ui/KeyTakeaway.astro';
+import AuthorByline from '../../components/ui/AuthorByline.astro';
+import EstimateForm from '../../components/forms/EstimateForm.astro';
+import ServiceSchema from '../../components/schema/ServiceSchema.astro';
+import FAQSchema from '../../components/schema/FAQSchema.astro';
+import OptimizedImage from '../../components/ui/OptimizedImage.astro';
+import { buildTitle, buildCanonical, buildDescription } from '../../lib/seo';
+
+const title = buildTitle("Commercial Land Clearing Contractors — Sullivan, Orange & Ulster Counties NY");
+const description = buildDescription(
+  "Commercial land clearing for developers, builders, and investors in Sullivan, Orange, and Ulster counties, NY. " +
+  "Certified forestry oversight — recover timber value before equipment arrives. Multi-acre site prep, subdivision clearing, agricultural reclamation. Call (845) 754-8242."
+);
+const canonicalUrl = buildCanonical("/lp/commercial-land-clearing-contractors");
+
+const crumbs = [
+  { label: "Home",     href: "/" },
+  { label: "Services", href: "/services" },
+  { label: "Commercial Land Clearing", href: "/lp/commercial-land-clearing-contractors" },
+];
+
+const faqs = [
+  {
+    question: "What scale of commercial land clearing projects do you handle?",
+    answer: "Environmental Forest Products handles commercial site clearing from single-lot residential builds to multi-acre subdivision and commercial development projects. Henry Kowalec has coordinated large-scale clearing operations for developers, builders, and institutional clients across Sullivan, Orange, and Ulster counties. Projects are scoped individually based on site conditions, access, regulatory constraints, and what timber value may be present before clearing begins.",
+  },
+  {
+    question: "Can you recover timber value from trees on a development site?",
+    answer: "Yes — and this step should happen before any clearing contract is signed. On development sites in the Hudson Valley and Catskills, second-growth forest frequently contains red oak, black cherry, white oak, and hard maple with genuine commercial value. A pre-clearing timber assessment identifies what is present, and a properly managed timber sale recovers that value before the clearing equipment arrives. On sites with substantial merchantable timber, the sale proceeds can meaningfully offset the total clearing cost — sometimes significantly.",
+  },
+  {
+    question: "Do you coordinate with site engineers and general contractors?",
+    answer: "Yes. EFP works directly with GCs, site engineers, and project managers on commercial clearing projects. We are familiar with the sequencing requirements of site development — what needs to be clear before grading begins, what access routes the clearing equipment needs, and how to coordinate timber recovery without delaying the development timeline. Henry Kowalec can attend pre-construction meetings and coordinate directly with your project team.",
+  },
+  {
+    question: "What permits are required for commercial land clearing in New York?",
+    answer: "New York State does not require a general permit for clearing upland private property, but commercial projects regularly trigger additional review. Work within or adjacent to regulated wetlands (DEC Article 24) typically requires a DEC permit. Federally jurisdictional wetlands may require Army Corps of Engineers review. Local municipalities have their own site plan and clearing permit requirements that vary by town. Projects involving NYSDOT or county road access require highway work permits. EFP identifies potential regulatory issues during the initial site assessment — before the scope is contracted.",
+  },
+  {
+    question: "What is the best time of year for large commercial clearing in Sullivan County?",
+    answer: "Late fall through early spring — November through March — is ideal for commercial land clearing in the Hudson Valley region. Frozen or firm ground supports heavy equipment without excessive rutting and soil compaction, which matters for both site quality and restoration cost. Summer clearing is possible but requires more careful equipment operation and generates faster brush regrowth that may require additional follow-up. We can accommodate project timelines year-round and will advise on season-specific considerations during the site assessment.",
+  },
+  {
+    question: "Do you provide a pre-clearing timber assessment as part of your process?",
+    answer: "Yes — this is the first step on every commercial clearing project we take on. Before any equipment is dispatched, Henry Kowalec walks the site to assess whether merchantable timber is present and can be separated and sold before clearing begins. On sites where this value is present, the assessment takes a few hours and can change the economics of the project significantly. On sites where the timber has no commercial value, you have that confirmed in writing before any scope is set.",
+  },
+  {
+    question: "What geographic area do you serve for commercial clearing?",
+    answer: "Commercial land clearing is available throughout Sullivan, Orange, and Ulster counties in New York, as well as Pike and Wayne counties in Pennsylvania and Sussex County in New Jersey. Henry Kowalec has worked with commercial clients on both sides of the NY/PA and NY/NJ borders and understands the regulatory differences that apply across state lines.",
+  },
+];
 ---
-<html><head><meta http-equiv="refresh" content="0;url=/services/land-clearing"></head></html>
+
+<ServiceLayout title={title} description={description} canonicalUrl={canonicalUrl}>
+  <ServiceSchema
+    pageType="service"
+    serviceName="Commercial Land Clearing"
+    description={description}
+    url={canonicalUrl}
+    areaServed={["Sullivan County, NY", "Orange County, NY", "Ulster County, NY", "Pike County, PA", "Wayne County, PA", "Sussex County, NJ"]}
+    crumbs={crumbs}
+  />
+  <FAQSchema items={faqs} />
+
+  <Breadcrumb crumbs={crumbs} />
+
+  <PageHero
+    title="Commercial Land Clearing Contractors"
+    subtitle="Certified forestry oversight for developers, builders, and investors — Sullivan, Orange, and Ulster counties"
+  />
+
+  <article class="max-w-4xl mx-auto my-8 sm:my-10 px-8 sm:px-12 py-10 bg-white rounded-2xl shadow-md ring-1 ring-gray-200">
+
+    <KeyTakeaway text="Most commercial clearing contractors clear everything in their path — merchantable hardwoods and brush go through the same chipper. Environmental Forest Products starts with a certified forester walking the site first, identifying and recovering any timber value before equipment arrives. On the right site, that step changes the net cost of the project significantly." />
+
+    <AuthorByline />
+    <p class="text-xs text-gray-400 mt-1 mb-8">Last reviewed: April 2026 by Henry Kowalec, CF</p>
+
+    <OptimizedImage
+      src="/images/uploads/land-clearing-forestburgh-ny-komatsu.jpg"
+      alt="Commercial land clearing in Forestburgh, NY — Komatsu excavators on a multi-acre site preparation project for residential development"
+      class="w-full rounded-xl shadow-md my-8"
+      sizes="(max-width: 768px) 100vw, 768px"
+    />
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Why Commercial Developers Work With a Forestry Firm</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      The difference between hiring a general clearing contractor and hiring a forestry firm for a commercial clearing project is not just about equipment or crew size. It is about what happens before the clearing starts.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      A general contractor mobilizes and clears. A consulting forester walks the site first — identifying which trees have marketable timber value, which areas are subject to wetland or buffer regulations that could create permit exposure, and what the right sequencing looks like for the clearing work relative to your development timeline. That pre-clearing assessment takes a few hours. Discovering a regulated wetland buffer conflict after a clearing contract is signed takes significantly longer to resolve — and costs proportionally more.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-6">
+      Environmental Forest Products has provided certified forestry oversight on commercial clearing projects throughout Sullivan, Orange, and Ulster counties for more than 30 years. Henry Kowalec has worked alongside developers, builders, engineering firms, and institutional project managers. He understands how commercial clearing fits into a development timeline and how to coordinate the work without introducing delays.
+    </p>
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Commercial Clearing Services</h2>
+    <ul class="space-y-4 mb-8">
+      {[
+        ["Subdivision and residential development clearing", "Full-site clearing for residential subdivisions, including access road corridors, building envelopes, and utility easements. EFP coordinates with site engineers to ensure the clearing scope aligns with the grading and construction plan."],
+        ["Commercial site preparation", "Large-scale clearing for commercial construction — warehouse pads, retail development, parking facilities, and access road systems. Phased clearing schedules available to match construction sequencing."],
+        ["Agricultural land reclamation", "Returning overgrown former farmland or pasture to agricultural or commercial use. Decades of invasive shrub growth, sapling regeneration, and brushy fencerows are systematically removed and the land is returned to a workable condition."],
+        ["Pre-development timber recovery", "Before any clearing equipment is dispatched, a pre-clearing timber assessment identifies merchantable trees that can be sold rather than destroyed. This step often recovers tens of thousands of dollars in timber value that would otherwise be chipped or burned — and it does not delay the development timeline."],
+        ["Right-of-way and corridor clearing", "Utility corridors, driveway access roads, stormwater easements, and property boundary establishment across Sullivan, Orange, and Ulster counties."],
+        ["Selective clearing with tree preservation", "Clearing work that removes specified trees and brush while preserving designated trees — perimeter trees, specimen trees, or trees required for landscaping compliance — using careful equipment operation and site planning."],
+      ].map(([heading, body]) => (
+        <li class="flex gap-3">
+          <svg class="w-5 h-5 text-[#2d5a2d] flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+          <div>
+            <span class="font-semibold text-gray-900">{heading}.</span>
+            <span class="text-gray-600"> {body}</span>
+          </div>
+        </li>
+      ))}
+    </ul>
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">The Pre-Clearing Timber Assessment — What It Covers and Why It Matters</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      The Hudson Valley and Catskills region is second-growth hardwood country. Parcels that have not been actively farmed or cleared for 40–70 years frequently carry stands of red oak, white oak, black cherry, hard maple, and tulip poplar — all species with active markets and real stumpage value. This value exists whether the site is being cleared for a 10-lot subdivision in Orange County or a commercial warehouse in Sullivan County.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      The pre-clearing assessment process:
+    </p>
+    <ol class="list-decimal pl-6 text-gray-700 mb-6 space-y-3 text-sm leading-relaxed">
+      <li><strong>Site walk.</strong> Henry Kowalec walks the clearing footprint and identifies species, diameter class, log quality, and estimated volume for any merchantable timber present.</li>
+      <li><strong>Timber valuation.</strong> Current stumpage prices for each merchantable species are applied to the estimated volume to produce an appraisal of what the timber is worth on the open market today.</li>
+      <li><strong>Recovery plan.</strong> If merchantable value is present, a recovery plan is developed: marking the trees to be removed and sold, coordinating with buyers, and establishing how the timber sale will be sequenced relative to the clearing work.</li>
+      <li><strong>Sale execution (if warranted).</strong> EFP markets the merchantable timber through its regional buyer network, negotiates competitive bids, and executes the sale — typically before clearing equipment is mobilized.</li>
+    </ol>
+    <p class="text-gray-700 leading-relaxed mb-6">
+      On sites where timber value is present, this process costs a few days of elapsed time and generates revenue. On sites where it is not present, the assessment confirms that in writing and the clearing work proceeds on schedule. In neither case does the process add meaningful delay to the development timeline.
+    </p>
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Equipment</h2>
+    <OptimizedImage
+      src="/images/uploads/komatsu-feller-buncher-timber-harvest-1-ny.jpg"
+      alt="Komatsu XT445L feller buncher — EFP's primary harvesting machine for commercial clearing and timber harvesting operations"
+      class="w-full rounded-xl shadow-md mb-6"
+      sizes="(max-width: 768px) 100vw, 768px"
+    />
+    <p class="text-gray-700 leading-relaxed mb-4">
+      EFP operates purpose-built forestry equipment — not repurposed construction machinery. This distinction matters on commercial sites where soil compaction, root damage to preserved trees, and restoration quality are all factors.
+    </p>
+    <ul class="list-disc pl-6 text-gray-700 mb-6 space-y-2 text-sm leading-relaxed">
+      <li><strong>Komatsu XT445L feller buncher.</strong> EFP's primary large-site clearing machine. Fells and bunches trees efficiently across large acreages while creating minimal ground disturbance compared to traditional bulldozer clearing.</li>
+      <li><strong>Timbermatic wheel harvester.</strong> Purpose-built harvesting machine that fells, delimbs, and bucks trees to precise log lengths. Used for timber recovery operations before or concurrent with clearing.</li>
+      <li><strong>Forwarders.</strong> Purpose-built log transport machines that carry logs from the felling area to the landing without dragging them across the ground — preserving soil and root structure in preserved tree zones.</li>
+      <li><strong>Log trucks and pup trailers.</strong> In-house hauling capability for merchantable timber removed from commercial clearing sites — no subcontracting required for log transport.</li>
+    </ul>
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Regulatory Overview for Commercial Clearing in New York</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Commercial site clearing in Sullivan, Orange, and Ulster counties regularly involves regulatory considerations that a general clearing contractor may not anticipate. EFP identifies these issues during the initial site assessment:
+    </p>
+    <ul class="list-disc pl-6 text-gray-700 mb-6 space-y-2 text-sm leading-relaxed">
+      <li><strong>DEC Article 24 — Freshwater Wetlands.</strong> Work within or adjacent to DEC-mapped freshwater wetlands (typically within 100 feet) requires a DEC permit before clearing begins. Many rural parcels in the region contain mapped wetlands or wetland buffers that are not visible on basic aerial maps.</li>
+      <li><strong>Army Corps of Engineers — Section 404.</strong> Federally jurisdictional wetlands (which may not be on DEC maps) can trigger a federal 404 permit requirement for fill or clearing activity within their boundaries or adjacent buffer zones.</li>
+      <li><strong>Local municipal requirements.</strong> Clearing permit requirements, tree preservation ordinances, and site plan review processes vary by municipality. Several Orange County townships and a number of Ulster County municipalities have specific tree removal ordinances that apply to commercial projects.</li>
+      <li><strong>NYSDOT / county road access.</strong> Driveway or access road construction from state or county roads requires highway work permits from NYSDOT or the county highway department — a step frequently overlooked in early project planning.</li>
+      <li><strong>NYC DEP watershed rules.</strong> Clearing on properties within New York City's Catskill/Delaware or Croton watershed systems is subject to additional DEP regulatory oversight. This applies to significant portions of Ulster County and parts of Sullivan County near the Neversink and Rondout reservoir systems.</li>
+    </ul>
+
+    <div class="bg-green-50 border border-green-200 rounded-lg p-6 my-10">
+      <h3 class="font-bold text-[#1a3c1a] text-lg mb-2">Ready to Scope a Commercial Clearing Project?</h3>
+      <p class="text-gray-700 text-sm mb-4">
+        Call Henry Kowalec directly to discuss your project. The first step is an on-site assessment — not a phone estimate — because commercial clearing projects have too many site-specific variables to price without walking the ground. We can usually schedule an initial site visit within a week for projects in the primary service area.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-3">
+        <a href="tel:+18454980208" class="inline-flex items-center gap-2 bg-[#1a3c1a] text-white font-semibold px-5 py-3 rounded hover:bg-[#2d5a2d] transition-colors text-sm">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/></svg>
+          Call (845) 754-8242
+        </a>
+        <a href="/services/land-clearing" class="inline-flex items-center gap-2 border border-[#2d5a2d] text-[#2d5a2d] font-semibold px-5 py-3 rounded hover:bg-green-50 transition-colors text-sm">
+          View Full Land Clearing Service →
+        </a>
+      </div>
+    </div>
+
+    <div class="mt-10 pt-6 border-t border-gray-200">
+      <p class="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-2">Sources &amp; Further Reading</p>
+      <ul class="text-xs text-gray-500 space-y-1">
+        <li><a href="https://www.dec.ny.gov/lands/4937.html" target="_blank" rel="noopener noreferrer" class="text-[#2d5a2d] hover:underline">NY DEC — Freshwater Wetlands Program (Article 24)</a></li>
+        <li><a href="https://www.dec.ny.gov/permits/6042.html" target="_blank" rel="noopener noreferrer" class="text-[#2d5a2d] hover:underline">NY DEC — Permits for Activities Near Water</a></li>
+        <li><a href="https://www.dec.ny.gov/lands/34341.html" target="_blank" rel="noopener noreferrer" class="text-[#2d5a2d] hover:underline">NY DEC — Timber Harvesting Program</a></li>
+      </ul>
+    </div>
+
+    <FAQSection items={faqs} />
+    <EstimateForm variant="b2b" />
+
+  </article>
+</ServiceLayout>

@@ -1,0 +1,267 @@
+---
+// pages/locations/ulster-county-ny.astro
+// CUSTOM — not generated from [county].astro template.
+// Ulster County, NY — Catskill escarpment, Hudson Valley woodlands, affluent landowners.
+// Target: 1,600–2,000 words. 7 county-specific FAQs. #1 ranking objective.
+
+import LocationLayout from '../../layouts/LocationLayout.astro';
+import PageHero from '../../components/ui/PageHero.astro';
+import Breadcrumb from '../../components/ui/Breadcrumb.astro';
+import FAQSection from '../../components/ui/FAQSection.astro';
+import KeyTakeaway from '../../components/ui/KeyTakeaway.astro';
+import AuthorByline from '../../components/ui/AuthorByline.astro';
+import EstimateForm from '../../components/forms/EstimateForm.astro';
+import ServiceSchema from '../../components/schema/ServiceSchema.astro';
+import FAQSchema from '../../components/schema/FAQSchema.astro';
+import { buildTitle, buildCanonical, buildDescription } from '../../lib/seo';
+import { services } from '../../data/services';
+
+const title = buildTitle('Consulting Forester — Ulster County, NY');
+const description = buildDescription(
+  'Consulting forester for Ulster County, NY — 480-a enrollment, timber appraisals, Catskill & Hudson Valley woodland management. (845) 754-8242.'
+);
+const canonicalUrl = buildCanonical('/locations/ulster-county-ny');
+
+const crumbs = [
+  { label: 'Home',      href: '/' },
+  { label: 'Locations', href: '/locations' },
+  { label: 'Ulster County, NY', href: '/locations/ulster-county-ny' },
+];
+
+const faqs = [
+  {
+    question: 'Does EFP provide forestry consulting throughout Ulster County, NY?',
+    answer: 'Yes. Environmental Forest Products serves private woodland owners throughout Ulster County — from the high-elevation Catskill townships in the west (Shandaken, Hardenburgh, Denning, Woodstock) to the mid-county communities along the Esopus Creek corridor, to the Hudson River townships near Kingston and Saugerties. Henry Kowalec has conducted timber appraisals, 480-a enrollments, and land clearing projects across the county.',
+  },
+  {
+    question: 'Which Ulster County townships have the strongest 480-a Forest Tax Law opportunity?',
+    answer: 'The western Ulster County townships — Shandaken, Hardenburgh, Denning, and Woodstock — have the highest concentration of qualifying woodland for 480-a enrollment. Dense forest cover, large parcel sizes, and high-elevation hardwood stands make these townships strong candidates for the program. The combination of active real estate markets (particularly in the Woodstock area) and significant school tax burdens makes the 80% property and school tax exemption on enrolled acreage especially valuable here. EFP handles the full enrollment process for Ulster County landowners.',
+  },
+  {
+    question: 'What timber species dominate Ulster County forests?',
+    answer: 'In the high-elevation western townships, sugar maple, beech, yellow birch, and black cherry dominate the upland forest. These are the classic northern hardwood species, and high-grade sugar maple in particular commands strong markets. Moving east toward the Hudson Valley, the species composition shifts to red oak, red maple, black birch, and tulip poplar on the lower terrain. Hemlock persists in the protected drainages throughout the county. Black cherry is present across much of the county wherever canopy disturbance has opened regeneration opportunities.',
+  },
+  {
+    question: 'How does the Esopus Creek watershed affect forestry operations in Ulster County?',
+    answer: 'The Esopus Creek is the primary drainage through the center of Ulster County and drains into the Ashokan Reservoir — part of New York City\'s water supply. Properties adjacent to the watershed may be subject to NYC DEP regulations regarding forestry operations near reservoir tributaries. Henry Kowalec has worked on properties in the Ulster County watershed zone and can advise on what regulatory requirements apply to a specific parcel. This is a factor that out-of-area consultants often overlook.',
+  },
+  {
+    question: 'Can EFP manage a timber sale on my Ulster County woodland?',
+    answer: 'Yes. EFP provides timber sale management for Ulster County landowners — appraisal, bid solicitation, contract review, harvest monitoring, and final inspection. Ulster County\'s position at the edge of the Catskills creates a buyer market that includes both regional sawmills and specialty hardwood buyers who prize the high-grade sugar maple and black cherry found in the western township stands. An independent appraisal is the essential first step before any sale negotiation.',
+  },
+  {
+    question: 'Does EFP handle land clearing in Kingston, Saugerties, or New Paltz?',
+    answer: 'Yes. Land clearing services are available throughout Ulster County, including in and around Kingston, Saugerties, New Paltz, and other Hudson Valley communities. Ulster County\'s active real estate market generates consistent site clearing demand, particularly for residential development on rural and semi-rural properties. EFP\'s approach is the same as elsewhere: timber assessment before clearing begins, to recover any merchantable value rather than chip or burn trees that have real market worth.',
+  },
+  {
+    question: 'What is a forest management plan and do I need one for my Ulster County property?',
+    answer: 'A forest management plan is a DEC-approved document that describes the current condition of your woodland and prescribes management activities over a defined planning period. It is required for 480-a Forest Tax Law enrollment, but it is also independently useful as a management guide for landowners who want to improve timber quality, wildlife habitat, or long-term forest health without necessarily planning an immediate harvest. Henry Kowalec prepares forest management plans for Ulster County landowners regardless of whether 480-a enrollment is the primary objective. Learn more about <a href="/services/woodlot-management">woodlot management planning</a>.',
+  },
+];
+---
+
+<LocationLayout title={title} description={description} canonicalUrl={canonicalUrl}>
+  <ServiceSchema
+    pageType="location"
+    serviceName="Forestry Consulting — Ulster County, NY"
+    description={description}
+    url={canonicalUrl}
+    areaServed={['Ulster County, NY', 'Catskill Mountains, NY', 'Hudson Valley, NY', 'Kingston, NY']}
+    crumbs={crumbs}
+  />
+  <FAQSchema items={faqs} />
+
+  <Breadcrumb crumbs={crumbs} />
+
+  <PageHero
+    title="Forestry Consulting in Ulster County, NY"
+    subtitle="Catskill escarpment hardwoods and Hudson Valley woodlands — serving private landowners throughout Ulster County"
+  />
+
+  <article class="max-w-4xl mx-auto my-8 sm:my-10 px-8 sm:px-12 py-10 bg-white rounded-2xl shadow-md ring-1 ring-gray-200">
+
+    <KeyTakeaway
+      text="Environmental Forest Products provides certified forestry consulting for private landowners throughout Ulster County, NY. Henry Kowalec has 30+ years of experience working in Ulster County — from the high-elevation Catskill townships in the west to the Hudson Valley communities near Kingston and Saugerties. Services include 480-a Forest Tax Law enrollment, timber appraisals, woodlot management, and land clearing."
+    />
+
+    <AuthorByline />
+
+    <!-- ── Ulster County Terrain ─────────────────────────────── -->
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Ulster County's Forest — Catskill Escarpment to the Hudson River</h2>
+
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Ulster County stretches from the high-elevation Catskill Mountains in the west — where the escarpment rises dramatically above the Esopus Creek valley — to the Hudson River in the east, creating one of the most varied terrain profiles of any county in the Hudson Valley region. That variation produces meaningfully different forest types across the county, and the management priorities that apply to a high-elevation Shandaken property are not the same ones that apply to a lower-elevation Kingston woodlot.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      In the western Catskill townships — Shandaken, Hardenburgh, Denning, and Woodstock — the terrain is steep, forested, and dominated by classic northern hardwoods: sugar maple, beech, yellow birch, and black cherry on the upper slopes and ridges. These townships contain some of the most productive hardwood stands in the entire Catskill region. The forest here has been shaped by a combination of historical selective harvesting, 20th-century reforestation, and the natural regeneration patterns of high-elevation Catskill woodland. High-grade sugar maple from this part of the county draws active buyer interest from hardwood mills across the region.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      The Esopus Creek watershed runs through the heart of the county, threading from the Catskill highlands through the mid-county townships toward the Ashokan Reservoir. Private woodland along and near this drainage is subject to additional regulatory considerations connected to New York City's water supply — a factor that has a direct bearing on what forestry operations are permissible on specific parcels. Henry Kowalec has worked on properties in this zone and understands what the regulatory framework requires.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-5">
+      Moving east through the county, the terrain moderates and the forest composition shifts. Red oak, red maple, black birch, and tulip poplar dominate the mid-county and Hudson Valley woodlands. The townships around New Paltz, Rosendale, and Saugerties contain a mix of established family woodlots and more recently acquired rural properties, many of which have not seen active management in decades. The Shawangunk Ridge enters Ulster County in the southeast, carrying its distinctive chestnut oak and pitch pine ridge-top forest along the county's southern border.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      The Hudson River communities — Kingston, Saugerties, and the lower-elevation townships — have active real estate markets that generate regular demand for land clearing services, timber assessments ahead of development, and occasional managed harvests on rural properties that are being transitioned into residential or agricultural use.
+    </p>
+
+    <!-- ── 480-a in Ulster ──────────────────────────────────── -->
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">480-a Enrollment in Ulster County — The Case for Western Township Landowners</h2>
+
+    <p class="text-gray-700 leading-relaxed mb-4">
+      New York's 480-a Forest Tax Law program provides a property and school tax exemption of up to 80% on enrolled woodland acreage for qualifying landowners. The program requires 50 or more contiguous acres of woodland capable of producing a merchantable forest crop, managed under a DEC-approved plan prepared by a certified consulting forester.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      The case for 480-a is particularly clear in the western Ulster County townships, where three factors converge: large forested parcels are common, the forest is the right type and age for productive management, and real estate values — particularly in the Woodstock area — have created a property tax environment where the 80% exemption on woodland acreage represents meaningful annual savings. EFP has enrolled properties in Shandaken, Hardenburgh, and surrounding townships, and Henry Kowalec can discuss the eligibility outlook for any Ulster County property during an initial consultation.
+    </p>
+
+    <div class="bg-green-50 border border-green-200 rounded-lg p-6 mb-8">
+      <h3 class="font-bold text-[#1a3c1a] text-base mb-2">480-a enrollment and woodlot management are complementary, not competing</h3>
+      <p class="text-gray-700 text-sm mb-3">
+        A common concern among Ulster County landowners is that 480-a enrollment restricts what they can do with their woodland. In practice, the required management plan sets a framework for the management activities that are appropriate for the property — and many of those activities, including selective harvesting and improvement cutting, generate revenue while maintaining enrollment compliance. The plan does not prohibit timber management; it guides it. For many landowners, a well-written 480-a management plan is the best long-term financial tool available for a forested property.
+      </p>
+      <a href="/services/480a-forest-tax-law" class="text-[#2d5a2d] font-semibold text-sm underline hover:text-[#1a3c1a]">
+        Learn more about the 480-a program requirements →
+      </a>
+    </div>
+
+    <!-- ── Timber in Ulster ─────────────────────────────────── -->
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Timber Value in Ulster County</h2>
+
+    <p class="text-gray-700 leading-relaxed mb-4">
+      The western Catskill townships of Ulster County hold some of the most valuable timber stands in the EFP service area. High-grade sugar maple — when correctly identified, measured, and sold through a competitive bid process — commands premium prices from hardwood flooring mills and specialty buyers. Black cherry, wherever it has regenerated following past canopy disturbance, adds additional value to mixed hardwood stands across the county.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      The critical step that determines whether a landowner captures full timber value or leaves it on the table is the <a href="/services/sell-standing-timber" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">independent timber appraisal</a>. The appraisal documents what is actually present — species, diameter, grade, volume — and establishes the current stumpage value before any negotiation begins. In the Ulster County high-elevation stands, the difference between the first offer received and the result of a properly managed competitive bid can be significant. Henry Kowalec's knowledge of which buyers compete for this timber type, and what the market is currently paying, is what makes that process productive.
+    </p>
+
+    <!-- ── Land Clearing in Ulster ─────────────────────────── -->
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Land Clearing and Woodlot Management Near Kingston, New Paltz, and Saugerties</h2>
+
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Ulster County's active real estate market generates regular demand for land clearing, site preparation, and woodlot assessment. In the communities along the Route 28 and Route 9W corridors — Kingston, Saugerties, New Paltz — residential development on rural and semi-rural parcels often involves trees that should be assessed before any clearing equipment arrives on site.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      EFP brings the same approach to every Ulster County clearing project: an on-site timber assessment first, to determine whether the trees being cleared have merchantable value worth recovering. On many Ulster County sites, the answer is yes — and the timber sale revenue meaningfully offsets the cost of the clearing work. Learn more about <a href="/services/land-clearing" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">land clearing with timber recovery</a>.
+    </p>
+
+    <!-- ── Services Grid ─────────────────────────────────────── -->
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Forestry Services Available in Ulster County</h2>
+    <p class="text-gray-700 leading-relaxed mb-5">
+      All services below are available to Ulster County landowners. Every engagement starts with an on-site assessment — Henry Kowalec walks the property before any scope is set.
+    </p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
+      {services.map(svc => (
+        <a
+          href={`/services/${svc.slug}`}
+          class="flex items-start gap-3 p-4 border border-gray-200 rounded-lg hover:border-[#2d5a2d] hover:bg-green-50 transition-colors group"
+        >
+          <span class="text-2xl flex-shrink-0" aria-hidden="true">{svc.icon}</span>
+          <div>
+            <div class="font-semibold text-[#1a3c1a] group-hover:text-[#2d5a2d] text-sm">{svc.name}</div>
+            <div class="text-xs text-gray-500 mt-0.5 leading-snug">{svc.excerpt.split('—')[0].trim()}</div>
+          </div>
+        </a>
+      ))}
+    </div>
+
+    <!-- ── CTA ────────────────────────────────────────────────── -->
+    <div class="bg-[#1a3c1a] text-white rounded-lg p-6 my-10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <div>
+        <p class="font-bold text-lg mb-1">Schedule a Site Visit in Ulster County</p>
+        <p class="text-green-200 text-sm">On-site assessment — not a phone estimate. All Ulster County townships served.</p>
+      </div>
+      <a
+        href="tel:+18454980208"
+        class="inline-flex items-center gap-2 bg-white text-[#1a3c1a] font-bold px-5 py-3 rounded hover:bg-green-100 transition-colors text-sm whitespace-nowrap flex-shrink-0"
+      >
+        <svg class="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/></svg>
+        (845) 754-8242
+      </a>
+    </div>
+
+    <!-- ── Towns Grid ─────────────────────────────────────────── -->
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Ulster County Communities Served</h2>
+    <p class="text-gray-600 text-sm mb-5">
+      EFP serves private landowners throughout Ulster County. Select a community for locally-specific forestry information.
+    </p>
+    <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 mb-10">
+      {[
+        { name: 'Kingston', slug: 'kingston' },
+        { name: 'New Paltz', slug: 'new-paltz' },
+        { name: 'Woodstock', slug: 'woodstock' },
+        { name: 'Saugerties', slug: 'saugerties' },
+        { name: 'Ellenville', slug: 'ellenville' },
+        { name: 'Phoenicia', slug: 'phoenicia' },
+        { name: 'Stone Ridge', slug: 'stone-ridge' },
+        { name: 'Accord', slug: 'accord' },
+        { name: 'High Falls', slug: 'high-falls' },
+        { name: 'Hurley', slug: 'hurley' },
+        { name: 'Tannersville', slug: 'tannersville' },
+        { name: 'Hunter', slug: 'hunter' },
+        { name: 'Pine Bush', slug: 'pine-bush' },
+        { name: 'Rosendale', slug: 'rosendale' },
+        { name: 'Gardiner', slug: 'gardiner' },
+        { name: 'Marlboro', slug: 'marlboro' },
+        { name: 'Highland', slug: 'highland' },
+        { name: 'Milton', slug: 'milton' },
+        { name: 'Clintondale', slug: 'clintondale' },
+        { name: 'Olivebridge', slug: 'olivebridge' },
+        { name: 'West Shokan', slug: 'west-shokan' },
+        { name: 'Shokan', slug: 'shokan' },
+        { name: 'Boiceville', slug: 'boiceville' },
+        { name: 'Bearsville', slug: 'bearsville' },
+        { name: 'Lake Hill', slug: 'lake-hill' },
+        { name: 'West Saugerties', slug: 'west-saugerties' },
+      ].map(town => (
+        <a
+          href={`/locations/ulster-county-ny/${town.slug}`}
+          class="text-sm text-[#2d5a2d] hover:text-[#1a3c1a] hover:underline py-1"
+        >
+          {town.name}
+        </a>
+      ))}
+    </div>
+
+    <!-- ── Neighboring Counties ──────────────────────────────── -->
+    <div class="bg-gray-50 border border-gray-200 rounded-lg p-5 mb-10">
+      <h3 class="font-semibold text-[#1a3c1a] mb-3 text-sm uppercase tracking-wide">Also Serving Nearby Counties</h3>
+      <div class="flex flex-wrap gap-3">
+        <a href="/locations/sullivan-county-ny" class="text-sm text-[#2d5a2d] hover:text-[#1a3c1a] hover:underline">Sullivan County, NY</a>
+        <a href="/locations/orange-county-ny" class="text-sm text-[#2d5a2d] hover:text-[#1a3c1a] hover:underline">Orange County, NY</a>
+      </div>
+    </div>
+
+    <!-- ── Free Tools ────────────────────────────────────────── -->
+    <div class="mt-10 mb-8">
+      <h2 class="text-xl font-bold text-[#1a3c1a] mb-1">Free Woodland Calculators</h2>
+      <p class="text-gray-500 text-sm mb-4">Use these tools to estimate timber value, 480-a tax savings, or tree removal costs before your first call.</p>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <a href="/services/sell-standing-timber/timber-value-estimator" class="group rounded-xl border border-gray-200 hover:border-[#2d5a2d] bg-white hover:bg-green-50 p-5 transition-colors block">
+          <p class="text-xs font-bold uppercase tracking-widest text-[#2d5a2d] mb-1">Timber</p>
+          <p class="font-semibold text-[#1a3c1a] text-sm mb-1 group-hover:text-[#2d5a2d]">Timber Value Estimator</p>
+          <p class="text-xs text-gray-500">Estimate stumpage value by species, diameter, and stand density.</p>
+        </a>
+        <a href="/services/480a-forest-tax-law/480a-savings-calculator" class="group rounded-xl border border-gray-200 hover:border-[#2d5a2d] bg-white hover:bg-green-50 p-5 transition-colors block">
+          <p class="text-xs font-bold uppercase tracking-widest text-[#2d5a2d] mb-1">Tax Law</p>
+          <p class="font-semibold text-[#1a3c1a] text-sm mb-1 group-hover:text-[#2d5a2d]">480-a Tax Savings Calculator</p>
+          <p class="text-xs text-gray-500">See annual and 15-year savings from enrolling your forest land.</p>
+        </a>
+        <a href="/services/tree-removal/tree-removal-cost-calculator" class="group rounded-xl border border-gray-200 hover:border-[#2d5a2d] bg-white hover:bg-green-50 p-5 transition-colors block">
+          <p class="text-xs font-bold uppercase tracking-widest text-[#2d5a2d] mb-1">Tree Removal</p>
+          <p class="font-semibold text-[#1a3c1a] text-sm mb-1 group-hover:text-[#2d5a2d]">Tree Removal Cost Calculator</p>
+          <p class="text-xs text-gray-500">Get a local price range estimate based on size and site access.</p>
+        </a>
+        <a href="/services/land-clearing/land-clearing-cost-calculator" class="group rounded-xl border border-gray-200 hover:border-[#2d5a2d] bg-white hover:bg-green-50 p-5 transition-colors block">
+          <p class="text-xs font-bold uppercase tracking-widest text-[#2d5a2d] mb-1">Land Clearing</p>
+          <p class="font-semibold text-[#1a3c1a] text-sm mb-1 group-hover:text-[#2d5a2d]">Land Clearing Cost Calculator</p>
+          <p class="text-xs text-gray-500">Estimate per-acre clearing costs by vegetation type and terrain.</p>
+        </a>
+      </div>
+    </div>
+
+    <FAQSection items={faqs} />
+    <EstimateForm variant="b2c" />
+
+  </article>
+</LocationLayout>

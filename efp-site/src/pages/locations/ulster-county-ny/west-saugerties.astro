@@ -1,0 +1,147 @@
+---
+// West Saugerties, Ulster County — individual static location page
+import LocationLayout from '../../../layouts/LocationLayout.astro';
+import PageHero from '../../../components/ui/PageHero.astro';
+import Breadcrumb from '../../../components/ui/Breadcrumb.astro';
+import FAQSection from '../../../components/ui/FAQSection.astro';
+import KeyTakeaway from '../../../components/ui/KeyTakeaway.astro';
+import AuthorByline from '../../../components/ui/AuthorByline.astro';
+import EstimateForm from '../../../components/forms/EstimateForm.astro';
+import ServiceSchema from '../../../components/schema/ServiceSchema.astro';
+import FAQSchema from '../../../components/schema/FAQSchema.astro';
+import { services } from '../../../data/services';
+
+const title       = "Forestry Consulting — West Saugerties, NY | EFP";
+const description = "Certified forestry consulting in West Saugerties, Ulster County. 480-a Forest Tax Law, timber harvesting, land clearing, and woodlot management in the Catskill foothills. Henry Kowalec, 30+ years experience. Call (845) 754-8242.";
+const canonicalUrl = "https://eforestproducts.com/locations/ulster-county-ny/west-saugerties";
+
+const crumbs = [
+  { label: "Home",      href: "/" },
+  { label: "Locations", href: "/locations" },
+  { label: "Ulster County, NY", href: "/locations/ulster-county-ny" },
+  { label: "West Saugerties", href: "/locations/ulster-county-ny/west-saugerties" },
+];
+
+const faqs = [
+  { question: "Do you provide forestry consulting near West Saugerties, NY?", answer: "Yes. Environmental Forest Products serves private landowners in West Saugerties and throughout Ulster County. Henry Kowalec has 30+ years of hands-on forestry experience in the Saugerties area and surrounding Catskill foothills, and provides on-site assessments for all service inquiries. Call (845) 754-8242." },
+  { question: "What does a forestry site assessment in West Saugerties involve?", answer: "An initial site visit covers the key questions: what species are present, what the timber volume and size-class distribution looks like, whether the property qualifies for the 480-a Forest Tax Law program, and what management approach makes the most sense given the landowner's objectives. Visits typically take 1–3 hours depending on parcel size and terrain." },
+  { question: "Does my West Saugerties property qualify for 480-a Forest Tax Law enrollment?", answer: "New York's 480-a program generally requires 50 or more contiguous acres of qualifying woodland. Properties in the West Saugerties area with sufficient contiguous forested acreage may qualify — particularly on the upland terrain where parcel sizes tend to be larger. An on-site assessment is the only way to confirm eligibility for a specific parcel." },
+  { question: "Can you appraise the timber value on my West Saugerties property?", answer: "Yes. A timber appraisal identifies species, diameter, volume, and current stumpage market value. The Catskill foothill terrain west of Saugerties supports red oak, red maple, black birch, and black cherry — species with active buyer markets. An independent appraisal establishes a reliable baseline before any buyer negotiation begins." },
+  { question: "Do you handle land clearing near West Saugerties?", answer: "Yes. Land clearing for residential and commercial site preparation is part of EFP's service offering throughout Ulster County. Every clearing project starts with a timber assessment — if merchantable trees are present, EFP recovers that value through a timber sale before the land is cleared rather than chipping or burning material with real market worth." },
+];
+---
+
+<LocationLayout title={title} description={description} canonicalUrl={canonicalUrl}>
+  <ServiceSchema
+    pageType="location"
+    serviceName="Forestry Consulting — West Saugerties, Ulster County"
+    description={description}
+    url={canonicalUrl}
+    areaServed={["West Saugerties, NY", "Ulster County, NY"]}
+    crumbs={crumbs}
+  />
+  <FAQSchema items={faqs} />
+  <Breadcrumb crumbs={crumbs} />
+
+  <PageHero
+    title="Forestry Consulting in West Saugerties, NY"
+    subtitle="Serving West Saugerties and the Catskill foothills — certified forestry for private landowners"
+  />
+
+  <article class="max-w-4xl mx-auto my-8 sm:my-10 px-8 sm:px-12 py-10 bg-white rounded-2xl shadow-md ring-1 ring-gray-200">
+
+    <KeyTakeaway
+      text="Environmental Forest Products provides certified forestry consulting for West Saugerties area landowners. Henry Kowalec brings 30+ years of hands-on experience in Ulster County — on-site assessments for 480-a enrollment, timber value, land clearing, and long-term woodland management in the Catskill foothills west of Saugerties."
+    />
+
+    <AuthorByline />
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">West Saugerties' Woodland and Forest Terrain</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      West Saugerties is a rural hamlet in the Town of Saugerties, situated on the Catskill foothill terrain rising west of the Saugerties village toward the escarpment. The forest here is mixed hardwood — red oak, red maple, black birch, and black cherry — on upland terrain that transitions from the Hudson Valley floor to the Catskill highlands. Parcels in this area tend to be larger and more rural than those closer to the village, with significant forested acreage that has often gone without professional assessment.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Red oak from the Catskill foothill terrain west of Saugerties has active buyer markets among flooring mills and hardwood distributors. Black cherry, wherever it has regenerated on disturbed canopy, adds additional value to mixed hardwood stands throughout this part of Ulster County.
+    </p>
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Local Forestry Context — West Saugerties</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      The area west of Saugerties village is a rural-residential and agricultural transition zone, with a mix of farm land, woodland parcels, and properties that have been in the same family for generations without formal forestry assessment. Many landowners here hold more timber value than they know — and more potential 480-a tax savings than they have ever evaluated.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Environmental Forest Products serves West Saugerties landowners for timber appraisals, competitive timber sale management, 480-a enrollment, land clearing with timber recovery, and long-term management planning. Every engagement starts with an on-site assessment of the specific property.
+    </p>
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Services Available Near West Saugerties</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
+      {services.map(svc => (
+        <a href={'/services/' + svc.slug} class="flex items-start gap-3 p-4 border border-gray-200 rounded-lg hover:border-[#2d5a2d] hover:bg-green-50 transition-colors group">
+          <span class="text-2xl flex-shrink-0" aria-hidden="true">{svc.icon}</span>
+          <div>
+            <div class="font-semibold text-[#1a3c1a] group-hover:text-[#2d5a2d] text-sm">{svc.name}</div>
+            <div class="text-xs text-gray-500 mt-0.5 leading-snug">{svc.excerpt.split('—')[0].trim()}</div>
+          </div>
+        </a>
+      ))}
+    </div>
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Timber Value and Harvest Planning Near West Saugerties</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Private woodland in the West Saugerties area holds timber value that most landowners have never had independently confirmed. Environmental Forest Products provides independent timber appraisals — not affiliated with any logging contractor — and manages the competitive bid process, reaching buyers who actively purchase red oak and mixed hardwoods from the Catskill foothills of Ulster County.
+    </p>
+
+    <div class="bg-green-50 border border-green-200 rounded-lg p-6 my-10">
+      <h3 class="font-bold text-[#1a3c1a] text-lg mb-2">480-a Forest Tax Law — West Saugerties Area Properties</h3>
+      <p class="text-gray-700 text-sm mb-3">
+        New York's 480-a Forest Tax Law program provides a property and school tax exemption of up to 80% on enrolled woodland acreage for qualifying landowners with 50 or more contiguous acres. Properties in the West Saugerties area with sufficient forested acreage and the right forest character may qualify. Environmental Forest Products prepares the required DEC-approved management plans and manages the full enrollment process.
+      </p>
+      <a href="/services/480a-forest-tax-law" class="text-[#2d5a2d] font-semibold text-sm underline hover:text-[#1a3c1a]">Learn about 480-a enrollment for Ulster County landowners →</a>
+    </div>
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Land Clearing Near West Saugerties</h2>
+    <p class="text-gray-700 leading-relaxed mb-6">
+      Land clearing for residential development and site preparation is a regular request in the West Saugerties area. Every EFP clearing project begins with a timber assessment to determine whether merchantable timber is present and recoverable — a step that reduces the net project cost and avoids burning or chipping trees that have real market value. Learn more about <a href="/services/land-clearing" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">land clearing services in Ulster County</a>.
+    </p>
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Why West Saugerties Landowners Work With EFP</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Henry Kowalec has conducted timber assessments, harvest operations, and land management work across Ulster County for more than 30 years — including on properties with the Catskill foothills terrain west of Saugerties and the red oak and mixed hardwood forest composition that characterizes the West Saugerties area. That accumulated site-specific experience means he can evaluate a property in West Saugerties with the context of hundreds of comparable assessments in this same region.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Environmental Forest Products is headquartered in Westbrookville, Sullivan County. When Henry walks your property in West Saugerties, he brings direct familiarity with Ulster County's terrain, access conditions, timber markets, and 480-a program requirements.
+    </p>
+
+    <div class="bg-[#1a3c1a] text-white rounded-lg p-6 my-10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <div>
+        <p class="font-bold text-lg mb-1">Schedule a Site Visit in West Saugerties</p>
+        <p class="text-green-200 text-sm">On-site assessment — not a phone estimate. We walk the property with you.</p>
+      </div>
+      <a href="tel:+18454980208" class="inline-flex items-center gap-2 bg-white text-[#1a3c1a] font-bold px-5 py-3 rounded hover:bg-green-100 transition-colors text-sm whitespace-nowrap flex-shrink-0">
+        <svg class="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/></svg>
+        (845) 754-8242
+      </a>
+    </div>
+
+    <FAQSection items={faqs} />
+
+    <div class="border border-gray-200 rounded-lg p-5 my-10">
+      <h3 class="font-semibold text-[#1a3c1a] mb-3 text-sm uppercase tracking-wide">Other Ulster County Communities We Serve</h3>
+      <div class="flex flex-wrap gap-3 mb-4">
+        <a href="/locations/ulster-county-ny/saugerties" class="text-sm text-[#2d5a2d] hover:underline">Saugerties</a>
+        <a href="/locations/ulster-county-ny/woodstock" class="text-sm text-[#2d5a2d] hover:underline">Woodstock</a>
+        <a href="/locations/ulster-county-ny/bearsville" class="text-sm text-[#2d5a2d] hover:underline">Bearsville</a>
+        <a href="/locations/ulster-county-ny/west-hurley" class="text-sm text-[#2d5a2d] hover:underline">West Hurley</a>
+        <a href="/locations/ulster-county-ny" class="text-sm text-[#2d5a2d] hover:underline font-semibold">View all Ulster County towns →</a>
+      </div>
+      <div>
+        <p class="text-xs text-gray-500 uppercase tracking-wide mb-2">Also Serving Nearby Counties</p>
+        <div class="flex flex-wrap gap-3">
+          <a href="/locations/sullivan-county-ny" class="text-sm text-[#2d5a2d] hover:underline">Sullivan County, NY</a>
+          <a href="/locations/orange-county-ny" class="text-sm text-[#2d5a2d] hover:underline">Orange County, NY</a>
+        </div>
+      </div>
+    </div>
+
+    <EstimateForm variant="b2c" />
+  </article>
+</LocationLayout>

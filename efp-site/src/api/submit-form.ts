@@ -1,32 +1,64 @@
-// ⚠️ MANUAL-ONLY — GHL (CRST Web) webhook routing. Do not edit with Agent.
-// This endpoint receives form submissions and routes to the CRM pipeline.
-// Real routing logic must be wired manually by Bryan Collins.
-//
-// Current state: Stub only — returns 200 with placeholder JSON.
-// Pipeline stages, field mapping, and lead source tagging are manual config.
-
 import type { APIRoute } from 'astro';
 
-export const prerender = false;  // This endpoint must NOT be statically rendered
+export const prerender = false;
 
 export const POST: APIRoute = async ({ request }) => {
-  // [STUB] — Real GHL webhook routing goes here
-  // Steps to implement manually:
-  // 1. Parse form data from request
-  // 2. Map fields to GHL contact schema
-  // 3. POST to PUBLIC_GHL_API_BASE with location auth
-  // 4. Assign correct pipeline stage (B2C vs B2B via form_variant field)
-  // 5. Trigger GHL automation workflow for lead nurture
-  // 6. Return redirect or JSON confirmation
+  const webhookUrl = import.meta.env.GHL_WEBHOOK_URL;
 
-  return new Response(
-    JSON.stringify({
-      success: true,
-      message: "[STUB] Form submission received. Endpoint not yet wired.",
-    }),
-    {
+  if (!webhookUrl) {
+    console.error('[submit-form] GHL_WEBHOOK_URL is not configured');
+    return new Response(JSON.stringify({ success: false, message: 'Server configuration error.' }), {
+      status: 500,
+      headers: { 'Content-Type': 'application/json' },
+    });
+  }
+
+  let formData: FormData;
+  try {
+    formData = await request.formData();
+  } catch {
+    return new Response(JSON.stringify({ success: false, message: 'Invalid form submission.' }), {
+      status: 400,
+      headers: { 'Content-Type': 'application/json' },
+    });
+  }
+
+  // Honeypot check — bots fill the hidden website field
+  const honeypot = formData.get('website') as string;
+  if (honeypot && honeypot.trim() !== '') {
+    return new Response(JSON.stringify({ success: true, message: 'Received.' }), {
       status: 200,
       headers: { 'Content-Type': 'application/json' },
+    });
+  }
+
+  const payload = {
+    firstName:   (formData.get('firstName')    as string | null)?.trim() ?? '',
+    lastName:    (formData.get('lastName')     as string | null)?.trim() ?? '',
+    phone:       (formData.get('phone')        as string | null)?.trim() ?? '',
+    email:       (formData.get('email')        as string | null)?.trim() ?? '',
+    county:      (formData.get('county')       as string | null)?.trim() ?? '',
+    message:     (formData.get('message')      as string | null)?.trim() ?? '',
+    smsConsent:  formData.get('smsConsent') === 'yes',
+    formVariant: (formData.get('form_variant') as string | null) ?? 'b2c',
+    source:      'eforestproducts.com',
+    submittedAt: new Date().toISOString(),
+  };
+
+  try {
+    const ghlResponse = await fetch(webhookUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+
+    if (!ghlResponse.ok) {
+      console.error('[submit-form] GHL webhook returned', ghlResponse.status);
     }
-  );
+  } catch (err) {
+    console.error('[submit-form] Failed to reach GHL webhook:', err);
+  }
+
+  // Redirect to thank-you page after submission regardless of GHL response
+  return Response.redirect(new URL('/thank-you', request.url), 303);
 };

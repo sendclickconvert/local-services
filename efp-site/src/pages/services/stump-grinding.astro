@@ -4,11 +4,14 @@ import ServiceLayout from '../../layouts/ServiceLayout.astro';
 import PageHero from '../../components/ui/PageHero.astro';
 import Breadcrumb from '../../components/ui/Breadcrumb.astro';
 import FAQSection from '../../components/ui/FAQSection.astro';
+import KeyTakeaway from '../../components/ui/KeyTakeaway.astro';
 import EstimateForm from '../../components/forms/EstimateForm.astro';
 import ServiceSchema from '../../components/schema/ServiceSchema.astro';
 import FAQSchema from '../../components/schema/FAQSchema.astro';
 import AuthorByline from '../../components/ui/AuthorByline.astro';
+import OptimizedImage from '../../components/ui/OptimizedImage.astro';
 import { buildTitle, buildCanonical, buildDescription } from '../../lib/seo';
+import ClusterArticles from '../../components/ui/ClusterArticles.astro';
 
 const title = buildTitle("Stump Grinding Services — Sullivan, Orange & Ulster Counties NY");
 const description = buildDescription(
@@ -22,7 +25,6 @@ const crumbs = [
   { label: "Stump Grinding", href: "/services/stump-grinding" },
 ];
 
-// ⚠️ FAQs — review and confirm with Henry before launch
 const faqs = [
   {
     question: "What is stump grinding and how does it work?",
@@ -38,11 +40,19 @@ const faqs = [
   },
   {
     question: "How long does stump grinding take?",
-    answer: "A single residential stump typically takes less than an hour to grind, depending on size and root structure. Multiple stumps or large-diameter stumps from mature trees take longer. Site access for the grinding equipment is a factor — ask about access requirements when you call. [⚠️ Confirm typical job timelines with Henry]"
+    answer: "A single residential stump typically takes less than an hour to grind, depending on size and root structure. Multiple stumps or large-diameter stumps from mature trees take longer. Site access for the grinding equipment is a factor — a walk-behind grinder fits through most yard gates, while larger towable units need at least a 4-foot-wide access point. We confirm access requirements during the estimate."
   },
   {
     question: "Do you serve Orange and Ulster counties for stump grinding?",
     answer: "Yes. Stump grinding is available throughout Sullivan, Orange, and Ulster counties in New York. Service is also available in Pike and Wayne counties in Pennsylvania and Sussex County in New Jersey. Contact us to confirm availability for your property."
+  },
+  {
+    question: "How deep do you grind stumps?",
+    answer: "We typically grind stumps 6–12 inches below ground level, which is deep enough to allow grass or new plantings to establish roots. For construction sites where a foundation or driveway will be poured, we can grind deeper — up to 18 inches — to ensure no wood remains that could decay and cause settling. The grinding depth depends on your plans for the area and we will discuss options during the estimate."
+  },
+  {
+    question: "What do you do with the wood chips after grinding?",
+    answer: "You have two options: we can haul the wood chips away and dispose of them, or we can spread them on-site as mulch around landscaping or wooded areas. Many landowners in Sullivan and Orange counties choose to keep the chips — they make excellent mulch and decompose naturally over one to two years. If you are planning to replant grass in the area, we recommend removing most of the chips and backfilling with topsoil for better grass establishment."
   },
 ];
 ---
@@ -65,11 +75,14 @@ const faqs = [
     subtitle="Clean stump removal after tree work, land clearing, or timber harvesting — site-ready results"
   />
 
-  <article class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+  <article class="max-w-4xl mx-auto my-8 sm:my-10 px-8 sm:px-12 py-10 bg-white rounded-2xl shadow-md ring-1 ring-gray-200">
+
+    <KeyTakeaway text="Leftover stumps aren't just unsightly — they're magnets for termites, carpenter ants, and fungal diseases that can spread to healthy trees. We recommend removing stumps within six months of tree removal to protect your property and prevent long-term damage." />
 
     <AuthorByline />
+    <p class="text-xs text-gray-400 mt-1 mb-8">Last reviewed: April 2026 by Henry Kowalec, CF</p>
 
-        <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Complete Stump Removal for Any Site Condition</h2>
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Complete Stump Removal for Any Site Condition</h2>
     <p class="text-gray-700 leading-relaxed mb-4">
       After a tree is removed — whether from storm damage, a clearing project, or timber harvesting operations — the stump that remains is more than an eyesore. It is a tripping hazard, an obstacle for mowing and grading, a source of continued root activity, and a host for wood-decay fungi and certain insects. Stump grinding removes it cleanly and leaves the site ready for whatever comes next.
     </p>
@@ -77,14 +90,71 @@ const faqs = [
       Environmental Forest Products provides stump grinding as a standalone service and as part of larger land clearing and timber projects across the Hudson Valley and Catskills region.
     </p>
 
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Common Situations Requiring Stump Grinding</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      In our 30+ years serving landowners across Sullivan, Orange, and Ulster counties in New York — and Pike, Wayne, and Sussex counties across the border — we have found that stump grinding needs fall into a handful of recurring situations. Recognizing which applies to your property helps clarify the right timing and approach.
+    </p>
+    <ul class="space-y-3 mb-6">
+      {[
+        ["After land clearing projects", "When a lot is cleared for development, construction, or agricultural use, stumps left behind prevent proper grading and make the land unusable. Builders and developers consistently require clean, stump-free sites before site prep can begin."],
+        ["Pre-construction site preparation", "Stumps below grade can cause settling problems for driveways, foundations, and outbuildings over time as the wood decays. Grinding to 12–18 inches below grade eliminates this risk before construction begins."],
+        ["Lawn restoration", "Stumps in lawn areas prevent clean mowing, create tripping hazards, and become increasingly problematic as surrounding grass grows back. Grinding resolves the problem permanently and allows the area to be seeded and restored."],
+        ["Safety hazards near walkways and driveways", "Protruding stumps near high-traffic areas — driveways, walkways, play areas — present genuine injury risk. Removing them promptly is the responsible choice, particularly on properties with children or elderly residents."],
+        ["Disease prevention", "Decaying stumps attract termites, carpenter ants, and several fungal diseases that can spread to healthy trees and structures on the property. Honey fungus and other wood-decay pathogens colonize stumps and can travel through root systems to nearby living trees. Removing stumps within six months of tree removal significantly reduces this risk."],
+        ["Property value and curb appeal", "Visible stumps are widely recognized as a detractor for residential property values and commercial curb appeal. Buyers and appraisers notice them, and removal is frequently requested as a condition of property sales."],
+      ].map(([heading, body]) => (
+        <li class="flex gap-3">
+          <svg class="w-5 h-5 text-[#2d5a2d] flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+          <div>
+            <span class="font-semibold text-gray-900">{heading}.</span>
+            <span class="text-gray-600"> {body}</span>
+          </div>
+        </li>
+      ))}
+    </ul>
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Our Stump Grinding Process</h2>
+    <OptimizedImage src="/images/uploads/land-clearing-forestburgh-ny-komatsu.jpg" alt="Site clearing and stump removal in Forestburgh, NY — Environmental Forest Products Sullivan County" class="w-full rounded-xl shadow-md mb-6" sizes="(max-width: 768px) 100vw, 768px" />
+    <p class="text-gray-700 leading-relaxed mb-4">
+      The right equipment makes the difference between efficient stump removal and a job that takes twice as long and disrupts more of the surrounding area than necessary. We use both walk-behind grinders for smaller stumps and tight-access situations, and larger towable grinders for stumps 24 inches in diameter and above. Walk-behind units fit through standard yard gates and cause minimal lawn disruption. Towable units handle high-volume work and larger hardwood stumps — common on Sullivan County properties that have had mature oaks, maples, or ash trees removed.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Grinding depth is typically 6–12 inches below grade for standard applications — sufficient for lawn restoration and replanting. For construction sites requiring a foundation, slab, or driveway, we grind to 18 inches or deeper to eliminate any organic material that could settle and cause structural problems over time.
+    </p>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Surface roots that extend beyond the main stump are addressed as part of the grinding process. We follow the primary root flare and address the main lateral roots that could cause problems for mowing or future plantings. Once grinding is complete, the resulting wood chips are your choice to keep or remove — they can be raked back into the void as fill, spread as mulch, or hauled off the property entirely.
+    </p>
+
     <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">When Stump Grinding Makes Sense</h2>
-    <img src="/images/uploads/land-clearing-forestburgh-ny-komatsu.jpg" alt="Site clearing and stump removal in Forestburgh, NY — Environmental Forest Products Sullivan County" class="w-full rounded-xl shadow-md" loading="lazy" />
     <ul class="space-y-3 mb-6">
       {[
         ["After tree removal", "A removed tree almost always leaves a stump. Grinding it eliminates the root collar and allows the area to be graded, seeded, or used for construction."],
         ["Following land clearing", "Stumps left after a clearing operation prevent proper grading and make the land difficult to use. Grinding them down brings the site to a consistent, workable level."],
         ["Lawn and landscaping restoration", "Stumps in lawn areas prevent clean mowing and become worse obstacles as surrounding grass grows back. Grinding resolves the problem permanently."],
         ["Site preparation for construction", "When a cleared area will be used for a driveway, foundation, outbuilding, or other structure, stumps need to be removed to below the depth of excavation or grading."],
+      ].map(([heading, body]) => (
+        <li class="flex gap-3">
+          <svg class="w-5 h-5 text-[#2d5a2d] flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+          <div>
+            <span class="font-semibold text-gray-900">{heading}.</span>
+            <span class="text-gray-600"> {body}</span>
+          </div>
+        </li>
+      ))}
+    </ul>
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Stump Grinding Cost Factors</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Stump grinding pricing in Sullivan, Orange, and Ulster counties is influenced by several factors. Understanding these helps landowners plan and budget accurately before calling for an estimate.
+    </p>
+    <ul class="space-y-3 mb-6">
+      {[
+        ["Stump diameter", "Pricing is typically calculated per inch of diameter — a 12-inch oak stump costs substantially less than a 36-inch maple stump. Larger stumps require more grinding time and, in some cases, larger equipment."],
+        ["Number of stumps", "Volume discounts apply when grinding multiple stumps in a single visit. Mobilization costs are spread across the job, making per-stump pricing more favorable when there are 5 or more stumps to remove."],
+        ["Location and accessibility", "Stumps near buildings, fences, or in confined backyard spaces require more careful equipment maneuvering and take longer than stumps in open areas. Access width is also a factor — some yards require a walk-behind unit where a towable would otherwise be more efficient."],
+        ["Root system complexity", "Hardwoods like oak, maple, and hickory develop extensive lateral root systems. Stumps with complex surface root flares take longer to grind thoroughly than softwood species with simpler root structures."],
+        ["Debris removal", "Leaving wood chips on-site is included in the base service. Hauling chips away for disposal adds to the total cost but may be the right choice for lawn areas where replanting is planned."],
+        ["Typical price range", "Stump grinding in Sullivan County typically runs $100–500 per stump depending on size, species, and site conditions. Multiple-stump projects are priced at a reduced per-stump rate. We provide fixed estimates after the site assessment."],
       ].map(([heading, body]) => (
         <li class="flex gap-3">
           <svg class="w-5 h-5 text-[#2d5a2d] flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
@@ -116,10 +186,42 @@ const faqs = [
       <p class="text-gray-700 text-sm mb-4">
         Call to discuss your site. We will confirm what equipment access looks like, how the chips will be handled, and what it takes to get from stump to clean ground.
       </p>
-      <a href="tel:+18457548242" class="inline-flex items-center gap-2 bg-[#1a3c1a] text-white font-semibold px-5 py-3 rounded hover:bg-[#2d5a2d] transition-colors text-sm">
+      <a href="tel:+18454980208" class="inline-flex items-center gap-2 bg-[#1a3c1a] text-white font-semibold px-5 py-3 rounded hover:bg-[#2d5a2d] transition-colors text-sm">
         <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/></svg>
         Call (845) 754-8242
       </a>
+    </div>
+
+    <div class="mt-12 pt-8 border-t border-gray-200">
+      <h3 class="text-lg font-bold text-[#1a3c1a] mb-4">Related Guides</h3>
+      <ul class="space-y-3 mb-10">
+        <li><a href="/guides/land-clearing-cost" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">Land Clearing Cost Per Acre — What to Expect in NY</a></li>
+        <li><a href="/guides/forestry-mulching-vs-land-clearing" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">Forestry Mulching vs. Traditional Land Clearing</a></li>
+      </ul>
+    </div>
+
+    <!-- Interactive Tool card -->
+    <div class="my-8 rounded-xl border border-[#2d5a2d] bg-green-50 p-6 flex flex-col sm:flex-row sm:items-center gap-4">
+      <div class="flex-shrink-0 text-3xl" aria-hidden="true">🪓</div>
+      <div class="flex-1 min-w-0">
+        <p class="text-xs font-bold uppercase tracking-widest text-[#2d5a2d] mb-1">Free Tool</p>
+        <p class="font-bold text-[#1a3c1a] text-base mb-1">Tree Removal Cost Calculator</p>
+        <p class="text-gray-600 text-sm">Most stump grinding jobs follow tree removal. Estimate the full project cost — tree removal plus stump grinding — with one tool.</p>
+      </div>
+      <a href="/services/tree-removal/tree-removal-cost-calculator" class="flex-shrink-0 inline-flex items-center gap-2 bg-[#2d5a2d] hover:bg-[#1a3c1a] text-white font-semibold text-sm px-5 py-2.5 rounded-lg transition-colors whitespace-nowrap">
+        Estimate My Cost
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+
+    <ClusterArticles serviceSlug="stump-grinding" heading="Stump Grinding Guides" />
+
+    <div class="mt-10 pt-6 border-t border-gray-200">
+      <p class="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-2">Sources &amp; Further Reading</p>
+      <ul class="text-xs text-gray-500 space-y-1">
+        <li><a href="https://www.isa-arbor.com/Tree-Care" target="_blank" rel="noopener noreferrer" class="text-[#2d5a2d] hover:underline">International Society of Arboriculture (ISA) — Tree Care</a></li>
+        <li><a href="https://www.dec.ny.gov/lands/4937.html" target="_blank" rel="noopener noreferrer" class="text-[#2d5a2d] hover:underline">NY DEC — Freshwater Wetlands (Article 24)</a></li>
+      </ul>
     </div>
 
     <FAQSection items={faqs} />

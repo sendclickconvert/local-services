@@ -1,12 +1,23 @@
 ---
 // ArticleSchema.astro
-// Injects BlogPosting JSON-LD for all /guides/ articles.
+// Injects BlogPosting + BreadcrumbList JSON-LD for all /guides/ articles.
 //
-// ⚠️ image array MUST include all three aspect ratios before publish:
-//    16:9, 4:3, 1:1 — required for Google rich results eligibility.
-//    Use buildSchemaImages(slug) from src/lib/seo.ts to generate.
+// ─── RULES ────────────────────────────────────────────────────────────────────
+// • image array MUST include all three aspect ratios before publish:
+//   16:9, 4:3, 1:1 — required for Google rich results eligibility.
+//   Use buildSchemaImages(slug) from src/lib/seo.ts to generate.
 //
-// dateModified MUST be updated on every content edit — freshness signal.
+// • dateModified MUST be updated on every content edit — freshness signal.
+//
+// • BreadcrumbList is emitted as a SEPARATE top-level <script> block.
+//   It must NOT be nested inside BlogPosting — invalid JSON-LD when done that
+//   way and prevents breadcrumb rich results from firing.
+//
+// • publisher uses @id reference to the org node (defined on homepage).
+//   Do NOT inline the full Organization object here.
+//
+// • author includes @id, url, and hasCredential for E-E-A-T signals.
+// ─────────────────────────────────────────────────────────────────────────────
 
 import { author, business } from '../../data/client.config';
 import { buildBreadcrumbs } from '../../data/schema/breadcrumbs';
@@ -24,28 +35,43 @@ interface Props {
 
 const { title, description, url, datePublished, dateModified, images, crumbs } = Astro.props;
 
-const schema = {
+// ─── 1. BlogPosting schema ────────────────────────────────────────────────────
+const articleSchema = {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
+  "@id": url,
   "headline": title,
   "description": description,
   "url": url,
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": url,
+  },
   "datePublished": datePublished,
   "dateModified": dateModified,
   "image": images,
   "author": {
     "@type": "Person",
+    "@id": `${business.domain}/#henry-kowalec`,
     "name": author.name,
-    "jobTitle": author.title,
+    "jobTitle": "Certified Consulting Forester",
+    "url": `${business.domain}/about`,
+    "hasCredential": {
+      "@type": "EducationalOccupationalCredential",
+      "credentialCategory": "professional certification",
+      "name": "Certified Forester (CF), Society of American Foresters",
+    },
     "sameAs": [...author.sameAs],
   },
   "publisher": {
-    "@type": "Organization",
-    "name": business.name,
-    "url": business.domain,
+    "@id": `${business.domain}/#organization`,
   },
-  "breadcrumb": buildBreadcrumbs(crumbs),
 };
+
+// ─── 2. BreadcrumbList — standalone top-level block ──────────────────────────
+// buildBreadcrumbs() already includes "@context" — emit as its own <script> tag.
+const breadcrumbSchema = buildBreadcrumbs(crumbs);
 ---
 
-<script type="application/ld+json" set:html={JSON.stringify(schema)} />
+<script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />

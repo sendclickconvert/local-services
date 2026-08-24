@@ -6,12 +6,15 @@
 // Do not agent-edit the form action, method, or hidden field values.
 
 import { integrations } from '../../data/client.config';
+import PhoneConsent from './PhoneConsent.astro';
+const turnstileSiteKey = import.meta.env.TURNSTILE_SITE ?? '';
 
 interface Props {
   variant?: 'b2c' | 'b2b';
   id?: string;
+  showPhone?: boolean;
 }
-const { variant = 'b2c', id = 'contact-form' } = Astro.props;
+const { variant = 'b2c', id = 'contact-form', showPhone = true } = Astro.props;
 
 const formHeading = variant === 'b2b'
   ? 'Request a Commercial Quote'
@@ -28,6 +31,15 @@ const submitLabel = variant === 'b2b'
   <!-- ⚠️ MANUAL-ONLY: form action endpoint — do not agent-edit -->
   <form action={integrations.formEndpoint} method="POST" class="space-y-5">
     <input type="hidden" name="form_variant" value={variant} />
+
+    <!-- Time-check field — set to epoch ms by JS on load; server rejects if under 3 s -->
+    <input type="hidden" name="_loaded_at" id={`loaded_at_${id}`} value="" />
+
+    <!-- Honeypot field — spam protection. Must stay hidden and empty for valid submissions. -->
+    <div style="position:absolute;left:-9999px;top:-9999px;opacity:0;" aria-hidden="true" tabindex="-1">
+      <label for="website_field">Website (leave blank)</label>
+      <input type="text" id="website_field" name="website" autocomplete="off" tabindex="-1" />
+    </div>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
       <div>
@@ -54,17 +66,6 @@ const submitLabel = variant === 'b2b'
       </div>
     </div>
 
-    <div>
-      <label for="phone" class="block text-sm font-semibold text-gray-700 mb-1.5">
-        Phone <span class="text-red-500" aria-hidden="true">*</span>
-      </label>
-      <input
-        type="tel" id="phone" name="phone" required
-        autocomplete="tel"
-        class="w-full px-4 py-2.5 border border-gray-300 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#2d5a2d] focus:border-transparent transition"
-        placeholder="(xxx) xxx-xxxx"
-      />
-    </div>
 
     <div>
       <label for="email" class="block text-sm font-semibold text-gray-700 mb-1.5">Email</label>
@@ -75,6 +76,21 @@ const submitLabel = variant === 'b2b'
         placeholder="john@example.com"
       />
     </div>
+
+    {showPhone && (
+      <div>
+        <label for="phone" class="block text-sm font-semibold text-gray-700 mb-1.5">
+          Phone <span class="text-gray-400 font-normal text-xs">(optional)</span>
+        </label>
+        <input
+          type="tel" id="phone" name="phone"
+          autocomplete="tel"
+          class="w-full px-4 py-2.5 border border-gray-300 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#2d5a2d] focus:border-transparent transition"
+          placeholder="(845) 555-0100"
+        />
+        <PhoneConsent />
+      </div>
+    )}
 
     {variant === 'b2c' && (
       <div>
@@ -111,6 +127,10 @@ const submitLabel = variant === 'b2b'
       ></textarea>
     </div>
 
+    {turnstileSiteKey && (
+      <div class="cf-turnstile" data-sitekey={turnstileSiteKey} data-theme="light"></div>
+    )}
+
     <button
       type="submit"
       class="w-full bg-[#1a3c1a] hover:bg-[#2d5a2d] text-white font-bold py-3.5 px-6 rounded-lg transition-colors text-base shadow-sm"
@@ -121,5 +141,23 @@ const submitLabel = variant === 'b2b'
     <p class="text-xs text-gray-500 text-center">
       Your information is never shared. We respond within 24 hours.
     </p>
+
+    <p class="text-xs text-gray-400 text-center">
+      <a href="/privacy" class="underline hover:text-gray-600">Privacy Policy</a>
+      <span class="mx-1">|</span>
+      <a href="/terms" class="underline hover:text-gray-600">Terms of Service</a>
+    </p>
   </form>
 </section>
+
+<!-- Time-check: stamp the hidden field the moment the form loads -->
+<script define:vars={{ fieldId: `loaded_at_${id}` }}>
+  (function () {
+    const el = document.getElementById(fieldId);
+    if (el) el.value = String(Date.now());
+  })();
+</script>
+
+{turnstileSiteKey && (
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+)}

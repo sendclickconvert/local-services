@@ -7,7 +7,10 @@ import KeyTakeaway from '../../components/ui/KeyTakeaway.astro';
 import AuthorByline from '../../components/ui/AuthorByline.astro';
 import ServiceSchema from '../../components/schema/ServiceSchema.astro';
 import FAQSchema from '../../components/schema/FAQSchema.astro';
+import EstimateForm from '../../components/forms/EstimateForm.astro';
+import OptimizedImage from '../../components/ui/OptimizedImage.astro';
 import { buildTitle, buildCanonical, buildDescription } from '../../lib/seo';
+import ClusterArticles from '../../components/ui/ClusterArticles.astro';
 
 const title = buildTitle("Tree Removal — Sullivan, Orange & Ulster Counties NY | EFP");
 const description = buildDescription(
@@ -47,6 +50,10 @@ const faqs = [
     question: "What areas do you serve for tree removal?",
     answer: "Sullivan, Orange, and Ulster counties in New York, plus Pike and Wayne counties in Pennsylvania and Sussex County in New Jersey.",
   },
+  {
+    question: "Do I need a permit to remove a tree on my property in Sullivan County?",
+    answer: "In most cases, no — Sullivan County and most towns within it do not require permits for tree removal on private property. However, there are exceptions: if the tree is in a wetland or within 100 feet of a regulated wetland, you may need a DEC permit under Article 24. Planned communities and HOAs often require approval even for dead trees. Historic districts may have restrictions. We are familiar with permit requirements across Sullivan, Orange, and Ulster counties and will advise you during the estimate.",
+  },
 ];
 ---
 
@@ -68,17 +75,18 @@ const faqs = [
     subtitle="Any size, any species — residential, commercial, and rural properties in Sullivan, Orange, and Ulster counties"
   />
 
-  <article class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+  <article class="max-w-4xl mx-auto my-8 sm:my-10 px-8 sm:px-12 py-10 bg-white rounded-2xl shadow-md ring-1 ring-gray-200">
 
     <KeyTakeaway text="Before any tree removal is scheduled, it is worth having a forester assess whether the trees have merchantable timber value — particularly large-diameter hardwoods on rural and semi-rural properties. Recovering that value changes the economics of the removal significantly." />
 
     <AuthorByline />
+    <p class="text-xs text-gray-400 mt-1 mb-8">Last reviewed: April 2026 by Henry Kowalec, CF</p>
 
-    <img
+    <OptimizedImage
       src="/images/uploads/hand-felling-trees-nyc-dep-carmel-ny.jpg"
       alt="Professional tree felling during NYC DEP project in Carmel, NY — Environmental Forest Products crew work"
       class="w-full rounded-xl shadow-md my-8"
-      loading="lazy"
+      sizes="(max-width: 768px) 100vw, 768px"
     />
 
     <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Tree Removal Services</h2>
@@ -93,6 +101,29 @@ const faqs = [
       and utilities, and what the landowner needs the site to look like when the work is done. Every
       project starts with an on-site assessment — not a phone estimate.
     </p>
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">When Tree Removal Is Necessary</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Over 30 years of tree work in Sullivan County, we have removed thousands of trees across a wide range of situations. The circumstances that prompt tree removal are more varied than most property owners expect — it is not always a dead or obviously hazardous tree.
+    </p>
+    <ul class="space-y-3 mb-8">
+      {[
+        ["Storm damage and hazard trees", "Wind damage, lightning strikes, and ice storms are common across the Hudson Valley and Catskills. Ice-laden limbs on mature hardwoods create extreme structural loads that cause failures days after a storm event, not just during it. Storm-damaged trees that remain standing with split leaders or root plate heave require professional assessment and often removal before the next weather event."],
+        ["Disease and pest infestation", "Emerald ash borer has eliminated millions of ash trees across New York. Oak wilt, beech leaf disease, and Dutch elm disease continue to affect regional tree populations. When infection has progressed beyond treatment viability, removal is both the right forestry call and an opportunity to salvage merchantable timber value before the wood degrades."],
+        ["Construction and development clearing", "Residential builds, commercial site preparation, and driveway installations routinely require tree removal as part of site prep. Coordinating with a forester first identifies trees with timber value worth recovering before clearing equipment arrives."],
+        ["Power line conflicts", "Trees growing into utility corridors create ongoing liability and service risk. Utilities including Central Hudson and NYSEG require removal rather than repeated trimming in many cases. Working alongside utility-required removal is a common part of our residential service calls."],
+        ["Property sale requirements", "Buyers frequently require hazard trees to be removed as a condition of sale. A pre-listing tree assessment identifies which trees need action before they appear on an inspection report as a negotiating issue."],
+        ["Root damage to foundations or septic systems", "Mature trees with aggressive root systems — silver maple, willow, cottonwood — can infiltrate septic fields and foundation drainage systems. When root damage is confirmed, removal is usually more cost-effective than ongoing repair."],
+      ].map(([heading, body]) => (
+        <li class="flex gap-3">
+          <svg class="w-5 h-5 text-[#2d5a2d] flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+          <div>
+            <span class="font-semibold text-gray-900">{heading}.</span>
+            <span class="text-gray-600"> {body}</span>
+          </div>
+        </li>
+      ))}
+    </ul>
 
     <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">When Tree Removal Makes Sense</h2>
     <ul class="space-y-3 mb-8">
@@ -161,10 +192,62 @@ const faqs = [
         Call to discuss your tree removal project. Henry will walk the site, assess any timber value,
         and give you a straight answer about what the work involves.
       </p>
-      <a href="tel:+18457548242" class="inline-flex items-center gap-2 bg-[#1a3c1a] text-white font-semibold px-5 py-3 rounded hover:bg-[#2d5a2d] transition-colors text-sm">
-        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/></svg>
+      <a href="tel:+18454980208" class="inline-flex items-center gap-2 bg-[#1a3c1a] text-white font-semibold px-5 py-3 rounded hover:bg-[#2d5a2d] transition-colors text-sm">
+        <svg class="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/></svg>
         Call (845) 754-8242
       </a>
+    </div>
+
+    <h2 class="text-2xl font-bold text-[#1a3c1a] mt-10 mb-4">Tree Removal Permitting in New York</h2>
+    <p class="text-gray-700 leading-relaxed mb-4">
+      Most tree removal on private property in New York does not require a permit, but there are important exceptions worth knowing before work begins.
+    </p>
+    <ul class="space-y-3 mb-6">
+      {[
+        ["Standard private property", "New York State does not require a permit for tree removal on private upland property in most circumstances. Most Sullivan, Orange, and Ulster county municipalities follow the same standard — no permit required for removal on your own land."],
+        ["Wetland buffer zones", "Trees within 100 feet of a regulated freshwater wetland fall under DEC Article 24 jurisdiction. Removal in this zone may require a wetland permit before work begins. We identify regulated features during the site assessment."],
+        ["DEC-protected and rare species", "Certain old-growth trees and rare native species have protections under DEC regulations. This is uncommon on private residential and rural parcels but worth confirming on larger woodland properties."],
+        ["Town-specific ordinances", "Some municipalities — particularly in Ulster County — have local tree ordinances that apply to specific species, size thresholds, or properties in designated districts. We are familiar with local requirements across the three-county area."],
+        ["HOA and planned community restrictions", "Properties within homeowner associations often require board approval for tree removal, including dead or hazardous trees. Covenants vary significantly — check your HOA documents before scheduling any removal."],
+      ].map(([heading, body]) => (
+        <li class="flex gap-3">
+          <svg class="w-5 h-5 text-[#2d5a2d] flex-shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+          <div>
+            <span class="font-semibold text-gray-900">{heading}.</span>
+            <span class="text-gray-600"> {body}</span>
+          </div>
+        </li>
+      ))}
+    </ul>
+    <p class="text-gray-700 leading-relaxed mb-6">
+      We are familiar with permit requirements across Sullivan, Orange, and Ulster counties and will advise on any regulatory considerations during the initial site estimate — before any scheduling decisions are made.
+    </p>
+
+    <!-- Interactive Tool card -->
+    <div class="my-8 rounded-xl border border-[#2d5a2d] bg-green-50 p-6 flex flex-col sm:flex-row sm:items-center gap-4">
+      <div class="flex-shrink-0 text-3xl" aria-hidden="true">🪓</div>
+      <div class="flex-1 min-w-0">
+        <p class="text-xs font-bold uppercase tracking-widest text-[#2d5a2d] mb-1">Free Tool</p>
+        <p class="font-bold text-[#1a3c1a] text-base mb-1">Tree Removal Cost Calculator</p>
+        <p class="text-gray-600 text-sm">Get a local price range estimate based on tree size, site access, and stump grinding — including the timber value offset most companies miss.</p>
+      </div>
+      <a href="/services/tree-removal/tree-removal-cost-calculator" class="flex-shrink-0 inline-flex items-center gap-2 bg-[#2d5a2d] hover:bg-[#1a3c1a] text-white font-semibold text-sm px-5 py-2.5 rounded-lg transition-colors whitespace-nowrap">
+        Estimate My Cost
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+        </svg>
+      </a>
+    </div>
+
+    <ClusterArticles serviceSlug="tree-removal" heading="Tree Removal Guides" />
+
+    <div class="mt-10 pt-6 border-t border-gray-200">
+      <p class="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-2">Sources &amp; Further Reading</p>
+      <ul class="text-xs text-gray-500 space-y-1">
+        <li><a href="https://www.isa-arbor.com/Tree-Care" target="_blank" rel="noopener noreferrer" class="text-[#2d5a2d] hover:underline">International Society of Arboriculture (ISA) — Tree Care</a></li>
+        <li><a href="https://www.dec.ny.gov/lands/4937.html" target="_blank" rel="noopener noreferrer" class="text-[#2d5a2d] hover:underline">NY DEC — Freshwater Wetlands (Article 24)</a></li>
+        <li><a href="https://www.dec.ny.gov/animals/265.html" target="_blank" rel="noopener noreferrer" class="text-[#2d5a2d] hover:underline">NY DEC — Wildlife Management</a></li>
+      </ul>
     </div>
 
     <FAQSection items={faqs} />
