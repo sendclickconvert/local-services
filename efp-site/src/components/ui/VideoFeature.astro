@@ -22,6 +22,8 @@
 //     caption="Henry Kowalec — 30+ years of certified forestry consulting"
 //   />
 
+import OptimizedImage from './OptimizedImage.astro';
+
 interface Props {
   vimeoId: string;         // Vimeo video ID only — e.g. "123456789"
   posterSrc: string;       // Poster image path — required, shown until play
@@ -77,13 +79,21 @@ const vimeoEmbedUrl = `https://player.vimeo.com/video/${vimeoId}?${vimeoParams}`
       data-vimeo-url={vimeoEmbedUrl}
     >
 
-      <!-- Poster image — lightweight, lazy loaded, covers the container -->
-      <img
+      <!--
+        Poster image — served through OptimizedImage so the responsive WebP
+        variants get used. This was previously a bare <img> pointing at the raw
+        upload, which pulled the full-size JPEG on every page load.
+        Container is max-w-5xl less padding, so the slot is ~960px on desktop.
+        The .video-poster class stays on the <img> itself; the play handler
+        looks it up with querySelector and fades it, which still works inside
+        the <picture> wrapper.
+      -->
+      <OptimizedImage
         class="video-poster absolute inset-0 w-full h-full object-cover"
         src={posterSrc}
         alt={posterAlt ?? heading ?? "EFP forestry operations — watch Henry Kowalec at work"}
         loading="lazy"
-        decoding="async"
+        sizes="(max-width: 1024px) 100vw, 960px"
         width={posterWidth}
         height={posterHeight}
       />
