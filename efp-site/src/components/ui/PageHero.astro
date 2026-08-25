@@ -20,6 +20,11 @@ interface Props {
   bgImageAlt?: string;
 }
 
+// Every page previously fell through to a flat green band. Pages that don't pass
+// their own bgImage now get a woodland plate behind the dark overlay; pass
+// bgImage={null} to opt back out to the solid colour.
+const DEFAULT_BG = '/images/uploads/stock/hero-woodland.jpg';
+
 const {
   title,
   subtitle,
@@ -27,7 +32,7 @@ const {
   ctaHref  = `tel:${phone.trackingTel}`,
   cta2Label,
   cta2Href,
-  bgImage,
+  bgImage = DEFAULT_BG,
   bgImageAlt = '',
 } = Astro.props;
 
@@ -57,7 +62,11 @@ const bgImageWebp = bgImage
           height="675"
         />
       </picture>
-      <div class="absolute inset-0 bg-[#0d1a0d]/70" aria-hidden="true" />
+      <!-- Dark enough for white text to pass contrast, light enough that the
+           photograph still reads. Paired with a soft bottom gradient so the
+           CTA row keeps contrast over bright sky. -->
+      <div class="absolute inset-0 bg-[#0d1a0d]/55" aria-hidden="true" />
+      <div class="absolute inset-0 bg-gradient-to-t from-[#0d1a0d]/45 via-transparent to-[#0d1a0d]/25" aria-hidden="true" />
     </>
   )}
 

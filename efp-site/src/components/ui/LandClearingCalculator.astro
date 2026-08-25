@@ -1,0 +1,286 @@
+---
+// LandClearingCalculator.astro
+// Homepage primary conversion element — a real working calculator, not a lead
+// form in tool clothing.
+//
+// STATE 1  four inputs + Calculate. No name/email/phone/consent anywhere.
+// STATE 2  result replaces the inputs in place. Edit-inputs link returns to 1.
+// STATE 3  contact form, revealed ONLY after a result is on screen.
+//
+// Pricing comes from src/lib/land-clearing-pricing.ts, which the full
+// calculator at /services/land-clearing/land-clearing-cost-calculator also
+// imports. One source — do not duplicate the figures here.
+
+import { integrations } from '../../data/client.config';
+import PhoneConsent from '../forms/PhoneConsent.astro';
+
+const TERRAIN = [
+  { value: 'flat',    label: 'Flat' },
+  { value: 'rolling', label: 'Rolling' },
+  { value: 'steep',   label: 'Steep or rocky' },
+];
+
+const VEG = [
+  { value: 'brush',    label: 'Light brush' },
+  { value: 'mixed',    label: 'Mixed brush and trees' },
+  { value: 'woodland', label: 'Mature woods' },
+];
+
+const TIMBER = [
+  { value: 'yes',   label: 'Yes' },
+  { value: 'no',    label: 'No' },
+  { value: 'maybe', label: 'Not sure' },
+];
+
+// bg-white matters now that the calculator sits directly on the light band
+// rather than inside a white card.
+const chip = 'cursor-pointer select-none rounded-lg border border-gray-300 bg-white px-3 py-2.5 text-sm text-center '
+           + 'text-gray-700 transition-colors hover:border-[#2d5a2d] hover:bg-green-50';
+---
+
+<div id="lcq" class="lcq">
+
+  <!-- ─── STATE 1: inputs only ─────────────────────────────────────────── -->
+  <div id="lcq-inputs">
+    <form id="lcq-form" novalidate>
+      <div class="mb-5">
+        <label for="lcq-acres" class="block text-sm font-semibold text-gray-700 mb-1.5">
+          How many acres?
+        </label>
+        <input
+          type="number" id="lcq-acres" name="acres" min="0.25" step="0.25"
+          inputmode="decimal" placeholder="e.g. 2"
+          class="w-full px-4 py-2.5 border border-gray-300 bg-white rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#2d5a2d] focus:border-transparent transition"
+        />
+      </div>
+
+      <fieldset class="mb-5">
+        <legend class="block text-sm font-semibold text-gray-700 mb-2">Terrain</legend>
+        <div class="grid grid-cols-3 gap-2">
+          {TERRAIN.map(o => (
+            <label class={`lcq-chip ${chip}`}>
+              <input type="radio" name="terrain" value={o.value} class="sr-only" />
+              <span>{o.label}</span>
+            </label>
+          ))}
+        </div>
+      </fieldset>
+
+      <fieldset class="mb-5">
+        <legend class="block text-sm font-semibold text-gray-700 mb-2">What's on it</legend>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+          {VEG.map(o => (
+            <label class={`lcq-chip ${chip}`}>
+              <input type="radio" name="vegType" value={o.value} class="sr-only" />
+              <span>{o.label}</span>
+            </label>
+          ))}
+        </div>
+      </fieldset>
+
+      <fieldset class="mb-6">
+        <legend class="block text-sm font-semibold text-gray-700 mb-2">
+          Mature trees worth money?
+        </legend>
+        <div class="grid grid-cols-3 gap-2">
+          {TIMBER.map(o => (
+            <label class={`lcq-chip ${chip}`}>
+              <input type="radio" name="timber" value={o.value} class="sr-only" />
+              <span>{o.label}</span>
+            </label>
+          ))}
+        </div>
+      </fieldset>
+
+      <p id="lcq-error" class="hidden text-sm text-red-600 mb-4">
+        Enter your acreage and pick one option in each group.
+      </p>
+
+      <button
+        type="submit"
+        class="w-full bg-[#1a3c1a] hover:bg-[#2d5a2d] text-white font-bold py-3.5 px-6 rounded-lg transition-colors text-base shadow-sm"
+      >
+        Calculate
+      </button>
+    </form>
+  </div>
+
+  <!-- ─── STATE 2: result (injected) ───────────────────────────────────── -->
+  <div id="lcq-result" class="hidden"></div>
+
+  <!-- ─── STATE 3: contact form, only after a result exists ────────────── -->
+  <div id="lcq-lead" class="hidden mt-8 pt-8 border-t border-gray-200">
+    <h3 class="text-lg font-bold text-[#1a3c1a] mb-1">Want a firm number for your parcel?</h3>
+    <p class="text-sm text-gray-600 leading-relaxed mb-5">
+      Henry will review your inputs and send a written estimate. No site visit required.
+    </p>
+
+    <!-- ⚠️ MANUAL-ONLY: form action endpoint — do not agent-edit -->
+    <form action={integrations.formEndpoint} method="POST" class="space-y-4">
+      <input type="hidden" name="form_variant" value="homepage-calculator" />
+      <input type="hidden" name="message" id="lcq-message" value="" />
+      <input type="hidden" name="_loaded_at" id="lcq-loaded-at" value="" />
+
+      <div style="position:absolute;left:-9999px;top:-9999px;opacity:0;" aria-hidden="true" tabindex="-1">
+        <label for="lcq-website">Website (leave blank)</label>
+        <input type="text" id="lcq-website" name="website" autocomplete="off" tabindex="-1" />
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label for="lcq-first" class="block text-sm font-semibold text-gray-700 mb-1.5">
+            First Name <span class="text-red-500" aria-hidden="true">*</span>
+          </label>
+          <input type="text" id="lcq-first" name="firstName" required autocomplete="given-name"
+            class="w-full px-4 py-2.5 border border-gray-300 bg-white rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#2d5a2d] focus:border-transparent transition"
+            placeholder="John" />
+        </div>
+        <div>
+          <label for="lcq-last" class="block text-sm font-semibold text-gray-700 mb-1.5">
+            Last Name <span class="text-red-500" aria-hidden="true">*</span>
+          </label>
+          <input type="text" id="lcq-last" name="lastName" required autocomplete="family-name"
+            class="w-full px-4 py-2.5 border border-gray-300 bg-white rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#2d5a2d] focus:border-transparent transition"
+            placeholder="Smith" />
+        </div>
+      </div>
+
+      <div>
+        <label for="lcq-email" class="block text-sm font-semibold text-gray-700 mb-1.5">Email</label>
+        <input type="email" id="lcq-email" name="email" autocomplete="email"
+          class="w-full px-4 py-2.5 border border-gray-300 bg-white rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#2d5a2d] focus:border-transparent transition"
+          placeholder="john@example.com" />
+      </div>
+
+      <div>
+        <label for="lcq-phone" class="block text-sm font-semibold text-gray-700 mb-1.5">
+          Phone <span class="text-gray-400 font-normal text-xs">(optional)</span>
+        </label>
+        <input type="tel" id="lcq-phone" name="phone" autocomplete="tel"
+          class="w-full px-4 py-2.5 border border-gray-300 bg-white rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#2d5a2d] focus:border-transparent transition"
+          placeholder="(845) 555-0100" />
+        <!-- Consent renders here ONLY — never in state 1. -->
+        <PhoneConsent />
+      </div>
+
+      <button type="submit"
+        class="w-full bg-[#1a3c1a] hover:bg-[#2d5a2d] text-white font-bold py-3.5 px-6 rounded-lg transition-colors text-base shadow-sm">
+        Send Me a Written Estimate
+      </button>
+    </form>
+  </div>
+</div>
+
+<style>
+  .lcq-chip input:checked + span { font-weight: 700; }
+  .lcq-chip:has(input:checked) {
+    border-color: #1a3c1a;
+    background: #1a3c1a;
+    color: #fff;
+  }
+  .lcq-chip:has(input:focus-visible) { outline: 2px solid #2d5a2d; outline-offset: 2px; }
+</style>
+
+<script>
+  import {
+    estimate, timberOffset, fmt,
+    VEG_LABELS, TERRAIN_LABELS,
+  } from '../../lib/land-clearing-pricing';
+
+  const root    = document.getElementById('lcq');
+  if (root) {
+    const form    = document.getElementById('lcq-form') as HTMLFormElement | null;
+    const inputs  = document.getElementById('lcq-inputs');
+    const result  = document.getElementById('lcq-result');
+    const lead    = document.getElementById('lcq-lead');
+    const errMsg  = document.getElementById('lcq-error');
+    const msgField= document.getElementById('lcq-message') as HTMLInputElement | null;
+    const loadedAt= document.getElementById('lcq-loaded-at') as HTMLInputElement | null;
+
+    if (loadedAt) loadedAt.value = String(Date.now());
+
+    form?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (!form || !inputs || !result || !lead) return;
+
+      const acres   = parseFloat((form.querySelector('[name="acres"]') as HTMLInputElement).value);
+      const terrain = (form.querySelector('[name="terrain"]:checked') as HTMLInputElement | null)?.value;
+      const vegType = (form.querySelector('[name="vegType"]:checked') as HTMLInputElement | null)?.value;
+      const timber  = (form.querySelector('[name="timber"]:checked')  as HTMLInputElement | null)?.value;
+
+      if (!acres || acres < 0.25 || !terrain || !vegType || !timber) {
+        errMsg?.classList.remove('hidden');
+        return;
+      }
+      errMsg?.classList.add('hidden');
+
+      // Homepage version does not ask about debris disposal — pass the zero-adder
+      // base case so the figure stays conservative. The full calculator asks.
+      const r = estimate({ acres, vegType: vegType as any, terrain: terrain as any, disposal: 'chip' });
+      const wantsTimber = timber === 'yes' || timber === 'maybe';
+      const t = timberOffset(r.midpoint);
+
+      const acreLabel = acres === 1 ? 'acre' : 'acres';
+
+      result.innerHTML = `
+        <div>
+          <p class="text-[11px] font-bold uppercase tracking-[0.14em] text-[#2d5a2d] mb-2">Your Estimate</p>
+          <h3 class="text-lg font-bold text-[#1a3c1a] mb-1">Estimated clearing cost</h3>
+          <p class="text-sm text-gray-500 mb-5">
+            ${acres.toLocaleString()} ${acreLabel} &middot; ${TERRAIN_LABELS[terrain]} &middot; ${VEG_LABELS[vegType]}
+          </p>
+
+          <div class="rounded-xl bg-[#1a3c1a] text-white px-5 py-6 text-center mb-4">
+            <p class="text-xs text-green-300 font-medium mb-1">Estimated range</p>
+            <p class="text-2xl sm:text-3xl font-bold">${fmt(r.totalLow)} – ${fmt(r.totalHigh)}</p>
+            <p class="text-xs text-green-300/80 mt-2">${fmt(r.perAcreLow)} – ${fmt(r.perAcreHigh)} per acre</p>
+          </div>
+
+          ${wantsTimber ? `
+          <div class="rounded-xl border border-amber-200 bg-amber-50 p-5 mb-4">
+            <p class="text-sm font-semibold text-amber-900 mb-2">Your timber may offset this</p>
+            <p class="text-sm text-amber-900 leading-relaxed mb-3">
+              Merchantable hardwoods can cut net clearing cost by 20–80% on wooded lots.
+              Against a typical ${fmt(r.midpoint)} job that is roughly
+              <strong>${fmt(t.creditLow)} – ${fmt(t.creditHigh)}</strong> in standing timber value.
+            </p>
+            <div class="rounded-lg bg-white border border-amber-200 px-4 py-3 text-center">
+              <p class="text-xs text-amber-800 font-medium mb-0.5">Net cost after timber credit</p>
+              <p class="text-xl font-bold text-amber-900">as low as ${fmt(t.netFloor)}</p>
+            </div>
+          </div>` : ''}
+
+          <p class="text-xs text-gray-500 leading-relaxed mb-4">
+            What drives the range: ${VEG_LABELS[vegType]} on ${TERRAIN_LABELS[terrain]} sets the
+            per-acre cost, and how the debris is handled moves it from there. Actual cost depends
+            on access, season, and stump depth.
+          </p>
+
+          <div class="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm">
+            <button type="button" id="lcq-edit"
+              class="text-[#2d5a2d] font-semibold underline hover:text-[#1a3c1a]">Edit inputs</button>
+            <a href="/services/land-clearing/land-clearing-cost-calculator"
+              class="text-[#2d5a2d] font-semibold underline hover:text-[#1a3c1a]">Use the full calculator</a>
+          </div>
+        </div>`;
+
+      if (msgField) {
+        msgField.value =
+          `Homepage calculator — ${acres} ${acreLabel}, ${TERRAIN_LABELS[terrain]}, ` +
+          `${VEG_LABELS[vegType]}, merchantable timber: ${timber}. ` +
+          `Estimated ${fmt(r.totalLow)}–${fmt(r.totalHigh)}` +
+          (wantsTimber ? ` (net after timber credit as low as ${fmt(t.netFloor)})` : '') + '.';
+      }
+
+      inputs.classList.add('hidden');
+      result.classList.remove('hidden');
+      lead.classList.remove('hidden');
+
+      document.getElementById('lcq-edit')?.addEventListener('click', () => {
+        result.classList.add('hidden');
+        lead.classList.add('hidden');
+        inputs.classList.remove('hidden');
+      });
+    });
+  }
+</script>

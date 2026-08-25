@@ -28,9 +28,19 @@ interface Props {
   posterAlt?: string;      // Custom alt text for poster image
   heading?: string;        // Optional section heading above panel
   caption?: string;        // Optional caption below panel
+  posterWidth?: number;    // Poster intrinsic width — reserves aspect ratio (CLS)
+  posterHeight?: number;   // Poster intrinsic height
 }
 
-const { vimeoId, posterSrc, posterAlt, heading, caption } = Astro.props;
+const {
+  vimeoId,
+  posterSrc,
+  posterAlt,
+  heading,
+  caption,
+  posterWidth = 1200,
+  posterHeight = 675,
+} = Astro.props;
 
 // Vimeo embed URL — no autoplay on initial load, autoplay only triggered by play button
 // background=0 keeps controls visible after load
@@ -74,6 +84,8 @@ const vimeoEmbedUrl = `https://player.vimeo.com/video/${vimeoId}?${vimeoParams}`
         alt={posterAlt ?? heading ?? "EFP forestry operations — watch Henry Kowalec at work"}
         loading="lazy"
         decoding="async"
+        width={posterWidth}
+        height={posterHeight}
       />
 
       <!-- Semi-transparent overlay for play button legibility -->

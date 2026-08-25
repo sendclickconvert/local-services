@@ -2,17 +2,20 @@
 // pages/index.astro — Homepage
 import BaseLayout from '../layouts/BaseLayout.astro';
 import EligibilityQuiz from '../components/ui/EligibilityQuiz.astro';
+import LandClearingCalculator from '../components/ui/LandClearingCalculator.astro';
 import ServiceCard from '../components/ui/ServiceCard.astro';
 import VideoFeature from '../components/ui/VideoFeature.astro';
 import CTASection from '../components/ui/CTASection.astro';
 import { buildTitle, buildCanonical, buildDescription } from '../lib/seo';
-import { business, phone } from '../data/client.config';
+import { business, phone, serviceArea } from '../data/client.config';
 import { websiteSchema } from '../data/schema/website';
 import { organizationSchema } from '../data/schema/organization';
 
-const title = "Environmental Forest Products | Forestry Consulting in Hudson Valley NY";
+// Deliberately a hardcoded literal, not buildTitle() — the brand suffix would
+// push this past 60 characters.
+const title = "Land Clearing & Forestry Services | Sullivan County NY";
 const description = buildDescription(
-  "Environmental Forest Products provides timber harvesting, land clearing, woodlot management, and 480-a tax consulting across NY, NJ, and PA. Call (845) 754-8242."
+  "Land clearing, forestry mulching, and timber harvesting in Sullivan, Orange and Ulster counties NY by a certified forester. Call (845) 754-8242."
 );
 const canonicalUrl = buildCanonical("/");
 
@@ -20,21 +23,23 @@ const canonicalUrl = buildCanonical("/");
 // From live EFP site — confirmed visible. Logo files needed from Henry.
 // ⚠️ = flag for Henry review before launch (verify current membership status)
 
+// w/h are the files' true intrinsic dimensions — they give the browser an aspect
+// ratio to reserve so these 14 lazy logos stop contributing to CLS.
 const allLogos = [
-  { name: "Better Business Bureau",              logo: "/images/logos/bbb.png" },
-  { name: "NY Forest Owners Association",        logo: "/images/logos/ny-forest-owners-association.jpg" },
-  { name: "Sullivan County Chamber of Commerce", logo: "/images/logos/sullivan-county-chamber.jpg" },
-  { name: "Orange County Chamber of Commerce",   logo: "/images/logos/orange-county-chamber.jpg" },
-  { name: "Delaware State Chamber of Commerce",  logo: "/images/logos/delaware-state-chamber.webp" },
-  { name: "Delaware County Business Alliance",   logo: "/images/logos/delaware-business-alliance.webp" },
-  { name: "Husqvarna",                          logo: "/images/logos/husqvarna.webp" },
-  { name: "Timberjack / John Deere",            logo: "/images/logos/timberjack.webp" },
-  { name: "Snap-on",                            logo: "/images/logos/snapon.webp" },
-  { name: "Columbia Forest Products",            logo: "/images/logos/columbia-forest-products.webp" },
-  { name: "Empire State Forest Products Assoc.", logo: "/images/logos/empire-state-forest.webp" },
-  { name: "Society of American Foresters",       logo: "/images/logos/society-american-foresters.webp" },
-  { name: "NJ Forestry Association",             logo: "/images/logos/nj-forestry-association.webp" },
-  { name: "NY Logger Training (NYLT)",           logo: "/images/logos/nylt-logo.webp" },
+  { name: "Better Business Bureau",              logo: "/images/logos/bbb.png",                        w: 1197, h: 2047 },
+  { name: "NY Forest Owners Association",        logo: "/images/logos/ny-forest-owners-association.jpg", w: 560, h:  422 },
+  { name: "Sullivan County Chamber of Commerce", logo: "/images/logos/sullivan-county-chamber.jpg",     w:  576, h:  576 },
+  { name: "Orange County Chamber of Commerce",   logo: "/images/logos/orange-county-chamber.jpg",       w:  450, h:  451 },
+  { name: "Delaware State Chamber of Commerce",  logo: "/images/logos/delaware-state-chamber.webp",     w: 1918, h: 1974 },
+  { name: "Delaware County Business Alliance",   logo: "/images/logos/delaware-business-alliance.webp", w:  141, h:   50 },
+  { name: "Husqvarna",                          logo: "/images/logos/husqvarna.webp",                  w:  175, h:   50 },
+  { name: "Timberjack / John Deere",            logo: "/images/logos/timberjack.webp",                 w:  175, h:   50 },
+  { name: "Snap-on",                            logo: "/images/logos/snapon.webp",                     w:  175, h:   50 },
+  { name: "Columbia Forest Products",            logo: "/images/logos/columbia-forest-products.webp",   w:  175, h:   50 },
+  { name: "Empire State Forest Products Assoc.", logo: "/images/logos/empire-state-forest.webp",        w:  300, h:   48 },
+  { name: "Society of American Foresters",       logo: "/images/logos/society-american-foresters.webp", w:  175, h:   50 },
+  { name: "NJ Forestry Association",             logo: "/images/logos/nj-forestry-association.webp",    w:  175, h:   50 },
+  { name: "NY Logger Training (NYLT)",           logo: "/images/logos/nylt-logo.webp",                  w:  220, h:   50 },
 ];
 
 // ─── TESTIMONIALS ─────────────────────────────────────────────────────────────
@@ -65,119 +70,185 @@ const testimonials = [
 
   <!-- ─── 1. HERO ─────────────────────────────────────────────────────────── -->
   <section class="relative overflow-hidden" style="background:#0d1a0d;">
-    <!-- Background image -->
+    <!--
+      Loaded EFP log truck. Source is 1200x1600 portrait; the truck sits as a
+      horizontal band across the middle, so object-position 44% holds the cab and
+      the loaded trailer in the short wide crop.
+    -->
     <picture>
-      <source srcset="/images/uploads/optimized/land-clearing-forestburgh-ny-komatsu-1200.webp" type="image/webp" />
+      <source srcset="/images/uploads/optimized/log-truck-hardwood-timber-sparta-nj-1200.webp" type="image/webp" />
       <img
-        src="/images/uploads/land-clearing-forestburgh-ny-komatsu.jpg"
-        alt="Sustainable timber harvesting in Sullivan County, New York"
+        src="/images/uploads/log-truck-hardwood-timber-sparta-nj.jpg"
+        alt="Environmental Forest Products log truck loaded with hardwood timber leaving a project in Sparta, NJ"
         fetchpriority="high"
         decoding="sync"
-        class="absolute inset-0 w-full h-full object-cover object-center"
-        width="1200" height="675"
+        class="absolute inset-0 w-full h-full object-cover object-[center_44%]"
+        width="1200" height="1600"
       />
     </picture>
-    <div class="absolute inset-0" style="background:rgba(13,26,13,0.72);" aria-hidden="true"></div>
+    <!--
+      Directional overlay: heavy on the left so the left-aligned copy stays legible,
+      lifting toward the right so the loaded trailer still reads. A flat overlay
+      would have muddied the whole frame.
+    -->
+    <div class="absolute inset-0 bg-gradient-to-r from-[#0d1a0d]/95 via-[#0d1a0d]/80 to-[#0d1a0d]/35" aria-hidden="true"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-[#0d1a0d]/60 via-transparent to-[#0d1a0d]/30" aria-hidden="true"></div>
 
     <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24">
-      <div class="flex flex-col lg:flex-row lg:items-center gap-10 lg:gap-14">
-
-        <!-- LEFT: existing hero content (55–60%) -->
-        <div class="lg:w-[57%] flex-shrink-0">
-          <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight mb-5">
-            Environmental Forest Products: Certified Forestry Consulting in the Hudson Valley &amp; Catskills
+      <!--
+        Left-aligned so the copy sits clear of the truck on the right — the same
+        arrangement as the reference. The estimate tool lives in its own band below.
+      -->
+      <div class="max-w-2xl">
+          <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight mb-4">
+            Land Clearing by a Certified Forester
           </h1>
-          <p class="text-lg sm:text-xl text-green-200 mb-8 leading-relaxed">
-            480-a Forest Tax Law · Land Clearing · Timber Harvesting · Woodlot Management
+          <p class="text-sm sm:text-base text-white/80 font-medium mb-4 leading-relaxed">
+            Sullivan, Orange &amp; Ulster Counties, NY · Pike &amp; Wayne, PA · Sussex County, NJ
           </p>
-          <div class="flex flex-col sm:flex-row gap-4">
+          <!-- Trimmed to reference length. The timber-offset hook is the one line no
+               competitor in this market can run, so it survives the cut. -->
+          <p class="text-sm sm:text-base text-green-100 mb-7 leading-relaxed">
+            Certified consulting forester, 30+ years clearing land across the Hudson Valley
+            and Catskills. And if your property has merchantable timber, we buy it directly —
+            so the wood may be worth something before the equipment arrives.
+          </p>
+
+          <!-- ─── TRUST ROW ────────────────────────────────────────────────────
+            ⚠️ NO GOOGLE REVIEW BLOCK HERE ON PURPOSE. There is no rating or review
+            count anywhere in this repo, and the project brief states the business
+            has no reviews (which is also why there is no AggregateRating schema).
+            Both slots below are verifiable EFP facts. To add the review block once
+            the GBP has ratings, put the real rating + count in client.config.ts and
+            render it as a third item — do not hardcode numbers here.
+          -->
+          <div class="flex flex-wrap items-center gap-x-6 gap-y-4 mb-8">
+            <div class="flex items-center gap-2.5">
+              <svg class="w-5 h-5 text-green-300 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+              </svg>
+              <div class="leading-tight">
+                <div class="text-white text-sm font-bold">Certified Consulting Forester</div>
+                <div class="text-green-200 text-xs">{business.owner} · serving landowners since {business.foundedYear}</div>
+              </div>
+            </div>
+
+            <div class="hidden sm:block w-px h-9 bg-white/25" aria-hidden="true"></div>
+
+            <div class="flex items-center gap-2.5">
+              <svg class="w-5 h-5 text-green-300 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+              </svg>
+              <div class="leading-tight">
+                <div class="text-white text-sm font-bold">480-a Certified</div>
+                <a href="/services/480a-forest-tax-law" class="text-green-200 text-xs underline hover:text-white transition-colors">
+                  Qualified to write DEC-approved plans
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <a
+            href={`tel:${phone.trackingTel}`}
+            class="inline-block text-2xl sm:text-3xl font-bold text-white underline decoration-2 underline-offset-4 hover:text-green-200 transition-colors mb-6"
+          >
+            {phone.display}
+          </a>
+
+          <!--
+            Buttons kept, deliberately smaller than before: text-sm with px-5/py-2.5
+            instead of text-lg with px-8/py-4. Still clears the 44px touch target.
+            The oversized pair was what made this section feel heavy.
+          -->
+          <div class="flex flex-col sm:flex-row gap-3">
             <a
               href={`tel:${phone.trackingTel}`}
-              class="inline-flex items-center justify-center gap-2 bg-white text-[#1a3c1a] hover:bg-green-50 font-bold text-base sm:text-lg px-8 py-4 rounded shadow-lg transition-colors"
+              class="inline-flex items-center justify-center gap-2 bg-white text-[#1a3c1a] hover:bg-green-50 font-semibold text-sm px-5 py-2.5 rounded transition-colors"
             >
-              <svg class="w-5 h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+              <svg class="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
                 <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
               </svg>
               Call for a Free Consultation
             </a>
             <a
               href="/contact"
-              class="inline-flex items-center justify-center gap-2 border-2 border-white text-white hover:bg-white/10 font-bold text-base sm:text-lg px-8 py-4 rounded shadow-lg transition-colors"
+              class="inline-flex items-center justify-center gap-2 border border-white/70 text-white hover:bg-white/10 font-semibold text-sm px-5 py-2.5 rounded transition-colors"
             >
               Request a Free Estimate
-              <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+              <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
               </svg>
             </a>
           </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats bar removed — the founding date now lives in the intro copy below. -->
+
+  <!-- ─── ESTIMATE TOOL — PRIMARY CONVERSION ELEMENT ──────────────────────── -->
+  <!--
+    Full-bleed light neutral band, no card and no overlap — the hero ends where it
+    ends and this reads as its own section. Content sits in the same max-w-7xl
+    container as the services grid below so the left edges line up.
+    Two columns on desktop: pitch left (~40%), tool right (~60%). The two-column
+    split is what keeps the section from getting tall — four stacked inputs under
+    a heading was the problem. Stacks to one column on mobile, text first.
+  -->
+  <section id="estimate" class="bg-[#eef1ee] py-16 sm:py-20 lg:py-24">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-16 lg:items-start">
+
+        <!-- LEFT ~40% — the pitch -->
+        <div class="lg:col-span-2">
+          <p class="text-[11px] sm:text-xs font-bold uppercase tracking-[0.14em] text-[#2d5a2d] mb-3">
+            Free Estimate Tool
+          </p>
+          <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#1a3c1a] leading-tight mb-4">
+            What Does Land Clearing Cost in New York?
+          </h2>
+          <p class="text-gray-600 text-base leading-relaxed">
+            Get a per-acre estimate in about 30 seconds — plus what your standing timber
+            may be worth against the cost.
+          </p>
         </div>
 
-        <!-- RIGHT: 480-a quiz widget (40–45%) -->
-        <div class="lg:w-[43%] w-full">
-          <EligibilityQuiz />
+        <!-- RIGHT ~60% — inputs, then result, then contact capture, in place -->
+        <div id="homepage-estimate" class="lg:col-span-3">
+          <LandClearingCalculator />
         </div>
 
       </div>
     </div>
   </section>
 
-  <!-- ─── TRUST BAR ──────────────────────────────────────────────────────── -->
-  <div class="bg-[#1a3c1a] py-5">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
-        {[
-          { stat: "Since 1991", label: "Serving the Tri-State area" },
-          { stat: "~100 yrs",   label: "Combined team experience" },
-          { stat: "6 counties", label: "NY · PA · NJ service area" },
-          { stat: "480-a",      label: "DEC-certified management plans" },
-        ].map(s => (
-          <div class="py-2">
-            <div class="text-white font-bold text-lg sm:text-xl leading-tight">{s.stat}</div>
-            <div class="text-green-300 text-xs mt-0.5 leading-snug">{s.label}</div>
-          </div>
-        ))}
-      </div>
-    </div>
-  </div>
-
-  <!-- ─── INTRO BODY ──────────────────────────────────────────────────────── -->
-  <section class="py-16 sm:py-20 bg-white">
-    <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 prose prose-lg prose-green">
-      <p>
-        Environmental Forest Products has served landowners across Sullivan, Orange,
-        and Ulster counties in New York — and into Pike and Wayne counties in
-        Pennsylvania and Sussex County in New Jersey — for over 30 years.
-        Henry Kowalec, a certified consulting forester, leads every project
-        personally.
-      </p>
-      <p>
-        Whether you're looking to harvest standing timber, clear land for development,
-        enroll wooded acreage in the New York 480-a Forest Tax Law program, or develop
-        a long-term woodlot management plan, EFP provides low-impact solutions
-        tailored to your land and your goals.
-      </p>
-      <p>
-        We buy standing timber directly, handle all aspects of sustainable logging,
-        and work with landowners who want to improve their forest without
-        sacrificing its long-term health.
-      </p>
-    </div>
-  </section>
+  <!--
+    Intro copy block removed — the calculator band now runs straight into the
+    services grid. The "since 1991" claim it carried survives in the hero trust
+    row and the video caption, so nothing was lost by deleting it.
+  -->
 
   <!-- ─── 2. SERVICES ──────────────────────────────────────────────────────── -->
   <section class="py-16 sm:py-20 bg-gray-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
-        <h2 class="text-2xl sm:text-3xl font-bold text-[#1a3c1a] mb-3">Forestry Services for Private Landowners</h2>
+        <h2 class="text-2xl sm:text-3xl font-bold text-[#1a3c1a] mb-3">Land Clearing & Forestry Services for Private Landowners</h2>
         <p class="text-gray-600 max-w-xl mx-auto text-base">
           Certified consulting expertise across Sullivan, Orange, and Ulster counties — and beyond.
         </p>
       </div>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        <ServiceCard title="480-a Forest Tax Law" slug="480a-forest-tax-law" excerpt="Reduce your property taxes with NY's 480-a program. Henry is one of a small number of certified foresters in the region qualified to write the required management plans." iconImage="/images/icons/480a-tax-law.png" />
-        <ServiceCard title="Land Clearing"        slug="land-clearing"        excerpt="Residential and commercial site preparation across Sullivan, Orange, and Ulster counties — clearing expertise grounded in forestry, not just excavation." iconImage="/images/icons/land-clearing.png" />
-        <ServiceCard title="Timber Harvesting"    slug="timber-harvesting"    excerpt="Selective, sustainable logging services. A consulting forester plans and oversees every harvest to protect your woodland and maximize what the timber is worth." iconImage="/images/icons/timber-harvesting.png" />
-        <ServiceCard title="Woodlot Management"   slug="woodlot-management"   excerpt="Forest management plans for private landowners — required for 480-a enrollment and the foundation of any long-term woodland stewardship program." iconImage="/images/icons/woodlot-management.png" />
+        <!--
+          Photos are sourced from /images/uploads/ only and rendered through
+          OptimizedImage. Both sources are 1200x1600 portrait, so each carries an
+          object-position that holds its subject inside the 16:9 band.
+          land-clearing-forestburgh is also the hero background — it is the ONLY
+          land clearing photograph in the repo (see media-manifest.ts).
+        -->
+        <ServiceCard title="Land Clearing"        slug="land-clearing"        excerpt="Residential and commercial site preparation across Sullivan, Orange, and Ulster counties — clearing expertise grounded in forestry, not just excavation." photo="/images/uploads/land-clearing-forestburgh-ny-komatsu.jpg" photoAlt="Two Komatsu excavators clearing land at a project site in Forestburgh, NY, with an Environmental Forest Products crew member on the ground" photoClass="object-[center_40%]" />
+        <ServiceCard title="Timber Harvesting"    slug="timber-harvesting"    excerpt="Selective, sustainable logging services. A consulting forester plans and oversees every harvest to protect your woodland and maximize what the timber is worth." photo="/images/uploads/komatsu-feller-buncher-selective-harvest-ny.jpg" photoAlt="Komatsu tracked feller buncher with felling head during a selective timber harvest in New York — marked trees only, surrounding stand left standing" photoClass="object-[center_35%]" />
+        <ServiceCard title="Woodlot Management"   slug="woodlot-management"   excerpt="Forest management plans for private landowners — required for 480-a enrollment and the foundation of any long-term woodland stewardship program." photo="/images/uploads/timberjack-forwarder-nyc-dep-carmel-ny.jpg" photoAlt="Timberjack 1010B forwarder handling large hardwood logs on an NYC DEP forestry project in Carmel, NY" photoClass="object-[center_36%]" />
+        <ServiceCard title="480-a Forest Tax Law" slug="480a-forest-tax-law" excerpt="Reduce your property taxes with NY's 480-a program. Henry is one of a small number of certified foresters in the region qualified to write the required management plans." photo="/images/uploads/stock/480a-forest-tax-law.jpg" photoAlt="Standing hardwood forest in autumn colour — the kind of wooded acreage that qualifies for New York 480-a Forest Tax Law enrollment" />
       </div>
       <div class="text-center mt-8">
         <a href="/services" class="inline-flex items-center gap-2 text-[#2d5a2d] font-semibold hover:text-[#1a3c1a] transition-colors">
@@ -197,6 +268,28 @@ const testimonials = [
         County (NY), with extended coverage into Pike County and Wayne County (PA)
         and Sussex County (NJ).
       </p>
+
+      <!-- County hub links — paths come from serviceArea in client.config.ts -->
+      <p class="mt-6 text-base leading-relaxed text-gray-700">
+        {serviceArea.primary.map((county, i) => (
+          <>
+            {i > 0 && <span class="text-gray-400"> · </span>}
+            <a href={`/locations/${county.slug}`} class="text-[#2d5a2d] font-semibold underline hover:text-[#1a3c1a]">
+              {county.name} {county.stateAbbr}
+            </a>
+          </>
+        ))}
+      </p>
+      <p class="mt-3 text-base leading-relaxed text-gray-700">
+        {serviceArea.secondary.map((county, i) => (
+          <>
+            {i > 0 && <span class="text-gray-400"> · </span>}
+            <a href={`/locations/${county.slug}`} class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">
+              {county.name} {county.stateAbbr}
+            </a>
+          </>
+        ))}
+      </p>
     </div>
   </section>
 
@@ -205,6 +298,8 @@ const testimonials = [
     vimeoId="1171347773"
     posterSrc="/images/uploads/spruce-timber-harvest-millbrook-ny.jpg"
     posterAlt="Environmental Forest Products logging equipment, Westbrookville NY"
+    posterWidth={1500}
+    posterHeight={2000}
     heading="See Our Work in Action"
     caption="Forestry equipment and field work from Environmental Forest Products — serving the Hudson Valley and Catskills since 1991."
   />
@@ -223,7 +318,7 @@ const testimonials = [
       <div class="flex flex-wrap items-center justify-center gap-8 sm:gap-10">
         {allLogos.map(item => (
           <div class="flex items-center justify-center h-14 px-2">
-            <img src={item.logo} alt={item.name} class="max-h-12 max-w-[140px] object-contain" loading="lazy" />
+            <img src={item.logo} alt={item.name} class="max-h-12 max-w-[140px] object-contain" loading="lazy" width={item.w} height={item.h} />
           </div>
         ))}
       </div>
@@ -286,12 +381,78 @@ const testimonials = [
     </div>
   </section>
 
+  <!-- ─── 480-a ELIGIBILITY QUIZ ───────────────────────────────────────────── -->
+  <!--
+    Relocated out of the hero so land clearing leads the page. The component
+    itself is untouched — same fields, same webhook, same lead_source tagging.
+  -->
+  <section class="py-16 sm:py-20 bg-white border-t border-gray-100">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-2xl sm:text-3xl font-bold text-[#1a3c1a] mb-8 text-center">
+        Own Wooded Acreage? You May Qualify for a NY Property Tax Reduction
+      </h2>
+      <EligibilityQuiz />
+    </div>
+  </section>
+
   <!-- ─── FAQ BLOCK ────────────────────────────────────────────────────────── -->
   <section class="py-16 sm:py-20 bg-white">
     <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 class="text-2xl sm:text-3xl font-bold text-[#1a3c1a] mb-10 text-center">Common Questions About Forestry Services in New York</h2>
+      <h2 class="text-2xl sm:text-3xl font-bold text-[#1a3c1a] mb-10 text-center">Common Questions About Land Clearing & Forestry in New York</h2>
 
       <div class="space-y-8">
+        <div>
+          <h3 class="text-lg font-semibold text-[#1a3c1a] mb-2">What is included in land clearing?</h3>
+          <p class="text-gray-700 leading-relaxed">
+            Land clearing covers removing the trees, brush, stumps, and undergrowth
+            standing between you and a usable site. On most projects that means felling
+            and processing the standing trees, dealing with the stumps, clearing the
+            slash and debris, and leaving the ground in workable condition for whatever
+            comes next. Because a consulting forester scopes the job before work starts,
+            merchantable trees are identified and set aside rather than chipped along
+            with everything else.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-semibold text-[#1a3c1a] mb-2">Do I need a permit to clear land in New York?</h3>
+          <p class="text-gray-700 leading-relaxed">
+            Often yes — many clearing projects in New York need some form of local or
+            state approval before work begins. Town and county codes commonly regulate
+            clearing near wetlands, streams, and steep slopes, and DEC jurisdiction can
+            apply within regulated areas and protected buffers. Larger disturbances can
+            also trigger erosion and stormwater requirements. We review the parcel and
+            tell you what applies before any equipment is scheduled.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-semibold text-[#1a3c1a] mb-2">How long does it take to clear one acre of wooded land?</h3>
+          <p class="text-gray-700 leading-relaxed">
+            It depends far more on what is on the acre than on the acre itself. Dense
+            mature hardwood with large stumps, wet ground, steep grade, or tight
+            equipment access takes considerably longer than open scrub on flat, dry
+            terrain. Whether stumps are ground or fully excavated, and whether
+            merchantable timber is sorted and hauled out, changes the schedule again.
+            We walk the property first and give you a schedule based on what is
+            actually standing there.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-semibold text-[#1a3c1a] mb-2">Can you sell the trees when clearing land?</h3>
+          <p class="text-gray-700 leading-relaxed">
+            Frequently, yes — if the trees coming down include merchantable timber, that
+            wood is worth something instead of being a disposal cost. Environmental
+            Forest Products buys standing timber directly, so species, size, and quality
+            get assessed before clearing begins rather than after the wood is already on
+            the ground. Whether a particular lot carries enough volume to be worth
+            marketing depends on what is growing on it. See
+            <a href="/services/sell-standing-timber" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">selling standing timber</a>
+            for how that side of the work is handled.
+          </p>
+        </div>
+
         <div>
           <h3 class="text-lg font-semibold text-[#1a3c1a] mb-2">How much do loggers pay landowners per acre in New York?</h3>
           <p class="text-gray-700 leading-relaxed">
@@ -299,7 +460,7 @@ const testimonials = [
             In New York, landowners typically receive between $500 and $2,000+ per
             acre for timber harvests, depending on the quality and density of
             merchantable trees. An on-site timber appraisal gives you the most
-            accurate number for your specific acreage. Call Henry at <a href="tel:+18454980208" class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">(845) 754-8242</a>
+            accurate number for your specific acreage. Call Henry at <a href={`tel:${phone.trackingTel}`} class="text-[#2d5a2d] underline hover:text-[#1a3c1a]">(845) 754-8242</a>
             for a free consultation.
           </p>
         </div>
@@ -346,6 +507,38 @@ const testimonials = [
     "mainEntity": [
       {
         "@type": "Question",
+        "name": "What is included in land clearing?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Land clearing covers removing the trees, brush, stumps, and undergrowth standing between you and a usable site. On most projects that means felling and processing the standing trees, dealing with the stumps, clearing the slash and debris, and leaving the ground in workable condition for whatever comes next. Because a consulting forester scopes the job before work starts, merchantable trees are identified and set aside rather than chipped along with everything else."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I need a permit to clear land in New York?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Often yes — many clearing projects in New York need some form of local or state approval before work begins. Town and county codes commonly regulate clearing near wetlands, streams, and steep slopes, and DEC jurisdiction can apply within regulated areas and protected buffers. Larger disturbances can also trigger erosion and stormwater requirements. Environmental Forest Products reviews the parcel and confirms what applies before any equipment is scheduled."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How long does it take to clear one acre of wooded land?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It depends far more on what is on the acre than on the acre itself. Dense mature hardwood with large stumps, wet ground, steep grade, or tight equipment access takes considerably longer than open scrub on flat, dry terrain. Whether stumps are ground or fully excavated, and whether merchantable timber is sorted and hauled out, changes the schedule again. We walk the property first and give you a schedule based on what is actually standing there."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can you sell the trees when clearing land?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Frequently, yes — if the trees coming down include merchantable timber, that wood is worth something instead of being a disposal cost. Environmental Forest Products buys standing timber directly, so species, size, and quality get assessed before clearing begins rather than after the wood is already on the ground. Whether a particular lot carries enough volume to be worth marketing depends on what is growing on it."
+        }
+      },
+      {
+        "@type": "Question",
         "name": "How much do loggers pay landowners per acre in New York?",
         "acceptedAnswer": {
           "@type": "Answer",
@@ -384,7 +577,7 @@ const testimonials = [
     <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
       <h2 class="text-2xl sm:text-3xl font-bold text-[#1a3c1a] mb-4">Ready to Talk About Your Land?</h2>
       <p class="text-gray-700 text-base leading-relaxed">
-        Call Henry directly at <a href="tel:+18454980208" class="text-[#2d5a2d] font-semibold underline hover:text-[#1a3c1a]">(845) 754-8242</a> or
+        Call Henry directly at <a href={`tel:${phone.trackingTel}`} class="text-[#2d5a2d] font-semibold underline hover:text-[#1a3c1a]">(845) 754-8242</a> or
         use the <a href="/contact" class="text-[#2d5a2d] font-semibold underline hover:text-[#1a3c1a]">contact form</a>. No obligation — just a conversation about
         what your property can do for you.
       </p>
@@ -392,6 +585,6 @@ const testimonials = [
   </section>
 
   <!-- ─── 6. FINAL CTA ──────────────────────────────────────────────────────── -->
-  <CTASection variant="b2c" />
+  <CTASection variant="b2c" heading="Ready to Clear Your Land?" />
 
 </BaseLayout>
