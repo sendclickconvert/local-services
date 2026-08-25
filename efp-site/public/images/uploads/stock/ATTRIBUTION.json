@@ -1,0 +1,101 @@
+[
+  {
+    "slug": "480a-forest-tax-law",
+    "query": "autumn hardwood forest standing trees",
+    "pinnedId": null,
+    "pexelsId": 35113995,
+    "pexelsUrl": "https://www.pexels.com/photo/beautiful-autumn-foliage-in-reads-landing-35113995/",
+    "photographer": "Tom Fisk",
+    "photographerUrl": "https://www.pexels.com/@tomfisk",
+    "pexelsAlt": "Vibrant autumn leaves in Reads Landing, Minnesota forest display a stunning fall scene.",
+    "needsReview": false
+  },
+  {
+    "slug": "wildlife-habitat",
+    "query": "white tailed deer in forest",
+    "pinnedId": null,
+    "pexelsId": 29227947,
+    "pexelsUrl": "https://www.pexels.com/photo/white-tailed-deer-in-autumn-forest-setting-29227947/",
+    "photographer": "Andrew Patrick Photo",
+    "photographerUrl": "https://www.pexels.com/@am83",
+    "pexelsAlt": "Majestic white-tailed deer buck walking through autumn forest path.",
+    "needsReview": false
+  },
+  {
+    "slug": "forest-stewardship-planning",
+    "query": "birch forest path autumn",
+    "pinnedId": null,
+    "pexelsId": 9782160,
+    "pexelsUrl": "https://www.pexels.com/photo/brown-trees-near-a-pathway-9782160/",
+    "photographer": "Kris Møklebust",
+    "photographerUrl": "https://www.pexels.com/@moklebust",
+    "pexelsAlt": "Winding pathway through a vibrant, misty autumn forest. Ideal for nature and travel themes.",
+    "needsReview": false
+  },
+  {
+    "slug": "hemlock-woolly-adelgid",
+    "query": null,
+    "pinnedId": 36541588,
+    "pexelsId": 36541588,
+    "pexelsUrl": "https://www.pexels.com/photo/close-up-of-eastern-hemlock-with-pinecones-36541588/",
+    "photographer": "Keith Cassill",
+    "photographerUrl": "https://www.pexels.com/@inspired2love",
+    "pexelsAlt": "A detailed view of Eastern Hemlock branches filled with mature pinecones.",
+    "needsReview": true
+  },
+  {
+    "slug": "emerald-ash-borer",
+    "query": null,
+    "pinnedId": 13220277,
+    "pexelsId": 13220277,
+    "pexelsUrl": "https://www.pexels.com/photo/leafless-trees-under-cloudy-sky-13220277/",
+    "photographer": "Tim Dusenberry",
+    "photographerUrl": "https://www.pexels.com/@tim-dusenberry-2385423",
+    "pexelsAlt": "Stark leafless tree trunks against a cloudy sky in Northampton, MA exemplify nature's resilience.",
+    "needsReview": true
+  },
+  {
+    "slug": "stump-grinding",
+    "query": "freshly cut tree stump",
+    "pinnedId": null,
+    "pexelsId": 35563299,
+    "pexelsUrl": "https://www.pexels.com/photo/close-up-of-a-tree-stump-in-forest-35563299/",
+    "photographer": "Walter Cunha",
+    "photographerUrl": "https://www.pexels.com/@walter-cunha-2158705182",
+    "pexelsAlt": "Detailed view of a freshly cut tree stump with visible growth rings in a forest setting.",
+    "needsReview": false
+  },
+  {
+    "slug": "tree-planting",
+    "query": "tree seedling reforestation forest",
+    "pinnedId": null,
+    "pexelsId": 30253501,
+    "pexelsUrl": "https://www.pexels.com/photo/lush-green-pine-saplings-in-natural-setting-30253501/",
+    "photographer": "Mark Stebnicki",
+    "photographerUrl": "https://www.pexels.com/@nc-farm-bureau-mark",
+    "pexelsAlt": "Vibrant young pine saplings growing in a lush green environment, basking in sunlight.",
+    "needsReview": false
+  },
+  {
+    "slug": "hero-woodland",
+    "query": null,
+    "pinnedId": 36397149,
+    "pexelsId": 36397149,
+    "pexelsUrl": "https://www.pexels.com/photo/autumn-vista-in-great-smoky-mountains-36397149/",
+    "photographer": "Esteban Carriazo",
+    "photographerUrl": "https://www.pexels.com/@esteban-carriazo-2153373740",
+    "pexelsAlt": "Beautiful autumn landscape of the Great Smoky Mountains with vibrant fall foliage.",
+    "needsReview": false
+  },
+  {
+    "slug": "hero-forest-path",
+    "query": "misty forest morning sunlight landscape",
+    "pinnedId": null,
+    "pexelsId": 6001095,
+    "pexelsUrl": "https://www.pexels.com/photo/dirt-road-between-trees-6001095/",
+    "photographer": "Myriams Fotos",
+    "photographerUrl": "https://www.pexels.com/@myriams-fotos",
+    "pexelsAlt": "A tranquil dirt road meandering through a misty forest at dawn, highlighting nature's serene beauty.",
+    "needsReview": false
+  }
+]

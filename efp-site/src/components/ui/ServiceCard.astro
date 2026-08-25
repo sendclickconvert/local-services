@@ -1,6 +1,13 @@
 ---
 // ServiceCard.astro
-// Card with hover state, icon, title, excerpt, arrow link.
+// Card with hover state, title, excerpt, arrow link, and EITHER:
+//   - photo     → a 16:9 image band above the padded content, with real alt text
+//   - iconImage → the existing 40x40 decorative icon slot (aria-hidden)
+//   - icon      → an emoji fallback
+// photo wins when present. With no photo prop the markup and spacing are
+// unchanged, so existing callers (/services index) render exactly as before.
+
+import OptimizedImage from './OptimizedImage.astro';
 
 interface Props {
   title: string;
@@ -8,35 +15,62 @@ interface Props {
   excerpt: string;
   icon?: string;
   iconImage?: string;
+  photo?: string;       // must live under /images/uploads/ — served via OptimizedImage
+  photoAlt?: string;    // real alt text; required whenever photo is set
+  photoClass?: string;  // object-position override — these sources are portrait
 }
 
-const { title, slug, excerpt, icon, iconImage } = Astro.props;
+const {
+  title,
+  slug,
+  excerpt,
+  icon,
+  iconImage,
+  photo,
+  photoAlt,
+  photoClass = 'object-center',
+} = Astro.props;
 ---
 
 <a
   href={`/services/${slug}`}
-  class="group flex flex-col bg-white border border-gray-200 rounded-lg p-6 shadow-sm hover:shadow-md hover:border-[#2d5a2d] transition-all duration-200 h-full"
+  class="group flex flex-col bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md hover:border-[#2d5a2d] transition-all duration-200 h-full overflow-hidden"
 >
-  {iconImage ? (
-    <div class="w-11 h-11 flex items-center justify-center mb-5">
-      <img src={iconImage} alt="" class="w-10 h-10 object-contain" aria-hidden="true" loading="lazy" />
+  {photo && (
+    <div class="relative w-full aspect-video overflow-hidden bg-gray-100">
+      <OptimizedImage
+        src={photo}
+        alt={photoAlt ?? ''}
+        class={`absolute inset-0 w-full h-full object-cover ${photoClass}`}
+        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 320px"
+        width={640}
+        height={360}
+      />
     </div>
-  ) : icon ? (
-    <span class="text-3xl mb-4 block" aria-hidden="true">{icon}</span>
-  ) : null}
+  )}
 
-  <h3 class="text-[#1a3c1a] font-bold text-lg mb-3 leading-snug group-hover:text-[#2d5a2d] transition-colors">
-    {title}
-  </h3>
+  <div class="flex flex-col flex-grow p-6">
+    {!photo && (iconImage ? (
+      <div class="w-11 h-11 flex items-center justify-center mb-5">
+        <img src={iconImage} alt="" class="w-10 h-10 object-contain" aria-hidden="true" loading="lazy" width="40" height="40" />
+      </div>
+    ) : icon ? (
+      <span class="text-3xl mb-4 block" aria-hidden="true">{icon}</span>
+    ) : null)}
 
-  <p class="text-gray-600 text-sm leading-relaxed flex-grow mb-4">
-    {excerpt}
-  </p>
+    <h3 class="text-[#1a3c1a] font-bold text-lg mb-3 leading-snug group-hover:text-[#2d5a2d] transition-colors">
+      {title}
+    </h3>
 
-  <span class="inline-flex items-center gap-1 text-[#2d5a2d] font-semibold text-sm group-hover:gap-2 transition-all mt-auto">
-    Learn more
-    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-    </svg>
-  </span>
+    <p class="text-gray-600 text-sm leading-relaxed flex-grow mb-4">
+      {excerpt}
+    </p>
+
+    <span class="inline-flex items-center gap-1 text-[#2d5a2d] font-semibold text-sm group-hover:gap-2 transition-all mt-auto">
+      Learn more
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+      </svg>
+    </span>
+  </div>
 </a>

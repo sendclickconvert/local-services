@@ -22,15 +22,27 @@
 //     caption="Henry Kowalec — 30+ years of certified forestry consulting"
 //   />
 
+import OptimizedImage from './OptimizedImage.astro';
+
 interface Props {
   vimeoId: string;         // Vimeo video ID only — e.g. "123456789"
   posterSrc: string;       // Poster image path — required, shown until play
   posterAlt?: string;      // Custom alt text for poster image
   heading?: string;        // Optional section heading above panel
   caption?: string;        // Optional caption below panel
+  posterWidth?: number;    // Poster intrinsic width — reserves aspect ratio (CLS)
+  posterHeight?: number;   // Poster intrinsic height
 }
 
-const { vimeoId, posterSrc, posterAlt, heading, caption } = Astro.props;
+const {
+  vimeoId,
+  posterSrc,
+  posterAlt,
+  heading,
+  caption,
+  posterWidth = 1200,
+  posterHeight = 675,
+} = Astro.props;
 
 // Vimeo embed URL — no autoplay on initial load, autoplay only triggered by play button
 // background=0 keeps controls visible after load
@@ -67,13 +79,23 @@ const vimeoEmbedUrl = `https://player.vimeo.com/video/${vimeoId}?${vimeoParams}`
       data-vimeo-url={vimeoEmbedUrl}
     >
 
-      <!-- Poster image — lightweight, lazy loaded, covers the container -->
-      <img
+      <!--
+        Poster image — served through OptimizedImage so the responsive WebP
+        variants get used. This was previously a bare <img> pointing at the raw
+        upload, which pulled the full-size JPEG on every page load.
+        Container is max-w-5xl less padding, so the slot is ~960px on desktop.
+        The .video-poster class stays on the <img> itself; the play handler
+        looks it up with querySelector and fades it, which still works inside
+        the <picture> wrapper.
+      -->
+      <OptimizedImage
         class="video-poster absolute inset-0 w-full h-full object-cover"
         src={posterSrc}
         alt={posterAlt ?? heading ?? "EFP forestry operations — watch Henry Kowalec at work"}
         loading="lazy"
-        decoding="async"
+        sizes="(max-width: 1024px) 100vw, 960px"
+        width={posterWidth}
+        height={posterHeight}
       />
 
       <!-- Semi-transparent overlay for play button legibility -->

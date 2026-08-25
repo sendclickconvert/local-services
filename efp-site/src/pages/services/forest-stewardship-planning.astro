@@ -1,6 +1,7 @@
 ---
 // pages/services/forest-stewardship-planning.astro
 import ServiceLayout from '../../layouts/ServiceLayout.astro';
+import { phone } from '../../data/client.config';
 import PageHero from '../../components/ui/PageHero.astro';
 import Breadcrumb from '../../components/ui/Breadcrumb.astro';
 import FAQSection from '../../components/ui/FAQSection.astro';
@@ -65,10 +66,12 @@ const faqs = [
   <FAQSchema items={faqs} />
 
   <PageHero
-    heading="Forest Stewardship Planning"
-    subheading="Long-term management plans for private landowners in Sullivan, Orange, and Ulster counties — forest health, wildlife habitat, timber value, and 480-a tax eligibility."
-    ctaText="Call (845) 754-8242"
-    ctaHref="tel:+18454980208"
+    title="Forest Stewardship Planning"
+    subtitle="Long-term management plans for private landowners in Sullivan, Orange, and Ulster counties — forest health, wildlife habitat, timber value, and 480-a tax eligibility."
+    ctaLabel={`Call ${phone.display}`}
+    ctaHref={`tel:${phone.trackingTel}`}
+    bgImage="/images/uploads/stock/forest-stewardship-planning.jpg"
+    bgImageAlt="Pathway through mixed deciduous woodland in autumn"
   />
 
   <div class="max-w-4xl mx-auto my-8 sm:my-10 px-8 sm:px-12 py-10 bg-white rounded-2xl shadow-md ring-1 ring-gray-200">

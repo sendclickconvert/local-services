@@ -290,58 +290,17 @@ const pageSchema = {
 
 <!-- ─── Calculator logic ────────────────────────────────────────── -->
 <script>
+  // Pricing now lives in src/lib/land-clearing-pricing.ts so the homepage
+  // calculator and this page cannot drift apart. Do not re-inline the figures.
+  import {
+    BASE_COST, TERRAIN_MULT, DISPOSAL_ADDER, TIMBER_VEG,
+    VEG_LABELS, TERRAIN_LABELS, DISPOSAL_LABELS, fmt,
+  } from '../../../lib/land-clearing-pricing';
 (function () {
-
-  // Base cost per acre [low, high] by vegetation type
-  // Sullivan/Orange/Ulster County, NY — April 2026 ranges
-  const BASE_COST = {
-    brush:    [1500,  3000],
-    mixed:    [2800,  5500],
-    woodland: [4500,  8500],
-    heavy:    [7000, 14000],
-  };
-
-  // Terrain multipliers [low, high]
-  const TERRAIN_MULT = {
-    flat:    [1.00, 1.00],
-    rolling: [1.15, 1.25],
-    steep:   [1.35, 1.55],
-  };
-
-  // Disposal add-on per acre [low, high]
-  const DISPOSAL_ADDER = {
-    chip: [0,    0],
-    pile: [200,  500],
-    haul: [600, 1400],
-  };
-
-  // Timber credit callout — show for woodland and heavy
-  const TIMBER_VEG = ['woodland', 'heavy'];
-
-  const VEG_LABELS = {
-    brush:    'light brush & scrub',
-    mixed:    'mixed growth',
-    woodland: 'established woodland',
-    heavy:    'heavy timber',
-  };
-  const TERRAIN_LABELS = {
-    flat:    'flat / gentle slope',
-    rolling: 'rolling terrain',
-    steep:   'steep / rocky',
-  };
-  const DISPOSAL_LABELS = {
-    chip: 'chip & spread on-site',
-    pile: 'pile & burn on-site',
-    haul: 'haul debris off-site',
-  };
-
-  const form   = document.getElementById('lc-form');
+const form   = document.getElementById('lc-form');
   const result = document.getElementById('lc-result');
   const errMsg = document.getElementById('lc-error');
 
-  function fmt(n) {
-    return '$' + Math.round(n).toLocaleString('en-US');
-  }
 
   form.addEventListener('submit', function (e) {
     e.preventDefault();
